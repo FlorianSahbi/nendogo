@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Cinzel:400,700|Raleway:100,300,400&display=swap');
+/* Thin 100
+Light 300
+Regular 400
+Bold 700 */
+/* 
+body {
+    background: #131415;
+    font-size: 14px;
+}
+
+h2 {
+    font-family: 'Cinzel', sans-serif !important;
+    color: #D2C9B8 !important;
+    text-align: center;
+}
+
+p {
+    font-family: 'Raleway', sans-serif !important;
+    color: #D2C9B8 !important;
+}
+
+.ok {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imgCont {
+    transform: rotateX(30deg) rotateZ(360deg) skewX(-20deg) scale(1.5);
+}
+
+.imgContainer {
+    width: 100vw;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: flex;
+} */

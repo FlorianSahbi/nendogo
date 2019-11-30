@@ -14,6 +14,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 body {
+    background: #131415;
+    font-size: 14px;
     line-height: 1;
 }
 
@@ -50,6 +52,7 @@ table {
     position: relative;
     margin-top: 1rem;
     cursor: pointer;
+    margin: 0.5rem;
 }
 
 img {
@@ -69,13 +72,28 @@ img {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    transition: all 0.5s ease;
+}
 
+.card--likeButton {
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: red;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     transition: all 0.5s ease;
 }
 
 .card--title {
-    color: #fff;
     transition: all 0.5s ease;
+    font-family: 'Cinzel', sans-serif !important;
+    color: #D2C9B8 !important;
+    text-align: center;
 }
 
 .card--number {
@@ -83,12 +101,7 @@ img {
     transition: all 0.5s ease;
 }
 
-.hover--card .card--title {
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-}
-
-.hover--card .card--number {
+.hover--card .card--title, .hover--card .card--number {
     transform: translate3d(0, 0, 0);
     opacity: 1;
 }
@@ -96,8 +109,6 @@ img {
 .hover--card .card--wrapper {
     backdrop-filter: brightness(60%);
 }
-
-
 
 .default--card .card--title {
     transform: translate3d(0, -100px, 0);
@@ -107,6 +118,14 @@ img {
 .default--card .card--number {
     transform: translate3d(0, 100px, 0);
     opacity: 0;
+}
+
+.default--card .card--likeButton {
+    opacity: 0;
+}
+
+.hover--card .card--likeButton {
+    opacity: 1;
 }
 
 .default--card .card--wrapper {
