@@ -89,6 +89,7 @@ const IndexPage = () => {
 
   return (
     <div>
+      <Link to="/account">Go to your account</Link>
       <SEO title="Home" />
       <Filter new={onNew} />
       <div className="nendoroids--container">
