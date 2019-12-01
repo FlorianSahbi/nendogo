@@ -1,16 +1,28 @@
 const path = require('path')
 const data = require('./src/pages/nendoroids.json')
 
+const users = require('./src/pages/users.json')
+
 exports.createPages = ({ actions }) => {
   const { createPage } = actions;
 
   const template = path.resolve('./src/templates/nendo.js')
+  const templateUser = path.resolve('./src/templates/user.js')
 
   data.forEach(e => {
     var path = e.number;
     createPage({
       path,
       component: template,
+      context: e,
+    })
+  })
+
+  users.forEach(e => {
+    var path = e.pseudo;
+    createPage({
+      path,
+      component: templateUser,
       context: e,
     })
   })
