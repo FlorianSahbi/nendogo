@@ -1,6 +1,7 @@
 import React from "react"
 import SEO from "../components/seo"
 import "./user.css"
+import { Link } from "gatsby"
 import nendoroids from "../pages/nendoroids.json"
 
 
@@ -8,6 +9,7 @@ const ProfilPic = (props) => {
     return (
         <div className="user--roundedProfil">
             <img src={props.src} alt={props.alt} />
+            <Link to={`/${props.number}/`} >{`See ${props.number}`}</Link>
         </div>
     )
 }
@@ -17,7 +19,7 @@ const renderliked = (array) => {
     array.forEach(e => {
         nendoroids.forEach(n => {
             if (n.number === e) {
-                liked.push(<ProfilPic src={n.images[0]} alt="jsp" />)
+                liked.push(<ProfilPic src={n.images[0]} alt="jsp" number={n.number} />)
             }
         })
     });
