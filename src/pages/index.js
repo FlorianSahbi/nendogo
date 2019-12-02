@@ -6,6 +6,8 @@ import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
 import "./index.css"
+import TransitionLink from "gatsby-plugin-transition-link"
+import AniLink from "gatsby-plugin-transition-link/AniLink"
 
 const Card = (props) => {
 
@@ -41,7 +43,10 @@ const Card = (props) => {
         <h2 className="card--title">{props.name}</h2>
         <p className="card--number">{props.number}</p>
       </div>
-      <Link to={`/${props.number}/`} >{`See ${props.number}`}</Link>
+      {/* <Link to={`/${props.number}/`} >{`See ${props.number}`}</Link> */}
+      <AniLink cover to={`/${props.number}/`} duration={1} direction="left" bg="#000" >
+        {`See ${props.number}`}
+      </AniLink>
     </div>
   )
 }
@@ -110,7 +115,7 @@ const Filter = (props) => {
       </select>
 
       <input type="submit" value="Envoyer" />
-  <p style={{color: "white"}}>CPT : {nendoroids.length}</p>
+      <p style={{ color: "white" }}>CPT : {nendoroids.length}</p>
     </form>
   )
 }
