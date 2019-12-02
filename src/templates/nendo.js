@@ -1,6 +1,7 @@
 import React from "react"
 import SEO from "../components/seo"
 import "./nendo.css"
+import { Link } from "gatsby"
 
 const More = (props) => {
   return (
@@ -43,23 +44,23 @@ export default (props) => {
 
             <div className="nendo--meta">
               <div className="nendo--title">
-                <h2>{props.pageContext.name}</h2>
+                <h2>{props.pageContext.formattedName}</h2>
               </div>
               <div className="nendo--description">
-                <h2>From the popular game "League of Legends" comes a Nendoroid of Ahri!</h2>
-                <p>From the internationally popular E-sports game "League of Legends" comes a Nendoroid of Ahri! She comes with two face plates, both of which capture her charming expressions in cute Nendoroid form. Her detailed costume has been faithfully recreated, including the gold adornments.</p>
-                <p>Two kinds of effect parts are included to display her using her abilities. Two tail parts are included allowing you to display her two different ways! Bent arms and bent leg parts are included allowing you to create a variety of different scenes!</p>
+                <h2>{props.pageContext.title}</h2>
+                {props.pageContext.description.map(p => <p>{p}</p>)}
               </div>
               <div className="nendo--more">
-                <More title="Product Name" value="Nendoroid Fate Testarossa: The MOVIE 1st Ver. (ねんどろいど ふぇいと・てすたろっさ ざ むーびー ふぁーすと ばーじょん)" />
-                <More title="Series" value=" Magical Girl Lyrical Nanoha The MOVIE 1st" />
-                <More title="Manufacturer" value="Good Smile Company" />
-                <More title="Category" value="Nendoroid" />
-                <More title="Price" value="¥3,333 (Before Tax)" />
-                <More title="Release Date" value="2010/03" />
-                <More title="Sculptor" value="Yaruo (LOUGH)" />
-                <More title="Cooperation" value="Nendoron" />
-                <More title="Specifications" value="Painted ABS&PVC posable figure - not to scale - stand included - approximately 100mm in height" />
+                <More title="Product Name" value={props.pageContext.name} />
+                <More title="Series" value={props.pageContext.series} />
+                <More title="Manufacturer" value={props.pageContext.manufacturer} />
+                <More title="Category" value={props.pageContext.category} />
+                <More title="Price" value={props.pageContext.price} />
+                <More title="Release Date" value={props.pageContext.releaseDate} />
+                <More title="Sculptor" value={props.pageContext.sculptor} />
+                <More title="Cooperation" value={props.pageContext.cooperation} />
+                <More title="Specifications" value={props.pageContext.specifications} />
+                <a target="_blank" href={props.pageContext.srcUrl} >{`See ${props.pageContext.formattedName}`}</a>
               </div>
             </div>
 

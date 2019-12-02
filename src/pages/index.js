@@ -68,6 +68,20 @@ const Filter = (props) => {
       setNewN(newN)
     }
 
+    if (filter === "series") {
+      let newN = nendoroids.filter(elem => {
+        return elem.series.toLowerCase().includes(e.target.value.toLowerCase());
+      })
+      setNewN(newN)
+    }
+
+    if (filter === "releaseDate") {
+      let newN = nendoroids.filter(elem => {
+        return elem.releaseDate.toLowerCase().includes(e.target.value.toLowerCase());
+      })
+      setNewN(newN)
+    }
+
     setValue(e.target.value)
 
     props.new(newN)
@@ -91,9 +105,12 @@ const Filter = (props) => {
       <select value={filter} onChange={(e) => handleChangeFilter(e)}>
         <option value="name">Name</option>
         <option value="number">Number</option>
+        <option value="series">Series</option>
+        <option value="releaseDate">Release Date</option>
       </select>
 
       <input type="submit" value="Envoyer" />
+  <p style={{color: "white"}}>CPT : {nendoroids.length}</p>
     </form>
   )
 }
@@ -114,7 +131,7 @@ const IndexPage = () => {
       <Filter new={onNew} />
       <div className="nendoroids--container">
         {/* <input type="text" /> */}
-        {n.map(nendo => <Card name={nendo.name} number={nendo.number} images={nendo.images} isLiked={nendo.isLiked} />)}
+        {n.map(nendo => <Card name={nendo.formattedName} number={nendo.number} images={nendo.images} isLiked={nendo.isLiked} />)}
 
       </div>
     </div>
