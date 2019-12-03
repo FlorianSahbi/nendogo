@@ -53,7 +53,7 @@ const Card = (props) => {
   )
 }
 
-const Filter = ({data, props}) => {
+const Filter = ({ data, props }) => {
   const [value, setValue] = useState("default")
   const [newN, setNewN] = useState([])
   const [filter, setFilter] = useState("name")
@@ -122,9 +122,8 @@ const Filter = ({data, props}) => {
   )
 }
 
-const IndexPage = ({data}) => {
+const IndexPage = ({ data }) => {
   const [n, setN] = useState(data.allMongodbNendoroidsNendoroids.edges);
-  console.log(n)
 
   const onNew = (value) => {
     console.log('ok')
@@ -133,8 +132,8 @@ const IndexPage = ({data}) => {
 
   return (
     <div>
+      <SEO title="index" />
       <Link to="/account">Go to your account</Link>
-      <SEO title="Home" />
       <Filter new={onNew} />
       <div className="nendoroids--container">
         {n.map(nendo => <Card name={nendo.node.formattedName} number={nendo.node.number} images={nendo.node.images} isLiked={nendo.node.isLiked} />)}
