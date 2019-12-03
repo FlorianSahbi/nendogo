@@ -82,15 +82,3 @@ export default (props) => {
         </>
     )
 }
-
-export const query = graphql`
-query {
-    allSitePage(filter: {path: {eq: "/0"}}) {
-      edges {
-        node {
-          path
-          component
-        }
-      }
-    }
-  }`

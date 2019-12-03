@@ -11,7 +11,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const pages = await graphql(`
   query {
-    allMongodbNendoroidsNendoroids {
+    allMongodbNendoroidsNendoroids(filter: {range: {eq: "901-1000"}}) {
       edges {
         node {
           name

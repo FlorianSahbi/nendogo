@@ -2,56 +2,9 @@ import React, { useState } from "react"
 import { Link } from "gatsby"
 import nendoroids from "./nendoroids.json"
 import { graphql } from "gatsby"
-
-import Layout from "../components/layout"
-import Image from "../components/image"
+import Card from "../components/IndexNendoroids/card"
 import SEO from "../components/seo"
-import "./index.css"
-import TransitionLink from "gatsby-plugin-transition-link"
-import AniLink from "gatsby-plugin-transition-link/AniLink"
-import nendo from "../templates/nendo.js"
-
-const Card = (props) => {
-
-  const [isHovered, setIsHovered] = useState(false);
-  const [isLiked, setIsLiked] = useState(props.isLiked);
-
-  const handleMouseEnter = (e) => {
-    e.preventDefault();
-    setIsHovered(true)
-  }
-
-  const onMouseLeave = (e) => {
-    e.preventDefault();
-    setIsHovered(false)
-  }
-
-  const handleLike = () => {
-    console.log("ok")
-    if (isLiked) {
-      setIsLiked(false)
-    } else {
-      setIsLiked(true)
-    }
-  }
-
-  return (
-    <div onMouseEnter={(e) => handleMouseEnter(e)} onMouseLeave={(e) => onMouseLeave(e)} className={isHovered ? " card--container hover--card" : "card--container default--card"}>
-      <img src={props.images[0]} alt="img_nendo" />
-      <div className="card--wrapper">
-        <div className="card--likeButton" onClick={() => handleLike()}>
-          {isLiked ? "❤️" : "♡"}
-        </div>
-        <h2 className="card--title">{props.name}</h2>
-        <p className="card--number">{props.number}</p>
-      </div>
-      {/* <Link to={`/${props.number}/`} >{`See ${props.number}`}</Link> */}
-      <AniLink cover to={`/${props.number}/`} duration={1} direction="left" bg="#000" >
-        {`See ${props.number}`}
-      </AniLink>
-    </div>
-  )
-}
+import indexStyles from "./index.module.css"
 
 const Filter = ({ data, props }) => {
   const [value, setValue] = useState("default")
@@ -135,8 +88,8 @@ const IndexPage = ({ data }) => {
       <SEO title="index" />
       <Link to="/account">Go to your account</Link>
       <Filter new={onNew} />
-      <div className="nendoroids--container">
-        {n.map(nendo => <Card name={nendo.node.formattedName} number={nendo.node.number} images={nendo.node.images} isLiked={nendo.node.isLiked} />)}
+      <div className={indexStyles.container}>
+        {n.map(nendo => <Card key={nendo.node._id} name={nendo.node.formattedName} number={nendo.node.number} images={nendo.node.images} isLiked={nendo.node.isLiked} />)}
       </div>
     </div>
   )
@@ -144,7 +97,7 @@ const IndexPage = ({ data }) => {
 
 export const query = graphql`
  query {
-  allMongodbNendoroidsNendoroids {
+  allMongodbNendoroidsNendoroids(filter: {range: {eq: "901-1000"}}) {
     edges {
       node {
         formattedName
