@@ -79,7 +79,8 @@ const NavBar = ({ props }) => {
   return (
     <nav className={navBarStyles.container}>
       <div className={navBarStyles.wrapper}>
-        <Link to="/account">Go to your account</Link>
+        <Link to="/users">Users </Link>
+        <Link to="/account">Go to your account </Link>
       </div>
     </nav>
   )
