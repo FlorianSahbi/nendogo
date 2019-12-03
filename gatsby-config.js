@@ -14,6 +14,10 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    {
+      resolve: `gatsby-source-mongodb`,
+      options: { dbName: `nendoroids`, collection: `nendoroids` },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {

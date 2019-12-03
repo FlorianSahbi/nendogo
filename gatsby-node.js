@@ -1,20 +1,48 @@
 const path = require('path')
-const data = require('./src/pages/nendoroids.json')
+// const data = require('./src/pages/nendoroids.json')
 
 const users = require('./src/pages/users.json')
 
-exports.createPages = ({ actions }) => {
+exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
 
   const template = path.resolve('./src/templates/nendo.js')
   const templateUser = path.resolve('./src/templates/user.js')
 
-  data.forEach(e => {
-    var path = e.number;
+  const pages = await graphql(`
+  query {
+    allMongodbNendoroidsNendoroids {
+      edges {
+        node {
+          name
+          formattedName
+          number
+          title
+          description
+          images
+          series
+          manufacturer
+          category
+          price
+          releaseDate
+          specifications
+          sculptor
+          cooperation
+          planningProduction
+          srcUrl
+        }
+      }
+    }
+  }
+ `)
+  let nendoroids = pages.data.allMongodbNendoroidsNendoroids.edges
+
+  nendoroids.forEach(e => {
+    var path = e.node.number;
     createPage({
       path,
       component: template,
-      context: e,
+      context: e.node,
     })
   })
 

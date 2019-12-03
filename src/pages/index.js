@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { Link } from "gatsby"
 import nendoroids from "./nendoroids.json"
+import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import Image from "../components/image"
@@ -8,6 +9,7 @@ import SEO from "../components/seo"
 import "./index.css"
 import TransitionLink from "gatsby-plugin-transition-link"
 import AniLink from "gatsby-plugin-transition-link/AniLink"
+import nendo from "../templates/nendo.js"
 
 const Card = (props) => {
 
@@ -51,7 +53,7 @@ const Card = (props) => {
   )
 }
 
-const Filter = (props) => {
+const Filter = ({data, props}) => {
   const [value, setValue] = useState("default")
   const [newN, setNewN] = useState([])
   const [filter, setFilter] = useState("name")
@@ -115,14 +117,14 @@ const Filter = (props) => {
       </select>
 
       <input type="submit" value="Envoyer" />
-      <p style={{ color: "white" }}>CPT : {nendoroids.length}</p>
+      {/* {<p style={{ color: "white" }}>CPT : {data}</p> } */}
     </form>
   )
 }
 
-const IndexPage = () => {
-
-  const [n, setN] = useState(nendoroids);
+const IndexPage = ({data}) => {
+  const [n, setN] = useState(data.allMongodbNendoroidsNendoroids.edges);
+  console.log(n)
 
   const onNew = (value) => {
     console.log('ok')
@@ -136,11 +138,25 @@ const IndexPage = () => {
       <Filter new={onNew} />
       <div className="nendoroids--container">
         {/* <input type="text" /> */}
-        {n.map(nendo => <Card name={nendo.formattedName} number={nendo.number} images={nendo.images} isLiked={nendo.isLiked} />)}
+        {n.map(nendo => <Card name={nendo.node.formattedName} number={nendo.node.number} images={nendo.node.images} isLiked={nendo.node.isLiked} />)}
 
       </div>
     </div>
   )
 }
+
+export const query = graphql`
+ query {
+  allMongodbNendoroidsNendoroids {
+    edges {
+      node {
+        formattedName
+        number
+        images
+      }
+    }
+  }
+}
+`
 
 export default IndexPage
