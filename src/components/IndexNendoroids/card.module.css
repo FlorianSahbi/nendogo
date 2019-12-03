@@ -50,8 +50,11 @@
     transition: all 0.5s ease;
     color: beige;
     font-family: "Raleway";
-    font-size: 1em;
+    font-size: 1.3em;
+    text-align: center;
     text-decoration: none;
+    margin-bottom: 0.5em;
+    font-size: bold;
 }
 
 .number {
@@ -60,6 +63,7 @@
     font-size: 1em;
     text-decoration: none;
     transition: all 0.5s ease;
+    margin-top: 0.5em;
 }
 
 .link {
@@ -79,6 +83,8 @@
     font-family: "Raleway";
     font-size: 1em;
     text-decoration: none;
+    height: 100%;
+    width: 100%;
 }
 
 .hover .title, .hover .number, .hover .link {
@@ -87,7 +93,7 @@
 }
 
 .hover .wrapper {
-    backdrop-filter: brightness(60%);
+    backdrop-filter: brightness(70%) blur(5px);
 }
 
 .default .title {

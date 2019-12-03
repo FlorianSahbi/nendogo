@@ -5,6 +5,7 @@ import { graphql } from "gatsby"
 import Card from "../components/IndexNendoroids/card"
 import SEO from "../components/seo"
 import indexStyles from "./index.module.css"
+import navBarStyles from "./navBar.module.css"
 
 const Filter = ({ data, props }) => {
   const [value, setValue] = useState("default")
@@ -74,6 +75,15 @@ const Filter = ({ data, props }) => {
     </form>
   )
 }
+const NavBar = ({ props }) => {
+  return (
+    <nav className={navBarStyles.container}>
+      <div className={navBarStyles.wrapper}>
+        <Link to="/account">Go to your account</Link>
+      </div>
+    </nav>
+  )
+}
 
 const IndexPage = ({ data }) => {
   const [n, setN] = useState(data.allMongodbNendoroidsNendoroids.edges);
@@ -83,13 +93,27 @@ const IndexPage = ({ data }) => {
     setN(value)
   }
 
+  console.log(data)
+
   return (
     <div>
-      <SEO title="index" />
-      <Link to="/account">Go to your account</Link>
-      <Filter new={onNew} />
+      <SEO title="List" />
+      <NavBar />
+      {/* <Filter new={onNew} /> */}
       <div className={indexStyles.container}>
-        {n.map(nendo => <Card key={nendo.node._id} name={nendo.node.formattedName} number={nendo.node.number} images={nendo.node.images} isLiked={nendo.node.isLiked} />)}
+        {
+          n.map(nendo => {
+            return (
+              <Card
+                key={nendo.node._id}
+                name={nendo.node.formattedName}
+                number={nendo.node.number}
+                images={nendo.node.images}
+                isLiked={nendo.node.isLiked}
+              />
+            )
+          })
+        }
       </div>
     </div>
   )
@@ -104,6 +128,7 @@ export const query = graphql`
         number
         images
         range
+        isLiked
       }
     }
   }

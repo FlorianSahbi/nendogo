@@ -17,13 +17,7 @@ const Card = (props) => {
     setIsHovered(false)
   }
 
-  const handleLike = () => {
-    if (isLiked) {
-      setIsLiked(false)
-    } else {
-      setIsLiked(true)
-    }
-  }
+  const handleLike = () => isLiked ? setIsLiked(false) : setIsLiked(true);
 
   return (
     <div
@@ -33,7 +27,10 @@ const Card = (props) => {
     >
       <img src={props.images[0]} alt="img_nendo" />
       <div className={cardStyles.wrapper}>
-        <div className={cardStyles.likeButton} onClick={() => handleLike()}>
+        <div
+          className={cardStyles.likeButton}
+          onClick={() => handleLike()}
+        >
           {isLiked ? "❤️" : "♡"}
         </div>
         <h2 className={cardStyles.title}>{props.name}</h2>

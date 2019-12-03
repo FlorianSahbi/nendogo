@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: "Nendoroids",
-    titleTemplate: "%s · Collection",
+    titleTemplate: "%s · NendoGO",
     description: "A tools to manage nendoroids collections.",
     url: "https://www.nendoroids.floriansahbi.com",
     image: "/images/mashiro.jpg",
