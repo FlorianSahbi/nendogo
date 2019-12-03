@@ -33,20 +33,36 @@ const renderProfile = (nbr) => {
   return a
 }
 
+const Carousel = (props) => {
+  return (
+    <div className="cd--container">
+      <div className="cd--wrapper">
+        <div className="slide slide1">
+          <img src={props.img1} alt="bla" />
+        </div>
+        <div className="slide slide2">
+          <img src={props.img2} alt="bla" />
+        </div>
+        <div className="slide slide3">
+          <img src={props.img3} alt="bla" />
+        </div>
+      </div>
+    </div >
+  )
+}
+
 export default (props) => {
   console.log(props.pageContext)
   return (
     <>
       <SEO title={`lol ${props.pageContext.name} | Flo`} description="With the theatrical release of 'Magical Girl Lyrical Nanoha The MOVIE 1st' getting closer by the day, yet another Nendoroid is here to join the cast - Fate Testarossa is here, and just like Nanoha, she is wearing her new barrier jacket from the movie! Three facial expressions are included: a typical, stoic expression, a serious expression, as well as an expression with closed eyes. Her all important intelligent device, 'Bardiche' is also included in both axe form and scythe form. Her familiar Arf is also included in her dog form, once again giving you everything you need for a Nendoroid reenactment of the original!" />
-      <Link to={`/`} >
-        back
-      </Link>
       <div className="nendo--container">
         <div className="nendo--wrapper">
           <div className="nendo--info">
 
             <div className="nendo--meta">
               <div className="nendo--title">
+                <Link to={`/`} >back</Link>
                 <h2>{props.pageContext.formattedName}</h2>
               </div>
               <div className="nendo--description">
@@ -68,7 +84,10 @@ export default (props) => {
             </div>
 
             <div className="nendo--preview">
-              <img src={props.pageContext.images[0]} alt="ok" />
+              <Carousel img1={props.pageContext.images[0]} img2={props.pageContext.images[1]} img3={props.pageContext.images[2]} />
+              <div className="nendo--number">#{props.pageContext.number}</div>
+
+              {/* <img src={props.pageContext.images[0]} alt="ok" /> */}
               {/* {props.pageContext.images.map(img => {
               return (
                 <div className="imgCont">
