@@ -137,9 +137,7 @@ const IndexPage = ({data}) => {
       <SEO title="Home" />
       <Filter new={onNew} />
       <div className="nendoroids--container">
-        {/* <input type="text" /> */}
         {n.map(nendo => <Card name={nendo.node.formattedName} number={nendo.node.number} images={nendo.node.images} isLiked={nendo.node.isLiked} />)}
-
       </div>
     </div>
   )
@@ -153,6 +151,7 @@ export const query = graphql`
         formattedName
         number
         images
+        range
       }
     }
   }
