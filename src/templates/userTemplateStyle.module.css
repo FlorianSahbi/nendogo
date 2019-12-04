@@ -4,19 +4,19 @@
     font-size: 14px;
 }
 
-.user--container {
+.container {
     height: 100vh;
     width: 100vw;
     /* border: 2px solid blue; */
 }
 
-.user--wrapper {
+.wrapper {
     /* border: 2px solid green; */
     height: 100%;
     width: 100%;
 }
 
-.user--info {
+.info {
     height: 100%;
     width: 100%;
     /* border: 10px solid pink; */
@@ -25,7 +25,7 @@
     align-items: center;
 }
 
-.user--meta {
+.meta {
     border: 2px solid red;
     height: 100%;
     width: 100%;
@@ -36,7 +36,7 @@
     flex-direction: column;
 }
 
-.user--title {
+.title {
     /* border: 2px solid firebrick; */
     color: white;
     font-size: 2em;
@@ -46,7 +46,7 @@
     padding: 1em;
 }
 
-.user--description {
+.description {
     /* border: 2px solid white; */
     color: white;
     /* border: 2px solid white; */
@@ -56,35 +56,35 @@
     padding: 1em;
 }
 
-.user--description h2 {
+.description h2 {
     margin-bottom: 1em;
     font-size: 1.5em;
     color: lightgoldenrodyellow;
 }
 
-.user--description p {
+.description p {
     margin-bottom: 1em;
 }
 
-.user--preview {
+.preview {
     /* border: 5px solid palegreen; */
     height: 100%;
     width: 100%;
 }
 
-.user--preview img {
+.preview img {
     height: 100%;
     width: 100%;
     object-fit: cover;
     object-position: center;
 }
 
-.user--user {
+.user {
     width: 100%;
     /* border: 5px solid red; */
 }
 
-.user--like {
+.like {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -94,7 +94,7 @@
     font-weight: 200;
 }
 
-.user--love {
+.love {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -104,7 +104,7 @@
     font-weight: 200;
 }
 
-.user--want {
+.want {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -114,7 +114,7 @@
     font-weight: 200;
 }
 
-.user--roundedProfil {
+.roundedProfil {
 
     display: flex;
     justify-content: center;
@@ -129,21 +129,21 @@
     cursor: pointer;
 }
 
-.user--like--list {
+.likeList {
     /* border: 2px solid blue; */
     display: flex;
     overflow: hidden;
     flex-wrap: wrap;
 }
 
-.user--love--list {
+.loveList {
     /* border: 2px solid blue; */
     display: flex;
     overflow: hidden;
     flex-wrap: wrap;
 }
 
-.user--want--list {
+.wantList {
     /* border: 2px solid blue; */
     display: flex;
     overflow: hidden;

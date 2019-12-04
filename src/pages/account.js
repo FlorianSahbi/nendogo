@@ -1,4 +1,3 @@
-// src/pages/account.js
 import React from "react"
 import { Router } from "@reach/router"
 import { login, logout, isAuthenticated, getProfile } from "../utils/auth"
@@ -15,7 +14,6 @@ const Account = () => {
     login()
     return <p>Redirecting to login...</p>
   }
-
   const user = getProfile()
 
   return (

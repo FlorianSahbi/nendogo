@@ -110,7 +110,6 @@ const IndexPage = ({ data }) => {
                 name={nendo.node.formattedName}
                 number={nendo.node.number}
                 images={nendo.node.images}
-                isLiked={nendo.node.isLiked}
               />
             )
           })
@@ -129,7 +128,6 @@ export const query = graphql`
         number
         images
         range
-        isLiked
       }
     }
   }
