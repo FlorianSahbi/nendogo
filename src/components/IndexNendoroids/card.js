@@ -53,7 +53,7 @@ const Card = (props) => {
         <h2 className={cardStyles.title}>{props.name}</h2>
         <p className={cardStyles.number}>{props.number}</p>
         <div className={`${cardStyles.link} ${cardStyles.default}`}>
-          <Link to={`/${props.number}/`} >Details</Link>
+          <Link to={`/${props.name}/`} >Details</Link>
         </div>
       </div>
     </div >

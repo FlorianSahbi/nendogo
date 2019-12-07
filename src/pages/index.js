@@ -9,19 +9,7 @@ import { Query, Mutation } from "react-apollo";
 import gql from 'graphql-tag'
 import { useQuery, useMutation } from '@apollo/react-hooks';
 
-
-const APOLLO_NENDO_QUERY = gql`
-{
-  nendoroid(id: "5de5dc15a9fedeb1755ec3cb") {
-    number
-    images
-    formattedName
-  }
-}
-
-`
-
-const NavBar = ({ props }) => {
+const NavBar = () => {
   return (
     <nav className={navBarStyles.container}>
       <div className={navBarStyles.wrapper}>
@@ -32,42 +20,24 @@ const NavBar = ({ props }) => {
   )
 }
 
-
-const IndexPage = ({ data: { nendo: { nendoroids } } }) => {
-  const [n, setN] = useState(nendoroids);
-
-  const { loading, error, data } = useQuery(APOLLO_NENDO_QUERY);
-
-
-  if (loading) return 'loading ...';
-  if (error) return `error ${error.message}`
-  console.log(data)
+const IndexPage = ({ data: { nendo: { nendoroids: data } } }) => {
+  const [nendoroids, setNendoroids] = useState(data);
 
   return (
     <div>
       <SEO title="List" />
       <NavBar />
-
-      {/* <Query query={APOLLO_NENDO_QUERY}>
-        {({ data, loading, error }) => {
-          if (loading) return <span style={{ coloc: "white" }}>bla...</span>
-          if (error) return <p style={{ coloc: "white" }}>{error.message}</p>
-          return <img src={data.nendoroid.images[0]} alt={data.nendoroid.number} />
-        }}
-      </Query> */}
-
-
       <div className={indexStyles.container}>
         {
-          n.map(nendo => {
+          nendoroids.map(nendoroid => {
             return (
               <Card
-                key={nendo.id}
-                id={nendo.id}
-                name={nendo.formattedName}
-                number={nendo.number}
-                images={nendo.images}
-                isLiked={nendo.isLiked}
+                key={nendoroid.id}
+                id={nendoroid.id}
+                name={nendoroid.formattedName}
+                number={nendoroid.number}
+                images={nendoroid.images}
+                isLiked={nendoroid.isLiked}
               />
             )
           })
@@ -91,3 +61,7 @@ export const GATSBY_NENDO_QUERY = graphql`
 `
 
 export default IndexPage
+
+  // const { loading, error, data } = useQuery(APOLLO_NENDO_QUERY);
+  // if (loading) return 'loading ...';
+  // if (error) return `error ${error.message}`

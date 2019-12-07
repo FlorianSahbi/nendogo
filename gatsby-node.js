@@ -1,64 +1,76 @@
-// const path = require('path')
-// // const data = require('./src/pages/nendoroids.json')
+const path = require('path')
 
-// const users = require('./src/pages/users.json')
+exports.createPages = async ({ graphql, actions }) => {
+  const { createPage } = actions;
 
-// exports.createPages = async ({ graphql, actions }) => {
-//   const { createPage } = actions;
+  const templateNendo = path.resolve('./src/templates/nendo.js')
+  const templateUser = path.resolve('./src/templates/user.js')
 
-//   const template = path.resolve('./src/templates/nendo.js')
-//   const templateUser = path.resolve('./src/templates/user.js')
+  const USER_PAGE_QUERY = await graphql(`
+  {
+  nendo {
+  users {
+  id
+  avatar
+  pseudo
+  }
+  }
+  }
+  `)
 
-//   const pages = await graphql(`
-//   query {
-//     allMongodbNendoroidsNendoroids(filter: {range: {eq: "901-1000"}}) {
-//       edges {
-//         node {
-//           name
-//           formattedName
-//           number
-//           title
-//           description
-//           images
-//           series
-//           manufacturer
-//           category
-//           price
-//           releaseDate
-//           specifications
-//           sculptor
-//           cooperation
-//           planningProduction
-//           srcUrl
-//         }
-//       }
-//     }
-//   }
-//  `)
-//   let nendoroids = pages.data.allMongodbNendoroidsNendoroids.edges
+  const NENDO_PAGE_QUERY = await graphql(`
+    {
+    nendo {
+    nendoroids {
+    id
+    category
+    cooperation
+    description
+    formattedName
+    distributedBy
+    images
+    manufacturer
+    name
+    number
+    planningProduction
+    range
+    price
+    releaseDate
+    releasedBy
+    sculptor
+    series
+    specifications
+    srcUrl
+    title
+    }
+    }
+    }
+    `)
 
-//   nendoroids.forEach(e => {
-//     var path = e.node.number;
-//     createPage({
-//       path,
-//       component: template,
-//       context: e.node,
-//     })
-//   })
+  const nendoroids = await NENDO_PAGE_QUERY.data.nendo.nendoroids;
+  const users = await USER_PAGE_QUERY.data.nendo.users;
 
-//   users.forEach(e => {
-//     var path = e.pseudo;
-//     createPage({
-//       path,
-//       component: templateUser,
-//       context: e,
-//     })
-//   })
-// }
+  nendoroids.forEach(nendoroid => {
+    createPage({
+      path: nendoroid.formattedName,
+      component: templateNendo,
+      context: nendoroid,
+    })
+  })
 
-// // ./gatsby-node.js
-// // Implement the Gatsby API “onCreatePage”. This is
-// // called after every page is created.
+  users.forEach(user => {
+    createPage({
+      path: user.pseudo,
+      component: templateUser,
+      context: user,
+    })
+  })
+}
+
+
+// ./gatsby-node.js
+// Implement the Gatsby API “onCreatePage”. This is
+// called after every page is created.
 // exports.onCreatePage = async ({ page, actions }) => {
 //   const { createPage } = actions
 
