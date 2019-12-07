@@ -21,7 +21,10 @@ const NavBar = () => {
 }
 
 const IndexPage = ({ data: { nendo: { nendoroids: data } } }) => {
+
   const [nendoroids, setNendoroids] = useState(data);
+  let isLiked = false;
+  console.log(nendoroids)
 
   return (
     <div>
@@ -37,7 +40,7 @@ const IndexPage = ({ data: { nendo: { nendoroids: data } } }) => {
                 name={nendoroid.formattedName}
                 number={nendoroid.number}
                 images={nendoroid.images}
-                isLiked={nendoroid.isLiked}
+                isLiked={nendoroid.likedBy.filter(user => user.id === "5dec1908bb95cb8650150814").length > 0 ? true : false}
               />
             )
           })
@@ -48,16 +51,22 @@ const IndexPage = ({ data: { nendo: { nendoroids: data } } }) => {
 }
 
 export const GATSBY_NENDO_QUERY = graphql`
-  {
-    nendo {
-      nendoroids {
-        id
-        formattedName
-        images
-        number
-      }
+{
+  nendo {
+    nendoroids {
+      id
+      formattedName
+      images
+      number
+      range
+      likedBy {
+      id
+      avatar
+      pseudo
+    }
     }
   }
+}
 `
 
 export default IndexPage

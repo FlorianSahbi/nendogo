@@ -111,13 +111,13 @@
     opacity: 0;
 }
 
-.default .likeButton {
+/* .default .likeButton {
     opacity: 0;
 }
 
 .hover .likeButton {
     opacity: 1;
-}
+} */
 
 .default .wrapper {
     backdrop-filter: none;

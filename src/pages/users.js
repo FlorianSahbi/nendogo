@@ -1,6 +1,5 @@
 import React, { useState } from "react"
 import { Link } from "gatsby"
-import users from "./users.json"
 import SEO from "../components/seo"
 import usersStyles from "./users.module.css"
 import navBarStyles from "../pages/navBar.module.css"
@@ -48,7 +47,7 @@ const Card = (props) => {
   )
 }
 
-const UsersPage = () => {
+const UsersPage = ({ data: { nendo: { users: data } } }) => {
 
   return (
     <div>
@@ -56,11 +55,11 @@ const UsersPage = () => {
       <NavBar />
       <div className={usersStyles.containerList}>
         {
-          users.map(nendo => {
+          data.map(user => {
             return (
               <Card
-                pseudo={nendo.pseudo}
-                avatar={nendo.avatar}
+                pseudo={user.pseudo}
+                avatar={user.avatar}
               />
             )
           })
@@ -69,5 +68,17 @@ const UsersPage = () => {
     </div>
   )
 }
+
+export const GATSBY_USER_QUERY = graphql`
+ {
+  nendo {
+    users {
+      id
+      avatar
+      pseudo
+    }
+  }
+ }
+`
 
 export default UsersPage

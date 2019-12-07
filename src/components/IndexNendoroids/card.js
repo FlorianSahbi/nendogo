@@ -31,7 +31,7 @@ const Card = (props) => {
   const handleLike = (id) => {
     isLiked ? setIsLiked(false) : setIsLiked(true);
     console.log(id)
-    addLike({ variables: { "id": id, "userId": "5de97b1a3f1a7e37cc89520f" } })
+    addLike({ variables: { "id": id.toString(), "userId": "5dec1908bb95cb8650150814" } })
       .then(value => console.log(`ok ${data}`))
       .catch(error => console.log(error));
   };

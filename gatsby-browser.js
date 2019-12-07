@@ -15,7 +15,6 @@ class SessionCheck extends React.Component {
   }
 
   componentDidMount() {
-    localStorage.setItem("userId", "5deaede749628a0add61ba82");
     silentAuth(this.handleCheckSession)
   }
 

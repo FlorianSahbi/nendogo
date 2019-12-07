@@ -14,18 +14,18 @@ const ProfilPic = (props) => {
   )
 }
 
-const renderliked = (array) => {
-  let liked = [];
-  array.forEach(e => {
-    nendoroids.forEach(n => {
-      if (n.number === e) {
-        liked.push(<ProfilPic src={n.images[0]} alt="jsp" number={n.number} />)
-      }
-    })
-  });
+// const renderliked = (array) => {
+//   let liked = [];
+//   array.forEach(e => {
+//     nendoroids.forEach(n => {
+//       if (n.number === e) {
+//         liked.push(<ProfilPic src={n.images[0]} alt="jsp" number={n.number} />)
+//       }
+//     })
+//   });
 
-  return liked
-}
+//   return liked
+// }
 
 export default (props) => {
   return (
@@ -51,7 +51,7 @@ export default (props) => {
           </div>
           <div className={userTemplateStyles.user}>
             <div className={userTemplateStyles.like}>
-              <div className={userTemplateStyles.title}>
+              {/* <div className={userTemplateStyles.title}>
                 <p>He like it</p>
               </div>
               <div className={userTemplateStyles.likeList}>
@@ -72,7 +72,7 @@ export default (props) => {
               </div>
               <div className={userTemplateStyles.loveList}>
                 {renderliked(props.pageContext.owned)}
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
