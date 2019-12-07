@@ -1,13 +1,6 @@
-/**
- * Implement Gatsby's Browser APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/browser-apis/
- */
-
-// You can delete this file if you're not using it
-
-import React from "react"
-import { silentAuth } from "./src/utils/auth"
+import React from "react";
+import { silentAuth } from "./src/utils/auth";
+export { wrapRootElement } from './src/apollo/wrap-root-element';
 
 class SessionCheck extends React.Component {
   constructor(props) {
@@ -22,6 +15,7 @@ class SessionCheck extends React.Component {
   }
 
   componentDidMount() {
+    localStorage.setItem("userId", "5deaede749628a0add61ba82");
     silentAuth(this.handleCheckSession)
   }
 
@@ -34,6 +28,6 @@ class SessionCheck extends React.Component {
   }
 }
 
-export const wrapRootElement = ({ element }) => {
-  return <SessionCheck>{element}</SessionCheck>
-}
+// export const wrapRootElement = ({ element }) => {
+//   return <SessionCheck>{element}</SessionCheck>
+// }

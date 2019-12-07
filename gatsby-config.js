@@ -13,6 +13,15 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
+      resolve: "gatsby-source-graphql",
+      options: {
+        typeName: "NENDO",
+        fieldName: "nendo",
+        url: "http://localhost:3005/graphql/",
+        // url: "https://www.nendoroids.floriansahbi.com/graphql/",
+      },
+    },
+    {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
         trackingId: "UA-116019269-4",
@@ -24,10 +33,6 @@ module.exports = {
         name: `images`,
         path: `${__dirname}/src/images`,
       },
-    },
-    {
-      resolve: `gatsby-source-mongodb`,
-      options: { dbName: `nendoroids`, collection: `nendoroids` },
     },
     {
       resolve: `gatsby-plugin-manifest`,

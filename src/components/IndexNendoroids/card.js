@@ -1,9 +1,19 @@
 import React, { useState } from "react"
 import { Link } from "gatsby"
 import cardStyles from "./card.module.css"
+import gql from 'graphql-tag'
+import { useMutation } from '@apollo/react-hooks';
+
+
 
 const Card = (props) => {
 
+  const APOLLO_ADD_LIKE_MUTATION = gql`
+    mutation addLike($id: ID!, $userId: ID!)  {
+      addLikeToNendoroid(id: $id userId: $userId)
+    }
+  `
+  const [addLike, { data }] = useMutation(APOLLO_ADD_LIKE_MUTATION);
   const [isHovered, setIsHovered] = useState(false);
   const [isLiked, setIsLiked] = useState(props.isLiked);
 
@@ -17,7 +27,14 @@ const Card = (props) => {
     setIsHovered(false)
   }
 
-  const handleLike = () => isLiked ? setIsLiked(false) : setIsLiked(true);
+
+  const handleLike = (id) => {
+    isLiked ? setIsLiked(false) : setIsLiked(true);
+    console.log(id)
+    addLike({ variables: { "id": id, "userId": "5de97b1a3f1a7e37cc89520f" } })
+      .then(value => console.log(`ok ${data}`))
+      .catch(error => console.log(error));
+  };
 
   return (
     <div
@@ -29,7 +46,7 @@ const Card = (props) => {
       <div className={cardStyles.wrapper}>
         <div
           className={cardStyles.likeButton}
-          onClick={() => handleLike()}
+          onClick={() => handleLike(props.id)}
         >
           {isLiked ? "❤️" : "♡"}
         </div>

@@ -1,80 +1,26 @@
-import React, { useState } from "react"
-import { Link } from "gatsby"
-import nendoroids from "./nendoroids.json"
-import { graphql } from "gatsby"
-import Card from "../components/IndexNendoroids/card"
-import SEO from "../components/seo"
-import indexStyles from "./index.module.css"
-import navBarStyles from "./navBar.module.css"
+import React, { useState } from "react";
+import { Link } from "gatsby";
+import { graphql } from "gatsby";
+import Card from "../components/IndexNendoroids/card";
+import SEO from "../components/seo";
+import indexStyles from "./index.module.css";
+import navBarStyles from "./navBar.module.css";
+import { Query, Mutation } from "react-apollo";
+import gql from 'graphql-tag'
+import { useQuery, useMutation } from '@apollo/react-hooks';
 
-const Filter = ({ data, props }) => {
-  const [value, setValue] = useState("default")
-  const [newN, setNewN] = useState([])
-  const [filter, setFilter] = useState("name")
 
-  const handleChange = (e) => {
-    console.log(e.target.value.toLowerCase())
-
-    if (filter === "name") {
-      let newN = nendoroids.filter(elem => {
-        return elem.name.toLowerCase().includes(e.target.value.toLowerCase());
-      })
-      setNewN(newN)
-    }
-
-    if (filter === "number") {
-      let newN = nendoroids.filter(elem => {
-        return elem.number.toLowerCase().includes(e.target.value.toLowerCase());
-      })
-      setNewN(newN)
-    }
-
-    if (filter === "series") {
-      let newN = nendoroids.filter(elem => {
-        return elem.series.toLowerCase().includes(e.target.value.toLowerCase());
-      })
-      setNewN(newN)
-    }
-
-    if (filter === "releaseDate") {
-      let newN = nendoroids.filter(elem => {
-        return elem.releaseDate.toLowerCase().includes(e.target.value.toLowerCase());
-      })
-      setNewN(newN)
-    }
-
-    setValue(e.target.value)
-
-    props.new(newN)
+const APOLLO_NENDO_QUERY = gql`
+{
+  nendoroid(id: "5de5dc15a9fedeb1755ec3cb") {
+    number
+    images
+    formattedName
   }
-
-  const handleChangeFilter = (e) => {
-    console.log(e.target.value.toLowerCase())
-    setFilter(e.target.value.toLowerCase())
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    props.new(newN)
-  }
-
-  return (
-
-    <form onSubmit={(e) => handleSubmit(e)}>
-      <input type="text" name="name" value={value} onChange={(e) => handleChange(e)} />
-
-      <select value={filter} onChange={(e) => handleChangeFilter(e)}>
-        <option value="name">Name</option>
-        <option value="number">Number</option>
-        <option value="series">Series</option>
-        <option value="releaseDate">Release Date</option>
-      </select>
-
-      <input type="submit" value="Envoyer" />
-      {/* {<p style={{ color: "white" }}>CPT : {data}</p> } */}
-    </form>
-  )
 }
+
+`
+
 const NavBar = ({ props }) => {
   return (
     <nav className={navBarStyles.container}>
@@ -86,30 +32,42 @@ const NavBar = ({ props }) => {
   )
 }
 
-const IndexPage = ({ data }) => {
-  const [n, setN] = useState(data.allMongodbNendoroidsNendoroids.edges);
 
-  const onNew = (value) => {
-    console.log('ok')
-    setN(value)
-  }
+const IndexPage = ({ data: { nendo: { nendoroids } } }) => {
+  const [n, setN] = useState(nendoroids);
 
+  const { loading, error, data } = useQuery(APOLLO_NENDO_QUERY);
+
+
+  if (loading) return 'loading ...';
+  if (error) return `error ${error.message}`
   console.log(data)
 
   return (
     <div>
       <SEO title="List" />
       <NavBar />
-      {/* <Filter new={onNew} /> */}
+
+      {/* <Query query={APOLLO_NENDO_QUERY}>
+        {({ data, loading, error }) => {
+          if (loading) return <span style={{ coloc: "white" }}>bla...</span>
+          if (error) return <p style={{ coloc: "white" }}>{error.message}</p>
+          return <img src={data.nendoroid.images[0]} alt={data.nendoroid.number} />
+        }}
+      </Query> */}
+
+
       <div className={indexStyles.container}>
         {
           n.map(nendo => {
             return (
               <Card
-                key={nendo.node._id}
-                name={nendo.node.formattedName}
-                number={nendo.node.number}
-                images={nendo.node.images}
+                key={nendo.id}
+                id={nendo.id}
+                name={nendo.formattedName}
+                number={nendo.number}
+                images={nendo.images}
+                isLiked={nendo.isLiked}
               />
             )
           })
@@ -119,19 +77,17 @@ const IndexPage = ({ data }) => {
   )
 }
 
-export const query = graphql`
- query {
-  allMongodbNendoroidsNendoroids(filter: {range: {eq: "901-1000"}}) {
-    edges {
-      node {
+export const GATSBY_NENDO_QUERY = graphql`
+  {
+    nendo {
+      nendoroids {
+        id
         formattedName
-        number
         images
-        range
+        number
       }
     }
   }
-}
 `
 
 export default IndexPage

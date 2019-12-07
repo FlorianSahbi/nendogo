@@ -20,7 +20,6 @@ const NavBar = ({ props }) => {
 const Card = (props) => {
 
   const [isHovered, setIsHovered] = useState(false);
-  const [isLiked, setIsLiked] = useState(props.isLiked);
 
   const handleMouseEnter = (e) => {
     e.preventDefault();
@@ -51,20 +50,13 @@ const Card = (props) => {
 
 const UsersPage = () => {
 
-  const [n, setN] = useState(users);
-
-  const onNew = (value) => {
-    console.log('ok')
-    setN(value)
-  }
-
   return (
     <div>
       <SEO title="Users list" />
       <NavBar />
       <div className={usersStyles.containerList}>
         {
-          n.map(nendo => {
+          users.map(nendo => {
             return (
               <Card
                 pseudo={nendo.pseudo}
