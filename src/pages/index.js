@@ -40,7 +40,9 @@ const IndexPage = ({ data: { nendo: { nendoroids: data } } }) => {
                 name={nendoroid.formattedName}
                 number={nendoroid.number}
                 images={nendoroid.images}
-                isLiked={nendoroid.likedBy.filter(user => user.id === "5dec1908bb95cb8650150814").length > 0 ? true : false}
+                isLiked={nendoroid.likedBy && nendoroid.likedBy.filter(user => user.id === "5dec1908bb95cb8650150814").length > 0 ? true : false}
+                isWished={nendoroid.wishedBy && nendoroid.wishedBy.filter(user => user.id === "5dec1908bb95cb8650150814").length > 0 ? true : false}
+                isOwned={nendoroid.ownedBy && nendoroid.ownedBy.filter(user => user.id === "5dec1908bb95cb8650150814").length > 0 ? true : false}
               />
             )
           })

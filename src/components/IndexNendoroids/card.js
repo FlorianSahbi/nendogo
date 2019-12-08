@@ -13,9 +13,50 @@ const Card = (props) => {
       addLikeToNendoroid(id: $id userId: $userId)
     }
   `
-  const [addLike, { data }] = useMutation(APOLLO_ADD_LIKE_MUTATION);
+
+  const APOLLO_REMOVE_LIKE_MUTATION = gql`
+  mutation removeLike($id: ID!, $userId: ID!)  {
+    removeLikeToNendoroid(id: $id userId: $userId)
+  }
+  `
+
+  const APOLLO_ADD_WISH_MUTATION = gql`
+    mutation addWish($id: ID!, $userId: ID!)  {
+      addWishToNendoroid(id: $id userId: $userId)
+    }
+  `
+
+  const APOLLO_REMOVE_WISH_MUTATION = gql`
+  mutation removeWish($id: ID!, $userId: ID!)  {
+    removeWishToNendoroid(id: $id userId: $userId)
+  }
+  `
+
+  const APOLLO_ADD_OWN_MUTATION = gql`
+    mutation addOwn($id: ID!, $userId: ID!)  {
+      addOwnToNendoroid(id: $id userId: $userId)
+    }
+  `
+
+  const APOLLO_REMOVE_OWN_MUTATION = gql`
+  mutation removeOwn($id: ID!, $userId: ID!)  {
+    removeOwnToNendoroid(id: $id userId: $userId)
+  }
+  `
+  const [addLike, { data: addLikeResponse }] = useMutation(APOLLO_ADD_LIKE_MUTATION);
+  const [removeLike, { data: removelikeResponse }] = useMutation(APOLLO_REMOVE_LIKE_MUTATION);
+
+  const [addWish, { data: addWishResponse }] = useMutation(APOLLO_ADD_WISH_MUTATION);
+  const [removeWish, { data: removeWishResponse }] = useMutation(APOLLO_REMOVE_WISH_MUTATION);
+
+  const [addOwn, { data: addOwnResponse }] = useMutation(APOLLO_ADD_OWN_MUTATION);
+  const [removeOwn, { data: removeOwnResponse }] = useMutation(APOLLO_REMOVE_OWN_MUTATION);
+
   const [isHovered, setIsHovered] = useState(false);
+
   const [isLiked, setIsLiked] = useState(props.isLiked);
+  const [isWished, setIsWished] = useState(props.isWished);
+  const [isOwned, setIsOwned] = useState(props.isOwned);
 
   const handleMouseEnter = (e) => {
     e.preventDefault();
@@ -30,10 +71,20 @@ const Card = (props) => {
 
   const handleLike = (id) => {
     isLiked ? setIsLiked(false) : setIsLiked(true);
-    console.log(id)
-    addLike({ variables: { "id": id.toString(), "userId": "5dec1908bb95cb8650150814" } })
-      .then(value => console.log(`ok ${data}`))
-      .catch(error => console.log(error));
+    isLiked ? removeLike({ variables: { "id": id.toString(), "userId": "5dec1908bb95cb8650150814" } }).then(value => console.log(`ok`)).catch(error => console.log(error))
+      : addLike({ variables: { "id": id.toString(), "userId": "5dec1908bb95cb8650150814" } }).then(value => console.log(`ok`)).catch(error => console.log(error))
+  };
+
+  const handleWish = (id) => {
+    isWished ? setIsWished(false) : setIsWished(true);
+    isWished ? removeWish({ variables: { "id": id.toString(), "userId": "5dec1908bb95cb8650150814" } }).then(value => console.log(`ok`)).catch(error => console.log(error))
+      : addWish({ variables: { "id": id.toString(), "userId": "5dec1908bb95cb8650150814" } }).then(value => console.log(`ok`)).catch(error => console.log(error))
+  };
+
+  const handleOwn = (id) => {
+    isOwned ? setIsOwned(false) : setIsOwned(true);
+    isOwned ? removeOwn({ variables: { "id": id.toString(), "userId": "5dec1908bb95cb8650150814" } }).then(value => console.log(`ok`)).catch(error => console.log(error))
+      : addOwn({ variables: { "id": id.toString(), "userId": "5dec1908bb95cb8650150814" } }).then(value => console.log(`ok`)).catch(error => console.log(error))
   };
 
   return (
@@ -44,12 +95,28 @@ const Card = (props) => {
     >
       <img src={props.images[0]} alt="img_nendo" />
       <div className={cardStyles.wrapper}>
+
         <div
           className={cardStyles.likeButton}
           onClick={() => handleLike(props.id)}
         >
           {isLiked ? "❤️" : "♡"}
         </div>
+
+        <div
+          className={cardStyles.wishButton}
+          onClick={() => handleWish(props.id)}
+        >
+          {isWished ? "★" : "☆"}
+        </div>
+
+        <div
+          className={cardStyles.ownButton}
+          onClick={() => handleOwn(props.id)}
+        >
+          {isOwned ? "✓" : "X"}
+        </div>
+
         <h2 className={cardStyles.title}>{props.name}</h2>
         <p className={cardStyles.number}>{props.number}</p>
         <div className={`${cardStyles.link} ${cardStyles.default}`}>
