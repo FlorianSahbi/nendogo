@@ -26,14 +26,6 @@ const ProfilPic = (props) => {
   )
 }
 
-const renderProfile = (nbr) => {
-  let a = [];
-  for (let i = 0; i < nbr; i++) {
-    a.push(<ProfilPic src="https://images.goodsmile.info/cgm/images/product/20140219/4228/27934/large/d099e29345767893f5976388a7d75e4e.jpg" alt="jsp" />)
-  }
-  return a
-}
-
 const Carousel = (props) => {
   return (
     <div className="cd--container">
@@ -72,11 +64,6 @@ query Nendo($id: ID!) {
 `;
 
 export default (props) => {
-
-  console.log(props.pageContext.id)
-
-
-
 
   const { loading, error, data } = useQuery(GET_INTERACTIONS, {
     variables: { id: props.pageContext.id },
@@ -120,15 +107,6 @@ export default (props) => {
             <div className="nendo--preview">
               <Carousel img1={props.pageContext.images[0]} img2={props.pageContext.images[1]} img3={props.pageContext.images[2]} />
               <div className="nendo--number">#{props.pageContext.number}</div>
-
-              {/* <img src={props.pageContext.images[0]} alt="ok" /> */}
-              {/* {props.pageContext.images.map(img => {
-              return (
-                <div className="imgCont">
-                  <img src={img} alt={`img ${props.pageContext.name}`} />
-                </div>
-              )
-            })} */}
             </div>
           </div>
           <div className="nendo--user">

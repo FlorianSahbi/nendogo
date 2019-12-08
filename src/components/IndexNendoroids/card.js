@@ -1,3 +1,7 @@
+/*eslint-disable jsx-a11y/click-events-have-key-events*/
+/*eslint-disable jsx-a11y/no-static-element-interactions*/
+/*eslint-disable jsx-a11y/interactive-supports-focus*/
+
 import React, { useState } from "react"
 import { Link } from "gatsby"
 import cardStyles from "./card.module.css"
@@ -43,12 +47,15 @@ const Card = (props) => {
     removeOwnToNendoroid(id: $id userId: $userId)
   }
   `
+  /*eslint-disable no-unused-vars*/
   const [addLike, { data: addLikeResponse }] = useMutation(APOLLO_ADD_LIKE_MUTATION);
   const [removeLike, { data: removelikeResponse }] = useMutation(APOLLO_REMOVE_LIKE_MUTATION);
 
+  /*eslint-disable no-unused-vars*/
   const [addWish, { data: addWishResponse }] = useMutation(APOLLO_ADD_WISH_MUTATION);
   const [removeWish, { data: removeWishResponse }] = useMutation(APOLLO_REMOVE_WISH_MUTATION);
 
+  /*eslint-disable no-unused-vars*/
   const [addOwn, { data: addOwnResponse }] = useMutation(APOLLO_ADD_OWN_MUTATION);
   const [removeOwn, { data: removeOwnResponse }] = useMutation(APOLLO_REMOVE_OWN_MUTATION);
 
@@ -57,6 +64,8 @@ const Card = (props) => {
   const [isLiked, setIsLiked] = useState(props.isLiked);
   const [isWished, setIsWished] = useState(props.isWished);
   const [isOwned, setIsOwned] = useState(props.isOwned);
+
+
 
   const handleMouseEnter = (e) => {
     e.preventDefault();
@@ -71,20 +80,20 @@ const Card = (props) => {
 
   const handleLike = (id) => {
     isLiked ? setIsLiked(false) : setIsLiked(true);
-    isLiked ? removeLike({ variables: { "id": id.toString(), "userId": "5dec1908bb95cb8650150814" } }).then(value => console.log(`ok`)).catch(error => console.log(error))
-      : addLike({ variables: { "id": id.toString(), "userId": "5dec1908bb95cb8650150814" } }).then(value => console.log(`ok`)).catch(error => console.log(error))
+    isLiked ? removeLike({ variables: { "id": id.toString(), "userId": "5dec1908bb95cb8650150814" } })
+      : addLike({ variables: { "id": id.toString(), "userId": "5dec1908bb95cb8650150814" } });
   };
 
   const handleWish = (id) => {
     isWished ? setIsWished(false) : setIsWished(true);
-    isWished ? removeWish({ variables: { "id": id.toString(), "userId": "5dec1908bb95cb8650150814" } }).then(value => console.log(`ok`)).catch(error => console.log(error))
-      : addWish({ variables: { "id": id.toString(), "userId": "5dec1908bb95cb8650150814" } }).then(value => console.log(`ok`)).catch(error => console.log(error))
+    isWished ? removeWish({ variables: { "id": id.toString(), "userId": "5dec1908bb95cb8650150814" } })
+      : addWish({ variables: { "id": id.toString(), "userId": "5dec1908bb95cb8650150814" } });
   };
 
   const handleOwn = (id) => {
     isOwned ? setIsOwned(false) : setIsOwned(true);
-    isOwned ? removeOwn({ variables: { "id": id.toString(), "userId": "5dec1908bb95cb8650150814" } }).then(value => console.log(`ok`)).catch(error => console.log(error))
-      : addOwn({ variables: { "id": id.toString(), "userId": "5dec1908bb95cb8650150814" } }).then(value => console.log(`ok`)).catch(error => console.log(error))
+    isOwned ? removeOwn({ variables: { "id": id.toString(), "userId": "5dec1908bb95cb8650150814" } })
+      : addOwn({ variables: { "id": id.toString(), "userId": "5dec1908bb95cb8650150814" } });
   };
 
   return (
@@ -112,6 +121,7 @@ const Card = (props) => {
 
         <div
           className={cardStyles.ownButton}
+          role="button"
           onClick={() => handleOwn(props.id)}
         >
           {isOwned ? "✓" : "X"}

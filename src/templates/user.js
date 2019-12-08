@@ -1,10 +1,12 @@
+/*eslint-disable jsx-a11y/click-events-have-key-events*/
+/*eslint-disable jsx-a11y/no-static-element-interactions*/
+
 import React from "react"
 import SEO from "../components/seo"
 import userTemplateStyles from "./userTemplateStyle.module.css"
 import { Link } from "gatsby"
-import nendoroids from "../pages/nendoroids.json"
 
-
+/*eslint-disable no-unused-vars*/
 const ProfilPic = (props) => {
   return (
     <div className={userTemplateStyles.roundedProfil}>
@@ -13,19 +15,6 @@ const ProfilPic = (props) => {
     </div>
   )
 }
-
-// const renderliked = (array) => {
-//   let liked = [];
-//   array.forEach(e => {
-//     nendoroids.forEach(n => {
-//       if (n.number === e) {
-//         liked.push(<ProfilPic src={n.images[0]} alt="jsp" number={n.number} />)
-//       }
-//     })
-//   });
-
-//   return liked
-// }
 
 export default (props) => {
   return (

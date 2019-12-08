@@ -4,7 +4,6 @@ const Filter = ({ data, props }) => {
     const [filter, setFilter] = useState("name")
   
     const handleChange = (e) => {
-      console.log(e.target.value.toLowerCase())
   
       if (filter === "name") {
         let newN = nendoroids.filter(elem => {
@@ -40,7 +39,6 @@ const Filter = ({ data, props }) => {
     }
   
     const handleChangeFilter = (e) => {
-      console.log(e.target.value.toLowerCase())
       setFilter(e.target.value.toLowerCase())
     }
   

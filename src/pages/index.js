@@ -5,9 +5,6 @@ import Card from "../components/IndexNendoroids/card";
 import SEO from "../components/seo";
 import indexStyles from "./index.module.css";
 import navBarStyles from "./navBar.module.css";
-import { Query, Mutation } from "react-apollo";
-import gql from 'graphql-tag'
-import { useQuery, useMutation } from '@apollo/react-hooks';
 
 const NavBar = () => {
   return (
@@ -21,10 +18,8 @@ const NavBar = () => {
 }
 
 const IndexPage = ({ data: { nendo: { nendoroids: data } } }) => {
-
+  /*eslint-disable no-unused-vars*/
   const [nendoroids, setNendoroids] = useState(data);
-  let isLiked = false;
-  console.log(nendoroids)
 
   return (
     <div>

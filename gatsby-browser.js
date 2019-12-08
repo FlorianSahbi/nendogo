@@ -2,6 +2,7 @@ import React from "react";
 import { silentAuth } from "./src/utils/auth";
 export { wrapRootElement } from './src/apollo/wrap-root-element';
 
+/*eslint-disable no-unused-vars*/
 class SessionCheck extends React.Component {
   constructor(props) {
     super(props)
