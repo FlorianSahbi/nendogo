@@ -70,7 +70,3 @@ export const GATSBY_NENDO_QUERY = graphql`
 `
 
 export default IndexPage
-
-  // const { loading, error, data } = useQuery(APOLLO_NENDO_QUERY);
-  // if (loading) return 'loading ...';
-  // if (error) return `error ${error.message}`
