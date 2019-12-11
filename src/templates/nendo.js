@@ -76,7 +76,7 @@ export default (props) => {
 
   return (
     <>
-      <SEO title={`lol ${props.pageContext.name} | Flo`} description="With the theatrical release of 'Magical Girl Lyrical Nanoha The MOVIE 1st' getting closer by the day, yet another Nendoroid is here to join the cast - Fate Testarossa is here, and just like Nanoha, she is wearing her new barrier jacket from the movie! Three facial expressions are included: a typical, stoic expression, a serious expression, as well as an expression with closed eyes. Her all important intelligent device, 'Bardiche' is also included in both axe form and scythe form. Her familiar Arf is also included in her dog form, once again giving you everything you need for a Nendoroid reenactment of the original!" />
+      <SEO title={`${props.pageContext.name}`} description={`${props.pageContext.name}`} />
       <div className="nendo--container">
         <div className="nendo--wrapper">
           <div className="nendo--info">

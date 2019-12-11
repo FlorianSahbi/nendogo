@@ -18,7 +18,6 @@ module.exports = {
         typeName: "NENDO",
         fieldName: "nendo",
         url: "http://localhost:3005/graphql/",
-        // url: "https://www.nendoroids.floriansahbi.com/graphql/",
       },
     },
     {
@@ -40,10 +39,10 @@ module.exports = {
         name: `gatsby-starter-default`,
         short_name: `starter`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        background_color: `#131415`,
+        theme_color: `#131415`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`,
+        icon: `src/images/mashiro.jpg`,
       },
     }
   ],
