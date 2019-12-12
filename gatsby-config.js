@@ -17,7 +17,7 @@ module.exports = {
       options: {
         typeName: "NENDO",
         fieldName: "nendo",
-        url: "http://localhost:3005/graphql/",
+        url: "https://nendoroids.floriansahbi.com/graphql",
       },
     },
     {
