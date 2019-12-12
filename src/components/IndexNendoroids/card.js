@@ -80,20 +80,20 @@ const Card = (props) => {
 
   const handleLike = (id) => {
     isLiked ? setIsLiked(false) : setIsLiked(true);
-    isLiked ? removeLike({ variables: { "id": id.toString(), "userId": "5dec1908bb95cb8650150814" } })
-      : addLike({ variables: { "id": id.toString(), "userId": "5dec1908bb95cb8650150814" } });
+    isLiked ? removeLike({ variables: { "id": id.toString(), "userId": "5dedb39b3eb115e98ed82992" } })
+      : addLike({ variables: { "id": id.toString(), "userId": "5dedb39b3eb115e98ed82992" } });
   };
 
   const handleWish = (id) => {
     isWished ? setIsWished(false) : setIsWished(true);
-    isWished ? removeWish({ variables: { "id": id.toString(), "userId": "5dec1908bb95cb8650150814" } })
-      : addWish({ variables: { "id": id.toString(), "userId": "5dec1908bb95cb8650150814" } });
+    isWished ? removeWish({ variables: { "id": id.toString(), "userId": "5dedb39b3eb115e98ed82992" } })
+      : addWish({ variables: { "id": id.toString(), "userId": "5dedb39b3eb115e98ed82992" } });
   };
 
   const handleOwn = (id) => {
     isOwned ? setIsOwned(false) : setIsOwned(true);
-    isOwned ? removeOwn({ variables: { "id": id.toString(), "userId": "5dec1908bb95cb8650150814" } })
-      : addOwn({ variables: { "id": id.toString(), "userId": "5dec1908bb95cb8650150814" } });
+    isOwned ? removeOwn({ variables: { "id": id.toString(), "userId": "5dedb39b3eb115e98ed82992" } })
+      : addOwn({ variables: { "id": id.toString(), "userId": "5dedb39b3eb115e98ed82992" } });
   };
 
   return (
