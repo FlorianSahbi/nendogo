@@ -191,29 +191,3 @@
 
 
 
-.cd--container {
-    /* border: 2px solid blue; */
-    height: 100%;
-    width: 100%;
-}
-
-.cd--wrapper {
-    /* border: 2px solid green; */
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    display: flex;
-}
-
-.slide {
-    /* border: 2px solid red; */
-    height: 100%;
-    width: 100%;
-}
-
-.slide img {
-    object-fit: cover;
-    object-position: center;
-    height: 100%;
-    width: 100%;
-}

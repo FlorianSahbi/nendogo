@@ -1,0 +1,64 @@
+.container {
+  /* border: 3px solid blue; */
+  height: 100%;
+  width: 100%;
+}
+
+.wrapper {
+  /* border: 3px solid green; */
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  position: relative;
+}
+
+.slide {
+  /* border: 3px solid red; */
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.slide img {
+  object-fit: cover;
+  /* object-position: center; */
+  height: 100%;
+  width: 100%;
+}
+
+.ActionsLayerContainer {
+  /* border: 5px solid pink; */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+}
+
+.ActionsLayerWrapper {
+  /* border: 3px solid red; */
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.previousButton {
+  /* border: 3px solid green; */
+  cursor: pointer;
+  flex: 0.1;
+}
+
+.showImage {
+  /* border: 3px solid red; */
+  cursor: zoom-in;
+  flex: 1;
+}
+
+.nextButton {
+  /* border: 3px solid green; */
+  cursor: pointer;
+  flex: 0.1;
+}

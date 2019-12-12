@@ -1,9 +1,10 @@
-import React from "react"
+import React, { useState } from "react"
 import SEO from "../components/seo"
 import "./nendo.css"
 import { Link } from "gatsby"
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
+import useStyle from "./slideshow.module.css";
 
 const More = (props) => {
   return (
@@ -27,18 +28,49 @@ const ProfilPic = (props) => {
 }
 
 const Carousel = (props) => {
+  const { images } = props;
+  const [index, setIndex] = useState(0);
+  const [currentImage, setCurrentImage] = useState(images[index]);
+
+  function handlePrevious() {
+    let i = index - 1;
+    if (i < 0) {
+      i = images.length - 1;
+      setIndex(i)
+      setCurrentImage(images[index])
+    } else {
+      setIndex(i)
+      setCurrentImage(images[index])
+    }
+  }
+
+  function handleNext() {
+    let i = index + 1;
+    if (i > images.length - 1) {
+      i = 0;
+      setIndex(i)
+      setCurrentImage(images[index])
+    } else {
+      setIndex(i)
+      setCurrentImage(images[index])
+    }
+  }
+
+  function handleShow() {
+    alert("show")
+  }
+
   return (
-    <div className="cd--container">
-      <div className="cd--wrapper">
-        <div className="slide slide1">
-          <img src={props.img1} alt="bla" />
+    <div className={useStyle.container}>
+      <div className={useStyle.wrapper}>
+        <div className={useStyle.ActionsLayerContainer}>
+          <div className={useStyle.ActionsLayerWrapper}>
+            <div className={useStyle.previousButton} onClick={handlePrevious}></div>
+            <div className={useStyle.showImage} onClick={handleShow}></div>
+            <div className={useStyle.nextButton} onClick={handleNext}></div>
+          </div>
         </div>
-        <div className="slide slide2">
-          <img src={props.img2} alt="bla" />
-        </div>
-        <div className="slide slide3">
-          <img src={props.img3} alt="bla" />
-        </div>
+        <img src={currentImage} className={useStyle.slide} alt="bla" />
       </div>
     </div >
   )
@@ -105,7 +137,7 @@ export default (props) => {
             </div>
 
             <div className="nendo--preview">
-              <Carousel img1={props.pageContext.images[0]} img2={props.pageContext.images[1]} img3={props.pageContext.images[2]} />
+              <Carousel images={props.pageContext.images} />
               <div className="nendo--number">#{props.pageContext.number}</div>
             </div>
           </div>
