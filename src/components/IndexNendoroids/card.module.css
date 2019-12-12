@@ -150,3 +150,9 @@
 .default .wrapper {
     backdrop-filter: none;
 }
+
+@media screen and (max-width: 440px) {
+    .container {
+        width: 190px;
+    }
+  }

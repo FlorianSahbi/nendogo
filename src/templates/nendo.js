@@ -142,13 +142,13 @@ export default (props) => {
             </div>
           </div>
           <div className="nendo--user">
-            <>
+            {/* <>
               <div className="user--like">
                 <div className="user--title">
                   <p>They liked it</p>
                 </div>
                 <div className="user--like--list">
-                  {data.nendoroid.likedBy !== undefined && data.nendoroid.likedBy.length <= 0 ? <span style={{ color: "white" }}>{`Poor ${props.pageContext.formattedName} nobody likes her :(`}</span> :
+                  {data.nendoroid.likedBy !== undefined && data.nendoroid.likedBy !== null && data.nendoroid.likedBy.length <= 0 ? <span style={{ color: "white" }}>{`Poor ${props.pageContext.formattedName} nobody likes her :(`}</span> :
                     data.nendoroid.likedBy.map(user => <ProfilPic src={user.avatar} alt={user.pseudo} />)}
                 </div>
               </div>
@@ -158,7 +158,7 @@ export default (props) => {
                   <p>They want it</p>
                 </div>
                 <div className="user--want--list">
-                  {data.nendoroid.wishedBy !== undefined && data.nendoroid.wishedBy.length <= 0 ? <span style={{ color: "white" }}>{`Poor ${props.pageContext.formattedName} nobody seems interested by her nendoroids :(`}</span> :
+                  {data.nendoroid.wishedBy !== undefined && data.nendoroid.wishedBy !== null && data.nendoroid.wishedBy.length <= 0 ? <span style={{ color: "white" }}>{`Poor ${props.pageContext.formattedName} nobody seems interested by her nendoroids :(`}</span> :
                     data.nendoroid.wishedBy.map(user => <ProfilPic src={user.avatar} alt={user.pseudo} />)}
                 </div>
               </div>
@@ -168,11 +168,11 @@ export default (props) => {
                   <p>They loved it</p>
                 </div>
                 <div className="user--love--list">
-                  {data.nendoroid.ownedBy !== undefined && data.nendoroid.ownedBy.length <= 0 ? <span style={{ color: "white" }}>{`Poor ${props.pageContext.formattedName} nobody she havn't home :(`}</span> :
+                  {data.nendoroid.ownedBy !== undefined && data.nendoroid.ownedBy !== null && data.nendoroid.ownedBy.length <= 0 ? <span style={{ color: "white" }}>{`Poor ${props.pageContext.formattedName} nobody she havn't home :(`}</span> :
                     data.nendoroid.ownedBy.map(user => <ProfilPic src={user.avatar} alt={user.pseudo} />)}
                 </div>
               </div>
-            </>
+            </> */}
           </div>
         </div>
       </div>
