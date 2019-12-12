@@ -142,7 +142,7 @@ export default (props) => {
             </div>
           </div>
           <div className="nendo--user">
-            {/* <>
+            <>
               <div className="user--like">
                 <div className="user--title">
                   <p>They liked it</p>
@@ -172,7 +172,7 @@ export default (props) => {
                     data.nendoroid.ownedBy.map(user => <ProfilPic src={user.avatar} alt={user.pseudo} />)}
                 </div>
               </div>
-            </> */}
+            </>
           </div>
         </div>
       </div>
