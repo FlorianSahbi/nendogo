@@ -8,42 +8,42 @@ import cardStyles from "./card.module.css"
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks';
 
-
+const user = { email: "florian.sahbi@gmail.com" };
 
 const Card = (props) => {
 
   const APOLLO_ADD_LIKE_MUTATION = gql`
-    mutation addLike($id: ID!, $userId: ID!)  {
+    mutation addLike($id: ID!, $userId: String!)  {
       addLikeToNendoroid(id: $id userId: $userId)
     }
   `
 
   const APOLLO_REMOVE_LIKE_MUTATION = gql`
-  mutation removeLike($id: ID!, $userId: ID!)  {
+  mutation removeLike($id: ID!, $userId: String!)  {
     removeLikeToNendoroid(id: $id userId: $userId)
   }
   `
 
   const APOLLO_ADD_WISH_MUTATION = gql`
-    mutation addWish($id: ID!, $userId: ID!)  {
+    mutation addWish($id: ID!, $userId: String!)  {
       addWishToNendoroid(id: $id userId: $userId)
     }
   `
 
   const APOLLO_REMOVE_WISH_MUTATION = gql`
-  mutation removeWish($id: ID!, $userId: ID!)  {
+  mutation removeWish($id: ID!, $userId: String!)  {
     removeWishToNendoroid(id: $id userId: $userId)
   }
   `
 
   const APOLLO_ADD_OWN_MUTATION = gql`
-    mutation addOwn($id: ID!, $userId: ID!)  {
+    mutation addOwn($id: ID!, $userId: String!)  {
       addOwnToNendoroid(id: $id userId: $userId)
     }
   `
 
   const APOLLO_REMOVE_OWN_MUTATION = gql`
-  mutation removeOwn($id: ID!, $userId: ID!)  {
+  mutation removeOwn($id: ID!, $userId: String!)  {
     removeOwnToNendoroid(id: $id userId: $userId)
   }
   `
@@ -80,20 +80,20 @@ const Card = (props) => {
 
   const handleLike = (id) => {
     isLiked ? setIsLiked(false) : setIsLiked(true);
-    isLiked ? removeLike({ variables: { "id": id.toString(), "userId": "5df1b3693eb115e98ed934ff" } })
-      : addLike({ variables: { "id": id.toString(), "userId": "5df1b3693eb115e98ed934ff" } });
+    isLiked ? removeLike({ variables: { "id": id.toString(), "userId": `${user.email}` } })
+      : addLike({ variables: { "id": id.toString(), "userId": `${user.email}` } });
   };
 
   const handleWish = (id) => {
     isWished ? setIsWished(false) : setIsWished(true);
-    isWished ? removeWish({ variables: { "id": id.toString(), "userId": "5df1b3693eb115e98ed934ff" } })
-      : addWish({ variables: { "id": id.toString(), "userId": "5df1b3693eb115e98ed934ff" } });
+    isWished ? removeWish({ variables: { "id": id.toString(), "userId": `${user.email}` } })
+      : addWish({ variables: { "id": id.toString(), "userId": `${user.email}` } });
   };
 
   const handleOwn = (id) => {
     isOwned ? setIsOwned(false) : setIsOwned(true);
-    isOwned ? removeOwn({ variables: { "id": id.toString(), "userId": "5df1b3693eb115e98ed934ff" } })
-      : addOwn({ variables: { "id": id.toString(), "userId": "5df1b3693eb115e98ed934ff" } });
+    isOwned ? removeOwn({ variables: { "id": id.toString(), "userId": `${user.email}` } })
+      : addOwn({ variables: { "id": id.toString(), "userId": `${user.email}` } });
   };
 
   return (

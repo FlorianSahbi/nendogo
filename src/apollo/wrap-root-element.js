@@ -1,14 +1,32 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { ApolloProvider } from 'react-apollo';
 import { client } from './client';
+import { silentAuth } from "../utils/auth"
 
-import { checkSession } from '../utils/auth';
+class SessionCheck extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            loading: true,
+        }
+    }
 
-const SessionCheck = ({ children }) => {
-    const [loading, stillLoading] = useState(true);
-    useEffect(() => checkSession(() => stillLoading(false)));
-    return loading === false && <>{children}</>
-};
+    handleCheckSession = () => {
+        this.setState({ loading: false })
+    }
+
+    componentDidMount() {
+        silentAuth(this.handleCheckSession)
+    }
+
+    render() {
+        return (
+            this.state.loading === false && (
+                <React.Fragment>{this.props.children}</React.Fragment>
+            )
+        )
+    }
+}
 
 export const wrapRootElement = ({ element }) => (
     <SessionCheck>
@@ -17,3 +35,6 @@ export const wrapRootElement = ({ element }) => (
         </ApolloProvider>
     </SessionCheck>
 )
+
+
+

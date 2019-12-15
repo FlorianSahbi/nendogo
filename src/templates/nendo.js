@@ -79,18 +79,9 @@ const Carousel = (props) => {
 const GET_INTERACTIONS = gql`
 query Nendo($id: ID!) {
   nendoroid(id: $id) {
-    likedBy {
-      avatar
-      pseudo
-    }
-    wishedBy {
-      avatar
-      pseudo
-    }
-    ownedBy {
-      pseudo
-      avatar
-    }
+    likedBy
+    wishedBy
+    ownedBy
   }
 }
 `;
@@ -148,8 +139,8 @@ export default (props) => {
                   <p>Like</p>
                 </div>
                 <div className="user--like--list">
-                  {data.nendoroid.likedBy !== undefined && data.nendoroid.likedBy !== null && data.nendoroid.likedBy.length <= 0 ? <span style={{ color: "white" }}>Like</span> :
-                    data.nendoroid.likedBy.map(user => <ProfilPic src={user.avatar} alt={user.pseudo} />)}
+                  {/* {data.nendoroid.likedBy !== undefined && data.nendoroid.likedBy !== null && data.nendoroid.likedBy.length <= 0 ? <span style={{ color: "white" }}>Like</span> :
+                    data.nendoroid.likedBy.map(user => <ProfilPic src={user.avatar} alt={user.pseudo} />)} */}
                 </div>
               </div>
 
@@ -159,8 +150,8 @@ export default (props) => {
                   <p>Wish</p>
                 </div>
                 <div className="user--want--list">
-                  {data.nendoroid.wishedBy !== undefined && data.nendoroid.wishedBy !== null && data.nendoroid.wishedBy.length <= 0 ? <span style={{ color: "white" }}>Whish</span> :
-                    data.nendoroid.wishedBy.map(user => <ProfilPic src={user.avatar} alt={user.pseudo} />)}
+                  {/* {data.nendoroid.wishedBy !== undefined && data.nendoroid.wishedBy !== null && data.nendoroid.wishedBy.length <= 0 ? <span style={{ color: "white" }}>Whish</span> :
+                    data.nendoroid.wishedBy.map(user => <ProfilPic src={user.avatar} alt={user.pseudo} />)} */}
                 </div>
               </div>
 
@@ -169,8 +160,8 @@ export default (props) => {
                   <p>Own</p>
                 </div>
                 <div className="user--love--list">
-                  {data.nendoroid.ownedBy !== undefined && data.nendoroid.ownedBy !== null && data.nendoroid.ownedBy.length <= 0 ? <span style={{ color: "white" }}>Own</span> :
-                    data.nendoroid.ownedBy.map(user => <ProfilPic src={user.avatar} alt={user.pseudo} />)}
+                  {/* {data.nendoroid.ownedBy !== undefined && data.nendoroid.ownedBy !== null && data.nendoroid.ownedBy.length <= 0 ? <span style={{ color: "white" }}>Own</span> :
+                    data.nendoroid.ownedBy.map(user => <ProfilPic src={user.avatar} alt={user.pseudo} />)} */}
                 </div>
               </div>
             </>
