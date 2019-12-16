@@ -1,23 +1,9 @@
-/*eslint-disable jsx-a11y/click-events-have-key-events*/
-/*eslint-disable jsx-a11y/no-static-element-interactions*/
-
 import React, { useState } from "react"
-import SEO from "../components/seo"
 import classes from "./userTemplateStyle.module.css"
-import { Link } from "gatsby"
 import { Carousel } from "../templates/nendo";
 import Card from "../components/IndexNendoroids/card"
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-/*eslint-disable no-unused-vars*/
-// const ProfilPic = (props) => {
-//   return (
-//     <div className={userTemplateStyles.roundedProfil}>
-//       <img src={props.src} alt={props.alt} />
-//       <Link to={`/${props.number}/`} >{`See ${props.number}`}</Link>
-//     </div>
-//   )
-// }
 
 const imgUrl = "https://images2.alphacoders.com/742/thumb-1920-742320.png";
 const imgProfile = "https://www.larutadelsorigens.cat/wallpic/full/30-300310_new-wallpapers-kimi-no-na-wa-mitsuha.jpg";
