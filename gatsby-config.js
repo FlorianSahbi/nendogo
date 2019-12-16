@@ -17,7 +17,8 @@ module.exports = {
       options: {
         typeName: "NENDO",
         fieldName: "nendo",
-        url: `http://localhost:4000`,
+        // url: `http://localhost:4000`,
+        url: `https://www.nendoroids.floriansahbi.com`,
       },
     },
     {
