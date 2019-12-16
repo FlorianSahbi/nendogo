@@ -105,27 +105,34 @@ const Card = (props) => {
       <img src={props.images[0]} alt="img_nendo" />
       <div className={cardStyles.wrapper}>
 
-        <div
-          className={cardStyles.likeButton}
-          onClick={() => handleLike(props.id)}
-        >
-          {isLiked ? "❤️" : "♡"}
-        </div>
+        {props.isLiked &&
+          <div
+            className={cardStyles.likeButton}
+            onClick={() => handleLike(props.id)}
+          >
+            {isLiked ? "❤️" : "♡"}
+          </div>
+        }
 
-        <div
-          className={cardStyles.wishButton}
-          onClick={() => handleWish(props.id)}
-        >
-          {isWished ? "★" : "☆"}
-        </div>
+        {props.isLiked &&
 
-        <div
-          className={cardStyles.ownButton}
-          role="button"
-          onClick={() => handleOwn(props.id)}
-        >
-          {isOwned ? "✓" : "X"}
-        </div>
+          <div
+            className={cardStyles.wishButton}
+            onClick={() => handleWish(props.id)}
+          >
+            {isWished ? "★" : "☆"}
+          </div>
+        }
+
+        {props.isOwn &&
+          <div
+            className={cardStyles.ownButton}
+            role="button"
+            onClick={() => handleOwn(props.id)}
+          >
+            {isOwned ? "✓" : "X"}
+          </div>
+        }
 
         <h2 className={cardStyles.title}>{props.name}</h2>
         <p className={cardStyles.number}>{props.number}</p>

@@ -27,7 +27,7 @@ const ProfilPic = (props) => {
   )
 }
 
-const Carousel = (props) => {
+export const Carousel = (props) => {
   const { images } = props;
   const [index, setIndex] = useState(0);
   const [currentImage, setCurrentImage] = useState(images[index]);
@@ -70,6 +70,7 @@ const Carousel = (props) => {
             <div className={useStyle.nextButton} onClick={handleNext}></div>
           </div>
         </div>
+        <img src={currentImage} className={useStyle.slideBg} alt="bla" />
         <img src={currentImage} className={useStyle.slide} alt="bla" />
       </div>
     </div >

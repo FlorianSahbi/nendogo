@@ -18,13 +18,18 @@
   height: 100%;
   width: 100%;
   position: absolute;
+  object-fit: contain;
+  object-position: center;
 }
 
-.slide img {
-  object-fit: cover;
-  /* object-position: center; */
+.slideBg {
   height: 100%;
   width: 100%;
+  position: absolute;
+  object-fit: cover;
+  object-position: center;
+  filter: blur(20px);
+  opacity: 0.5;
 }
 
 .ActionsLayerContainer {

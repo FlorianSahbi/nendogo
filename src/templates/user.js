@@ -1,68 +1,138 @@
 /*eslint-disable jsx-a11y/click-events-have-key-events*/
 /*eslint-disable jsx-a11y/no-static-element-interactions*/
 
-import React from "react"
+import React, { useState } from "react"
 import SEO from "../components/seo"
-import userTemplateStyles from "./userTemplateStyle.module.css"
+import classes from "./userTemplateStyle.module.css"
 import { Link } from "gatsby"
-
+import { Carousel } from "../templates/nendo";
+import Card from "../components/IndexNendoroids/card"
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 /*eslint-disable no-unused-vars*/
-const ProfilPic = (props) => {
-  return (
-    <div className={userTemplateStyles.roundedProfil}>
-      <img src={props.src} alt={props.alt} />
-      <Link to={`/${props.number}/`} >{`See ${props.number}`}</Link>
-    </div>
-  )
+// const ProfilPic = (props) => {
+//   return (
+//     <div className={userTemplateStyles.roundedProfil}>
+//       <img src={props.src} alt={props.alt} />
+//       <Link to={`/${props.number}/`} >{`See ${props.number}`}</Link>
+//     </div>
+//   )
+// }
+
+const imgUrl = "https://images2.alphacoders.com/742/thumb-1920-742320.png";
+const imgProfile = "https://www.larutadelsorigens.cat/wallpic/full/30-300310_new-wallpapers-kimi-no-na-wa-mitsuha.jpg";
+const nendoStories = [
+  "https://lh5.googleusercontent.com/-TzOpjinrBhE/UTlrvrbQs0I/AAAAAAAAA1U/8cmIq__9KoM/s1617/IMG_0539.jpg",
+  "https://farm8.staticflickr.com/7653/16839072620_1a5ca7021f_o.jpg",
+  "https://mynendoworld.files.wordpress.com/2017/08/img_0307.jpg?w=830",
+  "http://mikatan.goodsmile.info/en/wp-content/uploads/-000//1/5a434439ed9f8_2017-12-27-48288.jpg",
+  "https://static.myfigurecollection.net/upload/pictures/2014/10/16/1120890.jpeg",
+  "https://live.staticflickr.com/1957/44819518934_62037c288f_b.jpg"
+]
+const user = { email: "florian.sahbi@gmail.com" };
+
+const HAHA = gql`
+query userL($id: String!) {
+  userLikes(id: $id) {
+    id
+    formattedName
+    number
+    images
+  }
 }
+`;
+const HOHO = gql`
+query userW($id: String!) {
+  userWishes(id: $id) {
+    id
+    formattedName
+    number
+    images
+  }
+}
+`;
+const HIHI = gql`
+query userO($id: String!) {
+  userOwn(id: $id) {
+    id
+    formattedName
+    number
+    images
+  }
+}
+`;
 
 export default (props) => {
+  const [scrolled, setScrolled] = useState(false)
+  const [selected, setSelected] = useState("like")
+
+  let { error: errorNendoL, loading: LoadingNendoL, data: dataNendoL } = useQuery(HAHA, {
+    variables: { id: user.email },
+    fetchPolicy: 'no-cache'
+  })
+  let { error: errorNendoW, loading: LoadingNendoW, data: dataNendoW } = useQuery(HOHO, {
+    variables: { id: user.email },
+    fetchPolicy: 'no-cache'
+  })
+  let { error: errorNendoO, loading: LoadingNendoO, data: dataNendoO } = useQuery(HIHI, {
+    variables: { id: user.email },
+    fetchPolicy: 'no-cache'
+  })
+
+
+  if (errorNendoL | errorNendoW | errorNendoO) return <span>WAIT</span>
+  if (LoadingNendoL | LoadingNendoW | LoadingNendoO) return <p>Loading ...</p>
+  // console.log({ dataNendoL: dataNendoL.userLikes, dataNendoW: dataNendoW.userWishes, dataNendoO: dataNendoO.userOwn })
+
+  const renderCards = (array) => {
+    return array.map(nendo => <Card key={nendo.id} id={nendo.id} images={nendo.images} name={nendo.formattedName} number={nendo.number} />)
+  }
+
+  console.log(renderCards(dataNendoL.userLikes));
+
   return (
     <>
-      {/* <SEO title={`${props.pageContext.pseudo}`} description="With the theatrical release of 'Magical Girl Lyrical Nanoha The MOVIE 1st' getting closer by the day, yet another userroid is here to join the cast - Fate Testarossa is here, and just like Nanoha, she is wearing her new barrier jacket from the movie! Three facial expressions are included: a typical, stoic expression, a serious expression, as well as an expression with closed eyes. Her all important intelligent device, 'Bardiche' is also included in both axe form and scythe form. Her familiar Arf is also included in her dog form, once again giving you everything you need for a userroid reenactment of the original!" /> */}
+      <div className={classes.container}>
+        <div className={classes.wrapper}>
 
-      <div className={userTemplateStyles.container}>
-        <div className={userTemplateStyles.wrapper}>
-          <div className={userTemplateStyles.info}>
-            <div className={userTemplateStyles.meta}>
-              <div className={userTemplateStyles.title}>
-                <h2>{props.pageContext.pseudo}</h2>
-              </div>
-              <div className={userTemplateStyles.description}>
-                <h2>From the popular game "League of Legends" comes a userroid of Ahri!</h2>
-                <p>From the internationally popular E-sports game "League of Legends" comes a userroid of Ahri! She comes with two face plates, both of which capture her charming expressions in cute userroid form. Her detailed costume has been faithfully recreated, including the gold adornments.</p>
-                <p>Two kinds of effect parts are included to display her using her abilities. Two tail parts are included allowing you to display her two different ways! Bent arms and bent leg parts are included allowing you to create a variety of different scenes!</p>
-              </div>
-            </div>
-            <div className={userTemplateStyles.preview}>
-              <img src={props.pageContext.avatar} alt="ok" />
+          <div className={scrolled ? classes.hA : classes.imgWrapper}>
+            <img src={imgUrl} alt="dunno" />
+            <div className={scrolled ? classes.ppA : classes.profileImg}>
+              <img src={imgProfile} alt="dunnon" />
             </div>
           </div>
-          <div className={userTemplateStyles.user}>
-            <div className={userTemplateStyles.like}>
-              {/* <div className={userTemplateStyles.title}>
-                <p>He like it</p>
+
+          <div className={classes.content}>
+            <div style={{ position: "absolute", height: "100px", widht: "100px", color: "green", cursor: "pointer" }} onClick={() => setScrolled(!scrolled)}>CLICK</div>
+            <div className={classes.contentWrapper}>
+              <div className={classes.name} >
+                <h2>kixkillradio</h2>
               </div>
-              <div className={userTemplateStyles.likeList}>
-                {renderliked(props.pageContext.liked)}
-              </div>
-            </div>
-            <div className={userTemplateStyles.want}>
-              <div className={userTemplateStyles.title}>
-                <p>He want it</p>
-              </div>
-              <div className={userTemplateStyles.wantList}>
-                {renderliked(props.pageContext.wanted)}
+              <div className={classes.name} >
+                <span>Add</span>
+                <span>Comment</span>
+                <span>Contact</span>
               </div>
             </div>
-            <div className={userTemplateStyles.love}>
-              <div className={userTemplateStyles.title}>
-                <p>He own it</p>
+            <div className={classes.contentCollection}>
+              <div className={classes.contentCollectionTabWrapper}>
+                <span onClick={() => setSelected("like")}>Like</span>
+                <span onClick={() => setSelected("want")}>Want</span>
+                <span onClick={() => setSelected("own")}>Own</span>
               </div>
-              <div className={userTemplateStyles.loveList}>
-                {renderliked(props.pageContext.owned)}
-              </div> */}
+
+              <div className={classes.contentCollectionResultWrapper}>
+                {selected === "like" && renderCards(dataNendoL.userLikes)}
+                {selected === "want" && renderCards(dataNendoW.userWishes)}
+                {selected === "own" && renderCards(dataNendoO.userOwn)}
+              </div>
+
             </div>
+
+          </div>
+
+          <div className={classes.pictures}>
+            <Carousel images={nendoStories} />
           </div>
         </div>
       </div>
