@@ -1,0 +1,48 @@
+type Nendoroid {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  name: String
+  number: String
+  formattedName: String!
+  title: String
+  description: [String!]! @scalarList(strategy: RELATION)
+  images: [String!]! @scalarList(strategy: RELATION)
+  series: String
+  manufacturer: String
+  category: String
+  price: String
+  releaseDate: String
+  specifications: String
+  sculptor: String
+  cooperation: String
+  planningProduction: String
+  releasedBy: String
+  distributedBy: String
+  srcUrl: String
+  range: String
+  interactions: [Interaction!]!
+}
+
+type User {
+  id: ID! @id
+  first_name: String,
+  last_name: String,
+  pseudo: String,  @unique
+  email: String! @unique
+  avatar: String
+  password: String!
+}
+
+type Interaction {
+  id: ID! @id
+  nendoroid: Nendoroid!
+  user: User!
+  type: InteractionType!
+}
+
+enum InteractionType {
+  LIKE
+  WISH
+  OWN
+}

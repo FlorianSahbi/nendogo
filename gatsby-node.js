@@ -8,47 +8,59 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const USER_PAGE_QUERY = await graphql(`
   {
-  nendo {
-  users {
-  id
-  avatar
-  pseudo
-  }
-  }
+    api {
+      users {
+        users {
+          pseudo
+          id
+          avatar
+        }
+      }
+    }
   }
   `)
 
   const NENDO_PAGE_QUERY = await graphql(`
-    {
-    nendo {
-    nendoroids {
-    id
-    category
-    cooperation
-    description
-    formattedName
-    distributedBy
-    images
-    manufacturer
-    name
-    number
-    planningProduction
-    range
-    price
-    releaseDate
-    releasedBy
-    sculptor
-    series
-    specifications
-    srcUrl
-    title
+  {
+    api {
+      nendoroids {
+        nendoroids {
+          category
+          cooperation
+          description
+          distributedBy
+          formattedName
+          id
+          images
+          interactions {
+            id
+            nendoroid {
+              images
+              id
+              name
+            }
+          }
+          manufacturer
+          name
+          number
+          planningProduction
+          range
+          price
+          releaseDate
+          releasedBy
+          sculptor
+          srcUrl
+          series
+          specifications
+          title
+        }
+      }
     }
-    }
-    }
+  }
     `)
 
-  const nendoroids = await NENDO_PAGE_QUERY.data.nendo.nendoroids;
-  const users = await USER_PAGE_QUERY.data.nendo.users;
+  const nendoroids = await NENDO_PAGE_QUERY.data.api.nendoroids.nendoroids;
+  const users = await USER_PAGE_QUERY.data.api.users.users;
 
   nendoroids.forEach(nendoroid => {
     createPage({
@@ -74,20 +86,5 @@ exports.onCreatePage = async ({ page, actions }) => {
     page.matchPath = "/account/*"
 
     createPage(page)
-  }
-}
-
-exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
-  if (stage === "build-html") {
-    actions.setWebpackConfig({
-      module: {
-        rules: [
-          {
-            test: /auth0-js/,
-            use: loaders.null(),
-          },
-        ],
-      },
-    })
   }
 }

@@ -49,7 +49,7 @@ const Card = (props) => {
   )
 }
 
-const UsersPage = ({ data: { nendo: { users: data } } }) => {
+const UsersPage = ({ data: { api: { users: { users: data } } } }) => {
 
   return (
     <div>
@@ -73,12 +73,14 @@ const UsersPage = ({ data: { nendo: { users: data } } }) => {
 
 export const GATSBY_USER_QUERY = graphql`
  {
-  nendo {
+   api {
+  users {
     users {
       id
       avatar
       pseudo
     }
+   }
   }
  }
 `

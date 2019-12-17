@@ -1,0 +1,97 @@
+type Query {
+  nendoroids(
+    filter: String
+    skip: Int
+    first: Int
+    orderBy: NendoroidOrderByInput
+  ): Nendoroids!
+
+  users(
+    filter: String
+    skip: Int
+    first: Int
+    orderBy: NendoroidOrderByInput
+  ): Users!
+}
+
+type Mutation {
+  post(formattedName: String!, number: String!): Nendoroid!
+  signup(email: String!, password: String!, pseudo: String!): AuthPayload
+  login(pseudo: String!, password: String!): AuthPayload
+  interaction(nendoroidId: ID!): Interaction
+}
+
+type AuthPayload {
+  token: String
+  user: User
+}
+
+type Nendoroids {
+  nendoroids: [Nendoroid!]!
+  count: Int!
+}
+
+type Users {
+  users: [User!]!
+  count: Int!
+}
+
+type Nendoroid {
+  id: ID!
+  name: String
+  number: String
+  formattedName: String!
+  title: String
+  description: [String!]!
+  images: [String!]!
+  series: String
+  manufacturer: String
+  category: String
+  price: String
+  releaseDate: String
+  specifications: String
+  sculptor: String
+  cooperation: String
+  planningProduction: String
+  releasedBy: String
+  distributedBy: String
+  srcUrl: String
+  range: String
+  interactions: [Interaction!]!
+}
+
+type User {
+  id: ID!
+  firstName: String
+  lastName: String
+  pseudo: String
+  password: String!
+  avatar: String
+}
+
+type Subscription {
+  newNendoroid: Nendoroid
+  newInteraction: Interaction
+}
+
+type Interaction {
+  id: ID!
+  nendoroid: Nendoroid!
+  user: User!
+  type: InteractionType!
+}
+
+enum NendoroidOrderByInput {
+  description_ASC
+  description_DESC
+  url_ASC
+  url_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+enum InteractionType {
+  like
+  wish
+  own
+}

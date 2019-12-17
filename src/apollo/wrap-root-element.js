@@ -1,39 +1,39 @@
 import React from "react"
 import { ApolloProvider } from 'react-apollo';
 import { client } from './client';
-import { silentAuth } from "../utils/auth"
+// import { silentAuth } from "../utils/auth"
 
-class SessionCheck extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            loading: true,
-        }
-    }
+// class SessionCheck extends React.Component {
+//     constructor(props) {
+//         super(props)
+//         this.state = {
+//             loading: true,
+//         }
+//     }
 
-    handleCheckSession = () => {
-        this.setState({ loading: false })
-    }
+//     handleCheckSession = () => {
+//         this.setState({ loading: false })
+//     }
 
-    componentDidMount() {
-        silentAuth(this.handleCheckSession)
-    }
+//     componentDidMount() {
+//         silentAuth(this.handleCheckSession)
+//     }
 
-    render() {
-        return (
-            this.state.loading === false && (
-                <React.Fragment>{this.props.children}</React.Fragment>
-            )
-        )
-    }
-}
+//     render() {
+//         return (
+//             this.state.loading === false && (
+//                 <React.Fragment>{this.props.children}</React.Fragment>
+//             )
+//         )
+//     }
+// }
 
 export const wrapRootElement = ({ element }) => (
-    <SessionCheck>
+    // <SessionCheck>
         <ApolloProvider client={client}>
             {element}
         </ApolloProvider>
-    </SessionCheck>
+    // </SessionCheck>
 )
 
 

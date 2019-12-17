@@ -15,9 +15,9 @@ module.exports = {
     {
       resolve: "gatsby-source-graphql",
       options: {
-        typeName: "NENDO",
-        fieldName: "nendo",
-        url: `https://www.nendoroids.floriansahbi.com/graphql`,
+        typeName: "API",
+        fieldName: "api",
+        url: `http://localhost:4000`,
       },
     },
     {

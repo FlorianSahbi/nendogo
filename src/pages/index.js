@@ -8,29 +8,34 @@ import navBarStyles from "./navBar.module.css";
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
-const user = { email: "florian.sahbi@gmail.com" }
+let currentUser = null;
+if (localStorage.getItem("user")) {
+  currentUser = JSON.parse(localStorage.getItem("user"))
+  console.log(currentUser)
+}
 
-const HAHA = gql`
-query userL($id: String!) {
-  userLikes(id: $id) {
-    id
-  }
-}
-`;
-const HOHO = gql`
-query userW($id: String!) {
-  userWishes(id: $id) {
-    id
-  }
-}
-`;
-const HIHI = gql`
-query userO($id: String!) {
-  userOwn(id: $id) {
-    id
-  }
-}
-`;
+
+// const HAHA = gql`
+// query userL($id: String!) {
+//   userLikes(id: $id) {
+//     id
+//   }
+// }
+// `;
+// const HOHO = gql`
+// query userW($id: String!) {
+//   userWishes(id: $id) {
+//     id
+//   }
+// }
+// `;
+// const HIHI = gql`
+// query userO($id: String!) {
+//   userOwn(id: $id) {
+//     id
+//   }
+// }
+// `;
 
 const style = {
   idContainer: {
@@ -87,19 +92,17 @@ const NavBar = () => {
           <h1 style={style.title}>Nendoroids</h1>
         </div>
         <Link to="/users">Users </Link>
-
         <Link to="/account">Login or Signup </Link>
-
-        {/* <div style={style.idContainer}>
+        <div style={style.idContainer}>
           <div style={style.idWrapper}>
             {
-              isAuthenticated() ?
+              localStorage.getItem("user") ?
                 <>
                   <div style={style.idProfilPic}>
-                    <img style={style.idPicture} src={user.picture} alt={`${ user.nickname } -profile - picture`} />
+                    <img style={style.idPicture} src={currentUser.avatar} alt={`${currentUser.pseudo} -profile - picture`} />
                   </div>
                   <div style={style.idName}>
-                    <Link to={`/ y7rdoeze`}>{user.nickname} </Link>
+                    <Link to={`/ y7rdoeze`}>{currentUser.pseudo} </Link>
                   </div>
                 </>
                 :
@@ -110,60 +113,58 @@ const NavBar = () => {
                 </>
             }
           </div>
-        </div> */}
-
-
+        </div>
       </div>
     </nav>
   )
 }
 
-const IndexPage = ({ error: lol, loading: deux, data: { nendo: { nendoroids: data } } }) => {
+const IndexPage = ({ error: lol, loading: deux, data: { api: { nendoroids: { nendoroids: data } } } }) => {
 
 
   /*eslint-disable no-unused-vars*/
   const [nendoroids, setNendoroids] = useState(data);
 
-  let { error: errorNendoL, loading: LoadingNendoL, data: dataNendoL } = useQuery(HAHA, {
-    variables: { id: user.email },
-    fetchPolicy: 'no-cache'
-  })
-  let { error: errorNendoW, loading: LoadingNendoW, data: dataNendoW } = useQuery(HOHO, {
-    variables: { id: user.email },
-    fetchPolicy: 'no-cache'
-  })
-  let { error: errorNendoO, loading: LoadingNendoO, data: dataNendoO } = useQuery(HIHI, {
-    variables: { id: user.email },
-    fetchPolicy: 'no-cache'
-  })
+  // let { error: errorNendoL, loading: LoadingNendoL, data: dataNendoL } = useQuery(HAHA, {
+  //   variables: { id: user.email },
+  //   fetchPolicy: 'no-cache'
+  // })
+  // let { error: errorNendoW, loading: LoadingNendoW, data: dataNendoW } = useQuery(HOHO, {
+  //   variables: { id: user.email },
+  //   fetchPolicy: 'no-cache'
+  // })
+  // let { error: errorNendoO, loading: LoadingNendoO, data: dataNendoO } = useQuery(HIHI, {
+  //   variables: { id: user.email },
+  //   fetchPolicy: 'no-cache'
+  // })
 
-  if (errorNendoL | errorNendoW | errorNendoO) return <span>WAIT</span>
-  if (LoadingNendoL | LoadingNendoW | LoadingNendoO) return <p>Loading ...</p>
-
-
-  console.log(dataNendoL)
-  console.log(dataNendoO)
-  console.log(dataNendoW)
+  // if (errorNendoL | errorNendoW | errorNendoO) return <span>WAIT</span>
+  // if (LoadingNendoL | LoadingNendoW | LoadingNendoO) return <p>Loading ...</p>
 
 
-  const nendoIsLiked = (idNendo) => {
-    if (dataNendoL.userLikes !== undefined && [...dataNendoL.userLikes.filter(elem => elem.id === idNendo)].length > 0) {
-      return true;
-    }
-    return false;
-  }
-  const nendoIsWished = (idNendo) => {
-    if (dataNendoW !== undefined && [...dataNendoW.userWishes.filter(elem => elem.id === idNendo)].length > 0) {
-      return true;
-    }
-    return false;
-  }
-  const nendoIsown = (idNendo) => {
-    if (dataNendoO !== undefined && [...dataNendoO.userOwn.filter(elem => elem.id === idNendo)].length > 0) {
-      return true;
-    }
-    return false;
-  }
+  // console.log(dataNendoL)
+  // console.log(dataNendoO)
+  // console.log(dataNendoW)
+
+
+  // const nendoIsLiked = (idNendo) => {
+  //   if (dataNendoL.userLikes !== undefined && [...dataNendoL.userLikes.filter(elem => elem.id === idNendo)].length > 0) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
+  // const nendoIsWished = (idNendo) => {
+  //   if (dataNendoW !== undefined && [...dataNendoW.userWishes.filter(elem => elem.id === idNendo)].length > 0) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
+  // const nendoIsown = (idNendo) => {
+  //   if (dataNendoO !== undefined && [...dataNendoO.userOwn.filter(elem => elem.id === idNendo)].length > 0) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
   const tab = nendoroids.map(nendoroid => {
     return (
@@ -173,9 +174,9 @@ const IndexPage = ({ error: lol, loading: deux, data: { nendo: { nendoroids: dat
         name={nendoroid.formattedName}
         number={nendoroid.number}
         images={nendoroid.images}
-        isLiked={nendoIsLiked(nendoroid.id)}
-        isWished={nendoIsWished(nendoroid.id)}
-        isOwned={nendoIsown(nendoroid.id)}
+      // isLiked={nendoIsLiked(nendoroid.id)}
+      // isWished={nendoIsWished(nendoroid.id)}
+      // isOwned={nendoIsown(nendoroid.id)}
       />
     )
   })
@@ -195,14 +196,15 @@ const IndexPage = ({ error: lol, loading: deux, data: { nendo: { nendoroids: dat
 
 export const GATSBY_NENDO_QUERY = graphql`
 {
-  nendo {
+  api {
     nendoroids {
+      nendoroids {
       id
       formattedName
       images
       number
       range
-      likedBy
+      }
     }
   }
 }

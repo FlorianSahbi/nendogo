@@ -52,29 +52,27 @@ export default (props) => {
   const [scrolled, setScrolled] = useState(false)
   const [selected, setSelected] = useState("like")
 
-  let { error: errorNendoL, loading: LoadingNendoL, data: dataNendoL } = useQuery(HAHA, {
-    variables: { id: user.email },
-    fetchPolicy: 'no-cache'
-  })
-  let { error: errorNendoW, loading: LoadingNendoW, data: dataNendoW } = useQuery(HOHO, {
-    variables: { id: user.email },
-    fetchPolicy: 'no-cache'
-  })
-  let { error: errorNendoO, loading: LoadingNendoO, data: dataNendoO } = useQuery(HIHI, {
-    variables: { id: user.email },
-    fetchPolicy: 'no-cache'
-  })
+  // let { error: errorNendoL, loading: LoadingNendoL, data: dataNendoL } = useQuery(HAHA, {
+  //   variables: { id: user.email },
+  //   fetchPolicy: 'no-cache'
+  // })
+  // let { error: errorNendoW, loading: LoadingNendoW, data: dataNendoW } = useQuery(HOHO, {
+  //   variables: { id: user.email },
+  //   fetchPolicy: 'no-cache'
+  // })
+  // let { error: errorNendoO, loading: LoadingNendoO, data: dataNendoO } = useQuery(HIHI, {
+  //   variables: { id: user.email },
+  //   fetchPolicy: 'no-cache'
+  // })
 
 
-  if (errorNendoL | errorNendoW | errorNendoO) return <span>WAIT</span>
-  if (LoadingNendoL | LoadingNendoW | LoadingNendoO) return <p>Loading ...</p>
+  // if (errorNendoL | errorNendoW | errorNendoO) return <span>WAIT</span>
+  // if (LoadingNendoL | LoadingNendoW | LoadingNendoO) return <p>Loading ...</p>
   // console.log({ dataNendoL: dataNendoL.userLikes, dataNendoW: dataNendoW.userWishes, dataNendoO: dataNendoO.userOwn })
 
   const renderCards = (array) => {
     return array.map(nendo => <Card key={nendo.id} id={nendo.id} images={nendo.images} name={nendo.formattedName} number={nendo.number} />)
   }
-
-  console.log(renderCards(dataNendoL.userLikes));
 
   return (
     <>
@@ -108,9 +106,12 @@ export default (props) => {
               </div>
 
               <div className={classes.contentCollectionResultWrapper}>
-                {selected === "like" && renderCards(dataNendoL.userLikes)}
+                {/* {selected === "like" && renderCards(dataNendoL.userLikes)}
                 {selected === "want" && renderCards(dataNendoW.userWishes)}
-                {selected === "own" && renderCards(dataNendoO.userOwn)}
+                {selected === "own" && renderCards(dataNendoO.userOwn)} */}
+                {selected === "like" && <p>Like</p>}
+                {selected === "want" && <p>Want</p>}
+                {selected === "own" && <p>Own</p>}
               </div>
 
             </div>

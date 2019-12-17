@@ -89,13 +89,13 @@ query Nendo($id: ID!) {
 
 export default (props) => {
 
-  const { loading, error, data } = useQuery(GET_INTERACTIONS, {
-    variables: { id: props.pageContext.id },
-    fetchPolicy: 'no-cache'
-  });
+  // const { loading, error, data } = useQuery(GET_INTERACTIONS, {
+  //   variables: { id: props.pageContext.id },
+  //   fetchPolicy: 'no-cache'
+  // });
 
-  if (loading) return <span style={{ color: "white" }}>Loading ...</span>
-  if (error) return <span style={{ color: "white" }}>{error.message}</span>
+  // if (loading) return <span style={{ color: "white" }}>Loading ...</span>
+  // if (error) return <span style={{ color: "white" }}>{error.message}</span>
 
 
   return (
