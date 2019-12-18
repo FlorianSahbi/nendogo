@@ -1,12 +1,12 @@
 type Query {
-  nendoroids(
+  getNendoroids(
     filter: String
     skip: Int
     first: Int
     orderBy: NendoroidOrderByInput
   ): Nendoroids!
 
-  users(
+  getUsers(
     filter: String
     skip: Int
     first: Int
@@ -18,7 +18,7 @@ type Mutation {
   post(formattedName: String!, number: String!): Nendoroid!
   signup(email: String!, password: String!, pseudo: String!): AuthPayload
   login(pseudo: String!, password: String!): AuthPayload
-  interaction(nendoroidId: ID!): Interaction
+  interaction(nendoroidId: ID!, type: InteractionType!): Interaction
 }
 
 type AuthPayload {
@@ -91,7 +91,7 @@ enum NendoroidOrderByInput {
 }
 
 enum InteractionType {
-  like
-  wish
-  own
+  LIKE
+  WISH
+  OWN
 }

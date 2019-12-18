@@ -1,4 +1,4 @@
-async function nendoroids(parent, args, context) {
+async function getNendoroids(parent, args, context) {
   const where = args.filter
     ? {
       OR: [
@@ -26,7 +26,7 @@ async function nendoroids(parent, args, context) {
   }
 }
 
-async function users(parent, args, context) {
+async function getUsers(parent, args, context) {
   const where = args.filter
     ? {
       OR: [
@@ -54,6 +54,6 @@ async function users(parent, args, context) {
 }
 
 module.exports = {
-  nendoroids,
-  users,
+  getNendoroids,
+  getUsers,
 }
