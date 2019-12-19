@@ -236,10 +236,14 @@ export type NendoroidOrderByInput =
 export type UserOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "first_name_ASC"
-  | "first_name_DESC"
-  | "last_name_ASC"
-  | "last_name_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC"
+  | "firstName_ASC"
+  | "firstName_DESC"
+  | "lastName_ASC"
+  | "lastName_DESC"
   | "pseudo_ASC"
   | "pseudo_DESC"
   | "email_ASC"
@@ -277,8 +281,6 @@ export interface InteractionWhereInput {
   type_in?: Maybe<InteractionType[] | InteractionType>;
   type_not_in?: Maybe<InteractionType[] | InteractionType>;
   AND?: Maybe<InteractionWhereInput[] | InteractionWhereInput>;
-  OR?: Maybe<InteractionWhereInput[] | InteractionWhereInput>;
-  NOT?: Maybe<InteractionWhereInput[] | InteractionWhereInput>;
 }
 
 export interface NendoroidWhereInput {
@@ -550,12 +552,8 @@ export interface NendoroidWhereInput {
   range_not_starts_with?: Maybe<String>;
   range_ends_with?: Maybe<String>;
   range_not_ends_with?: Maybe<String>;
-  interactions_every?: Maybe<InteractionWhereInput>;
   interactions_some?: Maybe<InteractionWhereInput>;
-  interactions_none?: Maybe<InteractionWhereInput>;
   AND?: Maybe<NendoroidWhereInput[] | NendoroidWhereInput>;
-  OR?: Maybe<NendoroidWhereInput[] | NendoroidWhereInput>;
-  NOT?: Maybe<NendoroidWhereInput[] | NendoroidWhereInput>;
 }
 
 export interface UserWhereInput {
@@ -573,34 +571,50 @@ export interface UserWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  first_name?: Maybe<String>;
-  first_name_not?: Maybe<String>;
-  first_name_in?: Maybe<String[] | String>;
-  first_name_not_in?: Maybe<String[] | String>;
-  first_name_lt?: Maybe<String>;
-  first_name_lte?: Maybe<String>;
-  first_name_gt?: Maybe<String>;
-  first_name_gte?: Maybe<String>;
-  first_name_contains?: Maybe<String>;
-  first_name_not_contains?: Maybe<String>;
-  first_name_starts_with?: Maybe<String>;
-  first_name_not_starts_with?: Maybe<String>;
-  first_name_ends_with?: Maybe<String>;
-  first_name_not_ends_with?: Maybe<String>;
-  last_name?: Maybe<String>;
-  last_name_not?: Maybe<String>;
-  last_name_in?: Maybe<String[] | String>;
-  last_name_not_in?: Maybe<String[] | String>;
-  last_name_lt?: Maybe<String>;
-  last_name_lte?: Maybe<String>;
-  last_name_gt?: Maybe<String>;
-  last_name_gte?: Maybe<String>;
-  last_name_contains?: Maybe<String>;
-  last_name_not_contains?: Maybe<String>;
-  last_name_starts_with?: Maybe<String>;
-  last_name_not_starts_with?: Maybe<String>;
-  last_name_ends_with?: Maybe<String>;
-  last_name_not_ends_with?: Maybe<String>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  firstName?: Maybe<String>;
+  firstName_not?: Maybe<String>;
+  firstName_in?: Maybe<String[] | String>;
+  firstName_not_in?: Maybe<String[] | String>;
+  firstName_lt?: Maybe<String>;
+  firstName_lte?: Maybe<String>;
+  firstName_gt?: Maybe<String>;
+  firstName_gte?: Maybe<String>;
+  firstName_contains?: Maybe<String>;
+  firstName_not_contains?: Maybe<String>;
+  firstName_starts_with?: Maybe<String>;
+  firstName_not_starts_with?: Maybe<String>;
+  firstName_ends_with?: Maybe<String>;
+  firstName_not_ends_with?: Maybe<String>;
+  lastName?: Maybe<String>;
+  lastName_not?: Maybe<String>;
+  lastName_in?: Maybe<String[] | String>;
+  lastName_not_in?: Maybe<String[] | String>;
+  lastName_lt?: Maybe<String>;
+  lastName_lte?: Maybe<String>;
+  lastName_gt?: Maybe<String>;
+  lastName_gte?: Maybe<String>;
+  lastName_contains?: Maybe<String>;
+  lastName_not_contains?: Maybe<String>;
+  lastName_starts_with?: Maybe<String>;
+  lastName_not_starts_with?: Maybe<String>;
+  lastName_ends_with?: Maybe<String>;
+  lastName_not_ends_with?: Maybe<String>;
   pseudo?: Maybe<String>;
   pseudo_not?: Maybe<String>;
   pseudo_in?: Maybe<String[] | String>;
@@ -658,8 +672,6 @@ export interface UserWhereInput {
   password_ends_with?: Maybe<String>;
   password_not_ends_with?: Maybe<String>;
   AND?: Maybe<UserWhereInput[] | UserWhereInput>;
-  OR?: Maybe<UserWhereInput[] | UserWhereInput>;
-  NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
 }
 
 export type NendoroidWhereUniqueInput = AtLeastOne<{
@@ -722,8 +734,8 @@ export interface UserCreateOneInput {
 
 export interface UserCreateInput {
   id?: Maybe<ID_Input>;
-  first_name?: Maybe<String>;
-  last_name?: Maybe<String>;
+  firstName?: Maybe<String>;
+  lastName?: Maybe<String>;
   pseudo?: Maybe<String>;
   email: String;
   avatar?: Maybe<String>;
@@ -786,8 +798,8 @@ export interface UserUpdateOneRequiredInput {
 }
 
 export interface UserUpdateDataInput {
-  first_name?: Maybe<String>;
-  last_name?: Maybe<String>;
+  firstName?: Maybe<String>;
+  lastName?: Maybe<String>;
   pseudo?: Maybe<String>;
   email?: Maybe<String>;
   avatar?: Maybe<String>;
@@ -964,8 +976,8 @@ export interface NendoroidUpdateManyMutationInput {
 }
 
 export interface UserUpdateInput {
-  first_name?: Maybe<String>;
-  last_name?: Maybe<String>;
+  firstName?: Maybe<String>;
+  lastName?: Maybe<String>;
   pseudo?: Maybe<String>;
   email?: Maybe<String>;
   avatar?: Maybe<String>;
@@ -973,8 +985,8 @@ export interface UserUpdateInput {
 }
 
 export interface UserUpdateManyMutationInput {
-  first_name?: Maybe<String>;
-  last_name?: Maybe<String>;
+  firstName?: Maybe<String>;
+  lastName?: Maybe<String>;
   pseudo?: Maybe<String>;
   email?: Maybe<String>;
   avatar?: Maybe<String>;
@@ -990,12 +1002,6 @@ export interface InteractionSubscriptionWhereInput {
   AND?: Maybe<
     InteractionSubscriptionWhereInput[] | InteractionSubscriptionWhereInput
   >;
-  OR?: Maybe<
-    InteractionSubscriptionWhereInput[] | InteractionSubscriptionWhereInput
-  >;
-  NOT?: Maybe<
-    InteractionSubscriptionWhereInput[] | InteractionSubscriptionWhereInput
-  >;
 }
 
 export interface NendoroidSubscriptionWhereInput {
@@ -1007,12 +1013,6 @@ export interface NendoroidSubscriptionWhereInput {
   AND?: Maybe<
     NendoroidSubscriptionWhereInput[] | NendoroidSubscriptionWhereInput
   >;
-  OR?: Maybe<
-    NendoroidSubscriptionWhereInput[] | NendoroidSubscriptionWhereInput
-  >;
-  NOT?: Maybe<
-    NendoroidSubscriptionWhereInput[] | NendoroidSubscriptionWhereInput
-  >;
 }
 
 export interface UserSubscriptionWhereInput {
@@ -1022,8 +1022,6 @@ export interface UserSubscriptionWhereInput {
   updatedFields_contains_some?: Maybe<String[] | String>;
   node?: Maybe<UserWhereInput>;
   AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
 }
 
 export interface NodeNode {
@@ -1193,8 +1191,10 @@ export interface NendoroidNullablePromise
 
 export interface User {
   id: ID_Output;
-  first_name?: String;
-  last_name?: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  firstName?: String;
+  lastName?: String;
   pseudo?: String;
   email: String;
   avatar?: String;
@@ -1203,8 +1203,10 @@ export interface User {
 
 export interface UserPromise extends Promise<User>, Fragmentable {
   id: () => Promise<ID_Output>;
-  first_name: () => Promise<String>;
-  last_name: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  firstName: () => Promise<String>;
+  lastName: () => Promise<String>;
   pseudo: () => Promise<String>;
   email: () => Promise<String>;
   avatar: () => Promise<String>;
@@ -1215,8 +1217,10 @@ export interface UserSubscription
   extends Promise<AsyncIterator<User>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  first_name: () => Promise<AsyncIterator<String>>;
-  last_name: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  firstName: () => Promise<AsyncIterator<String>>;
+  lastName: () => Promise<AsyncIterator<String>>;
   pseudo: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   avatar: () => Promise<AsyncIterator<String>>;
@@ -1227,8 +1231,10 @@ export interface UserNullablePromise
   extends Promise<User | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  first_name: () => Promise<String>;
-  last_name: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  firstName: () => Promise<String>;
+  lastName: () => Promise<String>;
   pseudo: () => Promise<String>;
   email: () => Promise<String>;
   avatar: () => Promise<String>;
@@ -1615,8 +1621,10 @@ export interface UserSubscriptionPayloadSubscription
 
 export interface UserPreviousValues {
   id: ID_Output;
-  first_name?: String;
-  last_name?: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  firstName?: String;
+  lastName?: String;
   pseudo?: String;
   email: String;
   avatar?: String;
@@ -1627,8 +1635,10 @@ export interface UserPreviousValuesPromise
   extends Promise<UserPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  first_name: () => Promise<String>;
-  last_name: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  firstName: () => Promise<String>;
+  lastName: () => Promise<String>;
   pseudo: () => Promise<String>;
   email: () => Promise<String>;
   avatar: () => Promise<String>;
@@ -1639,8 +1649,10 @@ export interface UserPreviousValuesSubscription
   extends Promise<AsyncIterator<UserPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  first_name: () => Promise<AsyncIterator<String>>;
-  last_name: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  firstName: () => Promise<AsyncIterator<String>>;
+  lastName: () => Promise<AsyncIterator<String>>;
   pseudo: () => Promise<AsyncIterator<String>>;
   email: () => Promise<AsyncIterator<String>>;
   avatar: () => Promise<AsyncIterator<String>>;

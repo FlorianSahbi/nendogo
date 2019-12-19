@@ -6,8 +6,8 @@ type Nendoroid {
   number: String
   formattedName: String!
   title: String
-  description: [String!]! @scalarList(strategy: RELATION)
-  images: [String!]! @scalarList(strategy: RELATION)
+  description: [String!]! @scalarList(strategy: EMBEDDED)
+  images: [String!]! @scalarList(strategy: EMBEDDED)
   series: String
   manufacturer: String
   category: String
@@ -21,13 +21,15 @@ type Nendoroid {
   distributedBy: String
   srcUrl: String
   range: String
-  interactions: [Interaction!]!
+  interactions: [Interaction!]! @relation(link: INLINE)
 }
 
 type User {
   id: ID! @id
-  first_name: String,
-  last_name: String,
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  firstName: String,
+  lastName: String,
   pseudo: String,  @unique
   email: String! @unique
   avatar: String
@@ -37,7 +39,7 @@ type User {
 type Interaction {
   id: ID! @id
   nendoroid: Nendoroid!
-  user: User!
+  user: User! @relation(link: INLINE)
   type: InteractionType!
 }
 

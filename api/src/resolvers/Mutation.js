@@ -34,7 +34,7 @@ async function login(parent, args, context, info) {
     }
 }
 
-function post(parent, args, context, info) {
+function createNendoroid(parent, args, context, info) {
     const userId = getUserId(context)
     return context.prisma.createNendoroid({
         formattedName: args.formattedName,
@@ -44,10 +44,7 @@ function post(parent, args, context, info) {
 }
 
 async function interaction(parent, args, context, info) {
-    // 1
     const userId = getUserId(context)
-
-    // 2
     const nendoroidExists = await context.prisma.$exists.interaction({
         user: { id: userId },
         nendoroid: { id: args.nendoroidId },
@@ -57,7 +54,6 @@ async function interaction(parent, args, context, info) {
         throw new Error(`Already interaction for nendoroid: ${args.nendoroidId}`)
     }
 
-    // 3
     return context.prisma.createInteraction({
         user: { connect: { id: userId } },
         nendoroid: { connect: { id: args.nendoroidId } },
@@ -68,6 +64,6 @@ async function interaction(parent, args, context, info) {
 module.exports = {
     signup,
     login,
-    post,
+    createNendoroid,
     interaction
 }

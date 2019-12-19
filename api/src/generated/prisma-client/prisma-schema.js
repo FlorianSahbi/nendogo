@@ -107,8 +107,6 @@ input InteractionSubscriptionWhereInput {
   updatedFields_contains_some: [String!]
   node: InteractionWhereInput
   AND: [InteractionSubscriptionWhereInput!]
-  OR: [InteractionSubscriptionWhereInput!]
-  NOT: [InteractionSubscriptionWhereInput!]
 }
 
 enum InteractionType {
@@ -186,8 +184,6 @@ input InteractionWhereInput {
   type_in: [InteractionType!]
   type_not_in: [InteractionType!]
   AND: [InteractionWhereInput!]
-  OR: [InteractionWhereInput!]
-  NOT: [InteractionWhereInput!]
 }
 
 input InteractionWhereUniqueInput {
@@ -402,8 +398,6 @@ input NendoroidSubscriptionWhereInput {
   updatedFields_contains_some: [String!]
   node: NendoroidWhereInput
   AND: [NendoroidSubscriptionWhereInput!]
-  OR: [NendoroidSubscriptionWhereInput!]
-  NOT: [NendoroidSubscriptionWhereInput!]
 }
 
 input NendoroidUpdatedescriptionInput {
@@ -762,12 +756,8 @@ input NendoroidWhereInput {
   range_not_starts_with: String
   range_ends_with: String
   range_not_ends_with: String
-  interactions_every: InteractionWhereInput
   interactions_some: InteractionWhereInput
-  interactions_none: InteractionWhereInput
   AND: [NendoroidWhereInput!]
-  OR: [NendoroidWhereInput!]
-  NOT: [NendoroidWhereInput!]
 }
 
 input NendoroidWhereUniqueInput {
@@ -806,8 +796,10 @@ type Subscription {
 
 type User {
   id: ID!
-  first_name: String
-  last_name: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  firstName: String
+  lastName: String
   pseudo: String
   email: String!
   avatar: String
@@ -822,8 +814,8 @@ type UserConnection {
 
 input UserCreateInput {
   id: ID
-  first_name: String
-  last_name: String
+  firstName: String
+  lastName: String
   pseudo: String
   email: String!
   avatar: String
@@ -843,10 +835,14 @@ type UserEdge {
 enum UserOrderByInput {
   id_ASC
   id_DESC
-  first_name_ASC
-  first_name_DESC
-  last_name_ASC
-  last_name_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  firstName_ASC
+  firstName_DESC
+  lastName_ASC
+  lastName_DESC
   pseudo_ASC
   pseudo_DESC
   email_ASC
@@ -859,8 +855,10 @@ enum UserOrderByInput {
 
 type UserPreviousValues {
   id: ID!
-  first_name: String
-  last_name: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  firstName: String
+  lastName: String
   pseudo: String
   email: String!
   avatar: String
@@ -881,13 +879,11 @@ input UserSubscriptionWhereInput {
   updatedFields_contains_some: [String!]
   node: UserWhereInput
   AND: [UserSubscriptionWhereInput!]
-  OR: [UserSubscriptionWhereInput!]
-  NOT: [UserSubscriptionWhereInput!]
 }
 
 input UserUpdateDataInput {
-  first_name: String
-  last_name: String
+  firstName: String
+  lastName: String
   pseudo: String
   email: String
   avatar: String
@@ -895,8 +891,8 @@ input UserUpdateDataInput {
 }
 
 input UserUpdateInput {
-  first_name: String
-  last_name: String
+  firstName: String
+  lastName: String
   pseudo: String
   email: String
   avatar: String
@@ -904,8 +900,8 @@ input UserUpdateInput {
 }
 
 input UserUpdateManyMutationInput {
-  first_name: String
-  last_name: String
+  firstName: String
+  lastName: String
   pseudo: String
   email: String
   avatar: String
@@ -939,34 +935,50 @@ input UserWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  first_name: String
-  first_name_not: String
-  first_name_in: [String!]
-  first_name_not_in: [String!]
-  first_name_lt: String
-  first_name_lte: String
-  first_name_gt: String
-  first_name_gte: String
-  first_name_contains: String
-  first_name_not_contains: String
-  first_name_starts_with: String
-  first_name_not_starts_with: String
-  first_name_ends_with: String
-  first_name_not_ends_with: String
-  last_name: String
-  last_name_not: String
-  last_name_in: [String!]
-  last_name_not_in: [String!]
-  last_name_lt: String
-  last_name_lte: String
-  last_name_gt: String
-  last_name_gte: String
-  last_name_contains: String
-  last_name_not_contains: String
-  last_name_starts_with: String
-  last_name_not_starts_with: String
-  last_name_ends_with: String
-  last_name_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  firstName: String
+  firstName_not: String
+  firstName_in: [String!]
+  firstName_not_in: [String!]
+  firstName_lt: String
+  firstName_lte: String
+  firstName_gt: String
+  firstName_gte: String
+  firstName_contains: String
+  firstName_not_contains: String
+  firstName_starts_with: String
+  firstName_not_starts_with: String
+  firstName_ends_with: String
+  firstName_not_ends_with: String
+  lastName: String
+  lastName_not: String
+  lastName_in: [String!]
+  lastName_not_in: [String!]
+  lastName_lt: String
+  lastName_lte: String
+  lastName_gt: String
+  lastName_gte: String
+  lastName_contains: String
+  lastName_not_contains: String
+  lastName_starts_with: String
+  lastName_not_starts_with: String
+  lastName_ends_with: String
+  lastName_not_ends_with: String
   pseudo: String
   pseudo_not: String
   pseudo_in: [String!]
@@ -1024,8 +1036,6 @@ input UserWhereInput {
   password_ends_with: String
   password_not_ends_with: String
   AND: [UserWhereInput!]
-  OR: [UserWhereInput!]
-  NOT: [UserWhereInput!]
 }
 
 input UserWhereUniqueInput {
