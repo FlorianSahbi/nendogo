@@ -102,7 +102,9 @@ const Card = (props) => {
       onMouseLeave={(e) => onMouseLeave(e)}
       className={isHovered ? `${cardStyles.container} ${cardStyles.hover}` : `${cardStyles.container} ${cardStyles.default}`}
     >
-      <img src={props.images[0]} alt="img_nendo" />
+      {props.images ?
+        <img src={props.images[0]} alt="img_nendo" /> : <img src="https://d3ieicw58ybon5.cloudfront.net/exq/65/550.800/shop/product/150aa9d9939a4f249467f50fb1021ff6.jpg" alt="img_nendo" />
+      }
       <div className={cardStyles.wrapper}>
 
         {props.isLiked &&

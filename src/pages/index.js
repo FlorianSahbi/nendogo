@@ -119,7 +119,7 @@ const NavBar = () => {
   )
 }
 
-const IndexPage = ({ error: lol, loading: deux, data: { api: { nendoroids: { nendoroids: data } } } }) => {
+const IndexPage = ({ error: lol, loading: deux, data: { api: { getNendoroids: { nendoroids: data } } } }) => {
 
 
   /*eslint-disable no-unused-vars*/
@@ -197,11 +197,10 @@ const IndexPage = ({ error: lol, loading: deux, data: { api: { nendoroids: { nen
 export const GATSBY_NENDO_QUERY = graphql`
 {
   api {
-    nendoroids {
+    getNendoroids {
       nendoroids {
       id
       formattedName
-      images
       number
       range
       }

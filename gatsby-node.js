@@ -9,7 +9,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const USER_PAGE_QUERY = await graphql(`
   {
     api {
-      users {
+      getUsers {
         users {
           pseudo
           id
@@ -23,22 +23,24 @@ exports.createPages = async ({ graphql, actions }) => {
   const NENDO_PAGE_QUERY = await graphql(`
   {
     api {
-      nendoroids {
+      getNendoroids {
         nendoroids {
           category
           cooperation
-          description
           distributedBy
           formattedName
           id
-          images
           interactions {
             id
             nendoroid {
-              images
               id
               name
             }
+            user {
+              avatar
+              pseudo
+            }
+            type
           }
           manufacturer
           name
@@ -59,8 +61,8 @@ exports.createPages = async ({ graphql, actions }) => {
   }
     `)
 
-  const nendoroids = await NENDO_PAGE_QUERY.data.api.nendoroids.nendoroids;
-  const users = await USER_PAGE_QUERY.data.api.users.users;
+  const nendoroids = await NENDO_PAGE_QUERY.data.api.getNendoroids.nendoroids;
+  const users = await USER_PAGE_QUERY.data.api.getUsers.users;
 
   nendoroids.forEach(nendoroid => {
     createPage({

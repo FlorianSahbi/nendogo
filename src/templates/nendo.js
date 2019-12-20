@@ -77,15 +77,15 @@ export const Carousel = (props) => {
   )
 }
 
-const GET_INTERACTIONS = gql`
-query Nendo($id: ID!) {
-  nendoroid(id: $id) {
-    likedBy
-    wishedBy
-    ownedBy
-  }
-}
-`;
+// const GET_INTERACTIONS = gql`
+// query Nendo($id: ID!) {
+//   nendoroid(id: $id) {
+//     likedBy
+//     wishedBy
+//     ownedBy
+//   }
+// }
+// `;
 
 export default (props) => {
 
@@ -112,7 +112,7 @@ export default (props) => {
               </div>
               <div className="nendo--description">
                 <h2>{props.pageContext.title}</h2>
-                {props.pageContext.description.map(p => <p>{p}</p>)}
+                {props.pageContext.description && props.pageContext.description.map(p => <p>{p}</p>)}
               </div>
               <div className="nendo--more">
                 <More title="Product Name" value={props.pageContext.name} />
@@ -129,7 +129,9 @@ export default (props) => {
             </div>
 
             <div className="nendo--preview">
-              <Carousel images={props.pageContext.images} />
+              {props.pageContext.images &&
+                <Carousel images={props.pageContext.images} />
+              }
               <div className="nendo--number">#{props.pageContext.number}</div>
             </div>
           </div>
