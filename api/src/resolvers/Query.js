@@ -3,7 +3,7 @@ async function getNendoroids(parent, args, context) {
     ? {
       OR: [
         { formattedName_contains: args.filter },
-        { arnge_contains: args.filter },
+        { rapnge_contains: args.filter },
       ],
     }
     : {}
@@ -53,7 +53,100 @@ async function getUsers(parent, args, context) {
   }
 }
 
+async function getNendoroid(parent, args, context) {
+  const nendoroid = await context.prisma.nendoroid({ id: args.id });
+  return nendoroid;
+}
+
+async function getUser(parent, args, context) {
+  const user = await context.prisma.user({ id: args.id });
+  return user;
+}
+
+async function getNendoroidsLikedBy(parent, args, context, info) {
+  const nendoroids = await context.prisma.nendoroids({
+    where: {
+      interactions_some: {
+        user: { id: args.id },
+        AND: { type: "LIKE" }
+      }
+    },
+  })
+  const count = await context.prisma
+    .nendoroidsConnection({
+      where: {
+        interactions_some: {
+          user: { id: args.id },
+          AND: { type: "LIKE" }
+        }
+      },
+    })
+    .aggregate()
+    .count()
+  return {
+    nendoroids,
+    count,
+  }
+}
+
+async function getNendoroidsWishedBy(parent, args, context, info) {
+  const nendoroids = await context.prisma.nendoroids({
+    where: {
+      interactions_some: {
+        user: { id: args.id },
+        AND: { type: "WISH" }
+      }
+    },
+  })
+  const count = await context.prisma
+    .nendoroidsConnection({
+      where: {
+        interactions_some: {
+          user: { id: args.id },
+          AND: { type: "WISH" }
+        }
+      },
+    })
+    .aggregate()
+    .count()
+  return {
+    nendoroids,
+    count,
+  }
+}
+
+async function getNendoroidsOwnedBy(parent, args, context, info) {
+  const nendoroids = await context.prisma.nendoroids({
+    where: {
+      interactions_some: {
+        user: { id: args.id },
+        AND: { type: "OWN" }
+      }
+    },
+  })
+  const count = await context.prisma
+    .nendoroidsConnection({
+      where: {
+        interactions_some: {
+          user: { id: args.id },
+          AND: { type: "OWN" }
+        }
+      },
+    })
+    .aggregate()
+    .count()
+  return {
+    nendoroids,
+    count,
+  }
+}
+
 module.exports = {
+  getNendoroidsLikedBy,
+  getNendoroidsWishedBy,
+  getNendoroidsOwnedBy,
+  getUser,
+  getNendoroid,
   getNendoroids,
   getUsers,
 }

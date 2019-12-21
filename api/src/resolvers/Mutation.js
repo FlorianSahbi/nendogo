@@ -43,27 +43,34 @@ function createNendoroid(parent, args, context, info) {
     })
 }
 
-async function interaction(parent, args, context, info) {
+async function createInteraction(parent, args, context, info) {
     const userId = getUserId(context)
+    console.log(userId)
     const nendoroidExists = await context.prisma.$exists.interaction({
-        user: { id: userId },
+        user: { id: args.userId },
         nendoroid: { id: args.nendoroidId },
-        type: { type: args.type },
+        type: args.type,
     })
     if (nendoroidExists) {
         throw new Error(`Already interaction for nendoroid: ${args.nendoroidId}`)
     }
 
     return context.prisma.createInteraction({
-        user: { connect: { id: userId } },
+        user: { connect: { id: args.userId } },
         nendoroid: { connect: { id: args.nendoroidId } },
-        type: { type: args.type },
+        type: args.type,
     })
+}
+
+async function deleteInteraction(parent, args, content, info) {
+    const interaction = await context.prisma.deleteInteraction({ id: args.id });
+    return interaction;
 }
 
 module.exports = {
     signup,
     login,
     createNendoroid,
-    interaction
+    createInteraction,
+    deleteInteraction,
 }

@@ -12,13 +12,20 @@ type Query {
     first: Int
     orderBy: NendoroidOrderByInput
   ): Users!
+
+  getNendoroid(id: ID!): Nendoroid!
+  getUser(id: ID!): User!
+  getNendoroidsLikedBy(id: ID!): Nendoroids!
+  getNendoroidsWishedBy(id: ID!): Nendoroids!
+  getNendoroidsOwnedBy(id: ID!): Nendoroids!
 }
 
 type Mutation {
   createNendoroid(formattedName: String!, number: String!): Nendoroid!
   signup(email: String!, password: String!, pseudo: String!): AuthPayload
   login(pseudo: String!, password: String!): AuthPayload
-  interaction(nendoroidId: ID!, type: InteractionType!): Interaction
+  createInteraction(nendoroidId: ID!, userId: ID!, type: InteractionType!): Interaction
+  deleteInteraction(interactionId: ID!): Interaction
 }
 
 type AuthPayload {
