@@ -8,56 +8,33 @@ import cardStyles from "./card.module.css"
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks';
 
-const user = { email: "florian.sahbi@gmail.com" };
+let currentUser = null;
+if (localStorage.getItem("user")) {
+  currentUser = JSON.parse(localStorage.getItem("user"))
+  console.log(currentUser)
+}
 
 const Card = (props) => {
 
-  const APOLLO_ADD_LIKE_MUTATION = gql`
-    mutation addLike($id: ID!, $userId: String!)  {
-      addLikeToNendoroid(id: $id userId: $userId)
+  const CREATE_INTERACTION_MUTATION = gql`
+  mutation CreateInteraction($nendoroidId: ID!, $userId: ID!, $type: InteractionType!){
+    createInteraction(nendoroidId: $nendoroidId , userId: $userId, type: $type) {
+      id
     }
-  `
-
-  const APOLLO_REMOVE_LIKE_MUTATION = gql`
-  mutation removeLike($id: ID!, $userId: String!)  {
-    removeLikeToNendoroid(id: $id userId: $userId)
   }
-  `
+  `;
 
-  const APOLLO_ADD_WISH_MUTATION = gql`
-    mutation addWish($id: ID!, $userId: String!)  {
-      addWishToNendoroid(id: $id userId: $userId)
+  const DELETE_INTERACTION_MUTATION = gql`
+  mutation DeleteInteraction($interaction: ID!){
+    deleteInteraction(interaction: $interaction) {
+      id
     }
-  `
-
-  const APOLLO_REMOVE_WISH_MUTATION = gql`
-  mutation removeWish($id: ID!, $userId: String!)  {
-    removeWishToNendoroid(id: $id userId: $userId)
   }
-  `
-
-  const APOLLO_ADD_OWN_MUTATION = gql`
-    mutation addOwn($id: ID!, $userId: String!)  {
-      addOwnToNendoroid(id: $id userId: $userId)
-    }
-  `
-
-  const APOLLO_REMOVE_OWN_MUTATION = gql`
-  mutation removeOwn($id: ID!, $userId: String!)  {
-    removeOwnToNendoroid(id: $id userId: $userId)
-  }
-  `
-  /*eslint-disable no-unused-vars*/
-  const [addLike, { data: addLikeResponse }] = useMutation(APOLLO_ADD_LIKE_MUTATION);
-  const [removeLike, { data: removelikeResponse }] = useMutation(APOLLO_REMOVE_LIKE_MUTATION);
+  `;
 
   /*eslint-disable no-unused-vars*/
-  const [addWish, { data: addWishResponse }] = useMutation(APOLLO_ADD_WISH_MUTATION);
-  const [removeWish, { data: removeWishResponse }] = useMutation(APOLLO_REMOVE_WISH_MUTATION);
-
-  /*eslint-disable no-unused-vars*/
-  const [addOwn, { data: addOwnResponse }] = useMutation(APOLLO_ADD_OWN_MUTATION);
-  const [removeOwn, { data: removeOwnResponse }] = useMutation(APOLLO_REMOVE_OWN_MUTATION);
+  const [createInteraction, { data: addLikeResponse }] = useMutation(CREATE_INTERACTION_MUTATION);
+  const [deleteInteraction, { data: removelikeResponse }] = useMutation(DELETE_INTERACTION_MUTATION);
 
   const [isHovered, setIsHovered] = useState(false);
 
@@ -80,20 +57,20 @@ const Card = (props) => {
 
   const handleLike = (id) => {
     isLiked ? setIsLiked(false) : setIsLiked(true);
-    isLiked ? removeLike({ variables: { "id": id.toString(), "userId": `${user.email}` } })
-      : addLike({ variables: { "id": id.toString(), "userId": `${user.email}` } });
+    !isLiked ? createInteraction({ variables: { "nendoroidId": id.toString(), "userId": `${currentUser.id}`, "type": "LIKE" } })
+      : deleteInteraction({ variables: { "interactionId": id.toString() } });
   };
 
   const handleWish = (id) => {
     isWished ? setIsWished(false) : setIsWished(true);
-    isWished ? removeWish({ variables: { "id": id.toString(), "userId": `${user.email}` } })
-      : addWish({ variables: { "id": id.toString(), "userId": `${user.email}` } });
+    !isWished ? createInteraction({ variables: { "nendoroidId": id.toString(), "userId": `${currentUser.id}`, "type": "WISH" } })
+      : deleteInteraction({ variables: { "interactionId": id.toString() } });
   };
 
   const handleOwn = (id) => {
     isOwned ? setIsOwned(false) : setIsOwned(true);
-    isOwned ? removeOwn({ variables: { "id": id.toString(), "userId": `${user.email}` } })
-      : addOwn({ variables: { "id": id.toString(), "userId": `${user.email}` } });
+    !isOwned ? createInteraction({ variables: { "nendoroidId": id.toString(), "userId": `${currentUser.id}`, "type": "OWN" } })
+      : deleteInteraction({ variables: { "interactionId": id.toString() } });
   };
 
   return (
@@ -107,7 +84,7 @@ const Card = (props) => {
       }
       <div className={cardStyles.wrapper}>
 
-        {props.isLiked &&
+        {props.isLiked !== null &&
           <div
             className={cardStyles.likeButton}
             onClick={() => handleLike(props.id)}
@@ -116,7 +93,7 @@ const Card = (props) => {
           </div>
         }
 
-        {props.isLiked &&
+        {props.isWished !== null &&
 
           <div
             className={cardStyles.wishButton}
@@ -126,7 +103,7 @@ const Card = (props) => {
           </div>
         }
 
-        {props.isOwn &&
+        {props.isOwn !== null &&
           <div
             className={cardStyles.ownButton}
             role="button"

@@ -15,6 +15,7 @@ type Query {
 
   getNendoroid(id: ID!): Nendoroid!
   getUser(id: ID!): User!
+  getInteractions: Interactions!
   getNendoroidsLikedBy(id: ID!): Nendoroids!
   getNendoroidsWishedBy(id: ID!): Nendoroids!
   getNendoroidsOwnedBy(id: ID!): Nendoroids!
@@ -35,6 +36,11 @@ type AuthPayload {
 
 type Nendoroids {
   nendoroids: [Nendoroid!]!
+  count: Int!
+}
+
+type Interactions {
+  interactions: [Interaction!]!
   count: Int!
 }
 

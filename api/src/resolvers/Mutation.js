@@ -44,8 +44,7 @@ function createNendoroid(parent, args, context, info) {
 }
 
 async function createInteraction(parent, args, context, info) {
-    const userId = getUserId(context)
-    console.log(userId)
+    // const userId = getUserId(context)
     const nendoroidExists = await context.prisma.$exists.interaction({
         user: { id: args.userId },
         nendoroid: { id: args.nendoroidId },
@@ -62,8 +61,8 @@ async function createInteraction(parent, args, context, info) {
     })
 }
 
-async function deleteInteraction(parent, args, content, info) {
-    const interaction = await context.prisma.deleteInteraction({ id: args.id });
+async function deleteInteraction(parent, args, context, info) {
+    const interaction = await context.prisma.deleteInteraction({ id: args.interactionId });
     return interaction;
 }
 

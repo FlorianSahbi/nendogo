@@ -53,10 +53,24 @@ async function getUsers(parent, args, context) {
   }
 }
 
+async function getInteractions(parent, args, context) {
+  const interactions = await context.prisma.interactions({});
+  const count = await context.prisma
+    .interactionsConnection()
+    .aggregate()
+    .count()
+  return {
+    interactions,
+    count,
+  }
+}
+
 async function getNendoroid(parent, args, context) {
   const nendoroid = await context.prisma.nendoroid({ id: args.id });
   return nendoroid;
 }
+
+
 
 async function getUser(parent, args, context) {
   const user = await context.prisma.user({ id: args.id });
@@ -149,4 +163,5 @@ module.exports = {
   getNendoroid,
   getNendoroids,
   getUsers,
+  getInteractions,
 }

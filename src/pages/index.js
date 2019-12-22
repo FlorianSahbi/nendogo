@@ -15,27 +15,13 @@ if (localStorage.getItem("user")) {
 }
 
 
-// const HAHA = gql`
-// query userL($id: String!) {
-//   userLikes(id: $id) {
-//     id
-//   }
-// }
-// `;
-// const HOHO = gql`
-// query userW($id: String!) {
-//   userWishes(id: $id) {
-//     id
-//   }
-// }
-// `;
-// const HIHI = gql`
-// query userO($id: String!) {
-//   userOwn(id: $id) {
-//     id
-//   }
-// }
-// `;
+const CREATE_INTERACTION_MUTATION = gql`
+mutation CreateInteraction($nendoroidId: ID!, $userId: ID!, $type: InteractionType!){
+  createInteraction(nendoroidId: $nendoroidId , userId: $userId, type: $type) {
+    id
+  }
+}
+`;
 
 const style = {
   idContainer: {
@@ -174,9 +160,12 @@ const IndexPage = ({ error: lol, loading: deux, data: { api: { getNendoroids: { 
         name={nendoroid.formattedName}
         number={nendoroid.number}
         images={nendoroid.images}
-      // isLiked={nendoIsLiked(nendoroid.id)}
-      // isWished={nendoIsWished(nendoroid.id)}
-      // isOwned={nendoIsown(nendoroid.id)}
+        isLiked={false}
+        isWished={false}
+        isOwned={false}
+        // isLiked={false}
+        // isWished={nendoIsWished(nendoroid.id)}
+        // isOwned={nendoIsown(nendoroid.id)}
       />
     )
   })

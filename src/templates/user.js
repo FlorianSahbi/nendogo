@@ -15,63 +15,69 @@ const nendoStories = [
   "https://static.myfigurecollection.net/upload/pictures/2014/10/16/1120890.jpeg",
   "https://live.staticflickr.com/1957/44819518934_62037c288f_b.jpg"
 ]
-const user = { email: "florian.sahbi@gmail.com" };
 
-const HAHA = gql`
-query userL($id: String!) {
-  userLikes(id: $id) {
-    id
-    formattedName
-    number
-    images
+const user = { id: "5dfe60e59bd1160008ca1d76" };
+
+const GET_INTERACTION_LIKE_QUERY = gql`
+query GetNendoroidsLikedBy($id: ID!){
+  getNendoroidsLikedBy(id: $id) {
+    nendoroids {
+      id
+      name
+      number
+    }
+    count
   }
 }
-`;
-const HOHO = gql`
-query userW($id: String!) {
-  userWishes(id: $id) {
-    id
-    formattedName
-    number
-    images
+`
+const GET_INTERACTION_WISH_QUERY = gql`
+query GetNendoroidsWishedBy($id: ID!) {
+  getNendoroidsWishedBy(id: $id) {
+    nendoroids {
+      id
+      name
+      number
+    }
+    count
   }
 }
-`;
-const HIHI = gql`
-query userO($id: String!) {
-  userOwn(id: $id) {
-    id
-    formattedName
-    number
-    images
+`
+const GET_INTERACTION_OWN_QUERY = gql`
+query GetNendoroidsOwnedBy($id: ID!){
+  getNendoroidsOwnedBy(id: $id) {
+    nendoroids {
+      id
+      name
+      number
+    }
+    count
   }
 }
-`;
+`
 
 export default (props) => {
   const [scrolled, setScrolled] = useState(false)
   const [selected, setSelected] = useState("like")
 
-  // let { error: errorNendoL, loading: LoadingNendoL, data: dataNendoL } = useQuery(HAHA, {
-  //   variables: { id: user.email },
-  //   fetchPolicy: 'no-cache'
-  // })
-  // let { error: errorNendoW, loading: LoadingNendoW, data: dataNendoW } = useQuery(HOHO, {
-  //   variables: { id: user.email },
-  //   fetchPolicy: 'no-cache'
-  // })
-  // let { error: errorNendoO, loading: LoadingNendoO, data: dataNendoO } = useQuery(HIHI, {
-  //   variables: { id: user.email },
-  //   fetchPolicy: 'no-cache'
-  // })
+  let { error: errorNendoL, loading: LoadingNendoL, data: dataNendoL } = useQuery(GET_INTERACTION_LIKE_QUERY, {
+    variables: { id: user.id },
+    fetchPolicy: 'no-cache'
+  })
+  let { error: errorNendoW, loading: LoadingNendoW, data: dataNendoW } = useQuery(GET_INTERACTION_WISH_QUERY, {
+    variables: { id: user.id },
+    fetchPolicy: 'no-cache'
+  })
+  let { error: errorNendoO, loading: LoadingNendoO, data: dataNendoO } = useQuery(GET_INTERACTION_OWN_QUERY, {
+    variables: { id: user.id },
+    fetchPolicy: 'no-cache'
+  })
 
 
-  // if (errorNendoL | errorNendoW | errorNendoO) return <span>WAIT</span>
-  // if (LoadingNendoL | LoadingNendoW | LoadingNendoO) return <p>Loading ...</p>
-  // console.log({ dataNendoL: dataNendoL.userLikes, dataNendoW: dataNendoW.userWishes, dataNendoO: dataNendoO.userOwn })
+  if (errorNendoL | errorNendoW | errorNendoO) return <span>WAIT</span>
+  if (LoadingNendoL | LoadingNendoW | LoadingNendoO) return <p>Loading ...</p>
 
   const renderCards = (array) => {
-    return array.map(nendo => <Card key={nendo.id} id={nendo.id} images={nendo.images} name={nendo.formattedName} number={nendo.number} />)
+    return array.map(nendo => <Card key={nendo.id} id={nendo.id} images={nendo.images} name={nendo.name} number={nendo.number} />)
   }
 
   return (
@@ -106,12 +112,12 @@ export default (props) => {
               </div>
 
               <div className={classes.contentCollectionResultWrapper}>
-                {/* {selected === "like" && renderCards(dataNendoL.userLikes)}
-                {selected === "want" && renderCards(dataNendoW.userWishes)}
-                {selected === "own" && renderCards(dataNendoO.userOwn)} */}
-                {selected === "like" && <p>Like</p>}
+                {selected === "like" && renderCards(dataNendoL.getNendoroidsLikedBy.nendoroids)}
+                {selected === "want" && renderCards(dataNendoW.getNendoroidsWishedBy.nendoroids)}
+                {selected === "own" && renderCards(dataNendoO.getNendoroidsOwnedBy.nendoroids)}
+                {/* {selected === "like" && <p>Like</p>}
                 {selected === "want" && <p>Want</p>}
-                {selected === "own" && <p>Own</p>}
+                {selected === "own" && <p>Own</p>} */}
               </div>
 
             </div>
