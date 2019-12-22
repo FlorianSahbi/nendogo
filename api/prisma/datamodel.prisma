@@ -36,6 +36,16 @@ type User {
   password: String!
 }
 
+type File {
+  id: ID! @id
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  filename: String!
+  mimetype: String!
+  encoding: String!
+  url: String! @unique
+}
+
 type Interaction {
   id: ID! @id
   nendoroid: Nendoroid!

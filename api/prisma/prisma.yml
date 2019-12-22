@@ -8,4 +8,9 @@ hooks:
   post-deploy:
     - prisma generate
     # - npx nexus-prisma-generate --client ./generated/prisma-client --output ./generated/nexus-prisma
-    
+
+service: prisma-s3
+stage: dev
+# to disable authentication:
+disableAuth: true
+secret: mysecret123

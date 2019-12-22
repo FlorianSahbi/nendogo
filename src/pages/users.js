@@ -7,7 +7,7 @@ import usersStyles from "./users.module.css"
 import navBarStyles from "../pages/navBar.module.css"
 
 
-const NavBar = ({ props }) => {
+const NavBar = () => {
   return (
     <nav className={navBarStyles.container}>
       <div className={navBarStyles.wrapper}>

@@ -1,3 +1,5 @@
+scalar Upload
+
 type Query {
   getNendoroids(
     filter: String
@@ -5,28 +7,36 @@ type Query {
     first: Int
     orderBy: NendoroidOrderByInput
   ): Nendoroids!
-
   getUsers(
     filter: String
     skip: Int
     first: Int
     orderBy: NendoroidOrderByInput
   ): Users!
-
   getNendoroid(id: ID!): Nendoroid!
   getUser(id: ID!): User!
   getInteractions: Interactions!
   getNendoroidsLikedBy(id: ID!): Nendoroids!
   getNendoroidsWishedBy(id: ID!): Nendoroids!
   getNendoroidsOwnedBy(id: ID!): Nendoroids!
+  file(id: ID!): File
+  files: [File!]!
 }
 
 type Mutation {
   createNendoroid(formattedName: String!, number: String!): Nendoroid!
   signup(email: String!, password: String!, pseudo: String!): AuthPayload
   login(pseudo: String!, password: String!): AuthPayload
-  createInteraction(nendoroidId: ID!, userId: ID!, type: InteractionType!): Interaction
+  createInteraction(
+    nendoroidId: ID!
+    userId: ID!
+    type: InteractionType!
+  ): Interaction
   deleteInteraction(interactionId: ID!): Interaction
+  uploadFile(file: Upload!): File!
+  uploadFiles(files: [Upload!]!): [File!]!
+  renameFile(id: ID!, name: String!): File
+  deleteFile(id: ID!): File
 }
 
 type AuthPayload {
@@ -92,6 +102,14 @@ type Interaction {
   nendoroid: Nendoroid!
   user: User!
   type: InteractionType!
+}
+
+type File {
+  id: ID!
+  path: String!
+  filename: String!
+  mimetype: String!
+  encoding: String!
 }
 
 enum NendoroidOrderByInput {

@@ -3,14 +3,22 @@ import { Router } from "@reach/router"
 import { Link } from "gatsby"
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
+import { Upload as Uuu } from "../apollo/mutations/upload"
+import File from "../apollo/mutations/files"
 
 export let currentUser = null;
 
 const Home = () => <p>Hi !</p>;
 const Settings = () => <p>Settings</p>
-const Billing = () => <p>Billing</p>
+const Upload = () => {
+  return (
+    <>
+      <Uuu />
+      <File />
+    </>
+  )
+}
 const LoginPage = () => {
-
   const [form, setForm] = useState({ pseudo: "", mail: "", password: "" });
   const [pseudo, setPseudo] = useState('');
   const [mail, setMail] = useState('');
@@ -39,7 +47,7 @@ const LoginPage = () => {
         pseudo: pseudo,
         token: token,
       }
-      localStorage.setItem("user", JSON.stringify(currentUser) )
+      localStorage.setItem("user", JSON.stringify(currentUser))
       localStorage.setItem("isLoggedIn", "true");
       window.location.href = "http://localhost:8000";
       console.log(currentUser)
@@ -79,13 +87,12 @@ const LoginPage = () => {
 }
 
 const Account = () => {
-
   return (
     <>
       <nav>
         <Link to="/">Home</Link>{" "}
         <Link to="/account/settings">Settings</Link>{" "}
-        <Link to="/account/billing">Billing</Link>{" "}
+        <Link to="/account/upload">Upload</Link>{" "}
         <Link to="/account/login">Login</Link>{" "}
         <a href="#logout" onClick={e => {
           e.preventDefault()
@@ -97,7 +104,7 @@ const Account = () => {
       <Router>
         <Home path="/account" />
         <Settings path="/account/settings" />
-        <Billing path="/account/billing" />
+        <Upload path="/account/upload" />
         <LoginPage path="/account/login" />
       </Router>
     </>

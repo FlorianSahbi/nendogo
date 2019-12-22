@@ -77,25 +77,31 @@ export const Carousel = (props) => {
   )
 }
 
-// const GET_INTERACTIONS = gql`
-// query Nendo($id: ID!) {
-//   nendoroid(id: $id) {
-//     likedBy
-//     wishedBy
-//     ownedBy
-//   }
-// }
-// `;
+const GET_INTERACTIONS_QUERY = gql`
+query GetNendoroids($id: ID!){
+    getNendoroid(id: $id) {
+      interactions {
+        type
+        user {
+          pseudo
+          avatar
+        }
+      }
+    }
+  }
+`;
 
 export default (props) => {
 
-  // const { loading, error, data } = useQuery(GET_INTERACTIONS, {
-  //   variables: { id: props.pageContext.id },
-  //   fetchPolicy: 'no-cache'
-  // });
+  const { loading, error, data } = useQuery(GET_INTERACTIONS_QUERY, {
+    variables: { id: props.pageContext.id },
+    fetchPolicy: 'no-cache'
+  });
 
-  // if (loading) return <span style={{ color: "white" }}>Loading ...</span>
-  // if (error) return <span style={{ color: "white" }}>{error.message}</span>
+  if (loading) return <span style={{ color: "white" }}>Loading ...</span>
+  if (error) return <span style={{ color: "white" }}>{error.message}</span>
+
+  console.log(data.getNendoroid.interactions)
 
 
   return (
@@ -104,7 +110,6 @@ export default (props) => {
       <div className="nendo--container">
         <div className="nendo--wrapper">
           <div className="nendo--info">
-
             <div className="nendo--meta">
               <div className="nendo--title">
                 <Link to={`/`} >back</Link>
@@ -127,7 +132,6 @@ export default (props) => {
                 <a target="_blank" rel="noopener noreferrer" href={props.pageContext.srcUrl} >{`See ${props.pageContext.formattedName}`}</a>
               </div>
             </div>
-
             <div className="nendo--preview">
               {props.pageContext.images &&
                 <Carousel images={props.pageContext.images} />
@@ -142,29 +146,23 @@ export default (props) => {
                   <p>Like</p>
                 </div>
                 <div className="user--like--list">
-                  {/* {data.nendoroid.likedBy !== undefined && data.nendoroid.likedBy !== null && data.nendoroid.likedBy.length <= 0 ? <span style={{ color: "white" }}>Like</span> :
-                    data.nendoroid.likedBy.map(user => <ProfilPic src={user.avatar} alt={user.pseudo} />)} */}
+                  {data.getNendoroid.interactions && data.getNendoroid.interactions.filter(interaction => interaction.type === "LIKE").map(user => <ProfilPic src={user.avatar} alt={user.pseudo} />)}
                 </div>
               </div>
-
-
               <div className="user--want">
                 <div className="user--title">
                   <p>Wish</p>
                 </div>
                 <div className="user--want--list">
-                  {/* {data.nendoroid.wishedBy !== undefined && data.nendoroid.wishedBy !== null && data.nendoroid.wishedBy.length <= 0 ? <span style={{ color: "white" }}>Whish</span> :
-                    data.nendoroid.wishedBy.map(user => <ProfilPic src={user.avatar} alt={user.pseudo} />)} */}
+                  {data.getNendoroid.interactions && data.getNendoroid.interactions.filter(interaction => interaction.type === "WISH").map(user => <ProfilPic src={user.avatar} alt={user.pseudo} />)}
                 </div>
               </div>
-
               <div className="user--love">
                 <div className="user--title">
                   <p>Own</p>
                 </div>
                 <div className="user--love--list">
-                  {/* {data.nendoroid.ownedBy !== undefined && data.nendoroid.ownedBy !== null && data.nendoroid.ownedBy.length <= 0 ? <span style={{ color: "white" }}>Own</span> :
-                    data.nendoroid.ownedBy.map(user => <ProfilPic src={user.avatar} alt={user.pseudo} />)} */}
+                  {data.getNendoroid.interactions && data.getNendoroid.interactions.filter(interaction => interaction.type === "OWN").map(user => <ProfilPic src={user.avatar} alt={user.pseudo} />)}
                 </div>
               </div>
             </>

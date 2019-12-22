@@ -70,8 +70,6 @@ async function getNendoroid(parent, args, context) {
   return nendoroid;
 }
 
-
-
 async function getUser(parent, args, context) {
   const user = await context.prisma.user({ id: args.id });
   return user;
@@ -155,6 +153,18 @@ async function getNendoroidsOwnedBy(parent, args, context, info) {
   }
 }
 
+async function file() {
+  // input:(id: ID!)
+  // output: : File
+  return;
+}
+
+async function files() {
+  // input:
+  // output: : [File!]!
+  return;
+}
+
 module.exports = {
   getNendoroidsLikedBy,
   getNendoroidsWishedBy,
@@ -164,4 +174,6 @@ module.exports = {
   getNendoroids,
   getUsers,
   getInteractions,
+  file, 
+  files,
 }

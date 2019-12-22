@@ -66,10 +66,39 @@ async function deleteInteraction(parent, args, context, info) {
     return interaction;
 }
 
+async function uploadFile(parent, args, context, info) {
+    // input: (file: Upload!)
+    // output: : File!
+    return;
+
+};
+
+async function uploadFiles(parent, args, context, info) {
+    // input:  (files: [Upload!]!)
+    // output: : [File!]!
+    return;
+};
+
+async function renameFile(parent, args, context, info) {
+    // input: (id: ID!, name: String!)
+    // output: : File
+    return;
+};
+
+async function deleteFile(parent, args, context, info) {
+    // input: (id: ID!)
+    // output: : File
+    return;
+};
+
 module.exports = {
     signup,
     login,
     createNendoroid,
     createInteraction,
     deleteInteraction,
+    uploadFile,
+    uploadFiles,
+    renameFile,
+    deleteFile,
 }

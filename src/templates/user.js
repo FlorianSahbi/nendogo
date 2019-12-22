@@ -3,8 +3,11 @@ import classes from "./userTemplateStyle.module.css"
 import { Carousel } from "../templates/nendo";
 import Card from "../components/IndexNendoroids/card"
 import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
-
+import {
+  GET_INTERACTION_LIKE_QUERY,
+  GET_INTERACTION_WISH_QUERY,
+  GET_INTERACTION_OWN_QUERY
+} from "../apollo/queries";
 const imgUrl = "https://images2.alphacoders.com/742/thumb-1920-742320.png";
 const imgProfile = "https://www.larutadelsorigens.cat/wallpic/full/30-300310_new-wallpapers-kimi-no-na-wa-mitsuha.jpg";
 const nendoStories = [
@@ -17,43 +20,6 @@ const nendoStories = [
 ]
 
 const user = { id: "5dfe60e59bd1160008ca1d76" };
-
-const GET_INTERACTION_LIKE_QUERY = gql`
-query GetNendoroidsLikedBy($id: ID!){
-  getNendoroidsLikedBy(id: $id) {
-    nendoroids {
-      id
-      name
-      number
-    }
-    count
-  }
-}
-`
-const GET_INTERACTION_WISH_QUERY = gql`
-query GetNendoroidsWishedBy($id: ID!) {
-  getNendoroidsWishedBy(id: $id) {
-    nendoroids {
-      id
-      name
-      number
-    }
-    count
-  }
-}
-`
-const GET_INTERACTION_OWN_QUERY = gql`
-query GetNendoroidsOwnedBy($id: ID!){
-  getNendoroidsOwnedBy(id: $id) {
-    nendoroids {
-      id
-      name
-      number
-    }
-    count
-  }
-}
-`
 
 export default (props) => {
   const [scrolled, setScrolled] = useState(false)
