@@ -3,6 +3,18 @@
    License: none (public domain)
 */
 
+::selection {
+  background: #ffb7b7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #121415;
+}
+
 html,
 body,
 div,

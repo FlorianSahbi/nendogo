@@ -27,7 +27,7 @@ const renderUserInformation = () => {
         <div className={classes.idName}>
           <Link to={`/${currentUser.pseudo}`}>{currentUser.pseudo}</Link>
           {" "}
-          <span onClick={logout} style={{cursor: "pointer"}}>Logout</span>
+          <span onClick={logout} style={{ cursor: "pointer" }}>Logout</span>
         </div>
       </>
     )
@@ -51,6 +51,7 @@ export default function Layout({ children }) {
 
           <div className={classes.column}>
             <Link to="/users">Users </Link>
+            <Link to="/nendoroids">Nendoroids </Link>
           </div>
 
           <div className={classes.column}>
@@ -60,6 +61,7 @@ export default function Layout({ children }) {
               </div>
             </div>
           </div>
+          
         </div>
       </header>
       <section className={classes.bodyContainer}>
