@@ -1,0 +1,7 @@
+{
+  "valueType": "lists",
+  "values": [
+    { "_typeName": "User", "id": "0", "hobbies": ["Fishing", "Cooking"] },
+    { "_typeName": "User", "id": "1", "hobbies": ["Biking", "Coding"] }
+  ]
+}

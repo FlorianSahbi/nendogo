@@ -225,14 +225,18 @@ export interface ClientConstructor<T> {
 export type FileOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "path_ASC"
-  | "path_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC"
   | "filename_ASC"
   | "filename_DESC"
   | "mimetype_ASC"
   | "mimetype_DESC"
   | "encoding_ASC"
-  | "encoding_DESC";
+  | "encoding_DESC"
+  | "url_ASC"
+  | "url_DESC";
 
 export type InteractionType = "LIKE" | "WISH" | "OWN";
 
@@ -240,7 +244,11 @@ export type InteractionOrderByInput =
   | "id_ASC"
   | "id_DESC"
   | "type_ASC"
-  | "type_DESC";
+  | "type_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
 
 export type NendoroidOrderByInput =
   | "id_ASC"
@@ -308,6 +316,7 @@ export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
 export type FileWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
+  url?: Maybe<String>;
 }>;
 
 export interface FileWhereInput {
@@ -325,20 +334,22 @@ export interface FileWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  path?: Maybe<String>;
-  path_not?: Maybe<String>;
-  path_in?: Maybe<String[] | String>;
-  path_not_in?: Maybe<String[] | String>;
-  path_lt?: Maybe<String>;
-  path_lte?: Maybe<String>;
-  path_gt?: Maybe<String>;
-  path_gte?: Maybe<String>;
-  path_contains?: Maybe<String>;
-  path_not_contains?: Maybe<String>;
-  path_starts_with?: Maybe<String>;
-  path_not_starts_with?: Maybe<String>;
-  path_ends_with?: Maybe<String>;
-  path_not_ends_with?: Maybe<String>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
   filename?: Maybe<String>;
   filename_not?: Maybe<String>;
   filename_in?: Maybe<String[] | String>;
@@ -381,6 +392,20 @@ export interface FileWhereInput {
   encoding_not_starts_with?: Maybe<String>;
   encoding_ends_with?: Maybe<String>;
   encoding_not_ends_with?: Maybe<String>;
+  url?: Maybe<String>;
+  url_not?: Maybe<String>;
+  url_in?: Maybe<String[] | String>;
+  url_not_in?: Maybe<String[] | String>;
+  url_lt?: Maybe<String>;
+  url_lte?: Maybe<String>;
+  url_gt?: Maybe<String>;
+  url_gte?: Maybe<String>;
+  url_contains?: Maybe<String>;
+  url_not_contains?: Maybe<String>;
+  url_starts_with?: Maybe<String>;
+  url_not_starts_with?: Maybe<String>;
+  url_ends_with?: Maybe<String>;
+  url_not_ends_with?: Maybe<String>;
   AND?: Maybe<FileWhereInput[] | FileWhereInput>;
 }
 
@@ -409,6 +434,22 @@ export interface InteractionWhereInput {
   type_not?: Maybe<InteractionType>;
   type_in?: Maybe<InteractionType[] | InteractionType>;
   type_not_in?: Maybe<InteractionType[] | InteractionType>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
   AND?: Maybe<InteractionWhereInput[] | InteractionWhereInput>;
 }
 
@@ -815,24 +856,24 @@ export type UserWhereUniqueInput = AtLeastOne<{
 
 export interface FileCreateInput {
   id?: Maybe<ID_Input>;
-  path: String;
   filename: String;
   mimetype: String;
   encoding: String;
+  url: String;
 }
 
 export interface FileUpdateInput {
-  path?: Maybe<String>;
   filename?: Maybe<String>;
   mimetype?: Maybe<String>;
   encoding?: Maybe<String>;
+  url?: Maybe<String>;
 }
 
 export interface FileUpdateManyMutationInput {
-  path?: Maybe<String>;
   filename?: Maybe<String>;
   mimetype?: Maybe<String>;
   encoding?: Maybe<String>;
+  url?: Maybe<String>;
 }
 
 export interface InteractionCreateInput {
@@ -1090,6 +1131,22 @@ export interface InteractionScalarWhereInput {
   type_not?: Maybe<InteractionType>;
   type_in?: Maybe<InteractionType[] | InteractionType>;
   type_not_in?: Maybe<InteractionType[] | InteractionType>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
   AND?: Maybe<InteractionScalarWhereInput[] | InteractionScalarWhereInput>;
   OR?: Maybe<InteractionScalarWhereInput[] | InteractionScalarWhereInput>;
   NOT?: Maybe<InteractionScalarWhereInput[] | InteractionScalarWhereInput>;
@@ -1190,38 +1247,46 @@ export interface NodeNode {
 
 export interface File {
   id: ID_Output;
-  path: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
   filename: String;
   mimetype: String;
   encoding: String;
+  url: String;
 }
 
 export interface FilePromise extends Promise<File>, Fragmentable {
   id: () => Promise<ID_Output>;
-  path: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
   filename: () => Promise<String>;
   mimetype: () => Promise<String>;
   encoding: () => Promise<String>;
+  url: () => Promise<String>;
 }
 
 export interface FileSubscription
   extends Promise<AsyncIterator<File>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  path: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   filename: () => Promise<AsyncIterator<String>>;
   mimetype: () => Promise<AsyncIterator<String>>;
   encoding: () => Promise<AsyncIterator<String>>;
+  url: () => Promise<AsyncIterator<String>>;
 }
 
 export interface FileNullablePromise
   extends Promise<File | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  path: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
   filename: () => Promise<String>;
   mimetype: () => Promise<String>;
   encoding: () => Promise<String>;
+  url: () => Promise<String>;
 }
 
 export interface FileConnection {
@@ -1304,6 +1369,8 @@ export interface AggregateFileSubscription
 export interface Interaction {
   id: ID_Output;
   type: InteractionType;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface InteractionPromise extends Promise<Interaction>, Fragmentable {
@@ -1311,6 +1378,8 @@ export interface InteractionPromise extends Promise<Interaction>, Fragmentable {
   nendoroid: <T = NendoroidPromise>() => T;
   user: <T = UserPromise>() => T;
   type: () => Promise<InteractionType>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface InteractionSubscription
@@ -1320,6 +1389,8 @@ export interface InteractionSubscription
   nendoroid: <T = NendoroidSubscription>() => T;
   user: <T = UserSubscription>() => T;
   type: () => Promise<AsyncIterator<InteractionType>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface InteractionNullablePromise
@@ -1329,6 +1400,8 @@ export interface InteractionNullablePromise
   nendoroid: <T = NendoroidPromise>() => T;
   user: <T = UserPromise>() => T;
   type: () => Promise<InteractionType>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface Nendoroid {
@@ -1723,30 +1796,36 @@ export interface FileSubscriptionPayloadSubscription
 
 export interface FilePreviousValues {
   id: ID_Output;
-  path: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
   filename: String;
   mimetype: String;
   encoding: String;
+  url: String;
 }
 
 export interface FilePreviousValuesPromise
   extends Promise<FilePreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  path: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
   filename: () => Promise<String>;
   mimetype: () => Promise<String>;
   encoding: () => Promise<String>;
+  url: () => Promise<String>;
 }
 
 export interface FilePreviousValuesSubscription
   extends Promise<AsyncIterator<FilePreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  path: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   filename: () => Promise<AsyncIterator<String>>;
   mimetype: () => Promise<AsyncIterator<String>>;
   encoding: () => Promise<AsyncIterator<String>>;
+  url: () => Promise<AsyncIterator<String>>;
 }
 
 export interface InteractionSubscriptionPayload {
@@ -1777,6 +1856,8 @@ export interface InteractionSubscriptionPayloadSubscription
 export interface InteractionPreviousValues {
   id: ID_Output;
   type: InteractionType;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
 export interface InteractionPreviousValuesPromise
@@ -1784,6 +1865,8 @@ export interface InteractionPreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   type: () => Promise<InteractionType>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface InteractionPreviousValuesSubscription
@@ -1791,6 +1874,8 @@ export interface InteractionPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   type: () => Promise<AsyncIterator<InteractionType>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface NendoroidSubscriptionPayload {
@@ -1974,16 +2059,6 @@ The `String` scalar type represents textual data, represented as UTF-8 character
 export type String = string;
 
 /*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
-*/
-export type Int = number;
-
-/*
-The `Boolean` scalar type represents `true` or `false`.
-*/
-export type Boolean = boolean;
-
-/*
 DateTime scalar input type, allowing Date
 */
 export type DateTimeInput = Date | string;
@@ -1992,6 +2067,16 @@ export type DateTimeInput = Date | string;
 DateTime scalar output type, which is always a string
 */
 export type DateTimeOutput = string;
+
+/*
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
+*/
+export type Int = number;
+
+/*
+The `Boolean` scalar type represents `true` or `false`.
+*/
+export type Boolean = boolean;
 
 export type Long = string;
 

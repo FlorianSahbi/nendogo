@@ -27,10 +27,12 @@ scalar DateTime
 
 type File {
   id: ID!
-  path: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
   filename: String!
   mimetype: String!
   encoding: String!
+  url: String!
 }
 
 type FileConnection {
@@ -41,10 +43,10 @@ type FileConnection {
 
 input FileCreateInput {
   id: ID
-  path: String!
   filename: String!
   mimetype: String!
   encoding: String!
+  url: String!
 }
 
 type FileEdge {
@@ -55,22 +57,28 @@ type FileEdge {
 enum FileOrderByInput {
   id_ASC
   id_DESC
-  path_ASC
-  path_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
   filename_ASC
   filename_DESC
   mimetype_ASC
   mimetype_DESC
   encoding_ASC
   encoding_DESC
+  url_ASC
+  url_DESC
 }
 
 type FilePreviousValues {
   id: ID!
-  path: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
   filename: String!
   mimetype: String!
   encoding: String!
+  url: String!
 }
 
 type FileSubscriptionPayload {
@@ -90,17 +98,17 @@ input FileSubscriptionWhereInput {
 }
 
 input FileUpdateInput {
-  path: String
   filename: String
   mimetype: String
   encoding: String
+  url: String
 }
 
 input FileUpdateManyMutationInput {
-  path: String
   filename: String
   mimetype: String
   encoding: String
+  url: String
 }
 
 input FileWhereInput {
@@ -118,20 +126,22 @@ input FileWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  path: String
-  path_not: String
-  path_in: [String!]
-  path_not_in: [String!]
-  path_lt: String
-  path_lte: String
-  path_gt: String
-  path_gte: String
-  path_contains: String
-  path_not_contains: String
-  path_starts_with: String
-  path_not_starts_with: String
-  path_ends_with: String
-  path_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   filename: String
   filename_not: String
   filename_in: [String!]
@@ -174,11 +184,26 @@ input FileWhereInput {
   encoding_not_starts_with: String
   encoding_ends_with: String
   encoding_not_ends_with: String
+  url: String
+  url_not: String
+  url_in: [String!]
+  url_not_in: [String!]
+  url_lt: String
+  url_lte: String
+  url_gt: String
+  url_gte: String
+  url_contains: String
+  url_not_contains: String
+  url_starts_with: String
+  url_not_starts_with: String
+  url_ends_with: String
+  url_not_ends_with: String
   AND: [FileWhereInput!]
 }
 
 input FileWhereUniqueInput {
   id: ID
+  url: String
 }
 
 type Interaction {
@@ -186,6 +211,8 @@ type Interaction {
   nendoroid: Nendoroid!
   user: User!
   type: InteractionType!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type InteractionConnection {
@@ -222,11 +249,17 @@ enum InteractionOrderByInput {
   id_DESC
   type_ASC
   type_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
 }
 
 type InteractionPreviousValues {
   id: ID!
   type: InteractionType!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 input InteractionScalarWhereInput {
@@ -248,6 +281,22 @@ input InteractionScalarWhereInput {
   type_not: InteractionType
   type_in: [InteractionType!]
   type_not_in: [InteractionType!]
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [InteractionScalarWhereInput!]
   OR: [InteractionScalarWhereInput!]
   NOT: [InteractionScalarWhereInput!]
@@ -343,6 +392,22 @@ input InteractionWhereInput {
   type_not: InteractionType
   type_in: [InteractionType!]
   type_not_in: [InteractionType!]
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [InteractionWhereInput!]
 }
 

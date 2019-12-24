@@ -65,8 +65,8 @@ type Nendoroid {
   number: String
   formattedName: String!
   title: String
-  # description: [String!]!
-  # images: [String!]!
+  description: [String!]!
+  images: [String!]!
   series: String
   manufacturer: String
   category: String

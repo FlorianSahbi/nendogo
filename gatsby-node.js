@@ -26,6 +26,7 @@ exports.createPages = async ({ graphql, actions }) => {
       getNendoroids {
         nendoroids {
           category
+          images
           cooperation
           distributedBy
           formattedName

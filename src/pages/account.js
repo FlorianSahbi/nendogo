@@ -18,6 +18,7 @@ const Upload = () => {
     </>
   )
 }
+
 const LoginPage = () => {
   const [form, setForm] = useState({ pseudo: "", mail: "", password: "" });
   const [pseudo, setPseudo] = useState('');

@@ -21,7 +21,7 @@ type Nendoroid {
   distributedBy: String
   srcUrl: String
   range: String
-  interactions: [Interaction!]! @relation(link: INLINE)
+  interactions: [Interaction!]!
 }
 
 type User {
@@ -38,8 +38,8 @@ type User {
 
 type File {
   id: ID! @id
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
   filename: String!
   mimetype: String!
   encoding: String!
@@ -48,9 +48,11 @@ type File {
 
 type Interaction {
   id: ID! @id
-  nendoroid: Nendoroid!
+  nendoroid: Nendoroid! @relation(link: INLINE)
   user: User! @relation(link: INLINE)
   type: InteractionType!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
 
 enum InteractionType {

@@ -1,22 +1,10 @@
 /*eslint-disable jsx-a11y/no-static-element-interactions*/
 
-import React, { useState } from "react"
-import { Link } from "gatsby"
-import SEO from "../components/seo"
-import usersStyles from "./users.module.css"
-import navBarStyles from "../pages/navBar.module.css"
-
-
-const NavBar = () => {
-  return (
-    <nav className={navBarStyles.container}>
-      <div className={navBarStyles.wrapper}>
-        <Link to="/">Nendoroids </Link>
-        <Link to="/account">Go to your account </Link>
-      </div>
-    </nav>
-  )
-}
+import React, { useState } from "react";
+import { Link } from "gatsby";
+import SEO from "../components/seo";
+import usersStyles from "./users.module.css";
+import Layout from "../components/layout";
 
 const Card = (props) => {
 
@@ -52,9 +40,8 @@ const Card = (props) => {
 const UsersPage = ({ data: { api: { getUsers: { users: data } } } }) => {
 
   return (
-    <div>
+    <Layout>
       <SEO title="Users list" />
-      <NavBar />
       <div className={usersStyles.containerList}>
         {
           data.map(user => {
@@ -67,7 +54,7 @@ const UsersPage = ({ data: { api: { getUsers: { users: data } } } }) => {
           })
         }
       </div>
-    </div>
+    </Layout>
   )
 }
 

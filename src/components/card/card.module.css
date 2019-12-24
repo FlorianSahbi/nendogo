@@ -1,0 +1,160 @@
+.container {
+  height: 300px;
+  width: 200px;
+  border-radius: 10px;
+  position: relative;
+  margin-top: 1rem;
+  cursor: pointer;
+  margin: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container img {
+  border-radius: 10px;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.wrapper {
+  border: 7px double beige;
+  border-radius: 10px;
+  position: absolute;
+  height: 95%;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: all 0.5s ease;
+}
+
+.likeButton {
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: red;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease;
+}
+
+.wishButton {
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  color: red;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease;
+}
+
+.ownButton {
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: red;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease;
+}
+
+.title {
+  transition: all 0.5s ease;
+  color: beige;
+  font-family: "Raleway";
+  font-size: 1.3em;
+  text-align: center;
+  text-decoration: none;
+  margin-bottom: 0.5em;
+  font-size: bold;
+}
+
+.number {
+  color: beige;
+  font-family: "Raleway";
+  font-size: 1em;
+  text-decoration: none;
+  transition: all 0.5s ease;
+  margin-top: 0.5em;
+}
+
+.link {
+  position: absolute;
+  width: auto;
+  border: 7px double beige;
+  border-bottom: none;
+  padding: 0.5rem;
+  border-radius: 5px 5px 0 0;
+  bottom: 0;
+  height: -10px;
+  transition: all 0.5s ease;
+}
+
+.link a {
+  color: beige;
+  font-family: "Raleway";
+  font-size: 1em;
+  text-decoration: none;
+  height: 100%;
+  width: 100%;
+}
+
+.hover .title,
+.hover .number,
+.hover .link {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
+
+.hover .wrapper {
+  backdrop-filter: brightness(70%) blur(5px);
+}
+
+.default .title {
+  transform: translate3d(0, -100px, 0);
+  opacity: 0;
+}
+
+.default .number {
+  transform: translate3d(0, 100px, 0);
+  opacity: 0;
+}
+
+.default .link {
+  transform: translate3d(0, 5px, 0);
+  opacity: 0;
+}
+
+/* .default .likeButton {
+    opacity: 0;
+}
+
+.hover .likeButton {
+    opacity: 1;
+} */
+
+.default .wrapper {
+  backdrop-filter: none;
+}
+
+@media screen and (max-width: 440px) {
+  .container {
+    width: 190px;
+  }
+}

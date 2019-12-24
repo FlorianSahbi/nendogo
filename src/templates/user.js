@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import classes from "./userTemplateStyle.module.css"
 import { Carousel } from "../templates/nendo";
-import Card from "../components/IndexNendoroids/card"
+import Card from "../components/card/card"
 import { useQuery } from '@apollo/react-hooks';
 import {
   GET_INTERACTION_LIKE_QUERY,
