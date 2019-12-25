@@ -27,7 +27,7 @@ query GetNendoroidsLikedBy($id: ID!){
     count
   }
 }
-`
+`;
 export const GET_INTERACTION_WISH_QUERY = gql`
 query GetNendoroidsWishedBy($id: ID!) {
   getNendoroidsWishedBy(id: $id) {
@@ -39,7 +39,8 @@ query GetNendoroidsWishedBy($id: ID!) {
     count
   }
 }
-`
+`;
+
 export const GET_INTERACTION_OWN_QUERY = gql`
 query GetNendoroidsOwnedBy($id: ID!){
   getNendoroidsOwnedBy(id: $id) {
@@ -51,7 +52,7 @@ query GetNendoroidsOwnedBy($id: ID!){
     count
   }
 }
-`
+`;
 
 export const GET_NENDOROIDS_QUERY = gql`
 query {
@@ -73,7 +74,7 @@ query {
     }
   }
 }
-`
+`;
 
 export const SIGNUP_MUTATION = gql`
   mutation SignUp($email: String!, $password: String!, $pseudo: String!) {

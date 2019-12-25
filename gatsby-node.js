@@ -3,8 +3,8 @@ const path = require('path')
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
 
-  const templateNendo = path.resolve('./src/templates/nendo.js')
-  const templateUser = path.resolve('./src/templates/user.js')
+  const templateNendo = path.resolve('./src/templates/nendoroid')
+  const templateUser = path.resolve('./src/templates/user')
 
   const USER_PAGE_QUERY = await graphql(`
   {
@@ -65,21 +65,21 @@ exports.createPages = async ({ graphql, actions }) => {
   const nendoroids = await NENDO_PAGE_QUERY.data.api.getNendoroids.nendoroids;
   const users = await USER_PAGE_QUERY.data.api.getUsers.users;
 
-  nendoroids.forEach(nendoroid => {
+  nendoroids.forEach((nendoroid) => {
     createPage({
       path: nendoroid.formattedName,
       component: templateNendo,
       context: nendoroid,
     })
-  })
+  });
 
-  users.forEach(user => {
+  users.forEach((user) => {
     createPage({
       path: user.pseudo,
       component: templateUser,
       context: user,
     })
-  })
+  });
 }
 
 exports.onCreatePage = async ({ page, actions }) => {

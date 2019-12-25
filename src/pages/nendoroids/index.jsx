@@ -1,9 +1,9 @@
 import React from 'react';
 import { useQuery } from "@apollo/react-hooks";
-import Layout from '../components/layout';
-import classes from "./nendoroids.module.css";
-import Card from "../components/card/card";
-import { GET_NENDOROIDS_QUERY } from "../apollo/queries/index";
+import Layout from '../../components/layout';
+import classes from "./style.module.css";
+import Card from "../../components/card";
+import { GET_NENDOROIDS_QUERY } from "../../apollo/queries/index";
 
 export default function Nendoroids() {
 
