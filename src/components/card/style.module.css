@@ -1,11 +1,9 @@
 .container {
-  height: 300px;
-  width: 200px;
+  height: 100%;
+  width: 100%;
   border-radius: 10px;
   position: relative;
-  margin-top: 1rem;
   cursor: pointer;
-  margin: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;

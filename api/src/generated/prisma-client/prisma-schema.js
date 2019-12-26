@@ -455,7 +455,7 @@ type Nendoroid {
   createdAt: DateTime!
   updatedAt: DateTime!
   name: String
-  number: String
+  number: Int
   formattedName: String!
   title: String
   description: [String!]!
@@ -463,8 +463,8 @@ type Nendoroid {
   series: String
   manufacturer: String
   category: String
-  price: String
-  releaseDate: String
+  price: Int
+  releaseDate: DateTime
   specifications: String
   sculptor: String
   cooperation: String
@@ -493,7 +493,7 @@ input NendoroidCreateimagesInput {
 input NendoroidCreateInput {
   id: ID
   name: String
-  number: String
+  number: Int
   formattedName: String!
   title: String
   description: NendoroidCreatedescriptionInput
@@ -501,8 +501,8 @@ input NendoroidCreateInput {
   series: String
   manufacturer: String
   category: String
-  price: String
-  releaseDate: String
+  price: Int
+  releaseDate: DateTime
   specifications: String
   sculptor: String
   cooperation: String
@@ -522,7 +522,7 @@ input NendoroidCreateOneWithoutInteractionsInput {
 input NendoroidCreateWithoutInteractionsInput {
   id: ID
   name: String
-  number: String
+  number: Int
   formattedName: String!
   title: String
   description: NendoroidCreatedescriptionInput
@@ -530,8 +530,8 @@ input NendoroidCreateWithoutInteractionsInput {
   series: String
   manufacturer: String
   category: String
-  price: String
-  releaseDate: String
+  price: Int
+  releaseDate: DateTime
   specifications: String
   sculptor: String
   cooperation: String
@@ -595,7 +595,7 @@ type NendoroidPreviousValues {
   createdAt: DateTime!
   updatedAt: DateTime!
   name: String
-  number: String
+  number: Int
   formattedName: String!
   title: String
   description: [String!]!
@@ -603,8 +603,8 @@ type NendoroidPreviousValues {
   series: String
   manufacturer: String
   category: String
-  price: String
-  releaseDate: String
+  price: Int
+  releaseDate: DateTime
   specifications: String
   sculptor: String
   cooperation: String
@@ -641,7 +641,7 @@ input NendoroidUpdateimagesInput {
 
 input NendoroidUpdateInput {
   name: String
-  number: String
+  number: Int
   formattedName: String
   title: String
   description: NendoroidUpdatedescriptionInput
@@ -649,8 +649,8 @@ input NendoroidUpdateInput {
   series: String
   manufacturer: String
   category: String
-  price: String
-  releaseDate: String
+  price: Int
+  releaseDate: DateTime
   specifications: String
   sculptor: String
   cooperation: String
@@ -664,7 +664,7 @@ input NendoroidUpdateInput {
 
 input NendoroidUpdateManyMutationInput {
   name: String
-  number: String
+  number: Int
   formattedName: String
   title: String
   description: NendoroidUpdatedescriptionInput
@@ -672,8 +672,8 @@ input NendoroidUpdateManyMutationInput {
   series: String
   manufacturer: String
   category: String
-  price: String
-  releaseDate: String
+  price: Int
+  releaseDate: DateTime
   specifications: String
   sculptor: String
   cooperation: String
@@ -693,7 +693,7 @@ input NendoroidUpdateOneRequiredWithoutInteractionsInput {
 
 input NendoroidUpdateWithoutInteractionsDataInput {
   name: String
-  number: String
+  number: Int
   formattedName: String
   title: String
   description: NendoroidUpdatedescriptionInput
@@ -701,8 +701,8 @@ input NendoroidUpdateWithoutInteractionsDataInput {
   series: String
   manufacturer: String
   category: String
-  price: String
-  releaseDate: String
+  price: Int
+  releaseDate: DateTime
   specifications: String
   sculptor: String
   cooperation: String
@@ -763,20 +763,14 @@ input NendoroidWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
-  number: String
-  number_not: String
-  number_in: [String!]
-  number_not_in: [String!]
-  number_lt: String
-  number_lte: String
-  number_gt: String
-  number_gte: String
-  number_contains: String
-  number_not_contains: String
-  number_starts_with: String
-  number_not_starts_with: String
-  number_ends_with: String
-  number_not_ends_with: String
+  number: Int
+  number_not: Int
+  number_in: [Int!]
+  number_not_in: [Int!]
+  number_lt: Int
+  number_lte: Int
+  number_gt: Int
+  number_gte: Int
   formattedName: String
   formattedName_not: String
   formattedName_in: [String!]
@@ -847,34 +841,22 @@ input NendoroidWhereInput {
   category_not_starts_with: String
   category_ends_with: String
   category_not_ends_with: String
-  price: String
-  price_not: String
-  price_in: [String!]
-  price_not_in: [String!]
-  price_lt: String
-  price_lte: String
-  price_gt: String
-  price_gte: String
-  price_contains: String
-  price_not_contains: String
-  price_starts_with: String
-  price_not_starts_with: String
-  price_ends_with: String
-  price_not_ends_with: String
-  releaseDate: String
-  releaseDate_not: String
-  releaseDate_in: [String!]
-  releaseDate_not_in: [String!]
-  releaseDate_lt: String
-  releaseDate_lte: String
-  releaseDate_gt: String
-  releaseDate_gte: String
-  releaseDate_contains: String
-  releaseDate_not_contains: String
-  releaseDate_starts_with: String
-  releaseDate_not_starts_with: String
-  releaseDate_ends_with: String
-  releaseDate_not_ends_with: String
+  price: Int
+  price_not: Int
+  price_in: [Int!]
+  price_not_in: [Int!]
+  price_lt: Int
+  price_lte: Int
+  price_gt: Int
+  price_gte: Int
+  releaseDate: DateTime
+  releaseDate_not: DateTime
+  releaseDate_in: [DateTime!]
+  releaseDate_not_in: [DateTime!]
+  releaseDate_lt: DateTime
+  releaseDate_lte: DateTime
+  releaseDate_gt: DateTime
+  releaseDate_gte: DateTime
   specifications: String
   specifications_not: String
   specifications_in: [String!]

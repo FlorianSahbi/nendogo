@@ -3,7 +3,7 @@ async function getNendoroids(parent, args, context) {
     ? {
       OR: [
         { formattedName_contains: args.filter },
-        { rapnge_contains: args.filter },
+        { range_contains: args.filter },
       ],
     }
     : {}

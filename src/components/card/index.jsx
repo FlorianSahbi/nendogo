@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classes from "./style.module.css";
 import { Link } from "gatsby";
-import InteractionButton from "../buttons/interaction/index";
+// import InteractionButton from "../button/interaction/index";
 import default_nendoroid from "../../images/default_nendoroid.jpg";
 
 export default function Card(props) {
@@ -36,7 +36,7 @@ export default function Card(props) {
         <img src={default_nendoroid} alt="img_nendo" />
       )}
       <div className={classes.wrapper}>
-        <InteractionButton
+        {/* <InteractionButton
           type="LIKE"
           enabled="❤️"
           disabled="♡"
@@ -55,7 +55,7 @@ export default function Card(props) {
           enabled="✓"
           disabled="X"
           isActive={false}
-        />
+        /> */}
 
         <h2 className={classes.title}>{props.name}</h2>
 

@@ -54,8 +54,6 @@ export default function SEO({ title, description, image, pathname, article }) {
   />
 }
 
-export default SEO
-
 const query = graphql`
   query SEO {
     site {

@@ -4,20 +4,20 @@
   font-size: 14px;
 }
 
-.nendo--container {
+.container {
   height: 100vh;
   width: 100vw;
   /* border: 2px solid blue; */
   background: #131515;
 }
 
-.nendo--wrapper {
+.wrapper {
   /* border: 2px solid green; */
   height: 100%;
   width: 100%;
 }
 
-.nendo--info {
+.info {
   height: 100%;
   width: 100%;
   /* border: 10px solid pink; */
@@ -26,7 +26,7 @@
   align-items: center;
 }
 
-.nendo--meta {
+.meta {
   border: 2px solid red;
   height: 100%;
   width: 100%;
@@ -37,7 +37,7 @@
   flex-direction: column;
 }
 
-.nendo--title {
+.title {
   /* border: 2px solid firebrick; */
   color: white;
   font-size: 2em;
@@ -47,7 +47,7 @@
   padding: 1em;
 }
 
-.nendo--description {
+.description {
   /* border: 2px solid white; */
   color: white;
   /* border: 2px solid white; */
@@ -57,30 +57,30 @@
   padding: 1em;
 }
 
-.nendo--description h2 {
+.description h2 {
   margin-bottom: 1em;
   font-size: 1.5em;
   color: lightgoldenrodyellow;
 }
 
-.nendo--description p {
+.description p {
   margin-bottom: 1em;
 }
 
-.nendo--preview {
+.preview {
   /* border: 5px solid palegreen; */
   height: 100%;
   width: 100%;
 }
 
-.nendo--preview img {
+.preview img {
   height: 100%;
   width: 100%;
   object-fit: cover;
   object-position: center;
 }
 
-.nendo--more {
+.more {
   /* border: 2px solid purple; */
   width: 100%;
   display: flex;
@@ -90,31 +90,38 @@
   align-items: flex-start;
 }
 
-.more--container {
-  /* border: 2px solid blue; */
+.morecontainer {
   width: 40%;
+  margin: 1em;
+  /* border: 5px solid  blue; */
 }
 
-.more--title {
-  /* border: 2px solid blue; */
-  color: white;
+.moretitle {
+  color: #f0e6d2;
   width: 100%;
-  padding: 0.5em;
-  width: 100%;
+  font-family: 'Cinzel';
+  font-size: 1em;
+  
+  /* border: 5px dotted red; */
 }
 
-.more--value {
-  /* border: 2px solid blue; */
-  color: white;
+.morevalue {
+  color: #f0e6d2;
   width: 100%;
+  font-family: 'Raleway';
+  font-size: 1em;
+
+
+
+  /* border: 2px solid green; */
 }
 
-.nendo--user {
+.user {
   width: 100%;
   /* border: 5px solid red; */
 }
 
-.user--like {
+.userlike {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -124,7 +131,7 @@
   font-weight: 200;
 }
 
-.user--love {
+.userlove {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -134,7 +141,7 @@
   font-weight: 200;
 }
 
-.user--want {
+.userwant {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -144,7 +151,7 @@
   font-weight: 200;
 }
 
-.user--roundedProfil {
+.userroundedProfil {
   height: 80px;
   width: 80px;
   overflow: hidden;
@@ -155,28 +162,28 @@
   background: white;
 }
 
-.user--like--list {
+.userlikelist {
   /* border: 2px solid blue; */
   display: flex;
   overflow: hidden;
   flex-wrap: wrap;
 }
 
-.user--love--list {
+.userlovelist {
   /* border: 2px solid blue; */
   display: flex;
   overflow: hidden;
   flex-wrap: wrap;
 }
 
-.user--want--list {
+.userwantlist {
   /* border: 2px solid blue; */
   display: flex;
   overflow: hidden;
   flex-wrap: wrap;
 }
 
-.nendo--number {
+.number {
   position: absolute;
   color: beige;
   font-size: 6em;
@@ -189,7 +196,7 @@
 }
 
 @media screen and (max-width: 800px) {
-  .nendo--info {
+  .info {
     flex-direction: column;
   }
 }

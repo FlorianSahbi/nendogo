@@ -3,7 +3,7 @@ type Nendoroid {
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
   name: String
-  number: String
+  number: Int
   formattedName: String!
   title: String
   description: [String!]! @scalarList(strategy: EMBEDDED)
@@ -11,8 +11,8 @@ type Nendoroid {
   series: String
   manufacturer: String
   category: String
-  price: String
-  releaseDate: String
+  price: Int
+  releaseDate: DateTime
   specifications: String
   sculptor: String
   cooperation: String
@@ -28,9 +28,9 @@ type User {
   id: ID! @id
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
-  firstName: String,
-  lastName: String,
-  pseudo: String,  @unique
+  firstName: String
+  lastName: String
+  pseudo: String  @unique
   email: String! @unique
   avatar: String
   password: String!

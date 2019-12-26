@@ -1,19 +1,11 @@
-import React, { useState } from "react";
-
+import React, { useState } from "react"
 import { useMutation } from "@apollo/react-hooks";
 import {
   CREATE_INTERACTION_MUTATION,
   DELETE_INTERACTION_MUTATION
 } from "../../../apollo/queries/index";
 
-// interface InteractionButtonInterface {
-//     type: string;
-//     enabled: string;
-//     disabled: string;
-//     isActive: boolean;
-// }
-
-export default function InteractionButton(props) {
+const InteractionButton = (props) => {
 
   const [isActive, setIsActive] = useState(props.isActive);
 
@@ -46,3 +38,5 @@ export default function InteractionButton(props) {
     </div>
   )
 }
+
+export default InteractionButton;

@@ -498,20 +498,14 @@ export interface NendoroidWhereInput {
   name_not_starts_with?: Maybe<String>;
   name_ends_with?: Maybe<String>;
   name_not_ends_with?: Maybe<String>;
-  number?: Maybe<String>;
-  number_not?: Maybe<String>;
-  number_in?: Maybe<String[] | String>;
-  number_not_in?: Maybe<String[] | String>;
-  number_lt?: Maybe<String>;
-  number_lte?: Maybe<String>;
-  number_gt?: Maybe<String>;
-  number_gte?: Maybe<String>;
-  number_contains?: Maybe<String>;
-  number_not_contains?: Maybe<String>;
-  number_starts_with?: Maybe<String>;
-  number_not_starts_with?: Maybe<String>;
-  number_ends_with?: Maybe<String>;
-  number_not_ends_with?: Maybe<String>;
+  number?: Maybe<Int>;
+  number_not?: Maybe<Int>;
+  number_in?: Maybe<Int[] | Int>;
+  number_not_in?: Maybe<Int[] | Int>;
+  number_lt?: Maybe<Int>;
+  number_lte?: Maybe<Int>;
+  number_gt?: Maybe<Int>;
+  number_gte?: Maybe<Int>;
   formattedName?: Maybe<String>;
   formattedName_not?: Maybe<String>;
   formattedName_in?: Maybe<String[] | String>;
@@ -582,34 +576,22 @@ export interface NendoroidWhereInput {
   category_not_starts_with?: Maybe<String>;
   category_ends_with?: Maybe<String>;
   category_not_ends_with?: Maybe<String>;
-  price?: Maybe<String>;
-  price_not?: Maybe<String>;
-  price_in?: Maybe<String[] | String>;
-  price_not_in?: Maybe<String[] | String>;
-  price_lt?: Maybe<String>;
-  price_lte?: Maybe<String>;
-  price_gt?: Maybe<String>;
-  price_gte?: Maybe<String>;
-  price_contains?: Maybe<String>;
-  price_not_contains?: Maybe<String>;
-  price_starts_with?: Maybe<String>;
-  price_not_starts_with?: Maybe<String>;
-  price_ends_with?: Maybe<String>;
-  price_not_ends_with?: Maybe<String>;
-  releaseDate?: Maybe<String>;
-  releaseDate_not?: Maybe<String>;
-  releaseDate_in?: Maybe<String[] | String>;
-  releaseDate_not_in?: Maybe<String[] | String>;
-  releaseDate_lt?: Maybe<String>;
-  releaseDate_lte?: Maybe<String>;
-  releaseDate_gt?: Maybe<String>;
-  releaseDate_gte?: Maybe<String>;
-  releaseDate_contains?: Maybe<String>;
-  releaseDate_not_contains?: Maybe<String>;
-  releaseDate_starts_with?: Maybe<String>;
-  releaseDate_not_starts_with?: Maybe<String>;
-  releaseDate_ends_with?: Maybe<String>;
-  releaseDate_not_ends_with?: Maybe<String>;
+  price?: Maybe<Int>;
+  price_not?: Maybe<Int>;
+  price_in?: Maybe<Int[] | Int>;
+  price_not_in?: Maybe<Int[] | Int>;
+  price_lt?: Maybe<Int>;
+  price_lte?: Maybe<Int>;
+  price_gt?: Maybe<Int>;
+  price_gte?: Maybe<Int>;
+  releaseDate?: Maybe<DateTimeInput>;
+  releaseDate_not?: Maybe<DateTimeInput>;
+  releaseDate_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  releaseDate_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  releaseDate_lt?: Maybe<DateTimeInput>;
+  releaseDate_lte?: Maybe<DateTimeInput>;
+  releaseDate_gt?: Maybe<DateTimeInput>;
+  releaseDate_gte?: Maybe<DateTimeInput>;
   specifications?: Maybe<String>;
   specifications_not?: Maybe<String>;
   specifications_in?: Maybe<String[] | String>;
@@ -891,7 +873,7 @@ export interface NendoroidCreateOneWithoutInteractionsInput {
 export interface NendoroidCreateWithoutInteractionsInput {
   id?: Maybe<ID_Input>;
   name?: Maybe<String>;
-  number?: Maybe<String>;
+  number?: Maybe<Int>;
   formattedName: String;
   title?: Maybe<String>;
   description?: Maybe<NendoroidCreatedescriptionInput>;
@@ -899,8 +881,8 @@ export interface NendoroidCreateWithoutInteractionsInput {
   series?: Maybe<String>;
   manufacturer?: Maybe<String>;
   category?: Maybe<String>;
-  price?: Maybe<String>;
-  releaseDate?: Maybe<String>;
+  price?: Maybe<Int>;
+  releaseDate?: Maybe<DateTimeInput>;
   specifications?: Maybe<String>;
   sculptor?: Maybe<String>;
   cooperation?: Maybe<String>;
@@ -949,7 +931,7 @@ export interface NendoroidUpdateOneRequiredWithoutInteractionsInput {
 
 export interface NendoroidUpdateWithoutInteractionsDataInput {
   name?: Maybe<String>;
-  number?: Maybe<String>;
+  number?: Maybe<Int>;
   formattedName?: Maybe<String>;
   title?: Maybe<String>;
   description?: Maybe<NendoroidUpdatedescriptionInput>;
@@ -957,8 +939,8 @@ export interface NendoroidUpdateWithoutInteractionsDataInput {
   series?: Maybe<String>;
   manufacturer?: Maybe<String>;
   category?: Maybe<String>;
-  price?: Maybe<String>;
-  releaseDate?: Maybe<String>;
+  price?: Maybe<Int>;
+  releaseDate?: Maybe<DateTimeInput>;
   specifications?: Maybe<String>;
   sculptor?: Maybe<String>;
   cooperation?: Maybe<String>;
@@ -1010,7 +992,7 @@ export interface InteractionUpdateManyMutationInput {
 export interface NendoroidCreateInput {
   id?: Maybe<ID_Input>;
   name?: Maybe<String>;
-  number?: Maybe<String>;
+  number?: Maybe<Int>;
   formattedName: String;
   title?: Maybe<String>;
   description?: Maybe<NendoroidCreatedescriptionInput>;
@@ -1018,8 +1000,8 @@ export interface NendoroidCreateInput {
   series?: Maybe<String>;
   manufacturer?: Maybe<String>;
   category?: Maybe<String>;
-  price?: Maybe<String>;
-  releaseDate?: Maybe<String>;
+  price?: Maybe<Int>;
+  releaseDate?: Maybe<DateTimeInput>;
   specifications?: Maybe<String>;
   sculptor?: Maybe<String>;
   cooperation?: Maybe<String>;
@@ -1047,7 +1029,7 @@ export interface InteractionCreateWithoutNendoroidInput {
 
 export interface NendoroidUpdateInput {
   name?: Maybe<String>;
-  number?: Maybe<String>;
+  number?: Maybe<Int>;
   formattedName?: Maybe<String>;
   title?: Maybe<String>;
   description?: Maybe<NendoroidUpdatedescriptionInput>;
@@ -1055,8 +1037,8 @@ export interface NendoroidUpdateInput {
   series?: Maybe<String>;
   manufacturer?: Maybe<String>;
   category?: Maybe<String>;
-  price?: Maybe<String>;
-  releaseDate?: Maybe<String>;
+  price?: Maybe<Int>;
+  releaseDate?: Maybe<DateTimeInput>;
   specifications?: Maybe<String>;
   sculptor?: Maybe<String>;
   cooperation?: Maybe<String>;
@@ -1163,7 +1145,7 @@ export interface InteractionUpdateManyDataInput {
 
 export interface NendoroidUpdateManyMutationInput {
   name?: Maybe<String>;
-  number?: Maybe<String>;
+  number?: Maybe<Int>;
   formattedName?: Maybe<String>;
   title?: Maybe<String>;
   description?: Maybe<NendoroidUpdatedescriptionInput>;
@@ -1171,8 +1153,8 @@ export interface NendoroidUpdateManyMutationInput {
   series?: Maybe<String>;
   manufacturer?: Maybe<String>;
   category?: Maybe<String>;
-  price?: Maybe<String>;
-  releaseDate?: Maybe<String>;
+  price?: Maybe<Int>;
+  releaseDate?: Maybe<DateTimeInput>;
   specifications?: Maybe<String>;
   sculptor?: Maybe<String>;
   cooperation?: Maybe<String>;
@@ -1409,7 +1391,7 @@ export interface Nendoroid {
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
   name?: String;
-  number?: String;
+  number?: Int;
   formattedName: String;
   title?: String;
   description: String[];
@@ -1417,8 +1399,8 @@ export interface Nendoroid {
   series?: String;
   manufacturer?: String;
   category?: String;
-  price?: String;
-  releaseDate?: String;
+  price?: Int;
+  releaseDate?: DateTimeOutput;
   specifications?: String;
   sculptor?: String;
   cooperation?: String;
@@ -1434,7 +1416,7 @@ export interface NendoroidPromise extends Promise<Nendoroid>, Fragmentable {
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
   name: () => Promise<String>;
-  number: () => Promise<String>;
+  number: () => Promise<Int>;
   formattedName: () => Promise<String>;
   title: () => Promise<String>;
   description: () => Promise<String[]>;
@@ -1442,8 +1424,8 @@ export interface NendoroidPromise extends Promise<Nendoroid>, Fragmentable {
   series: () => Promise<String>;
   manufacturer: () => Promise<String>;
   category: () => Promise<String>;
-  price: () => Promise<String>;
-  releaseDate: () => Promise<String>;
+  price: () => Promise<Int>;
+  releaseDate: () => Promise<DateTimeOutput>;
   specifications: () => Promise<String>;
   sculptor: () => Promise<String>;
   cooperation: () => Promise<String>;
@@ -1470,7 +1452,7 @@ export interface NendoroidSubscription
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   name: () => Promise<AsyncIterator<String>>;
-  number: () => Promise<AsyncIterator<String>>;
+  number: () => Promise<AsyncIterator<Int>>;
   formattedName: () => Promise<AsyncIterator<String>>;
   title: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String[]>>;
@@ -1478,8 +1460,8 @@ export interface NendoroidSubscription
   series: () => Promise<AsyncIterator<String>>;
   manufacturer: () => Promise<AsyncIterator<String>>;
   category: () => Promise<AsyncIterator<String>>;
-  price: () => Promise<AsyncIterator<String>>;
-  releaseDate: () => Promise<AsyncIterator<String>>;
+  price: () => Promise<AsyncIterator<Int>>;
+  releaseDate: () => Promise<AsyncIterator<DateTimeOutput>>;
   specifications: () => Promise<AsyncIterator<String>>;
   sculptor: () => Promise<AsyncIterator<String>>;
   cooperation: () => Promise<AsyncIterator<String>>;
@@ -1506,7 +1488,7 @@ export interface NendoroidNullablePromise
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
   name: () => Promise<String>;
-  number: () => Promise<String>;
+  number: () => Promise<Int>;
   formattedName: () => Promise<String>;
   title: () => Promise<String>;
   description: () => Promise<String[]>;
@@ -1514,8 +1496,8 @@ export interface NendoroidNullablePromise
   series: () => Promise<String>;
   manufacturer: () => Promise<String>;
   category: () => Promise<String>;
-  price: () => Promise<String>;
-  releaseDate: () => Promise<String>;
+  price: () => Promise<Int>;
+  releaseDate: () => Promise<DateTimeOutput>;
   specifications: () => Promise<String>;
   sculptor: () => Promise<String>;
   cooperation: () => Promise<String>;
@@ -1908,7 +1890,7 @@ export interface NendoroidPreviousValues {
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
   name?: String;
-  number?: String;
+  number?: Int;
   formattedName: String;
   title?: String;
   description: String[];
@@ -1916,8 +1898,8 @@ export interface NendoroidPreviousValues {
   series?: String;
   manufacturer?: String;
   category?: String;
-  price?: String;
-  releaseDate?: String;
+  price?: Int;
+  releaseDate?: DateTimeOutput;
   specifications?: String;
   sculptor?: String;
   cooperation?: String;
@@ -1935,7 +1917,7 @@ export interface NendoroidPreviousValuesPromise
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
   name: () => Promise<String>;
-  number: () => Promise<String>;
+  number: () => Promise<Int>;
   formattedName: () => Promise<String>;
   title: () => Promise<String>;
   description: () => Promise<String[]>;
@@ -1943,8 +1925,8 @@ export interface NendoroidPreviousValuesPromise
   series: () => Promise<String>;
   manufacturer: () => Promise<String>;
   category: () => Promise<String>;
-  price: () => Promise<String>;
-  releaseDate: () => Promise<String>;
+  price: () => Promise<Int>;
+  releaseDate: () => Promise<DateTimeOutput>;
   specifications: () => Promise<String>;
   sculptor: () => Promise<String>;
   cooperation: () => Promise<String>;
@@ -1962,7 +1944,7 @@ export interface NendoroidPreviousValuesSubscription
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   name: () => Promise<AsyncIterator<String>>;
-  number: () => Promise<AsyncIterator<String>>;
+  number: () => Promise<AsyncIterator<Int>>;
   formattedName: () => Promise<AsyncIterator<String>>;
   title: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String[]>>;
@@ -1970,8 +1952,8 @@ export interface NendoroidPreviousValuesSubscription
   series: () => Promise<AsyncIterator<String>>;
   manufacturer: () => Promise<AsyncIterator<String>>;
   category: () => Promise<AsyncIterator<String>>;
-  price: () => Promise<AsyncIterator<String>>;
-  releaseDate: () => Promise<AsyncIterator<String>>;
+  price: () => Promise<AsyncIterator<Int>>;
+  releaseDate: () => Promise<AsyncIterator<DateTimeOutput>>;
   specifications: () => Promise<AsyncIterator<String>>;
   sculptor: () => Promise<AsyncIterator<String>>;
   cooperation: () => Promise<AsyncIterator<String>>;

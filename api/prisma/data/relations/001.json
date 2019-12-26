@@ -1,9 +1,0 @@
-{
-  "valueType": "relations",
-  "values": [
-    [
-      { "_typeName": "User", "id": "0", "fieldName": "partner" },
-      { "_typeName": "User", "id": "1", "fieldName": "partner" }
-    ]
-  ]
-}

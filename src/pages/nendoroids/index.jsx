@@ -12,8 +12,6 @@ export default function Nendoroids() {
   if (error) return <div>Error</div>
   if (loading) return <div>Loading...</div>
 
-
-
   const renderCards = () => {
     const cards = data.getNendoroids.nendoroids.map(({ id, formattedName, number, images }) => {
       return (
@@ -36,7 +34,7 @@ export default function Nendoroids() {
 
   return (
     <Layout>
-      <section className={classes.container}>
+      <section className={classes.nendoroidsContainer}>
         <div className={classes.wrapper}>
           {renderCards()}
         </div>
