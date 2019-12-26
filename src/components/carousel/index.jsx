@@ -5,6 +5,7 @@ export default function Carousel(props) {
   const { images } = props;
   const [index, setIndex] = useState(0);
   const [currentImage, setCurrentImage] = useState(images[index]);
+  const [showPreview, setshowPreview] = useState(false);
 
   function handlePrevious() {
     let i = index - 1;
@@ -31,11 +32,19 @@ export default function Carousel(props) {
   }
 
   function handleShow() {
-    alert("show");
+    setshowPreview(true);
   }
 
   return (
     <div className={classes.container}>
+      {showPreview && (
+        <section className={classes.modalPrerviewContainer}>
+          <div onClick={() => setshowPreview(false)} className={classes.modalPrerviewWrapper}>
+            <img src={images[index]} alt="bla" />
+          </div>
+        </section>
+      )}
+
       <div className={classes.wrapper}>
         <div className={classes.ActionsLayerContainer}>
           <div className={classes.ActionsLayerWrapper}>

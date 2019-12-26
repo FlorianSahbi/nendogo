@@ -99,19 +99,17 @@
 .moretitle {
   color: #f0e6d2;
   width: 100%;
-  font-family: 'Cinzel';
+  font-family: "Cinzel";
   font-size: 1em;
-  
+
   /* border: 5px dotted red; */
 }
 
 .morevalue {
   color: #f0e6d2;
   width: 100%;
-  font-family: 'Raleway';
+  font-family: "Raleway";
   font-size: 1em;
-
-
 
   /* border: 2px solid green; */
 }
