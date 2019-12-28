@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import classes from "./style.module.css";
 import { Link } from "gatsby";
-// import InteractionButton from "../button/interaction/index";
+import InteractionButton from "../button/interaction/index";
 import default_nendoroid from "../../images/default_nendoroid.jpg";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 export default function Card(props) {
   const [isHovered, setIsHovered] = useState(false);
@@ -35,15 +36,18 @@ export default function Card(props) {
       ) : (
         <img src={default_nendoroid} alt="img_nendo" />
       )}
+
       <div className={classes.wrapper}>
-        {/* <InteractionButton
+        <InteractionButton
+          srcId={props.id}
           type="LIKE"
-          enabled="❤️"
-          disabled="♡"
+          enabled={<AiFillHeart />}
+          disabled={<AiOutlineHeart />}
           isActive={false}
         />
 
-        <InteractionButton
+        {/* <InteractionButton
+          srcId={props.id}
           type="WISH"
           enabled="★"
           disabled="☆"
@@ -51,6 +55,7 @@ export default function Card(props) {
         />
 
         <InteractionButton
+          srcId={props.id}
           type="OWN"
           enabled="✓"
           disabled="X"

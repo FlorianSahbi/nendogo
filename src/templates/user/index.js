@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import classes from "./style.module.css";
 import Carousel from "../../components/carousel/index";
 import Card from "../../components/card";
@@ -8,6 +8,7 @@ import {
   GET_INTERACTION_WISH_QUERY,
   GET_INTERACTION_OWN_QUERY
 } from "../../apollo/queries";
+import { UserContext } from "../../components/layout/index";
 
 const imgUrl = "https://images2.alphacoders.com/742/thumb-1920-742320.png";
 const imgProfile =
@@ -21,9 +22,8 @@ const nendoStories = [
   "https://live.staticflickr.com/1957/44819518934_62037c288f_b.jpg"
 ];
 
-const user = { id: "5e0215339bd11600084ff20e" };
-
 const User = (props) => {
+  const currentUser = useContext(UserContext);
   const [scrolled, setScrolled] = useState(false);
   const [selected, setSelected] = useState("like");
 
@@ -32,7 +32,7 @@ const User = (props) => {
     loading: LoadingNendoL,
     data: dataNendoL
   } = useQuery(GET_INTERACTION_LIKE_QUERY, {
-    variables: { id: user.id },
+    variables: { id: currentUser.id },
     fetchPolicy: "no-cache"
   });
 
@@ -41,7 +41,7 @@ const User = (props) => {
     loading: LoadingNendoW,
     data: dataNendoW
   } = useQuery(GET_INTERACTION_WISH_QUERY, {
-    variables: { id: user.id },
+    variables: { id: currentUser.id },
     fetchPolicy: "no-cache"
   });
 
@@ -50,7 +50,7 @@ const User = (props) => {
     loading: LoadingNendoO,
     data: dataNendoO
   } = useQuery(GET_INTERACTION_OWN_QUERY, {
-    variables: { id: user.id },
+    variables: { id: currentUser.id },
     fetchPolicy: "no-cache"
   });
 

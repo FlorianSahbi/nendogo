@@ -22,6 +22,7 @@ type Query {
   getNendoroidsOwnedBy(id: ID!): Nendoroids!
   file(id: ID!): File
   files: [File!]!
+  getNendoroidsByRange(range: String!): Nendoroids!
 }
 
 type Mutation {

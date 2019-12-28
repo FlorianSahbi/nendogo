@@ -1,96 +1,26 @@
-.containerList {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-items: flex-start;
-}
-
-.container {
-    height: 300px;
-    width: 200px;
-    border-radius: 10px;
-    position: relative;
-    margin-top: 1rem;
-    cursor: pointer;
-    margin: 0.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.container img {
-    border-radius: 10px;
+.usersContainer {
     height: 100%;
     width: 100%;
-    object-fit: cover;
-    object-position: center;
-}
-
-.wrapper {
-    border: 7px double beige;
-    border-radius: 10px;
-    position: absolute;
-    height: 95%;
-    width: 90%;
-    display: flex;
+  
+    /* border: 5px solid green; */
+  }
+  
+  .wrapper {
+    padding: 1em;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: auto;
+  
+    grid-column-gap: 1em;
+    grid-row-gap: 1em;
+  
+    justify-items: stretch;
+    align-items: stretch;
+  
     justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    transition: all 0.5s ease;
-}
-
-
-
-.title {
-    transition: all 0.5s ease;
-    font-family: 'Cinzel', sans-serif !important;
-    color: #D2C9B8 !important;
-    text-align: center;
-}
-
-.link {
-    position: absolute;
-    width: auto;
-    border: 7px double beige;
-    border-bottom: none;
-    padding: 0.5rem;
-    border-radius: 5px 5px 0 0;
-    bottom: 0;
-    height: -10px;
-    transition: all 0.5s ease;
-}
-
-.link a {
-    color: beige;
-    font-family: "Raleway";
-    font-size: 1em;
-    text-decoration: none;
-    height: 100%;
-    width: 100%;
-}
-
-
-.hover .title, .hover .link {
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-}
-
-.hover .wrapper {
-    backdrop-filter: brightness(60%);
-}
-
-.default .title {
-    transform: translate3d(0, -100px, 0);
-    opacity: 0;
-}
-
-.default .link {
-    transform: translate3d(0, 5px, 0);
-    opacity: 0;
-}
-
-
-
-.default .wrapper {
-    backdrop-filter: none;
-}
+    align-content: center;
+  
+    grid-auto-flow: row;
+  
+    /* border: 10px solid blue; */
+  }

@@ -116,3 +116,37 @@ export const GET_INTERACTIONS_QUERY = gql`
     }
   }
 `;
+
+export const GET_NENDOROIDS_BY_RANGE_QUERY = gql`
+  query GetNendoroidsByRange($range: String!){
+    getNendoroidsByRange(range: $range) {
+      nendoroids {
+        formattedName
+        number
+        id
+        images
+        interactions {
+          id
+          type
+          user {
+            pseudo
+            avatar
+            id
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_USERS_QUERY = gql`
+query {
+    getUsers {
+      users {
+        pseudo
+        avatar
+        id
+      }
+    }
+  }
+`;

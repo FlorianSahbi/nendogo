@@ -139,3 +139,8 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+.react-icons {
+  color: red;
+  font-size: 1.5em;
+}

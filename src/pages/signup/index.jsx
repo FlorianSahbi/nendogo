@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import classes from "./style.module.css";
 import { useMutation } from "@apollo/react-hooks";
 import { SIGNUP_MUTATION } from "../../apollo/queries/index";
@@ -10,7 +10,7 @@ const nendoStories = [
   "http://mikatan.goodsmile.info/en/wp-content/uploads/-000//1/5a434439ed9f8_2017-12-27-48288.jpg",
   "https://static.myfigurecollection.net/upload/pictures/2014/10/16/1120890.jpeg",
   "https://live.staticflickr.com/1957/44819518934_62037c288f_b.jpg"
-]
+];
 
 export default function Signup() {
   const [pseudo, setPseudo] = useState("");
@@ -19,69 +19,120 @@ export default function Signup() {
 
   const [signup] = useMutation(SIGNUP_MUTATION, {
     onCompleted: data => {
-      localStorage.setItem("user", JSON.stringify(data));
-      localStorage.setItem("isLoggedIn", "true");
-      window.location.href = "http://localhost:8000/nendoroids";
+      const currentUser = {
+        token: data.login.token,
+        id: data.login.user.id,
+        pseudo: data.login.user.pseudo,
+        avatar: data.login.user.avatar
+      };
+      if (typeof window !== "undefined") {
+        localStorage.setItem("user", JSON.stringify(currentUser));
+        localStorage.setItem("isLoggedIn", "true");
+        window.location.href = "http://localhost:8000/nendoroids";
+      }
     }
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     console.log({ pseudo, email, password });
     signup({ variables: { pseudo, email, password } });
     setPseudo("");
     setEmail("");
     setPassword("");
-  }
+  };
 
-  const handleInputPseudo = (e) => {
-    setPseudo(e.target.value)
-  }
+  const handleInputPseudo = e => {
+    setPseudo(e.target.value);
+  };
 
-  const handleInputEmail = (e) => {
-    setEmail(e.target.value)
-  }
+  const handleInputEmail = e => {
+    setEmail(e.target.value);
+  };
 
-  const handleInputPassword = (e) => {
-    setPassword(e.target.value)
-  }
+  const handleInputPassword = e => {
+    setPassword(e.target.value);
+  };
 
   const renderCardsBacbground = () => {
-
     const cards = nendoStories.map(elem => {
       return (
         <div style={{ height: "200px", width: "100%", padding: "5px" }}>
-          <img style={{ height: "100%", width: "100%", objectFit: "cover" }} src={elem} alt="ok" />
+          <img
+            style={{ height: "100%", width: "100%", objectFit: "cover" }}
+            src={elem}
+            alt="ok"
+          />
         </div>
-      )
-    })
+      );
+    });
 
     return (
-      <div style={{ overflow: "hidden", height: "100%", width: "100%", display: "flex" }}>
-        <div style={{ flex: "auto" }} className={classes.column}>{cards}</div>
-        <div style={{ flex: "auto", transform: "translateY(-240px)" }} className={classes.column}>{cards}</div>
-        <div style={{ flex: "auto" }} className={classes.column}>{cards}</div>
-        <div style={{ flex: "auto" }} className={classes.column}>{cards}</div>
-      </div >
-    )
-  }
+      <div
+        style={{
+          overflow: "hidden",
+          height: "100%",
+          width: "100%",
+          display: "flex"
+        }}
+      >
+        <div style={{ flex: "auto" }} className={classes.column}>
+          {cards}
+        </div>
+        <div
+          style={{ flex: "auto", transform: "translateY(-240px)" }}
+          className={classes.column}
+        >
+          {cards}
+        </div>
+        <div style={{ flex: "auto" }} className={classes.column}>
+          {cards}
+        </div>
+        <div style={{ flex: "auto" }} className={classes.column}>
+          {cards}
+        </div>
+      </div>
+    );
+  };
 
   return (
-    <section className={classes.signUpContainer} >
-      <div className={classes.wrapper} >
-        <div className={classes.leftPanel}>
-          {renderCardsBacbground()}
-        </div>
+    <section className={classes.signUpContainer}>
+      <div className={classes.wrapper}>
+        <div className={classes.leftPanel}>{renderCardsBacbground()}</div>
         <div className={classes.rightPanel}>
           <form onSubmit={handleSubmit}>
-            <h2 style={{ textAlign: "center", textTransform: "uppercase", fontFamily: "'Cinzel", fontSize: "1.5em" }}>Sign up</h2>
-            <input type="text" value={pseudo} onChange={handleInputPseudo} placeholder="Type your pseudo" />
-            <input type="mail" value={email} onChange={handleInputEmail} placeholder="Type your email" />
-            <input type="password" value={password} onChange={handleInputPassword} placeholder="Type your password" />
+            <h2
+              style={{
+                textAlign: "center",
+                textTransform: "uppercase",
+                fontFamily: "'Cinzel",
+                fontSize: "1.5em"
+              }}
+            >
+              Sign up
+            </h2>
+            <input
+              type="text"
+              value={pseudo}
+              onChange={handleInputPseudo}
+              placeholder="Type your pseudo"
+            />
+            <input
+              type="mail"
+              value={email}
+              onChange={handleInputEmail}
+              placeholder="Type your email"
+            />
+            <input
+              type="password"
+              value={password}
+              onChange={handleInputPassword}
+              placeholder="Type your password"
+            />
             <input type="submit" value="signup" />
           </form>
         </div>
       </div>
     </section>
-  )
+  );
 }

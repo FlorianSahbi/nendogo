@@ -1,19 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from "react";
 import { useQuery } from "@apollo/react-hooks";
-import Layout from '../../components/layout';
+import Layout from "../../components/layout";
 import classes from "./style.module.css";
 import Card from "../../components/card";
 import { GET_NENDOROIDS_QUERY } from "../../apollo/queries/index";
+import { UserContext } from "../../components/layout/index";
 
-export default function Nendoroids() {
-
-  const { error, loading, data } = useQuery(GET_NENDOROIDS_QUERY);
-
-  if (error) return <div>Error</div>
-  if (loading) return <div>Loading...</div>
-
-  const renderCards = () => {
-    const cards = data.getNendoroids.nendoroids.map(({ id, formattedName, number, images }) => {
+const renderCards = nendoroids => {
+  const cards = nendoroids.map(
+    ({ id, formattedName, number, images, interactions }) => {
       return (
         <Card
           key={id}
@@ -25,20 +20,30 @@ export default function Nendoroids() {
           isWished={false}
           isOwned={false}
         />
-      )
-    })
-    return cards;
-  }
+      );
+    }
+  );
+  return cards;
+};
 
-  console.log(data);
+export default function Nendoroids() {
+  const currentUser = useContext(UserContext);
+  const { error, loading, data } = useQuery(GET_NENDOROIDS_QUERY);
+
+  if (error) return <div>Error</div>;
+  if (loading) return <div>Loading...</div>;
+
+  const {
+    getNendoroids: { nendoroids }
+  } = data;
+
+  console.log(currentUser);
 
   return (
     <Layout>
       <section className={classes.nendoroidsContainer}>
-        <div className={classes.wrapper}>
-          {renderCards()}
-        </div>
+        <div className={classes.wrapper}>{renderCards(nendoroids)}</div>
       </section>
     </Layout>
-  )
+  );
 }

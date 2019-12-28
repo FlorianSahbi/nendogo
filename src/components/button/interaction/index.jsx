@@ -1,11 +1,13 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import {
   CREATE_INTERACTION_MUTATION,
   DELETE_INTERACTION_MUTATION
 } from "../../../apollo/queries/index";
+import { UserContext } from "../../layout/index";
 
-const InteractionButton = (props) => {
+const InteractionButton = props => {
+  const currentUser = useContext(UserContext);
 
   const [isActive, setIsActive] = useState(props.isActive);
 
@@ -16,27 +18,24 @@ const InteractionButton = (props) => {
     isActive ? setIsActive(false) : setIsActive(true);
     isActive
       ? deleteInteraction({
-        variables: {
-          interactionId: props.id.toString()
-        }
-      })
+          variables: {
+            interactionId: currentUser.id
+          }
+        })
       : createInteraction({
-        variables: {
-          nendoroidId: props.id.toString(),
-          // userId: `${currentUser.id}`,
-          type: "LIKE"
-        }
-      });
+          variables: {
+            nendoroidId: props.srcId,
+            userId: currentUser.id,
+            type
+          }
+        });
   };
 
   return (
-    <div
-      role="button"
-      onClick={() => handleClick(props.type)}
-    >
+    <div role="button" onClick={() => handleClick(props.type)}>
       {isActive ? props.enabled : props.disabled}
     </div>
-  )
-}
+  );
+};
 
 export default InteractionButton;

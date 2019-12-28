@@ -67,7 +67,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   nendoroids.forEach((nendoroid) => {
     createPage({
-      path: nendoroid.formattedName,
+      path: `nendoroid/${nendoroid.formattedName}`,
       component: templateNendo,
       context: nendoroid,
     })
@@ -75,7 +75,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   users.forEach((user) => {
     createPage({
-      path: user.pseudo,
+      path: `user/${user.pseudo}`,
       component: templateUser,
       context: user,
     })

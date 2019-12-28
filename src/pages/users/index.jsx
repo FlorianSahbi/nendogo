@@ -1,39 +1,38 @@
 import React from "react";
 import classes from "./style.module.css";
-
-import SEO from "../../components/seo";
 import Layout from "../../components/layout";
 import Card from "../../components/card";
+import { useQuery } from "@apollo/react-hooks";
+import { GET_USERS_QUERY } from "../../apollo/queries/index";
 
-export default function UsersPage({
-  data: {
-    api: {
-      getUsers: { users: data }
-    }
-  }
-}) {
+const renderCards = userArray => {
+  return userArray.map(user => (
+    <Card
+      key={user.id}
+      id={user.id}
+      name={user.pseudo}
+      iamges={[user.avatar]}
+    />
+  ));
+};
+
+export default function UsersPage() {
+  const { error, loading, data } = useQuery(GET_USERS_QUERY, {
+    fetchPolicy: "no-cache"
+  });
+
+  if (error) return <div>{error.message}</div>;
+  if (loading) return <div>Loading...</div>;
+
+  const {
+    getUsers: { users }
+  } = data;
+
   return (
     <Layout>
-      <SEO title="Users list" />
-      <div className={classes.containerList}>
-        {data.map(user => {
-          return <Card name={user.pseudo} avatar={user.avatar} />;
-        })}
-      </div>
+      <section className={classes.usersContainer}>
+        <div className={classes.wrapper}>{renderCards(users)}</div>
+      </section>
     </Layout>
   );
 }
-
-export const GATSBY_USER_QUERY = graphql`
-  {
-    api {
-      getUsers {
-        users {
-          id
-          avatar
-          pseudo
-        }
-      }
-    }
-  }
-`;

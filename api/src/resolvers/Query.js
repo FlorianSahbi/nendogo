@@ -153,6 +153,26 @@ async function getNendoroidsOwnedBy(parent, args, context, info) {
   }
 }
 
+async function getNendoroidsByRange(parent, args, context, info) {
+  const nendoroids = await context.prisma.nendoroids({
+    where: {
+      range: args.range
+    },
+  })
+  const count = await context.prisma
+    .nendoroidsConnection({
+      where: {
+        range: args.range
+      },
+    })
+    .aggregate()
+    .count()
+  return {
+    nendoroids,
+    count,
+  }
+}
+
 async function file() {
   // input:(id: ID!)
   // output: : File
@@ -174,6 +194,7 @@ module.exports = {
   getNendoroids,
   getUsers,
   getInteractions,
-  file, 
+  file,
   files,
+  getNendoroidsByRange,
 }
