@@ -21,53 +21,49 @@ exports.createPages = async ({ graphql, actions }) => {
   `)
 
   const NENDO_PAGE_QUERY = await graphql(`
-  {
-    api {
-      getNendoroids(orderBy: number_ASC) {
-        nendoroids {
+    {
+      api {
+        getNendoroid(id: "5e0500b6ff57ca94d71843c6") {
           category
-          images
           cooperation
+          description
           distributedBy
           formattedName
           id
+          images
           interactions {
             id
-            nendoroid {
-              id
-              name
-            }
+            type
             user {
               avatar
+              id
               pseudo
             }
-            type
           }
           manufacturer
-          name
           number
+          name
           planningProduction
-          range
           price
+          range
           releaseDate
           releasedBy
           sculptor
-          srcUrl
           series
           specifications
+          srcUrl
           title
         }
       }
     }
-  }
-    `)
+  `)
 
   const nendoroids = await NENDO_PAGE_QUERY.data.api.getNendoroids.nendoroids;
   const users = await USER_PAGE_QUERY.data.api.getUsers.users;
 
   nendoroids.forEach((nendoroid) => {
     createPage({
-      path: `nendoroid/${nendoroid.formattedName}`,
+      path: `${nendoroid.formattedName}`,
       component: templateNendo,
       context: nendoroid,
     })
@@ -75,7 +71,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   users.forEach((user) => {
     createPage({
-      path: `user/${user.pseudo}`,
+      path: `${user.pseudo}`,
       component: templateUser,
       context: user,
     })

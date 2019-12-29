@@ -32,7 +32,7 @@ const User = (props) => {
     loading: LoadingNendoL,
     data: dataNendoL
   } = useQuery(GET_INTERACTION_LIKE_QUERY, {
-    variables: { id: currentUser.id },
+    variables: { id: props.pageContext.id },
     fetchPolicy: "no-cache"
   });
 
@@ -41,7 +41,7 @@ const User = (props) => {
     loading: LoadingNendoW,
     data: dataNendoW
   } = useQuery(GET_INTERACTION_WISH_QUERY, {
-    variables: { id: currentUser.id },
+    variables: { id: props.pageContext.id },
     fetchPolicy: "no-cache"
   });
 
@@ -50,7 +50,7 @@ const User = (props) => {
     loading: LoadingNendoO,
     data: dataNendoO
   } = useQuery(GET_INTERACTION_OWN_QUERY, {
-    variables: { id: currentUser.id },
+    variables: { id: props.pageContext.id },
     fetchPolicy: "no-cache"
   });
 
@@ -63,7 +63,7 @@ const User = (props) => {
         key={nendo.id}
         id={nendo.id}
         images={nendo.images}
-        name={nendo.name}
+        name={nendo.formattedName}
         number={nendo.number}
       />
     ));
@@ -95,7 +95,7 @@ const User = (props) => {
             </div>
             <div className={classes.contentWrapper}>
               <div className={classes.name}>
-                <h2>kixkillradio</h2>
+                <h2>{props.pageContext.pseudo}</h2>
               </div>
               <div className={classes.name}>
                 <span>Add</span>

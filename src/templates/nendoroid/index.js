@@ -1,11 +1,10 @@
-import React, {useState} from "react";
+import React from "react";
 import classes from "./style.module.css";
-import SEO from "../../components/seo";
-import moment from "gatsby";
 import { Link } from "gatsby";
 import { useQuery } from "@apollo/react-hooks";
 import Carousel from "../../components/carousel/index";
 import { GET_INTERACTIONS_QUERY } from "../../apollo/queries/index";
+import { useStaticQuery, graphql } from "gatsby";
 
 const More = props => {
   return (
@@ -24,58 +23,38 @@ const ProfilPic = props => {
   );
 };
 
-const InteractionsList = ({ title, data, type }) => {
+const InteractionsList = (props) => {
+  const array = props.data.filter(e => e.type === props.type);
   return (
     <div className={classes.userlike}>
       <div className={classes.usertitle}>
-        <p>{title}</p>
+        <p>{props.title}</p>
       </div>
       <div className={classes.userlikelist}>
-        {data.getNendoroid.interactions &&
-          data.getNendoroid.interactions
-            .filter(interaction => interaction.type === { type })
-            .map(user => (
-              <ProfilPic src={user.avatar} alt={user.pseudo} />
-            ))}
+        {array &&
+          array
+            .map(interaction => {
+              return (
+                <ProfilPic src={interaction.user.avatar} alt={interaction.user.pseudo} />
+              )
+            })}
       </div>
     </div>
   )
 };
 
-
-
 const Nendoroid = ({ pageContext: { manufacturer, releaseDate, id, formattedName, title, description, name, series, category, price, sculptor, cooperation, specifications, srcUrl, images, number } }) => {
+
   const { loading, error, data } = useQuery(GET_INTERACTIONS_QUERY, {
     variables: { id: id },
     fetchPolicy: "no-cache"
   });
 
-  
-
   if (loading) return <span style={{ color: "white" }}>Loading ...</span>;
   if (error) return <span style={{ color: "white" }}>{error.message}</span>;
 
-  console.log(data.getNendoroid.interactions);
-
-  const fullScreenPreview = ({ image }) => {
-    return (
-      <section className={classes.modalPrerviewContainer}>
-        <div className={classes.modalPrerviewWrapper}>
-          <img src={image} alt="bla" />
-        </div>
-      </section>
-    )
-  }
-
   return (
     <>
-
-      <fullScreenPreview image={images[0]} />
-     
-      {/* <SEO
-        title={`${name}`}
-        description={`${name}`}
-      /> */}
       <div className={classes.container}>
         <div className={classes.wrapper}>
           <div className={classes.info}>
@@ -117,11 +96,10 @@ const Nendoroid = ({ pageContext: { manufacturer, releaseDate, id, formattedName
 
           </div>
           <div className={classes.user}>
-            <InteractionsList title="Like" type="LIKE" data={data} />
-            <InteractionsList title="Wish" type="WISH" data={data} />
-            <InteractionsList title="Own" type="OWN" data={data} />
+            <InteractionsList title="Like" type="LIKE" data={data.getNendoroid.interactions} />
+            <InteractionsList title="Wish" type="WISH" data={data.getNendoroid.interactions} />
+            <InteractionsList title="Own" type="OWN" data={data.getNendoroid.interactions} />
           </div>
-
         </div>
       </div>
     </>

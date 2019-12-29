@@ -21,7 +21,8 @@ export const GET_INTERACTION_LIKE_QUERY = gql`
     getNendoroidsLikedBy(id: $id) {
       nendoroids {
         id
-        name
+        formattedName
+        images
         number
       }
       count
@@ -34,7 +35,8 @@ export const GET_INTERACTION_WISH_QUERY = gql`
     getNendoroidsWishedBy(id: $id) {
       nendoroids {
         id
-        name
+        formattedName
+        images
         number
       }
       count
@@ -47,7 +49,8 @@ export const GET_INTERACTION_OWN_QUERY = gql`
     getNendoroidsOwnedBy(id: $id) {
       nendoroids {
         id
-        name
+        formattedName
+        images
         number
       }
       count
@@ -111,6 +114,7 @@ export const GET_INTERACTIONS_QUERY = gql`
         user {
           pseudo
           avatar
+          id
         }
       }
     }

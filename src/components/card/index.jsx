@@ -7,9 +7,6 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 export default function Card(props) {
   const [isHovered, setIsHovered] = useState(false);
-  const [isLiked, setIsLiked] = useState(props.isLiked);
-  const [isWished, setIsWished] = useState(props.isWished);
-  const [isOwned, setIsOwned] = useState(props.isOwned);
 
   const handleMouseEnter = e => {
     e.preventDefault();
@@ -38,20 +35,22 @@ export default function Card(props) {
       )}
 
       <div className={classes.wrapper}>
-        <InteractionButton
-          srcId={props.id}
-          type="LIKE"
-          enabled={<AiFillHeart />}
-          disabled={<AiOutlineHeart />}
-          isActive={false}
-        />
+        <div className={classes.likeButtonContainer}>
+          <InteractionButton
+            srcId={props.id}
+            type="LIKE"
+            enabled={<AiFillHeart />}
+            disabled={<AiOutlineHeart />}
+            isActive={props.isLiked}
+          />
+        </div>
 
-        {/* <InteractionButton
+        <InteractionButton
           srcId={props.id}
           type="WISH"
           enabled="★"
           disabled="☆"
-          isActive={true}
+          isActive={props.isWished}
         />
 
         <InteractionButton
@@ -59,8 +58,8 @@ export default function Card(props) {
           type="OWN"
           enabled="✓"
           disabled="X"
-          isActive={false}
-        /> */}
+          isActive={props.isOwned}
+        />
 
         <h2 className={classes.title}>{props.name}</h2>
 

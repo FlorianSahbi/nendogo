@@ -6,9 +6,15 @@ import Card from "../../components/card";
 import { GET_NENDOROIDS_QUERY } from "../../apollo/queries/index";
 import { UserContext } from "../../components/layout/index";
 
-const renderCards = nendoroids => {
+const renderCards = (nendoroids, currentUser) => {
   const cards = nendoroids.map(
     ({ id, formattedName, number, images, interactions }) => {
+      [
+        ...interactions.filter(
+          e => e.user.id === currentUser.id && e.type === "LIKE"
+        )
+      ].length > 0;
+
       return (
         <Card
           key={id}
@@ -16,9 +22,27 @@ const renderCards = nendoroids => {
           name={formattedName}
           number={number}
           images={images}
-          isLiked={false}
-          isWished={false}
-          isOwned={false}
+          isLiked={
+            [
+              ...interactions.filter(
+                e => e.user.id === currentUser.id && e.type === "LIKE"
+              )
+            ].length > 0
+          }
+          isWished={
+            [
+              ...interactions.filter(
+                e => e.user.id === currentUser.id && e.type === "WISH"
+              )
+            ].length > 0
+          }
+          isOwned={
+            [
+              ...interactions.filter(
+                e => e.user.id === currentUser.id && e.type === "OWN"
+              )
+            ].length > 0
+          }
         />
       );
     }
@@ -37,12 +61,12 @@ export default function Nendoroids() {
     getNendoroids: { nendoroids }
   } = data;
 
-  console.log(currentUser);
-
   return (
     <Layout>
       <section className={classes.nendoroidsContainer}>
-        <div className={classes.wrapper}>{renderCards(nendoroids)}</div>
+        <div className={classes.wrapper}>
+          {renderCards(nendoroids, currentUser)}
+        </div>
       </section>
     </Layout>
   );

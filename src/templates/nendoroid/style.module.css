@@ -160,6 +160,13 @@
   background: white;
 }
 
+.userroundedProfil img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
 .userlikelist {
   /* border: 2px solid blue; */
   display: flex;

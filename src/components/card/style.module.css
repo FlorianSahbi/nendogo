@@ -30,46 +30,15 @@
   transition: all 0.5s ease;
 }
 
-.likeButton {
-  height: 30px;
-  width: 30px;
+.likeButtonContainer {
+  height: 40px;
+  width: 40px;
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  color: red;
-  font-size: 2rem;
+  top: 5px;
+  right: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all 0.5s ease;
-}
-
-.wishButton {
-  height: 30px;
-  width: 30px;
-  position: absolute;
-  bottom: 1rem;
-  right: 1rem;
-  color: red;
-  font-size: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.5s ease;
-}
-
-.ownButton {
-  height: 30px;
-  width: 30px;
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  color: red;
-  font-size: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.5s ease;
 }
 
 .title {

@@ -68,9 +68,7 @@ const FilterByNumber = props => {
 export default function Layout({ children }) {
   const [displayFilters, setdisplayFilters] = useState(false);
 
-  const handleData = value => {
-    console.log(value);
-  };
+  const handleData = value => {};
 
   return (
     <IconContext.Provider value={{ className: "react-icons" }}>
@@ -112,8 +110,8 @@ export default function Layout({ children }) {
             </div>
 
             <div className={classes.column}>
-              <Link to="/users">Users </Link>
-              <Link to="/nendoroids">Nendoroids </Link>
+              <Link to="/users/">Users </Link>
+              <Link to="/nendoroids/">Nendoroids </Link>
               <span onClick={() => setdisplayFilters(!displayFilters)}>
                 filter
               </span>

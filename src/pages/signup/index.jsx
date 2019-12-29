@@ -35,7 +35,6 @@ export default function Signup() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log({ pseudo, email, password });
     signup({ variables: { pseudo, email, password } });
     setPseudo("");
     setEmail("");
