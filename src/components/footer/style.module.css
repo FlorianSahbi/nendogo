@@ -1,0 +1,14 @@
+.footerContainer {
+  background: pink;
+  height: 10vh;
+  width: 100%;
+}
+
+.footerWrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Cinzel";
+}

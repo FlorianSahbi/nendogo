@@ -1,7 +1,8 @@
 import React, { useState, useContext } from "react";
 import classes from "./style.module.css";
 import Carousel from "../../components/carousel/index";
-import Card from "../../components/card";
+import Card from "../../components/card/nendoroid";
+import Layout from "../../components/layout/index";
 import { useQuery } from "@apollo/react-hooks";
 import {
   GET_INTERACTION_LIKE_QUERY,
@@ -70,13 +71,13 @@ const User = (props) => {
   };
 
   return (
-    <>
+    <Layout footer={false}>
       <div className={classes.container}>
         <div className={classes.wrapper}>
           <div className={scrolled ? classes.hA : classes.imgWrapper}>
             <img src={imgUrl} alt="dunno" />
             <div className={scrolled ? classes.ppA : classes.profileImg}>
-              <img src={imgProfile} alt="dunnon" />
+              <img src={props.pageContext.avatar} alt="dunnon" />
             </div>
           </div>
 
@@ -126,7 +127,7 @@ const User = (props) => {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 }
 

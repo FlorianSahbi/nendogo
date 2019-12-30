@@ -9,8 +9,8 @@ export const CREATE_INTERACTION_MUTATION = gql`
 `;
 
 export const DELETE_INTERACTION_MUTATION = gql`
-  mutation DeleteInteraction($interaction: ID!){
-    deleteInteraction(interaction: $interaction) {
+  mutation DeleteInteraction($interactionId: ID!){
+    deleteInteraction(interactionId: $interactionId) {
       id
     }
   }
@@ -58,28 +58,6 @@ export const GET_INTERACTION_OWN_QUERY = gql`
   }
 `;
 
-export const GET_NENDOROIDS_QUERY = gql`
-  query {
-    getNendoroids(orderBy: number_ASC) {
-      nendoroids {
-        formattedName
-        number
-        id
-        images
-        interactions {
-          id
-          type
-          user {
-            pseudo
-            avatar
-            id
-          }
-        }
-      }
-    }
-  }
-`;
-
 export const SIGNUP_MUTATION = gql`
   mutation SignUp($email: String!, $password: String!, $pseudo: String!) {
     signup(email: $email, password: $password, pseudo: $pseudo) {
@@ -121,9 +99,22 @@ export const GET_INTERACTIONS_QUERY = gql`
   }
 `;
 
-export const GET_NENDOROIDS_BY_RANGE_QUERY = gql`
-  query GetNendoroidsByRange($range: String!){
-    getNendoroidsByRange(range: $range) {
+export const GET_USERS_QUERY = gql`
+query {
+    getUsers {
+      users {
+        pseudo
+        avatar
+        id
+      }
+    }
+  }
+`;
+
+
+export const GET_NENDOROIDS_QUERY = gql`
+  query {
+    getNendoroids(orderBy: number_ASC) {
       nendoroids {
         formattedName
         number
@@ -143,13 +134,23 @@ export const GET_NENDOROIDS_BY_RANGE_QUERY = gql`
   }
 `;
 
-export const GET_USERS_QUERY = gql`
-query {
-    getUsers {
-      users {
-        pseudo
-        avatar
+export const GET_NENDOROIDS_BY_RANGE_QUERY = gql`
+  query GetNendoroidsByRange($range: String!){
+    getNendoroidsByRange(range: $range) {
+      nendoroids {
+        formattedName
+        number
         id
+        images
+        interactions {
+          id
+          type
+          user {
+            pseudo
+            avatar
+            id
+          }
+        }
       }
     }
   }

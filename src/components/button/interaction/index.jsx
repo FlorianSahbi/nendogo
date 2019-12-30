@@ -9,17 +9,18 @@ import { UserContext } from "../../layout/index";
 const InteractionButton = props => {
   const currentUser = useContext(UserContext);
 
-  const [isActive, setIsActive] = useState(props.isActive);
-
+  const [isActive, setIsActive] = useState(props.isActive.isActive);
   const [createInteraction] = useMutation(CREATE_INTERACTION_MUTATION);
   const [deleteInteraction] = useMutation(DELETE_INTERACTION_MUTATION);
+
+  // console.log(props.isActive.interactionId)
 
   const handleClick = type => {
     isActive ? setIsActive(false) : setIsActive(true);
     isActive
       ? deleteInteraction({
           variables: {
-            interactionId: currentUser.id
+            interactionId: props.isActive.interactionId
           }
         })
       : createInteraction({

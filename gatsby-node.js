@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -18,52 +18,54 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
   }
-  `)
+  `);
 
   const NENDO_PAGE_QUERY = await graphql(`
     {
       api {
-        getNendoroid(id: "5e0500b6ff57ca94d71843c6") {
-          category
-          cooperation
-          description
-          distributedBy
-          formattedName
-          id
-          images
-          interactions {
+        getNendoroids {
+          nendoroids {
+            title
+            srcUrl
+            specifications
+            series
+            sculptor
+            releasedBy
+            releaseDate
+            range
+            price
+            planningProduction
+            number
+            name
+            images
+            formattedName
             id
-            type
-            user {
-              avatar
+            distributedBy
+            description
+            cooperation
+            category
+            manufacturer
+            interactions {
               id
-              pseudo
+              type
+              user {
+                avatar
+                pseudo
+                id
+              }
             }
           }
-          manufacturer
-          number
-          name
-          planningProduction
-          price
-          range
-          releaseDate
-          releasedBy
-          sculptor
-          series
-          specifications
-          srcUrl
-          title
         }
       }
     }
-  `)
+  `);
 
   const nendoroids = await NENDO_PAGE_QUERY.data.api.getNendoroids.nendoroids;
   const users = await USER_PAGE_QUERY.data.api.getUsers.users;
 
   nendoroids.forEach((nendoroid) => {
     createPage({
-      path: `${nendoroid.formattedName}`,
+      path: `nendoroid/${nendoroid.formattedName}`,
       component: templateNendo,
       context: nendoroid,
     })
@@ -71,19 +73,18 @@ exports.createPages = async ({ graphql, actions }) => {
 
   users.forEach((user) => {
     createPage({
-      path: `${user.pseudo}`,
+      path: `user/${user.pseudo}`,
       component: templateUser,
       context: user,
     })
   });
-}
+};
 
 exports.onCreatePage = async ({ page, actions }) => {
-  const { createPage } = actions
+  const { createPage } = actions;
 
   if (page.path.match(/^\/account/)) {
-    page.matchPath = "/account/*"
-
-    createPage(page)
-  }
-}
+    page.matchPath = "/account/*";
+    createPage(page);
+  };
+};

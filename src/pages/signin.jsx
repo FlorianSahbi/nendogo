@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import classes from "./style.module.css";
+import classes from "./signin.module.css";
 import { useMutation } from "@apollo/react-hooks";
-import { SIGNUP_MUTATION } from "../../apollo/queries/index";
+import { SIGNIN_MUTATION } from "../apollo/queries/index";
 
 const nendoStories = [
   "https://lh5.googleusercontent.com/-TzOpjinrBhE/UTlrvrbQs0I/AAAAAAAAA1U/8cmIq__9KoM/s1617/IMG_0539.jpg",
@@ -12,12 +12,12 @@ const nendoStories = [
   "https://live.staticflickr.com/1957/44819518934_62037c288f_b.jpg"
 ];
 
-export default function Signup() {
+const SigninPage = () => {
+  console.log("render signin")
   const [pseudo, setPseudo] = useState("");
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [signup] = useMutation(SIGNUP_MUTATION, {
+  const [signin] = useMutation(SIGNIN_MUTATION, {
     onCompleted: data => {
       const currentUser = {
         token: data.login.token,
@@ -35,18 +35,13 @@ export default function Signup() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    signup({ variables: { pseudo, email, password } });
+    signin({ variables: { pseudo, password } });
     setPseudo("");
-    setEmail("");
     setPassword("");
   };
 
   const handleInputPseudo = e => {
     setPseudo(e.target.value);
-  };
-
-  const handleInputEmail = e => {
-    setEmail(e.target.value);
   };
 
   const handleInputPassword = e => {
@@ -87,7 +82,10 @@ export default function Signup() {
         <div style={{ flex: "auto" }} className={classes.column}>
           {cards}
         </div>
-        <div style={{ flex: "auto" }} className={classes.column}>
+        <div
+          style={{ flex: "auto", transform: "translateY(-180px)" }}
+          className={classes.column}
+        >
           {cards}
         </div>
       </div>
@@ -108,7 +106,7 @@ export default function Signup() {
                 fontSize: "1.5em"
               }}
             >
-              Sign up
+              Sign in
             </h2>
             <input
               type="text"
@@ -117,21 +115,17 @@ export default function Signup() {
               placeholder="Type your pseudo"
             />
             <input
-              type="mail"
-              value={email}
-              onChange={handleInputEmail}
-              placeholder="Type your email"
-            />
-            <input
               type="password"
               value={password}
               onChange={handleInputPassword}
               placeholder="Type your password"
             />
-            <input type="submit" value="signup" />
+            <input type="submit" value="signin" />
           </form>
         </div>
       </div>
     </section>
   );
 }
+
+export default SigninPage;

@@ -44,7 +44,7 @@ const InteractionsList = (props) => {
 };
 
 const Nendoroid = ({ pageContext: { manufacturer, releaseDate, id, formattedName, title, description, name, series, category, price, sculptor, cooperation, specifications, srcUrl, images, number } }) => {
-
+  console.log(description)
   const { loading, error, data } = useQuery(GET_INTERACTIONS_QUERY, {
     variables: { id: id },
     fetchPolicy: "no-cache"

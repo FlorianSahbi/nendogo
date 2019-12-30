@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import classes from "./style.module.css";
 import { Link } from "gatsby";
-import InteractionButton from "../button/interaction/index";
-import default_nendoroid from "../../images/default_nendoroid.jpg";
+import InteractionButton from "../../button/interaction/index";
+import default_nendoroid from "../../../images/default_nendoroid.jpg";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 export default function Card(props) {
@@ -35,38 +35,44 @@ export default function Card(props) {
       )}
 
       <div className={classes.wrapper}>
-        <div className={classes.likeButtonContainer}>
+        {props.isLiked !== undefined && (
+          <div className={classes.likeButtonContainer}>
+            <InteractionButton
+              srcId={props.id}
+              type="LIKE"
+              enabled={<AiFillHeart />}
+              disabled={<AiOutlineHeart />}
+              isActive={props.isLiked}
+            />
+          </div>
+        )}
+
+        {props.isWished !== undefined && (
           <InteractionButton
             srcId={props.id}
-            type="LIKE"
-            enabled={<AiFillHeart />}
-            disabled={<AiOutlineHeart />}
-            isActive={props.isLiked}
+            type="WISH"
+            enabled="★"
+            disabled="☆"
+            isActive={props.isWished}
           />
-        </div>
+        )}
 
-        <InteractionButton
-          srcId={props.id}
-          type="WISH"
-          enabled="★"
-          disabled="☆"
-          isActive={props.isWished}
-        />
-
-        <InteractionButton
-          srcId={props.id}
-          type="OWN"
-          enabled="✓"
-          disabled="X"
-          isActive={props.isOwned}
-        />
+        {props.isOwned !== undefined && (
+          <InteractionButton
+            srcId={props.id}
+            type="OWN"
+            enabled="✓"
+            disabled="X"
+            isActive={props.isOwned}
+          />
+        )}
 
         <h2 className={classes.title}>{props.name}</h2>
 
         <p className={classes.number}>{props.number}</p>
 
         <div className={`${classes.link} ${classes.default}`}>
-          <Link to={`/${props.name}/`}>Details</Link>
+          <a href={`nendoroid/${props.name}/`}>Details</a>
         </div>
       </div>
     </div>
