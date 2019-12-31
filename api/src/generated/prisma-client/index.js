@@ -13,11 +13,19 @@ var models = [
     embedded: false
   },
   {
-    name: "File",
+    name: "Interaction",
     embedded: false
   },
   {
-    name: "Interaction",
+    name: "Serie",
+    embedded: false
+  },
+  {
+    name: "Manufacturer",
+    embedded: false
+  },
+  {
+    name: "Sculptor",
     embedded: false
   },
   {

@@ -1,4 +1,3 @@
-scalar Upload
 scalar Date
 
 type Query {
@@ -14,14 +13,30 @@ type Query {
     first: Int
     orderBy: NendoroidOrderByInput
   ): Users!
+  getSeries(
+    filter: String
+    skip: Int
+    first: Int
+    orderBy: NendoroidOrderByInput
+  ): Series!
+  getManufacturers(
+    filter: String
+    skip: Int
+    first: Int
+    orderBy: NendoroidOrderByInput
+  ): Manufacturers!
+  getSculptors(
+    filter: String
+    skip: Int
+    first: Int
+    orderBy: NendoroidOrderByInput
+  ): Sculptors!
   getNendoroid(id: ID!): Nendoroid!
   getUser(id: ID!): User!
   getInteractions: Interactions!
   getNendoroidsLikedBy(id: ID!): Nendoroids!
   getNendoroidsWishedBy(id: ID!): Nendoroids!
   getNendoroidsOwnedBy(id: ID!): Nendoroids!
-  file(id: ID!): File
-  files: [File!]!
   getNendoroidsByRange(range: String!): Nendoroids!
 }
 
@@ -35,10 +50,6 @@ type Mutation {
     type: InteractionType!
   ): Interaction
   deleteInteraction(interactionId: ID!): Interaction
-  uploadFile(file: Upload!): File!
-  uploadFiles(files: [Upload!]!): [File!]!
-  renameFile(id: ID!, name: String!): File
-  deleteFile(id: ID!): File
 }
 
 type AuthPayload {
@@ -58,6 +69,11 @@ type Interactions {
 
 type Users {
   users: [User!]!
+  count: Int!
+}
+
+type Series {
+  series: [Serie!]!
   count: Int!
 }
 
@@ -94,6 +110,31 @@ type User {
   avatar: String
 }
 
+type Serie {
+  id: ID!
+  name: String!
+}
+
+type Manufacturer {
+  id: ID!
+  name: String!
+}
+
+type Manufacturers {
+  manufacturers: [Manufacturer!]!
+  count: Int!
+}
+
+type Sculptor {
+  id: ID!
+  name: String!
+}
+
+type Sculptors {
+  sculptors: [Sculptor!]!
+  count: Int!
+}
+
 type Subscription {
   newNendoroid: Nendoroid
   newInteraction: Interaction
@@ -104,14 +145,6 @@ type Interaction {
   nendoroid: Nendoroid!
   user: User!
   type: InteractionType!
-}
-
-type File {
-  id: ID!
-  path: String!
-  filename: String!
-  mimetype: String!
-  encoding: String!
 }
 
 enum NendoroidOrderByInput {

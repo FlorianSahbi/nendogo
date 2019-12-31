@@ -15,11 +15,15 @@ const Header = () => {
         <div className={classes.column}>
           <Link to="/users/">Users </Link>
           <Link to="/nendoroids/">Nendoroids </Link>
-          <Link to="/signin/">Login </Link>
+          <Link to="/series/">Series </Link>
+          <Link to="/manufacturers/">Manufacturers </Link>
+          <Link to="/sculptors/">Sculptors </Link>
+          <Link to="/series/">Series </Link>
         </div>
 
         <div className={classes.column}>
           <div className={classes.idContainer}>
+            <Link to="/signin/">Login </Link>
             {/* <div className={classes.idWrapper}>{renderUserInformation()}</div> */}
           </div>
         </div>

@@ -16,9 +16,11 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
-  file: (where?: FileWhereInput) => Promise<boolean>;
   interaction: (where?: InteractionWhereInput) => Promise<boolean>;
+  manufacturer: (where?: ManufacturerWhereInput) => Promise<boolean>;
   nendoroid: (where?: NendoroidWhereInput) => Promise<boolean>;
+  sculptor: (where?: SculptorWhereInput) => Promise<boolean>;
+  serie: (where?: SerieWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
 }
 
@@ -41,25 +43,6 @@ export interface Prisma {
    * Queries
    */
 
-  file: (where: FileWhereUniqueInput) => FileNullablePromise;
-  files: (args?: {
-    where?: FileWhereInput;
-    orderBy?: FileOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => FragmentableArray<File>;
-  filesConnection: (args?: {
-    where?: FileWhereInput;
-    orderBy?: FileOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => FileConnectionPromise;
   interaction: (
     where: InteractionWhereUniqueInput
   ) => InteractionNullablePromise;
@@ -81,6 +64,27 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => InteractionConnectionPromise;
+  manufacturer: (
+    where: ManufacturerWhereUniqueInput
+  ) => ManufacturerNullablePromise;
+  manufacturers: (args?: {
+    where?: ManufacturerWhereInput;
+    orderBy?: ManufacturerOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Manufacturer>;
+  manufacturersConnection: (args?: {
+    where?: ManufacturerWhereInput;
+    orderBy?: ManufacturerOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => ManufacturerConnectionPromise;
   nendoroid: (where: NendoroidWhereUniqueInput) => NendoroidNullablePromise;
   nendoroids: (args?: {
     where?: NendoroidWhereInput;
@@ -100,6 +104,44 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => NendoroidConnectionPromise;
+  sculptor: (where: SculptorWhereUniqueInput) => SculptorNullablePromise;
+  sculptors: (args?: {
+    where?: SculptorWhereInput;
+    orderBy?: SculptorOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Sculptor>;
+  sculptorsConnection: (args?: {
+    where?: SculptorWhereInput;
+    orderBy?: SculptorOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => SculptorConnectionPromise;
+  serie: (where: SerieWhereUniqueInput) => SerieNullablePromise;
+  series: (args?: {
+    where?: SerieWhereInput;
+    orderBy?: SerieOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Serie>;
+  seriesConnection: (args?: {
+    where?: SerieWhereInput;
+    orderBy?: SerieOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => SerieConnectionPromise;
   user: (where: UserWhereUniqueInput) => UserNullablePromise;
   users: (args?: {
     where?: UserWhereInput;
@@ -125,22 +167,6 @@ export interface Prisma {
    * Mutations
    */
 
-  createFile: (data: FileCreateInput) => FilePromise;
-  updateFile: (args: {
-    data: FileUpdateInput;
-    where: FileWhereUniqueInput;
-  }) => FilePromise;
-  updateManyFiles: (args: {
-    data: FileUpdateManyMutationInput;
-    where?: FileWhereInput;
-  }) => BatchPayloadPromise;
-  upsertFile: (args: {
-    where: FileWhereUniqueInput;
-    create: FileCreateInput;
-    update: FileUpdateInput;
-  }) => FilePromise;
-  deleteFile: (where: FileWhereUniqueInput) => FilePromise;
-  deleteManyFiles: (where?: FileWhereInput) => BatchPayloadPromise;
   createInteraction: (data: InteractionCreateInput) => InteractionPromise;
   updateInteraction: (args: {
     data: InteractionUpdateInput;
@@ -159,6 +185,26 @@ export interface Prisma {
   deleteManyInteractions: (
     where?: InteractionWhereInput
   ) => BatchPayloadPromise;
+  createManufacturer: (data: ManufacturerCreateInput) => ManufacturerPromise;
+  updateManufacturer: (args: {
+    data: ManufacturerUpdateInput;
+    where: ManufacturerWhereUniqueInput;
+  }) => ManufacturerPromise;
+  updateManyManufacturers: (args: {
+    data: ManufacturerUpdateManyMutationInput;
+    where?: ManufacturerWhereInput;
+  }) => BatchPayloadPromise;
+  upsertManufacturer: (args: {
+    where: ManufacturerWhereUniqueInput;
+    create: ManufacturerCreateInput;
+    update: ManufacturerUpdateInput;
+  }) => ManufacturerPromise;
+  deleteManufacturer: (
+    where: ManufacturerWhereUniqueInput
+  ) => ManufacturerPromise;
+  deleteManyManufacturers: (
+    where?: ManufacturerWhereInput
+  ) => BatchPayloadPromise;
   createNendoroid: (data: NendoroidCreateInput) => NendoroidPromise;
   updateNendoroid: (args: {
     data: NendoroidUpdateInput;
@@ -175,6 +221,38 @@ export interface Prisma {
   }) => NendoroidPromise;
   deleteNendoroid: (where: NendoroidWhereUniqueInput) => NendoroidPromise;
   deleteManyNendoroids: (where?: NendoroidWhereInput) => BatchPayloadPromise;
+  createSculptor: (data: SculptorCreateInput) => SculptorPromise;
+  updateSculptor: (args: {
+    data: SculptorUpdateInput;
+    where: SculptorWhereUniqueInput;
+  }) => SculptorPromise;
+  updateManySculptors: (args: {
+    data: SculptorUpdateManyMutationInput;
+    where?: SculptorWhereInput;
+  }) => BatchPayloadPromise;
+  upsertSculptor: (args: {
+    where: SculptorWhereUniqueInput;
+    create: SculptorCreateInput;
+    update: SculptorUpdateInput;
+  }) => SculptorPromise;
+  deleteSculptor: (where: SculptorWhereUniqueInput) => SculptorPromise;
+  deleteManySculptors: (where?: SculptorWhereInput) => BatchPayloadPromise;
+  createSerie: (data: SerieCreateInput) => SeriePromise;
+  updateSerie: (args: {
+    data: SerieUpdateInput;
+    where: SerieWhereUniqueInput;
+  }) => SeriePromise;
+  updateManySeries: (args: {
+    data: SerieUpdateManyMutationInput;
+    where?: SerieWhereInput;
+  }) => BatchPayloadPromise;
+  upsertSerie: (args: {
+    where: SerieWhereUniqueInput;
+    create: SerieCreateInput;
+    update: SerieUpdateInput;
+  }) => SeriePromise;
+  deleteSerie: (where: SerieWhereUniqueInput) => SeriePromise;
+  deleteManySeries: (where?: SerieWhereInput) => BatchPayloadPromise;
   createUser: (data: UserCreateInput) => UserPromise;
   updateUser: (args: {
     data: UserUpdateInput;
@@ -200,15 +278,21 @@ export interface Prisma {
 }
 
 export interface Subscription {
-  file: (
-    where?: FileSubscriptionWhereInput
-  ) => FileSubscriptionPayloadSubscription;
   interaction: (
     where?: InteractionSubscriptionWhereInput
   ) => InteractionSubscriptionPayloadSubscription;
+  manufacturer: (
+    where?: ManufacturerSubscriptionWhereInput
+  ) => ManufacturerSubscriptionPayloadSubscription;
   nendoroid: (
     where?: NendoroidSubscriptionWhereInput
   ) => NendoroidSubscriptionPayloadSubscription;
+  sculptor: (
+    where?: SculptorSubscriptionWhereInput
+  ) => SculptorSubscriptionPayloadSubscription;
+  serie: (
+    where?: SerieSubscriptionWhereInput
+  ) => SerieSubscriptionPayloadSubscription;
   user: (
     where?: UserSubscriptionWhereInput
   ) => UserSubscriptionPayloadSubscription;
@@ -222,22 +306,6 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type FileOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC"
-  | "filename_ASC"
-  | "filename_DESC"
-  | "mimetype_ASC"
-  | "mimetype_DESC"
-  | "encoding_ASC"
-  | "encoding_DESC"
-  | "url_ASC"
-  | "url_DESC";
-
 export type InteractionType = "LIKE" | "WISH" | "OWN";
 
 export type InteractionOrderByInput =
@@ -249,6 +317,16 @@ export type InteractionOrderByInput =
   | "createdAt_DESC"
   | "updatedAt_ASC"
   | "updatedAt_DESC";
+
+export type ManufacturerOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC"
+  | "name_ASC"
+  | "name_DESC";
 
 export type NendoroidOrderByInput =
   | "id_ASC"
@@ -292,6 +370,26 @@ export type NendoroidOrderByInput =
   | "range_ASC"
   | "range_DESC";
 
+export type SculptorOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC"
+  | "name_ASC"
+  | "name_DESC";
+
+export type SerieOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC"
+  | "name_ASC"
+  | "name_DESC";
+
 export type UserOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -313,101 +411,6 @@ export type UserOrderByInput =
   | "password_DESC";
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
-
-export type FileWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-  url?: Maybe<String>;
-}>;
-
-export interface FileWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  filename?: Maybe<String>;
-  filename_not?: Maybe<String>;
-  filename_in?: Maybe<String[] | String>;
-  filename_not_in?: Maybe<String[] | String>;
-  filename_lt?: Maybe<String>;
-  filename_lte?: Maybe<String>;
-  filename_gt?: Maybe<String>;
-  filename_gte?: Maybe<String>;
-  filename_contains?: Maybe<String>;
-  filename_not_contains?: Maybe<String>;
-  filename_starts_with?: Maybe<String>;
-  filename_not_starts_with?: Maybe<String>;
-  filename_ends_with?: Maybe<String>;
-  filename_not_ends_with?: Maybe<String>;
-  mimetype?: Maybe<String>;
-  mimetype_not?: Maybe<String>;
-  mimetype_in?: Maybe<String[] | String>;
-  mimetype_not_in?: Maybe<String[] | String>;
-  mimetype_lt?: Maybe<String>;
-  mimetype_lte?: Maybe<String>;
-  mimetype_gt?: Maybe<String>;
-  mimetype_gte?: Maybe<String>;
-  mimetype_contains?: Maybe<String>;
-  mimetype_not_contains?: Maybe<String>;
-  mimetype_starts_with?: Maybe<String>;
-  mimetype_not_starts_with?: Maybe<String>;
-  mimetype_ends_with?: Maybe<String>;
-  mimetype_not_ends_with?: Maybe<String>;
-  encoding?: Maybe<String>;
-  encoding_not?: Maybe<String>;
-  encoding_in?: Maybe<String[] | String>;
-  encoding_not_in?: Maybe<String[] | String>;
-  encoding_lt?: Maybe<String>;
-  encoding_lte?: Maybe<String>;
-  encoding_gt?: Maybe<String>;
-  encoding_gte?: Maybe<String>;
-  encoding_contains?: Maybe<String>;
-  encoding_not_contains?: Maybe<String>;
-  encoding_starts_with?: Maybe<String>;
-  encoding_not_starts_with?: Maybe<String>;
-  encoding_ends_with?: Maybe<String>;
-  encoding_not_ends_with?: Maybe<String>;
-  url?: Maybe<String>;
-  url_not?: Maybe<String>;
-  url_in?: Maybe<String[] | String>;
-  url_not_in?: Maybe<String[] | String>;
-  url_lt?: Maybe<String>;
-  url_lte?: Maybe<String>;
-  url_gt?: Maybe<String>;
-  url_gte?: Maybe<String>;
-  url_contains?: Maybe<String>;
-  url_not_contains?: Maybe<String>;
-  url_starts_with?: Maybe<String>;
-  url_not_starts_with?: Maybe<String>;
-  url_ends_with?: Maybe<String>;
-  url_not_ends_with?: Maybe<String>;
-  AND?: Maybe<FileWhereInput[] | FileWhereInput>;
-}
 
 export type InteractionWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
@@ -826,37 +829,171 @@ export interface UserWhereInput {
   AND?: Maybe<UserWhereInput[] | UserWhereInput>;
 }
 
+export type ManufacturerWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface ManufacturerWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  AND?: Maybe<ManufacturerWhereInput[] | ManufacturerWhereInput>;
+}
+
 export type NendoroidWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
+
+export type SculptorWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface SculptorWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  AND?: Maybe<SculptorWhereInput[] | SculptorWhereInput>;
+}
+
+export type SerieWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface SerieWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  AND?: Maybe<SerieWhereInput[] | SerieWhereInput>;
+}
 
 export type UserWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
   pseudo?: Maybe<String>;
   email?: Maybe<String>;
 }>;
-
-export interface FileCreateInput {
-  id?: Maybe<ID_Input>;
-  filename: String;
-  mimetype: String;
-  encoding: String;
-  url: String;
-}
-
-export interface FileUpdateInput {
-  filename?: Maybe<String>;
-  mimetype?: Maybe<String>;
-  encoding?: Maybe<String>;
-  url?: Maybe<String>;
-}
-
-export interface FileUpdateManyMutationInput {
-  filename?: Maybe<String>;
-  mimetype?: Maybe<String>;
-  encoding?: Maybe<String>;
-  url?: Maybe<String>;
-}
 
 export interface InteractionCreateInput {
   id?: Maybe<ID_Input>;
@@ -987,6 +1124,19 @@ export interface UserUpsertNestedInput {
 
 export interface InteractionUpdateManyMutationInput {
   type?: Maybe<InteractionType>;
+}
+
+export interface ManufacturerCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+}
+
+export interface ManufacturerUpdateInput {
+  name?: Maybe<String>;
+}
+
+export interface ManufacturerUpdateManyMutationInput {
+  name?: Maybe<String>;
 }
 
 export interface NendoroidCreateInput {
@@ -1165,6 +1315,32 @@ export interface NendoroidUpdateManyMutationInput {
   range?: Maybe<String>;
 }
 
+export interface SculptorCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+}
+
+export interface SculptorUpdateInput {
+  name?: Maybe<String>;
+}
+
+export interface SculptorUpdateManyMutationInput {
+  name?: Maybe<String>;
+}
+
+export interface SerieCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+}
+
+export interface SerieUpdateInput {
+  name?: Maybe<String>;
+}
+
+export interface SerieUpdateManyMutationInput {
+  name?: Maybe<String>;
+}
+
 export interface UserUpdateInput {
   firstName?: Maybe<String>;
   lastName?: Maybe<String>;
@@ -1183,15 +1359,6 @@ export interface UserUpdateManyMutationInput {
   password?: Maybe<String>;
 }
 
-export interface FileSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<FileWhereInput>;
-  AND?: Maybe<FileSubscriptionWhereInput[] | FileSubscriptionWhereInput>;
-}
-
 export interface InteractionSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
@@ -1200,6 +1367,17 @@ export interface InteractionSubscriptionWhereInput {
   node?: Maybe<InteractionWhereInput>;
   AND?: Maybe<
     InteractionSubscriptionWhereInput[] | InteractionSubscriptionWhereInput
+  >;
+}
+
+export interface ManufacturerSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ManufacturerWhereInput>;
+  AND?: Maybe<
+    ManufacturerSubscriptionWhereInput[] | ManufacturerSubscriptionWhereInput
   >;
 }
 
@@ -1214,6 +1392,26 @@ export interface NendoroidSubscriptionWhereInput {
   >;
 }
 
+export interface SculptorSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<SculptorWhereInput>;
+  AND?: Maybe<
+    SculptorSubscriptionWhereInput[] | SculptorSubscriptionWhereInput
+  >;
+}
+
+export interface SerieSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<SerieWhereInput>;
+  AND?: Maybe<SerieSubscriptionWhereInput[] | SerieSubscriptionWhereInput>;
+}
+
 export interface UserSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
@@ -1225,127 +1423,6 @@ export interface UserSubscriptionWhereInput {
 
 export interface NodeNode {
   id: ID_Output;
-}
-
-export interface File {
-  id: ID_Output;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-  filename: String;
-  mimetype: String;
-  encoding: String;
-  url: String;
-}
-
-export interface FilePromise extends Promise<File>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  filename: () => Promise<String>;
-  mimetype: () => Promise<String>;
-  encoding: () => Promise<String>;
-  url: () => Promise<String>;
-}
-
-export interface FileSubscription
-  extends Promise<AsyncIterator<File>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  filename: () => Promise<AsyncIterator<String>>;
-  mimetype: () => Promise<AsyncIterator<String>>;
-  encoding: () => Promise<AsyncIterator<String>>;
-  url: () => Promise<AsyncIterator<String>>;
-}
-
-export interface FileNullablePromise
-  extends Promise<File | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  filename: () => Promise<String>;
-  mimetype: () => Promise<String>;
-  encoding: () => Promise<String>;
-  url: () => Promise<String>;
-}
-
-export interface FileConnection {
-  pageInfo: PageInfo;
-  edges: FileEdge[];
-}
-
-export interface FileConnectionPromise
-  extends Promise<FileConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<FileEdge>>() => T;
-  aggregate: <T = AggregateFilePromise>() => T;
-}
-
-export interface FileConnectionSubscription
-  extends Promise<AsyncIterator<FileConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<FileEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateFileSubscription>() => T;
-}
-
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
-}
-
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
-    Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface FileEdge {
-  node: File;
-  cursor: String;
-}
-
-export interface FileEdgePromise extends Promise<FileEdge>, Fragmentable {
-  node: <T = FilePromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface FileEdgeSubscription
-  extends Promise<AsyncIterator<FileEdge>>,
-    Fragmentable {
-  node: <T = FileSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateFile {
-  count: Int;
-}
-
-export interface AggregateFilePromise
-  extends Promise<AggregateFile>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateFileSubscription
-  extends Promise<AsyncIterator<AggregateFile>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface Interaction {
@@ -1590,6 +1667,29 @@ export interface InteractionConnectionSubscription
   aggregate: <T = AggregateInteractionSubscription>() => T;
 }
 
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
+}
+
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
+}
+
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
+    Fragmentable {
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
+}
+
 export interface InteractionEdge {
   node: Interaction;
   cursor: String;
@@ -1621,6 +1721,96 @@ export interface AggregateInteractionPromise
 
 export interface AggregateInteractionSubscription
   extends Promise<AsyncIterator<AggregateInteraction>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface Manufacturer {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  name: String;
+}
+
+export interface ManufacturerPromise
+  extends Promise<Manufacturer>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  name: () => Promise<String>;
+}
+
+export interface ManufacturerSubscription
+  extends Promise<AsyncIterator<Manufacturer>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  name: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ManufacturerNullablePromise
+  extends Promise<Manufacturer | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  name: () => Promise<String>;
+}
+
+export interface ManufacturerConnection {
+  pageInfo: PageInfo;
+  edges: ManufacturerEdge[];
+}
+
+export interface ManufacturerConnectionPromise
+  extends Promise<ManufacturerConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ManufacturerEdge>>() => T;
+  aggregate: <T = AggregateManufacturerPromise>() => T;
+}
+
+export interface ManufacturerConnectionSubscription
+  extends Promise<AsyncIterator<ManufacturerConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ManufacturerEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateManufacturerSubscription>() => T;
+}
+
+export interface ManufacturerEdge {
+  node: Manufacturer;
+  cursor: String;
+}
+
+export interface ManufacturerEdgePromise
+  extends Promise<ManufacturerEdge>,
+    Fragmentable {
+  node: <T = ManufacturerPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ManufacturerEdgeSubscription
+  extends Promise<AsyncIterator<ManufacturerEdge>>,
+    Fragmentable {
+  node: <T = ManufacturerSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateManufacturer {
+  count: Int;
+}
+
+export interface AggregateManufacturerPromise
+  extends Promise<AggregateManufacturer>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateManufacturerSubscription
+  extends Promise<AsyncIterator<AggregateManufacturer>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
@@ -1677,6 +1867,180 @@ export interface AggregateNendoroidPromise
 
 export interface AggregateNendoroidSubscription
   extends Promise<AsyncIterator<AggregateNendoroid>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface Sculptor {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  name: String;
+}
+
+export interface SculptorPromise extends Promise<Sculptor>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  name: () => Promise<String>;
+}
+
+export interface SculptorSubscription
+  extends Promise<AsyncIterator<Sculptor>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  name: () => Promise<AsyncIterator<String>>;
+}
+
+export interface SculptorNullablePromise
+  extends Promise<Sculptor | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  name: () => Promise<String>;
+}
+
+export interface SculptorConnection {
+  pageInfo: PageInfo;
+  edges: SculptorEdge[];
+}
+
+export interface SculptorConnectionPromise
+  extends Promise<SculptorConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<SculptorEdge>>() => T;
+  aggregate: <T = AggregateSculptorPromise>() => T;
+}
+
+export interface SculptorConnectionSubscription
+  extends Promise<AsyncIterator<SculptorConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<SculptorEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateSculptorSubscription>() => T;
+}
+
+export interface SculptorEdge {
+  node: Sculptor;
+  cursor: String;
+}
+
+export interface SculptorEdgePromise
+  extends Promise<SculptorEdge>,
+    Fragmentable {
+  node: <T = SculptorPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface SculptorEdgeSubscription
+  extends Promise<AsyncIterator<SculptorEdge>>,
+    Fragmentable {
+  node: <T = SculptorSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateSculptor {
+  count: Int;
+}
+
+export interface AggregateSculptorPromise
+  extends Promise<AggregateSculptor>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateSculptorSubscription
+  extends Promise<AsyncIterator<AggregateSculptor>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface Serie {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  name: String;
+}
+
+export interface SeriePromise extends Promise<Serie>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  name: () => Promise<String>;
+}
+
+export interface SerieSubscription
+  extends Promise<AsyncIterator<Serie>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  name: () => Promise<AsyncIterator<String>>;
+}
+
+export interface SerieNullablePromise
+  extends Promise<Serie | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  name: () => Promise<String>;
+}
+
+export interface SerieConnection {
+  pageInfo: PageInfo;
+  edges: SerieEdge[];
+}
+
+export interface SerieConnectionPromise
+  extends Promise<SerieConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<SerieEdge>>() => T;
+  aggregate: <T = AggregateSeriePromise>() => T;
+}
+
+export interface SerieConnectionSubscription
+  extends Promise<AsyncIterator<SerieConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<SerieEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateSerieSubscription>() => T;
+}
+
+export interface SerieEdge {
+  node: Serie;
+  cursor: String;
+}
+
+export interface SerieEdgePromise extends Promise<SerieEdge>, Fragmentable {
+  node: <T = SeriePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface SerieEdgeSubscription
+  extends Promise<AsyncIterator<SerieEdge>>,
+    Fragmentable {
+  node: <T = SerieSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateSerie {
+  count: Int;
+}
+
+export interface AggregateSeriePromise
+  extends Promise<AggregateSerie>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateSerieSubscription
+  extends Promise<AsyncIterator<AggregateSerie>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
@@ -1751,65 +2115,6 @@ export interface BatchPayloadSubscription
   count: () => Promise<AsyncIterator<Long>>;
 }
 
-export interface FileSubscriptionPayload {
-  mutation: MutationType;
-  node: File;
-  updatedFields: String[];
-  previousValues: FilePreviousValues;
-}
-
-export interface FileSubscriptionPayloadPromise
-  extends Promise<FileSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = FilePromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = FilePreviousValuesPromise>() => T;
-}
-
-export interface FileSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<FileSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = FileSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = FilePreviousValuesSubscription>() => T;
-}
-
-export interface FilePreviousValues {
-  id: ID_Output;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-  filename: String;
-  mimetype: String;
-  encoding: String;
-  url: String;
-}
-
-export interface FilePreviousValuesPromise
-  extends Promise<FilePreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  filename: () => Promise<String>;
-  mimetype: () => Promise<String>;
-  encoding: () => Promise<String>;
-  url: () => Promise<String>;
-}
-
-export interface FilePreviousValuesSubscription
-  extends Promise<AsyncIterator<FilePreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  filename: () => Promise<AsyncIterator<String>>;
-  mimetype: () => Promise<AsyncIterator<String>>;
-  encoding: () => Promise<AsyncIterator<String>>;
-  url: () => Promise<AsyncIterator<String>>;
-}
-
 export interface InteractionSubscriptionPayload {
   mutation: MutationType;
   node: Interaction;
@@ -1858,6 +2163,56 @@ export interface InteractionPreviousValuesSubscription
   type: () => Promise<AsyncIterator<InteractionType>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface ManufacturerSubscriptionPayload {
+  mutation: MutationType;
+  node: Manufacturer;
+  updatedFields: String[];
+  previousValues: ManufacturerPreviousValues;
+}
+
+export interface ManufacturerSubscriptionPayloadPromise
+  extends Promise<ManufacturerSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ManufacturerPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ManufacturerPreviousValuesPromise>() => T;
+}
+
+export interface ManufacturerSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ManufacturerSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ManufacturerSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ManufacturerPreviousValuesSubscription>() => T;
+}
+
+export interface ManufacturerPreviousValues {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  name: String;
+}
+
+export interface ManufacturerPreviousValuesPromise
+  extends Promise<ManufacturerPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  name: () => Promise<String>;
+}
+
+export interface ManufacturerPreviousValuesSubscription
+  extends Promise<AsyncIterator<ManufacturerPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  name: () => Promise<AsyncIterator<String>>;
 }
 
 export interface NendoroidSubscriptionPayload {
@@ -1964,6 +2319,106 @@ export interface NendoroidPreviousValuesSubscription
   range: () => Promise<AsyncIterator<String>>;
 }
 
+export interface SculptorSubscriptionPayload {
+  mutation: MutationType;
+  node: Sculptor;
+  updatedFields: String[];
+  previousValues: SculptorPreviousValues;
+}
+
+export interface SculptorSubscriptionPayloadPromise
+  extends Promise<SculptorSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = SculptorPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = SculptorPreviousValuesPromise>() => T;
+}
+
+export interface SculptorSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<SculptorSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = SculptorSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = SculptorPreviousValuesSubscription>() => T;
+}
+
+export interface SculptorPreviousValues {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  name: String;
+}
+
+export interface SculptorPreviousValuesPromise
+  extends Promise<SculptorPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  name: () => Promise<String>;
+}
+
+export interface SculptorPreviousValuesSubscription
+  extends Promise<AsyncIterator<SculptorPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  name: () => Promise<AsyncIterator<String>>;
+}
+
+export interface SerieSubscriptionPayload {
+  mutation: MutationType;
+  node: Serie;
+  updatedFields: String[];
+  previousValues: SeriePreviousValues;
+}
+
+export interface SerieSubscriptionPayloadPromise
+  extends Promise<SerieSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = SeriePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = SeriePreviousValuesPromise>() => T;
+}
+
+export interface SerieSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<SerieSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = SerieSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = SeriePreviousValuesSubscription>() => T;
+}
+
+export interface SeriePreviousValues {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  name: String;
+}
+
+export interface SeriePreviousValuesPromise
+  extends Promise<SeriePreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  name: () => Promise<String>;
+}
+
+export interface SeriePreviousValuesSubscription
+  extends Promise<AsyncIterator<SeriePreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  name: () => Promise<AsyncIterator<String>>;
+}
+
 export interface UserSubscriptionPayload {
   mutation: MutationType;
   node: User;
@@ -2036,11 +2491,6 @@ export type ID_Input = string | number;
 export type ID_Output = string;
 
 /*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
-
-/*
 DateTime scalar input type, allowing Date
 */
 export type DateTimeInput = Date | string;
@@ -2049,6 +2499,11 @@ export type DateTimeInput = Date | string;
 DateTime scalar output type, which is always a string
 */
 export type DateTimeOutput = string;
+
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
 
 /*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
@@ -2076,11 +2531,19 @@ export const models: Model[] = [
     embedded: false
   },
   {
-    name: "File",
+    name: "Interaction",
     embedded: false
   },
   {
-    name: "Interaction",
+    name: "Serie",
+    embedded: false
+  },
+  {
+    name: "Manufacturer",
+    embedded: false
+  },
+  {
+    name: "Sculptor",
     embedded: false
   },
   {

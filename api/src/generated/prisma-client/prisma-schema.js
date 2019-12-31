@@ -3,15 +3,23 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateFile {
+/* GraphQL */ `type AggregateInteraction {
   count: Int!
 }
 
-type AggregateInteraction {
+type AggregateManufacturer {
   count: Int!
 }
 
 type AggregateNendoroid {
+  count: Int!
+}
+
+type AggregateSculptor {
+  count: Int!
+}
+
+type AggregateSerie {
   count: Int!
 }
 
@@ -24,187 +32,6 @@ type BatchPayload {
 }
 
 scalar DateTime
-
-type File {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  filename: String!
-  mimetype: String!
-  encoding: String!
-  url: String!
-}
-
-type FileConnection {
-  pageInfo: PageInfo!
-  edges: [FileEdge]!
-  aggregate: AggregateFile!
-}
-
-input FileCreateInput {
-  id: ID
-  filename: String!
-  mimetype: String!
-  encoding: String!
-  url: String!
-}
-
-type FileEdge {
-  node: File!
-  cursor: String!
-}
-
-enum FileOrderByInput {
-  id_ASC
-  id_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  filename_ASC
-  filename_DESC
-  mimetype_ASC
-  mimetype_DESC
-  encoding_ASC
-  encoding_DESC
-  url_ASC
-  url_DESC
-}
-
-type FilePreviousValues {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  filename: String!
-  mimetype: String!
-  encoding: String!
-  url: String!
-}
-
-type FileSubscriptionPayload {
-  mutation: MutationType!
-  node: File
-  updatedFields: [String!]
-  previousValues: FilePreviousValues
-}
-
-input FileSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: FileWhereInput
-  AND: [FileSubscriptionWhereInput!]
-}
-
-input FileUpdateInput {
-  filename: String
-  mimetype: String
-  encoding: String
-  url: String
-}
-
-input FileUpdateManyMutationInput {
-  filename: String
-  mimetype: String
-  encoding: String
-  url: String
-}
-
-input FileWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-  updatedAt_not: DateTime
-  updatedAt_in: [DateTime!]
-  updatedAt_not_in: [DateTime!]
-  updatedAt_lt: DateTime
-  updatedAt_lte: DateTime
-  updatedAt_gt: DateTime
-  updatedAt_gte: DateTime
-  filename: String
-  filename_not: String
-  filename_in: [String!]
-  filename_not_in: [String!]
-  filename_lt: String
-  filename_lte: String
-  filename_gt: String
-  filename_gte: String
-  filename_contains: String
-  filename_not_contains: String
-  filename_starts_with: String
-  filename_not_starts_with: String
-  filename_ends_with: String
-  filename_not_ends_with: String
-  mimetype: String
-  mimetype_not: String
-  mimetype_in: [String!]
-  mimetype_not_in: [String!]
-  mimetype_lt: String
-  mimetype_lte: String
-  mimetype_gt: String
-  mimetype_gte: String
-  mimetype_contains: String
-  mimetype_not_contains: String
-  mimetype_starts_with: String
-  mimetype_not_starts_with: String
-  mimetype_ends_with: String
-  mimetype_not_ends_with: String
-  encoding: String
-  encoding_not: String
-  encoding_in: [String!]
-  encoding_not_in: [String!]
-  encoding_lt: String
-  encoding_lte: String
-  encoding_gt: String
-  encoding_gte: String
-  encoding_contains: String
-  encoding_not_contains: String
-  encoding_starts_with: String
-  encoding_not_starts_with: String
-  encoding_ends_with: String
-  encoding_not_ends_with: String
-  url: String
-  url_not: String
-  url_in: [String!]
-  url_not_in: [String!]
-  url_lt: String
-  url_lte: String
-  url_gt: String
-  url_gte: String
-  url_contains: String
-  url_not_contains: String
-  url_starts_with: String
-  url_not_starts_with: String
-  url_ends_with: String
-  url_not_ends_with: String
-  AND: [FileWhereInput!]
-}
-
-input FileWhereUniqueInput {
-  id: ID
-  url: String
-}
 
 type Interaction {
   id: ID!
@@ -417,25 +244,154 @@ input InteractionWhereUniqueInput {
 
 scalar Long
 
+type Manufacturer {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+}
+
+type ManufacturerConnection {
+  pageInfo: PageInfo!
+  edges: [ManufacturerEdge]!
+  aggregate: AggregateManufacturer!
+}
+
+input ManufacturerCreateInput {
+  id: ID
+  name: String!
+}
+
+type ManufacturerEdge {
+  node: Manufacturer!
+  cursor: String!
+}
+
+enum ManufacturerOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  name_ASC
+  name_DESC
+}
+
+type ManufacturerPreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+}
+
+type ManufacturerSubscriptionPayload {
+  mutation: MutationType!
+  node: Manufacturer
+  updatedFields: [String!]
+  previousValues: ManufacturerPreviousValues
+}
+
+input ManufacturerSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ManufacturerWhereInput
+  AND: [ManufacturerSubscriptionWhereInput!]
+}
+
+input ManufacturerUpdateInput {
+  name: String
+}
+
+input ManufacturerUpdateManyMutationInput {
+  name: String
+}
+
+input ManufacturerWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  AND: [ManufacturerWhereInput!]
+}
+
+input ManufacturerWhereUniqueInput {
+  id: ID
+}
+
 type Mutation {
-  createFile(data: FileCreateInput!): File!
-  updateFile(data: FileUpdateInput!, where: FileWhereUniqueInput!): File
-  updateManyFiles(data: FileUpdateManyMutationInput!, where: FileWhereInput): BatchPayload!
-  upsertFile(where: FileWhereUniqueInput!, create: FileCreateInput!, update: FileUpdateInput!): File!
-  deleteFile(where: FileWhereUniqueInput!): File
-  deleteManyFiles(where: FileWhereInput): BatchPayload!
   createInteraction(data: InteractionCreateInput!): Interaction!
   updateInteraction(data: InteractionUpdateInput!, where: InteractionWhereUniqueInput!): Interaction
   updateManyInteractions(data: InteractionUpdateManyMutationInput!, where: InteractionWhereInput): BatchPayload!
   upsertInteraction(where: InteractionWhereUniqueInput!, create: InteractionCreateInput!, update: InteractionUpdateInput!): Interaction!
   deleteInteraction(where: InteractionWhereUniqueInput!): Interaction
   deleteManyInteractions(where: InteractionWhereInput): BatchPayload!
+  createManufacturer(data: ManufacturerCreateInput!): Manufacturer!
+  updateManufacturer(data: ManufacturerUpdateInput!, where: ManufacturerWhereUniqueInput!): Manufacturer
+  updateManyManufacturers(data: ManufacturerUpdateManyMutationInput!, where: ManufacturerWhereInput): BatchPayload!
+  upsertManufacturer(where: ManufacturerWhereUniqueInput!, create: ManufacturerCreateInput!, update: ManufacturerUpdateInput!): Manufacturer!
+  deleteManufacturer(where: ManufacturerWhereUniqueInput!): Manufacturer
+  deleteManyManufacturers(where: ManufacturerWhereInput): BatchPayload!
   createNendoroid(data: NendoroidCreateInput!): Nendoroid!
   updateNendoroid(data: NendoroidUpdateInput!, where: NendoroidWhereUniqueInput!): Nendoroid
   updateManyNendoroids(data: NendoroidUpdateManyMutationInput!, where: NendoroidWhereInput): BatchPayload!
   upsertNendoroid(where: NendoroidWhereUniqueInput!, create: NendoroidCreateInput!, update: NendoroidUpdateInput!): Nendoroid!
   deleteNendoroid(where: NendoroidWhereUniqueInput!): Nendoroid
   deleteManyNendoroids(where: NendoroidWhereInput): BatchPayload!
+  createSculptor(data: SculptorCreateInput!): Sculptor!
+  updateSculptor(data: SculptorUpdateInput!, where: SculptorWhereUniqueInput!): Sculptor
+  updateManySculptors(data: SculptorUpdateManyMutationInput!, where: SculptorWhereInput): BatchPayload!
+  upsertSculptor(where: SculptorWhereUniqueInput!, create: SculptorCreateInput!, update: SculptorUpdateInput!): Sculptor!
+  deleteSculptor(where: SculptorWhereUniqueInput!): Sculptor
+  deleteManySculptors(where: SculptorWhereInput): BatchPayload!
+  createSerie(data: SerieCreateInput!): Serie!
+  updateSerie(data: SerieUpdateInput!, where: SerieWhereUniqueInput!): Serie
+  updateManySeries(data: SerieUpdateManyMutationInput!, where: SerieWhereInput): BatchPayload!
+  upsertSerie(where: SerieWhereUniqueInput!, create: SerieCreateInput!, update: SerieUpdateInput!): Serie!
+  deleteSerie(where: SerieWhereUniqueInput!): Serie
+  deleteManySeries(where: SerieWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
@@ -989,25 +945,267 @@ type PageInfo {
 }
 
 type Query {
-  file(where: FileWhereUniqueInput!): File
-  files(where: FileWhereInput, orderBy: FileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [File]!
-  filesConnection(where: FileWhereInput, orderBy: FileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FileConnection!
   interaction(where: InteractionWhereUniqueInput!): Interaction
   interactions(where: InteractionWhereInput, orderBy: InteractionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Interaction]!
   interactionsConnection(where: InteractionWhereInput, orderBy: InteractionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): InteractionConnection!
+  manufacturer(where: ManufacturerWhereUniqueInput!): Manufacturer
+  manufacturers(where: ManufacturerWhereInput, orderBy: ManufacturerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Manufacturer]!
+  manufacturersConnection(where: ManufacturerWhereInput, orderBy: ManufacturerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ManufacturerConnection!
   nendoroid(where: NendoroidWhereUniqueInput!): Nendoroid
   nendoroids(where: NendoroidWhereInput, orderBy: NendoroidOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Nendoroid]!
   nendoroidsConnection(where: NendoroidWhereInput, orderBy: NendoroidOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): NendoroidConnection!
+  sculptor(where: SculptorWhereUniqueInput!): Sculptor
+  sculptors(where: SculptorWhereInput, orderBy: SculptorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Sculptor]!
+  sculptorsConnection(where: SculptorWhereInput, orderBy: SculptorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SculptorConnection!
+  serie(where: SerieWhereUniqueInput!): Serie
+  series(where: SerieWhereInput, orderBy: SerieOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Serie]!
+  seriesConnection(where: SerieWhereInput, orderBy: SerieOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SerieConnection!
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   node(id: ID!): Node
 }
 
+type Sculptor {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+}
+
+type SculptorConnection {
+  pageInfo: PageInfo!
+  edges: [SculptorEdge]!
+  aggregate: AggregateSculptor!
+}
+
+input SculptorCreateInput {
+  id: ID
+  name: String!
+}
+
+type SculptorEdge {
+  node: Sculptor!
+  cursor: String!
+}
+
+enum SculptorOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  name_ASC
+  name_DESC
+}
+
+type SculptorPreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+}
+
+type SculptorSubscriptionPayload {
+  mutation: MutationType!
+  node: Sculptor
+  updatedFields: [String!]
+  previousValues: SculptorPreviousValues
+}
+
+input SculptorSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: SculptorWhereInput
+  AND: [SculptorSubscriptionWhereInput!]
+}
+
+input SculptorUpdateInput {
+  name: String
+}
+
+input SculptorUpdateManyMutationInput {
+  name: String
+}
+
+input SculptorWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  AND: [SculptorWhereInput!]
+}
+
+input SculptorWhereUniqueInput {
+  id: ID
+}
+
+type Serie {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+}
+
+type SerieConnection {
+  pageInfo: PageInfo!
+  edges: [SerieEdge]!
+  aggregate: AggregateSerie!
+}
+
+input SerieCreateInput {
+  id: ID
+  name: String!
+}
+
+type SerieEdge {
+  node: Serie!
+  cursor: String!
+}
+
+enum SerieOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  name_ASC
+  name_DESC
+}
+
+type SeriePreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+}
+
+type SerieSubscriptionPayload {
+  mutation: MutationType!
+  node: Serie
+  updatedFields: [String!]
+  previousValues: SeriePreviousValues
+}
+
+input SerieSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: SerieWhereInput
+  AND: [SerieSubscriptionWhereInput!]
+}
+
+input SerieUpdateInput {
+  name: String
+}
+
+input SerieUpdateManyMutationInput {
+  name: String
+}
+
+input SerieWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  AND: [SerieWhereInput!]
+}
+
+input SerieWhereUniqueInput {
+  id: ID
+}
+
 type Subscription {
-  file(where: FileSubscriptionWhereInput): FileSubscriptionPayload
   interaction(where: InteractionSubscriptionWhereInput): InteractionSubscriptionPayload
+  manufacturer(where: ManufacturerSubscriptionWhereInput): ManufacturerSubscriptionPayload
   nendoroid(where: NendoroidSubscriptionWhereInput): NendoroidSubscriptionPayload
+  sculptor(where: SculptorSubscriptionWhereInput): SculptorSubscriptionPayload
+  serie(where: SerieSubscriptionWhereInput): SerieSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 

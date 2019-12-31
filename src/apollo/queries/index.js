@@ -155,3 +155,39 @@ export const GET_NENDOROIDS_BY_RANGE_QUERY = gql`
     }
   }
 `;
+
+export const GET_SERIES_QUERY = gql`
+  {
+    getSeries {
+      series {
+        id
+        name
+      }
+      count
+    }
+  }
+`;
+
+export const GET_MANUFACTURERS_QUERY = gql`
+  {
+    getManufacturers {
+      manufacturers {
+        id
+        name
+      }
+      count
+    }
+  }
+`;
+
+export const GET_SCULPTORS_QUERY = gql`
+  {
+    getSculptors {
+      sculptors {
+        id
+        name
+      }
+      count
+    }
+  }
+`;

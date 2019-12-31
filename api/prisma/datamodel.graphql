@@ -30,20 +30,10 @@ type User {
   updatedAt: DateTime! @updatedAt
   firstName: String
   lastName: String
-  pseudo: String  @unique
+  pseudo: String @unique
   email: String! @unique
   avatar: String
   password: String!
-}
-
-type File {
-  id: ID! @id
-  createdAt: DateTime! @createdAt
-  updatedAt: DateTime! @updatedAt
-  filename: String!
-  mimetype: String!
-  encoding: String!
-  url: String! @unique
 }
 
 type Interaction {
@@ -53,6 +43,27 @@ type Interaction {
   type: InteractionType!
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
+}
+
+type Serie {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  name: String!
+}
+
+type Manufacturer {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  name: String!
+}
+
+type Sculptor {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  name: String!
 }
 
 enum InteractionType {
