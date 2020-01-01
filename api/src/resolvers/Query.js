@@ -90,7 +90,7 @@ async function getManufacturers(parent, args, context) {
     }
     : {}
 
-  const manufacturer = await context.prisma.manufacturers({
+  const manufacturers = await context.prisma.manufacturers({
     where,
     skip: args.skip,
     first: args.first,

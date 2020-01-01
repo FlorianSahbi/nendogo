@@ -18,14 +18,13 @@ const ManufacturersPage = () => {
 
   const currentUser = useContext(UserContext);
 
-  const [manufacturers, setManufacturer] = useState(null);
+  const [manufacturers, setManufacturers] = useState(null);
 
   const [getManufacturers, { loading, data }] = useLazyQuery(
     GET_MANUFACTURERS_QUERY,
     {
       onCompleted: data => {
-        setManufacturer(data);
-        console.log(serie);
+        setManufacturers(data);
       }
     }
   );
@@ -43,7 +42,7 @@ const ManufacturersPage = () => {
       <section className={classes.nendoroidsContainer}>
         <div className={classes.wrapper}>
           {manufacturers &&
-            manufacturer.getManufacturers &&
+            manufacturers.getManufacturers &&
             renderCards(
               manufacturers.getManufacturers.manufacturers,
               currentUser

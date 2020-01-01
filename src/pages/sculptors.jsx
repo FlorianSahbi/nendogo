@@ -14,7 +14,7 @@ const renderCards = (nendoroids, currentUser) => {
 };
 
 const SculptorsPage = () => {
-  console.log("render Series");
+  console.log("render Sculptor");
 
   const currentUser = useContext(UserContext);
 
@@ -23,7 +23,6 @@ const SculptorsPage = () => {
   const [getSculptors, { loading, data }] = useLazyQuery(GET_SCULPTORS_QUERY, {
     onCompleted: data => {
       setSculptors(data);
-      console.log(serie);
     }
   });
 
@@ -33,15 +32,13 @@ const SculptorsPage = () => {
 
   if (loading) return <p style={{ color: "white" }}>Loading...</p>;
 
-  console.log(data);
-
   return (
     <Layout header={true}>
       <section className={classes.nendoroidsContainer}>
         <div className={classes.wrapper}>
-          {sculptor &&
+          {sculptors &&
             sculptors.getSculptors &&
-            renderCards(sculptor.getSculptors.sculptors, currentUser)}
+            renderCards(sculptors.getSculptors.sculptors, currentUser)}
         </div>
       </section>
     </Layout>
