@@ -21,6 +21,14 @@ module.exports = {
       },
     },
     {
+      resolve: "gatsby-source-graphql",
+      options: {
+        typeName: "PRISMA",
+        fieldName: "prisma",
+        url: `http://localhost:4466`,
+      },
+    },
+    {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
         trackingId: "UA-116019269-4",

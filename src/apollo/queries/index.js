@@ -191,3 +191,43 @@ export const GET_SCULPTORS_QUERY = gql`
     }
   }
 `;
+
+export const GET_MANU_QUERRY = gql`
+query GetManu($manuName: String) {
+  prisma {
+    nendoroids(where: {manufacturer_contains: "Good Smile Company"}) {
+      id
+      formattedName
+      number
+      images
+    }
+  }
+}
+`
+
+
+export const UPLOAD_FILE = gql`
+  mutation SingleUpload($file: Upload!) {
+    singleUpload(file: $file) {
+      filename
+      mimetype
+      encoding
+    }
+  }
+`;
+
+export const UPLOAD_FILE_STREAM = gql`
+  mutation SingleUploadStream($file: Upload!) {
+    singleUploadStream(file: $file) {
+      filename
+      mimetype
+      encoding
+    }
+  }
+`;
+
+export const uploadFileMutation = gql`
+  mutation($file: Upload!) {
+    uploadFile(file: $file)
+  }
+`;

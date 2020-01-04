@@ -1,7 +1,11 @@
-import ApolloClient from 'apollo-boost';
+import ApolloClient from "apollo-client";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { createUploadLink } from "apollo-upload-client";
 import fetch from 'isomorphic-fetch';
 
+const link = createUploadLink({ uri: "http://localhost:4000" });
+
 export const client = new ApolloClient({
-  uri: `http://localhost:4000`,
-  fetch,
+  link,
+  cache: new InMemoryCache()
 });
