@@ -255,6 +255,10 @@ async function getNendoroidsByRange(parent, args, context, info) {
   }
 }
 
+async function files(parent, args, context, info) {
+  return files;
+}
+
 module.exports = {
   getNendoroidsLikedBy,
   getNendoroidsWishedBy,
@@ -268,4 +272,5 @@ module.exports = {
   getUsers,
   getInteractions,
   getNendoroidsByRange,
+  files,
 }
