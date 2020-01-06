@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useQuery, useLazyQuery } from "@apollo/react-hooks";
+import React, { useContext } from "react";
 import Layout from "../components/layout";
 import classes from "./nendoroids.module.css";
 import Card from "../components/card/nendoroid";
-import { GET_NENDOROIDS_BY_RANGE_QUERY } from "../apollo/queries/index";
 import { UserContext } from "../components/layout/index";
-import { AiOutlineLogout } from "react-icons/ai";
+import { graphql } from "gatsby";
 
 const isLikedBy = (i, userId) => {
   let b = [...i.filter(e => e.user.id === userId && e.type === "LIKE")][0];
@@ -59,50 +57,46 @@ const renderCards = (nendoroids, currentUser) => {
   return cards;
 };
 
-const NendoroidsPage = () => {
+const NendoroidsPage = ({
+  data: {
+    prisma: { nendoroids }
+  }
+}) => {
   console.log("render Nendoroids");
 
   const currentUser = useContext(UserContext);
 
-  const [nendo, setNendo] = useState(null);
-
-  const [getNendoroids, { loading, data }] = useLazyQuery(
-    GET_NENDOROIDS_BY_RANGE_QUERY,
-    {
-      onCompleted: data => {
-        setNendo(data);
-        console.log(nendo);
-      }
-    }
-  );
-
-  useEffect(() => {
-    getNendoroids({ variables: { range: "701-800" } });
-  }, []);
-
-  if (loading) return <p style={{ color: "white" }}>Loading...</p>;
-
-  console.log(data)
-
   return (
     <Layout header={true}>
-
-
-      <nav>
-        
-      </nav>
-
-
-
       <section className={classes.nendoroidsContainer}>
         <div className={classes.wrapper}>
-          {nendo &&
-            nendo.getNendoroidsByRange &&
-            renderCards(nendo.getNendoroidsByRange.nendoroids, currentUser)}
+          {renderCards(nendoroids, currentUser)}
         </div>
       </section>
     </Layout>
   );
 };
+
+export const query = graphql`
+  {
+    prisma {
+      nendoroids(orderBy: number_ASC, skip: 0, first: 50) {
+        id
+        formattedName
+        number
+        images
+        interactions {
+          id
+          type
+          user {
+            pseudo
+            id
+            avatar
+          }
+        }
+      }
+    }
+  }
+`;
 
 export default NendoroidsPage;

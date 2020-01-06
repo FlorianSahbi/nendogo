@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Layout from "../components/layout";
 import classes from "./nendoroids.module.css";
-import Card from "../components/card/serie";
+import Card from "../components/card/manufacturer";
 import { UserContext } from "../components/layout/index";
 import { graphql } from "gatsby";
 

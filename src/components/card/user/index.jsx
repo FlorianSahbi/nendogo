@@ -36,7 +36,7 @@ const Card = props => {
         <h2 className={classes.title}>{props.name}</h2>
 
         <div className={`${classes.link} ${classes.default}`}>
-          <Link to={`user/${props.name}/`}>Details</Link>
+          <a href={`../user/${props.name}/`}>Details</a>
         </div>
       </div>
     </div>
