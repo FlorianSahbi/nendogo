@@ -23,7 +23,10 @@ const SculptorsPage = ({
 
   return (
     <Layout header={true}>
-      <section className={classes.nendoroidsContainer}>
+      <section
+        style={{ background: "#121415", minHeight: "100vh" }}
+        className={classes.nendoroidsContainer}
+      >
         <div className={classes.wrapper}>
           {renderCards(sculptors, currentUser)}
         </div>
@@ -35,7 +38,7 @@ const SculptorsPage = ({
 export const query = graphql`
   {
     prisma {
-      sculptors(orderBy: name_ASC, skip: 0, first: 10) {
+      sculptors(orderBy: name_ASC) {
         name
         id
       }

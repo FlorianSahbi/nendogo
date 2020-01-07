@@ -172,3 +172,15 @@ type File {
   mimetype: String!
   encoding: String!
 }
+
+type Image {
+  id: ID!
+  likes: Int!
+  views: Int!
+  user: User!
+  serie: Serie!
+  title: String!
+  nendoroids: [Nendoroids!]!
+  tags: [String!]!
+  file: File!
+}

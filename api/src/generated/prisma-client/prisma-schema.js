@@ -3,7 +3,15 @@ module.exports = {
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-/* GraphQL */ `type AggregateInteraction {
+/* GraphQL */ `type AggregateFile {
+  count: Int!
+}
+
+type AggregateImage {
+  count: Int!
+}
+
+type AggregateInteraction {
   count: Int!
 }
 
@@ -32,6 +40,386 @@ type BatchPayload {
 }
 
 scalar DateTime
+
+type File {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  filename: String!
+  mimetype: String!
+  encoding: String!
+  url: String!
+}
+
+type FileConnection {
+  pageInfo: PageInfo!
+  edges: [FileEdge]!
+  aggregate: AggregateFile!
+}
+
+input FileCreateInput {
+  id: ID
+  filename: String!
+  mimetype: String!
+  encoding: String!
+  url: String!
+}
+
+input FileCreateOneInput {
+  create: FileCreateInput
+  connect: FileWhereUniqueInput
+}
+
+type FileEdge {
+  node: File!
+  cursor: String!
+}
+
+enum FileOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  filename_ASC
+  filename_DESC
+  mimetype_ASC
+  mimetype_DESC
+  encoding_ASC
+  encoding_DESC
+  url_ASC
+  url_DESC
+}
+
+type FilePreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  filename: String!
+  mimetype: String!
+  encoding: String!
+  url: String!
+}
+
+type FileSubscriptionPayload {
+  mutation: MutationType!
+  node: File
+  updatedFields: [String!]
+  previousValues: FilePreviousValues
+}
+
+input FileSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: FileWhereInput
+  AND: [FileSubscriptionWhereInput!]
+}
+
+input FileUpdateDataInput {
+  filename: String
+  mimetype: String
+  encoding: String
+  url: String
+}
+
+input FileUpdateInput {
+  filename: String
+  mimetype: String
+  encoding: String
+  url: String
+}
+
+input FileUpdateManyMutationInput {
+  filename: String
+  mimetype: String
+  encoding: String
+  url: String
+}
+
+input FileUpdateOneRequiredInput {
+  create: FileCreateInput
+  update: FileUpdateDataInput
+  upsert: FileUpsertNestedInput
+  connect: FileWhereUniqueInput
+}
+
+input FileUpsertNestedInput {
+  update: FileUpdateDataInput!
+  create: FileCreateInput!
+}
+
+input FileWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  filename: String
+  filename_not: String
+  filename_in: [String!]
+  filename_not_in: [String!]
+  filename_lt: String
+  filename_lte: String
+  filename_gt: String
+  filename_gte: String
+  filename_contains: String
+  filename_not_contains: String
+  filename_starts_with: String
+  filename_not_starts_with: String
+  filename_ends_with: String
+  filename_not_ends_with: String
+  mimetype: String
+  mimetype_not: String
+  mimetype_in: [String!]
+  mimetype_not_in: [String!]
+  mimetype_lt: String
+  mimetype_lte: String
+  mimetype_gt: String
+  mimetype_gte: String
+  mimetype_contains: String
+  mimetype_not_contains: String
+  mimetype_starts_with: String
+  mimetype_not_starts_with: String
+  mimetype_ends_with: String
+  mimetype_not_ends_with: String
+  encoding: String
+  encoding_not: String
+  encoding_in: [String!]
+  encoding_not_in: [String!]
+  encoding_lt: String
+  encoding_lte: String
+  encoding_gt: String
+  encoding_gte: String
+  encoding_contains: String
+  encoding_not_contains: String
+  encoding_starts_with: String
+  encoding_not_starts_with: String
+  encoding_ends_with: String
+  encoding_not_ends_with: String
+  url: String
+  url_not: String
+  url_in: [String!]
+  url_not_in: [String!]
+  url_lt: String
+  url_lte: String
+  url_gt: String
+  url_gte: String
+  url_contains: String
+  url_not_contains: String
+  url_starts_with: String
+  url_not_starts_with: String
+  url_ends_with: String
+  url_not_ends_with: String
+  AND: [FileWhereInput!]
+}
+
+input FileWhereUniqueInput {
+  id: ID
+}
+
+type Image {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  likes: Int!
+  views: Int!
+  user: User!
+  serie: Serie!
+  title: String!
+  nendoroids(where: NendoroidWhereInput, orderBy: NendoroidOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Nendoroid!]
+  tags: [String!]!
+  file: File!
+}
+
+type ImageConnection {
+  pageInfo: PageInfo!
+  edges: [ImageEdge]!
+  aggregate: AggregateImage!
+}
+
+input ImageCreateInput {
+  id: ID
+  likes: Int!
+  views: Int!
+  user: UserCreateOneInput!
+  serie: SerieCreateOneInput!
+  title: String!
+  nendoroids: NendoroidCreateManyInput
+  tags: ImageCreatetagsInput
+  file: FileCreateOneInput!
+}
+
+input ImageCreatetagsInput {
+  set: [String!]
+}
+
+type ImageEdge {
+  node: Image!
+  cursor: String!
+}
+
+enum ImageOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  likes_ASC
+  likes_DESC
+  views_ASC
+  views_DESC
+  title_ASC
+  title_DESC
+}
+
+type ImagePreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  likes: Int!
+  views: Int!
+  title: String!
+  tags: [String!]!
+}
+
+type ImageSubscriptionPayload {
+  mutation: MutationType!
+  node: Image
+  updatedFields: [String!]
+  previousValues: ImagePreviousValues
+}
+
+input ImageSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ImageWhereInput
+  AND: [ImageSubscriptionWhereInput!]
+}
+
+input ImageUpdateInput {
+  likes: Int
+  views: Int
+  user: UserUpdateOneRequiredInput
+  serie: SerieUpdateOneRequiredInput
+  title: String
+  nendoroids: NendoroidUpdateManyInput
+  tags: ImageUpdatetagsInput
+  file: FileUpdateOneRequiredInput
+}
+
+input ImageUpdateManyMutationInput {
+  likes: Int
+  views: Int
+  title: String
+  tags: ImageUpdatetagsInput
+}
+
+input ImageUpdatetagsInput {
+  set: [String!]
+}
+
+input ImageWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  likes: Int
+  likes_not: Int
+  likes_in: [Int!]
+  likes_not_in: [Int!]
+  likes_lt: Int
+  likes_lte: Int
+  likes_gt: Int
+  likes_gte: Int
+  views: Int
+  views_not: Int
+  views_in: [Int!]
+  views_not_in: [Int!]
+  views_lt: Int
+  views_lte: Int
+  views_gt: Int
+  views_gte: Int
+  user: UserWhereInput
+  serie: SerieWhereInput
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  nendoroids_some: NendoroidWhereInput
+  file: FileWhereInput
+  AND: [ImageWhereInput!]
+}
+
+input ImageWhereUniqueInput {
+  id: ID
+}
 
 type Interaction {
   id: ID!
@@ -362,6 +750,18 @@ input ManufacturerWhereUniqueInput {
 }
 
 type Mutation {
+  createFile(data: FileCreateInput!): File!
+  updateFile(data: FileUpdateInput!, where: FileWhereUniqueInput!): File
+  updateManyFiles(data: FileUpdateManyMutationInput!, where: FileWhereInput): BatchPayload!
+  upsertFile(where: FileWhereUniqueInput!, create: FileCreateInput!, update: FileUpdateInput!): File!
+  deleteFile(where: FileWhereUniqueInput!): File
+  deleteManyFiles(where: FileWhereInput): BatchPayload!
+  createImage(data: ImageCreateInput!): Image!
+  updateImage(data: ImageUpdateInput!, where: ImageWhereUniqueInput!): Image
+  updateManyImages(data: ImageUpdateManyMutationInput!, where: ImageWhereInput): BatchPayload!
+  upsertImage(where: ImageWhereUniqueInput!, create: ImageCreateInput!, update: ImageUpdateInput!): Image!
+  deleteImage(where: ImageWhereUniqueInput!): Image
+  deleteManyImages(where: ImageWhereInput): BatchPayload!
   createInteraction(data: InteractionCreateInput!): Interaction!
   updateInteraction(data: InteractionUpdateInput!, where: InteractionWhereUniqueInput!): Interaction
   updateManyInteractions(data: InteractionUpdateManyMutationInput!, where: InteractionWhereInput): BatchPayload!
@@ -470,6 +870,11 @@ input NendoroidCreateInput {
   interactions: InteractionCreateManyWithoutNendoroidInput
 }
 
+input NendoroidCreateManyInput {
+  create: [NendoroidCreateInput!]
+  connect: [NendoroidWhereUniqueInput!]
+}
+
 input NendoroidCreateOneWithoutInteractionsInput {
   create: NendoroidCreateWithoutInteractionsInput
   connect: NendoroidWhereUniqueInput
@@ -571,6 +976,262 @@ type NendoroidPreviousValues {
   range: String
 }
 
+input NendoroidScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  number: Int
+  number_not: Int
+  number_in: [Int!]
+  number_not_in: [Int!]
+  number_lt: Int
+  number_lte: Int
+  number_gt: Int
+  number_gte: Int
+  formattedName: String
+  formattedName_not: String
+  formattedName_in: [String!]
+  formattedName_not_in: [String!]
+  formattedName_lt: String
+  formattedName_lte: String
+  formattedName_gt: String
+  formattedName_gte: String
+  formattedName_contains: String
+  formattedName_not_contains: String
+  formattedName_starts_with: String
+  formattedName_not_starts_with: String
+  formattedName_ends_with: String
+  formattedName_not_ends_with: String
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  series: String
+  series_not: String
+  series_in: [String!]
+  series_not_in: [String!]
+  series_lt: String
+  series_lte: String
+  series_gt: String
+  series_gte: String
+  series_contains: String
+  series_not_contains: String
+  series_starts_with: String
+  series_not_starts_with: String
+  series_ends_with: String
+  series_not_ends_with: String
+  manufacturer: String
+  manufacturer_not: String
+  manufacturer_in: [String!]
+  manufacturer_not_in: [String!]
+  manufacturer_lt: String
+  manufacturer_lte: String
+  manufacturer_gt: String
+  manufacturer_gte: String
+  manufacturer_contains: String
+  manufacturer_not_contains: String
+  manufacturer_starts_with: String
+  manufacturer_not_starts_with: String
+  manufacturer_ends_with: String
+  manufacturer_not_ends_with: String
+  category: String
+  category_not: String
+  category_in: [String!]
+  category_not_in: [String!]
+  category_lt: String
+  category_lte: String
+  category_gt: String
+  category_gte: String
+  category_contains: String
+  category_not_contains: String
+  category_starts_with: String
+  category_not_starts_with: String
+  category_ends_with: String
+  category_not_ends_with: String
+  price: Int
+  price_not: Int
+  price_in: [Int!]
+  price_not_in: [Int!]
+  price_lt: Int
+  price_lte: Int
+  price_gt: Int
+  price_gte: Int
+  releaseDate: DateTime
+  releaseDate_not: DateTime
+  releaseDate_in: [DateTime!]
+  releaseDate_not_in: [DateTime!]
+  releaseDate_lt: DateTime
+  releaseDate_lte: DateTime
+  releaseDate_gt: DateTime
+  releaseDate_gte: DateTime
+  specifications: String
+  specifications_not: String
+  specifications_in: [String!]
+  specifications_not_in: [String!]
+  specifications_lt: String
+  specifications_lte: String
+  specifications_gt: String
+  specifications_gte: String
+  specifications_contains: String
+  specifications_not_contains: String
+  specifications_starts_with: String
+  specifications_not_starts_with: String
+  specifications_ends_with: String
+  specifications_not_ends_with: String
+  sculptor: String
+  sculptor_not: String
+  sculptor_in: [String!]
+  sculptor_not_in: [String!]
+  sculptor_lt: String
+  sculptor_lte: String
+  sculptor_gt: String
+  sculptor_gte: String
+  sculptor_contains: String
+  sculptor_not_contains: String
+  sculptor_starts_with: String
+  sculptor_not_starts_with: String
+  sculptor_ends_with: String
+  sculptor_not_ends_with: String
+  cooperation: String
+  cooperation_not: String
+  cooperation_in: [String!]
+  cooperation_not_in: [String!]
+  cooperation_lt: String
+  cooperation_lte: String
+  cooperation_gt: String
+  cooperation_gte: String
+  cooperation_contains: String
+  cooperation_not_contains: String
+  cooperation_starts_with: String
+  cooperation_not_starts_with: String
+  cooperation_ends_with: String
+  cooperation_not_ends_with: String
+  planningProduction: String
+  planningProduction_not: String
+  planningProduction_in: [String!]
+  planningProduction_not_in: [String!]
+  planningProduction_lt: String
+  planningProduction_lte: String
+  planningProduction_gt: String
+  planningProduction_gte: String
+  planningProduction_contains: String
+  planningProduction_not_contains: String
+  planningProduction_starts_with: String
+  planningProduction_not_starts_with: String
+  planningProduction_ends_with: String
+  planningProduction_not_ends_with: String
+  releasedBy: String
+  releasedBy_not: String
+  releasedBy_in: [String!]
+  releasedBy_not_in: [String!]
+  releasedBy_lt: String
+  releasedBy_lte: String
+  releasedBy_gt: String
+  releasedBy_gte: String
+  releasedBy_contains: String
+  releasedBy_not_contains: String
+  releasedBy_starts_with: String
+  releasedBy_not_starts_with: String
+  releasedBy_ends_with: String
+  releasedBy_not_ends_with: String
+  distributedBy: String
+  distributedBy_not: String
+  distributedBy_in: [String!]
+  distributedBy_not_in: [String!]
+  distributedBy_lt: String
+  distributedBy_lte: String
+  distributedBy_gt: String
+  distributedBy_gte: String
+  distributedBy_contains: String
+  distributedBy_not_contains: String
+  distributedBy_starts_with: String
+  distributedBy_not_starts_with: String
+  distributedBy_ends_with: String
+  distributedBy_not_ends_with: String
+  srcUrl: String
+  srcUrl_not: String
+  srcUrl_in: [String!]
+  srcUrl_not_in: [String!]
+  srcUrl_lt: String
+  srcUrl_lte: String
+  srcUrl_gt: String
+  srcUrl_gte: String
+  srcUrl_contains: String
+  srcUrl_not_contains: String
+  srcUrl_starts_with: String
+  srcUrl_not_starts_with: String
+  srcUrl_ends_with: String
+  srcUrl_not_ends_with: String
+  range: String
+  range_not: String
+  range_in: [String!]
+  range_not_in: [String!]
+  range_lt: String
+  range_lte: String
+  range_gt: String
+  range_gte: String
+  range_contains: String
+  range_not_contains: String
+  range_starts_with: String
+  range_not_starts_with: String
+  range_ends_with: String
+  range_not_ends_with: String
+  AND: [NendoroidScalarWhereInput!]
+  OR: [NendoroidScalarWhereInput!]
+  NOT: [NendoroidScalarWhereInput!]
+}
+
 type NendoroidSubscriptionPayload {
   mutation: MutationType!
   node: Nendoroid
@@ -585,6 +1246,29 @@ input NendoroidSubscriptionWhereInput {
   updatedFields_contains_some: [String!]
   node: NendoroidWhereInput
   AND: [NendoroidSubscriptionWhereInput!]
+}
+
+input NendoroidUpdateDataInput {
+  name: String
+  number: Int
+  formattedName: String
+  title: String
+  description: NendoroidUpdatedescriptionInput
+  images: NendoroidUpdateimagesInput
+  series: String
+  manufacturer: String
+  category: String
+  price: Int
+  releaseDate: DateTime
+  specifications: String
+  sculptor: String
+  cooperation: String
+  planningProduction: String
+  releasedBy: String
+  distributedBy: String
+  srcUrl: String
+  range: String
+  interactions: InteractionUpdateManyWithoutNendoroidInput
 }
 
 input NendoroidUpdatedescriptionInput {
@@ -618,6 +1302,40 @@ input NendoroidUpdateInput {
   interactions: InteractionUpdateManyWithoutNendoroidInput
 }
 
+input NendoroidUpdateManyDataInput {
+  name: String
+  number: Int
+  formattedName: String
+  title: String
+  description: NendoroidUpdatedescriptionInput
+  images: NendoroidUpdateimagesInput
+  series: String
+  manufacturer: String
+  category: String
+  price: Int
+  releaseDate: DateTime
+  specifications: String
+  sculptor: String
+  cooperation: String
+  planningProduction: String
+  releasedBy: String
+  distributedBy: String
+  srcUrl: String
+  range: String
+}
+
+input NendoroidUpdateManyInput {
+  create: [NendoroidCreateInput!]
+  update: [NendoroidUpdateWithWhereUniqueNestedInput!]
+  upsert: [NendoroidUpsertWithWhereUniqueNestedInput!]
+  delete: [NendoroidWhereUniqueInput!]
+  connect: [NendoroidWhereUniqueInput!]
+  set: [NendoroidWhereUniqueInput!]
+  disconnect: [NendoroidWhereUniqueInput!]
+  deleteMany: [NendoroidScalarWhereInput!]
+  updateMany: [NendoroidUpdateManyWithWhereNestedInput!]
+}
+
 input NendoroidUpdateManyMutationInput {
   name: String
   number: Int
@@ -638,6 +1356,11 @@ input NendoroidUpdateManyMutationInput {
   distributedBy: String
   srcUrl: String
   range: String
+}
+
+input NendoroidUpdateManyWithWhereNestedInput {
+  where: NendoroidScalarWhereInput!
+  data: NendoroidUpdateManyDataInput!
 }
 
 input NendoroidUpdateOneRequiredWithoutInteractionsInput {
@@ -669,9 +1392,20 @@ input NendoroidUpdateWithoutInteractionsDataInput {
   range: String
 }
 
+input NendoroidUpdateWithWhereUniqueNestedInput {
+  where: NendoroidWhereUniqueInput!
+  data: NendoroidUpdateDataInput!
+}
+
 input NendoroidUpsertWithoutInteractionsInput {
   update: NendoroidUpdateWithoutInteractionsDataInput!
   create: NendoroidCreateWithoutInteractionsInput!
+}
+
+input NendoroidUpsertWithWhereUniqueNestedInput {
+  where: NendoroidWhereUniqueInput!
+  update: NendoroidUpdateDataInput!
+  create: NendoroidCreateInput!
 }
 
 input NendoroidWhereInput {
@@ -945,6 +1679,12 @@ type PageInfo {
 }
 
 type Query {
+  file(where: FileWhereUniqueInput!): File
+  files(where: FileWhereInput, orderBy: FileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [File]!
+  filesConnection(where: FileWhereInput, orderBy: FileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FileConnection!
+  image(where: ImageWhereUniqueInput!): Image
+  images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image]!
+  imagesConnection(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ImageConnection!
   interaction(where: InteractionWhereUniqueInput!): Interaction
   interactions(where: InteractionWhereInput, orderBy: InteractionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Interaction]!
   interactionsConnection(where: InteractionWhereInput, orderBy: InteractionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): InteractionConnection!
@@ -1101,6 +1841,11 @@ input SerieCreateInput {
   name: String!
 }
 
+input SerieCreateOneInput {
+  create: SerieCreateInput
+  connect: SerieWhereUniqueInput
+}
+
 type SerieEdge {
   node: Serie!
   cursor: String!
@@ -1140,12 +1885,28 @@ input SerieSubscriptionWhereInput {
   AND: [SerieSubscriptionWhereInput!]
 }
 
+input SerieUpdateDataInput {
+  name: String
+}
+
 input SerieUpdateInput {
   name: String
 }
 
 input SerieUpdateManyMutationInput {
   name: String
+}
+
+input SerieUpdateOneRequiredInput {
+  create: SerieCreateInput
+  update: SerieUpdateDataInput
+  upsert: SerieUpsertNestedInput
+  connect: SerieWhereUniqueInput
+}
+
+input SerieUpsertNestedInput {
+  update: SerieUpdateDataInput!
+  create: SerieCreateInput!
 }
 
 input SerieWhereInput {
@@ -1201,6 +1962,8 @@ input SerieWhereUniqueInput {
 }
 
 type Subscription {
+  file(where: FileSubscriptionWhereInput): FileSubscriptionPayload
+  image(where: ImageSubscriptionWhereInput): ImageSubscriptionPayload
   interaction(where: InteractionSubscriptionWhereInput): InteractionSubscriptionPayload
   manufacturer(where: ManufacturerSubscriptionWhereInput): ManufacturerSubscriptionPayload
   nendoroid(where: NendoroidSubscriptionWhereInput): NendoroidSubscriptionPayload

@@ -29,6 +29,14 @@ var models = [
     embedded: false
   },
   {
+    name: "File",
+    embedded: false
+  },
+  {
+    name: "Image",
+    embedded: false
+  },
+  {
     name: "InteractionType",
     embedded: false
   }

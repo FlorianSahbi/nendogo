@@ -66,6 +66,30 @@ type Sculptor {
   name: String!
 }
 
+type File {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  filename: String!
+  mimetype: String!
+  encoding: String!
+  url: String!
+}
+
+type Image {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  likes: Int!
+  views: Int!
+  user: User! @relation(link: INLINE)
+  serie: Serie! @relation(link: INLINE)
+  title: String!
+  nendoroids: [Nendoroid!]! @relation(link: INLINE)
+  tags: [String!]! @scalarList(strategy: EMBEDDED)
+  file: File! @relation(link: INLINE)
+}
+
 enum InteractionType {
   LIKE
   WISH
