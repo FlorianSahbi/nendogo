@@ -6,6 +6,8 @@ import Card from "../components/card/serie";
 import { GET_SCULPTORS_QUERY } from "../apollo/queries/index";
 import { UserContext } from "../components/layout/index";
 
+import {CounterDisplay} from "../apollo/wrap-root-element";
+
 const renderCards = (nendoroids, currentUser) => {
   const cards = nendoroids.map(({ id, name }) => {
     return <Card key={id} id={id} name={name} number={"0"} images={"o"} />;
@@ -34,6 +36,7 @@ const SculptorsPage = () => {
 
   return (
     <Layout header={true}>
+       <CounterDisplay />
       <section className={classes.nendoroidsContainer}>
         <div className={classes.wrapper}>
           {sculptors &&
