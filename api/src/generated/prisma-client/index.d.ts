@@ -16,6 +16,8 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
+  file: (where?: FileWhereInput) => Promise<boolean>;
+  image: (where?: ImageWhereInput) => Promise<boolean>;
   interaction: (where?: InteractionWhereInput) => Promise<boolean>;
   manufacturer: (where?: ManufacturerWhereInput) => Promise<boolean>;
   nendoroid: (where?: NendoroidWhereInput) => Promise<boolean>;
@@ -43,6 +45,44 @@ export interface Prisma {
    * Queries
    */
 
+  file: (where: FileWhereUniqueInput) => FileNullablePromise;
+  files: (args?: {
+    where?: FileWhereInput;
+    orderBy?: FileOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<File>;
+  filesConnection: (args?: {
+    where?: FileWhereInput;
+    orderBy?: FileOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FileConnectionPromise;
+  image: (where: ImageWhereUniqueInput) => ImageNullablePromise;
+  images: (args?: {
+    where?: ImageWhereInput;
+    orderBy?: ImageOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Image>;
+  imagesConnection: (args?: {
+    where?: ImageWhereInput;
+    orderBy?: ImageOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => ImageConnectionPromise;
   interaction: (
     where: InteractionWhereUniqueInput
   ) => InteractionNullablePromise;
@@ -167,6 +207,38 @@ export interface Prisma {
    * Mutations
    */
 
+  createFile: (data: FileCreateInput) => FilePromise;
+  updateFile: (args: {
+    data: FileUpdateInput;
+    where: FileWhereUniqueInput;
+  }) => FilePromise;
+  updateManyFiles: (args: {
+    data: FileUpdateManyMutationInput;
+    where?: FileWhereInput;
+  }) => BatchPayloadPromise;
+  upsertFile: (args: {
+    where: FileWhereUniqueInput;
+    create: FileCreateInput;
+    update: FileUpdateInput;
+  }) => FilePromise;
+  deleteFile: (where: FileWhereUniqueInput) => FilePromise;
+  deleteManyFiles: (where?: FileWhereInput) => BatchPayloadPromise;
+  createImage: (data: ImageCreateInput) => ImagePromise;
+  updateImage: (args: {
+    data: ImageUpdateInput;
+    where: ImageWhereUniqueInput;
+  }) => ImagePromise;
+  updateManyImages: (args: {
+    data: ImageUpdateManyMutationInput;
+    where?: ImageWhereInput;
+  }) => BatchPayloadPromise;
+  upsertImage: (args: {
+    where: ImageWhereUniqueInput;
+    create: ImageCreateInput;
+    update: ImageUpdateInput;
+  }) => ImagePromise;
+  deleteImage: (where: ImageWhereUniqueInput) => ImagePromise;
+  deleteManyImages: (where?: ImageWhereInput) => BatchPayloadPromise;
   createInteraction: (data: InteractionCreateInput) => InteractionPromise;
   updateInteraction: (args: {
     data: InteractionUpdateInput;
@@ -278,6 +350,12 @@ export interface Prisma {
 }
 
 export interface Subscription {
+  file: (
+    where?: FileSubscriptionWhereInput
+  ) => FileSubscriptionPayloadSubscription;
+  image: (
+    where?: ImageSubscriptionWhereInput
+  ) => ImageSubscriptionPayloadSubscription;
   interaction: (
     where?: InteractionSubscriptionWhereInput
   ) => InteractionSubscriptionPayloadSubscription;
@@ -306,27 +384,23 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type InteractionType = "LIKE" | "WISH" | "OWN";
-
-export type InteractionOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "type_ASC"
-  | "type_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
-
-export type ManufacturerOrderByInput =
+export type FileOrderByInput =
   | "id_ASC"
   | "id_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
   | "updatedAt_DESC"
-  | "name_ASC"
-  | "name_DESC";
+  | "filename_ASC"
+  | "filename_DESC"
+  | "mimetype_ASC"
+  | "mimetype_DESC"
+  | "encoding_ASC"
+  | "encoding_DESC"
+  | "url_ASC"
+  | "url_DESC";
+
+export type InteractionType = "LIKE" | "WISH" | "OWN";
 
 export type NendoroidOrderByInput =
   | "id_ASC"
@@ -370,6 +444,40 @@ export type NendoroidOrderByInput =
   | "range_ASC"
   | "range_DESC";
 
+export type InteractionOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "type_ASC"
+  | "type_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type ImageOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC"
+  | "likes_ASC"
+  | "likes_DESC"
+  | "views_ASC"
+  | "views_DESC"
+  | "title_ASC"
+  | "title_DESC";
+
+export type ManufacturerOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC"
+  | "name_ASC"
+  | "name_DESC";
+
 export type SculptorOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -412,11 +520,11 @@ export type UserOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export type InteractionWhereUniqueInput = AtLeastOne<{
+export type FileWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
-export interface InteractionWhereInput {
+export interface FileWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -431,12 +539,6 @@ export interface InteractionWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  nendoroid?: Maybe<NendoroidWhereInput>;
-  user?: Maybe<UserWhereInput>;
-  type?: Maybe<InteractionType>;
-  type_not?: Maybe<InteractionType>;
-  type_in?: Maybe<InteractionType[] | InteractionType>;
-  type_not_in?: Maybe<InteractionType[] | InteractionType>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -453,8 +555,68 @@ export interface InteractionWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<InteractionWhereInput[] | InteractionWhereInput>;
+  filename?: Maybe<String>;
+  filename_not?: Maybe<String>;
+  filename_in?: Maybe<String[] | String>;
+  filename_not_in?: Maybe<String[] | String>;
+  filename_lt?: Maybe<String>;
+  filename_lte?: Maybe<String>;
+  filename_gt?: Maybe<String>;
+  filename_gte?: Maybe<String>;
+  filename_contains?: Maybe<String>;
+  filename_not_contains?: Maybe<String>;
+  filename_starts_with?: Maybe<String>;
+  filename_not_starts_with?: Maybe<String>;
+  filename_ends_with?: Maybe<String>;
+  filename_not_ends_with?: Maybe<String>;
+  mimetype?: Maybe<String>;
+  mimetype_not?: Maybe<String>;
+  mimetype_in?: Maybe<String[] | String>;
+  mimetype_not_in?: Maybe<String[] | String>;
+  mimetype_lt?: Maybe<String>;
+  mimetype_lte?: Maybe<String>;
+  mimetype_gt?: Maybe<String>;
+  mimetype_gte?: Maybe<String>;
+  mimetype_contains?: Maybe<String>;
+  mimetype_not_contains?: Maybe<String>;
+  mimetype_starts_with?: Maybe<String>;
+  mimetype_not_starts_with?: Maybe<String>;
+  mimetype_ends_with?: Maybe<String>;
+  mimetype_not_ends_with?: Maybe<String>;
+  encoding?: Maybe<String>;
+  encoding_not?: Maybe<String>;
+  encoding_in?: Maybe<String[] | String>;
+  encoding_not_in?: Maybe<String[] | String>;
+  encoding_lt?: Maybe<String>;
+  encoding_lte?: Maybe<String>;
+  encoding_gt?: Maybe<String>;
+  encoding_gte?: Maybe<String>;
+  encoding_contains?: Maybe<String>;
+  encoding_not_contains?: Maybe<String>;
+  encoding_starts_with?: Maybe<String>;
+  encoding_not_starts_with?: Maybe<String>;
+  encoding_ends_with?: Maybe<String>;
+  encoding_not_ends_with?: Maybe<String>;
+  url?: Maybe<String>;
+  url_not?: Maybe<String>;
+  url_in?: Maybe<String[] | String>;
+  url_not_in?: Maybe<String[] | String>;
+  url_lt?: Maybe<String>;
+  url_lte?: Maybe<String>;
+  url_gt?: Maybe<String>;
+  url_gte?: Maybe<String>;
+  url_contains?: Maybe<String>;
+  url_not_contains?: Maybe<String>;
+  url_starts_with?: Maybe<String>;
+  url_not_starts_with?: Maybe<String>;
+  url_ends_with?: Maybe<String>;
+  url_not_ends_with?: Maybe<String>;
+  AND?: Maybe<FileWhereInput[] | FileWhereInput>;
 }
+
+export type ImageWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
 
 export interface NendoroidWhereInput {
   id?: Maybe<ID_Input>;
@@ -711,6 +873,46 @@ export interface NendoroidWhereInput {
   AND?: Maybe<NendoroidWhereInput[] | NendoroidWhereInput>;
 }
 
+export interface InteractionWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  nendoroid?: Maybe<NendoroidWhereInput>;
+  user?: Maybe<UserWhereInput>;
+  type?: Maybe<InteractionType>;
+  type_not?: Maybe<InteractionType>;
+  type_in?: Maybe<InteractionType[] | InteractionType>;
+  type_not_in?: Maybe<InteractionType[] | InteractionType>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<InteractionWhereInput[] | InteractionWhereInput>;
+}
+
 export interface UserWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
@@ -829,6 +1031,126 @@ export interface UserWhereInput {
   AND?: Maybe<UserWhereInput[] | UserWhereInput>;
 }
 
+export interface ImageWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  likes?: Maybe<Int>;
+  likes_not?: Maybe<Int>;
+  likes_in?: Maybe<Int[] | Int>;
+  likes_not_in?: Maybe<Int[] | Int>;
+  likes_lt?: Maybe<Int>;
+  likes_lte?: Maybe<Int>;
+  likes_gt?: Maybe<Int>;
+  likes_gte?: Maybe<Int>;
+  views?: Maybe<Int>;
+  views_not?: Maybe<Int>;
+  views_in?: Maybe<Int[] | Int>;
+  views_not_in?: Maybe<Int[] | Int>;
+  views_lt?: Maybe<Int>;
+  views_lte?: Maybe<Int>;
+  views_gt?: Maybe<Int>;
+  views_gte?: Maybe<Int>;
+  user?: Maybe<UserWhereInput>;
+  serie?: Maybe<SerieWhereInput>;
+  title?: Maybe<String>;
+  title_not?: Maybe<String>;
+  title_in?: Maybe<String[] | String>;
+  title_not_in?: Maybe<String[] | String>;
+  title_lt?: Maybe<String>;
+  title_lte?: Maybe<String>;
+  title_gt?: Maybe<String>;
+  title_gte?: Maybe<String>;
+  title_contains?: Maybe<String>;
+  title_not_contains?: Maybe<String>;
+  title_starts_with?: Maybe<String>;
+  title_not_starts_with?: Maybe<String>;
+  title_ends_with?: Maybe<String>;
+  title_not_ends_with?: Maybe<String>;
+  nendoroids_some?: Maybe<NendoroidWhereInput>;
+  file?: Maybe<FileWhereInput>;
+  AND?: Maybe<ImageWhereInput[] | ImageWhereInput>;
+}
+
+export interface SerieWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  AND?: Maybe<SerieWhereInput[] | SerieWhereInput>;
+}
+
+export type InteractionWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
 export type ManufacturerWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
@@ -941,101 +1263,44 @@ export type SerieWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
-export interface SerieWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  AND?: Maybe<SerieWhereInput[] | SerieWhereInput>;
-}
-
 export type UserWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
   pseudo?: Maybe<String>;
   email?: Maybe<String>;
 }>;
 
-export interface InteractionCreateInput {
+export interface FileCreateInput {
   id?: Maybe<ID_Input>;
-  nendoroid: NendoroidCreateOneWithoutInteractionsInput;
+  filename: String;
+  mimetype: String;
+  encoding: String;
+  url: String;
+}
+
+export interface FileUpdateInput {
+  filename?: Maybe<String>;
+  mimetype?: Maybe<String>;
+  encoding?: Maybe<String>;
+  url?: Maybe<String>;
+}
+
+export interface FileUpdateManyMutationInput {
+  filename?: Maybe<String>;
+  mimetype?: Maybe<String>;
+  encoding?: Maybe<String>;
+  url?: Maybe<String>;
+}
+
+export interface ImageCreateInput {
+  id?: Maybe<ID_Input>;
+  likes: Int;
+  views: Int;
   user: UserCreateOneInput;
-  type: InteractionType;
-}
-
-export interface NendoroidCreateOneWithoutInteractionsInput {
-  create?: Maybe<NendoroidCreateWithoutInteractionsInput>;
-  connect?: Maybe<NendoroidWhereUniqueInput>;
-}
-
-export interface NendoroidCreateWithoutInteractionsInput {
-  id?: Maybe<ID_Input>;
-  name?: Maybe<String>;
-  number?: Maybe<Int>;
-  formattedName: String;
-  title?: Maybe<String>;
-  description?: Maybe<NendoroidCreatedescriptionInput>;
-  images?: Maybe<NendoroidCreateimagesInput>;
-  series?: Maybe<String>;
-  manufacturer?: Maybe<String>;
-  category?: Maybe<String>;
-  price?: Maybe<Int>;
-  releaseDate?: Maybe<DateTimeInput>;
-  specifications?: Maybe<String>;
-  sculptor?: Maybe<String>;
-  cooperation?: Maybe<String>;
-  planningProduction?: Maybe<String>;
-  releasedBy?: Maybe<String>;
-  distributedBy?: Maybe<String>;
-  srcUrl?: Maybe<String>;
-  range?: Maybe<String>;
-}
-
-export interface NendoroidCreatedescriptionInput {
-  set?: Maybe<String[] | String>;
-}
-
-export interface NendoroidCreateimagesInput {
-  set?: Maybe<String[] | String>;
+  serie: SerieCreateOneInput;
+  title: String;
+  nendoroids?: Maybe<NendoroidCreateManyInput>;
+  tags?: Maybe<ImageCreatetagsInput>;
+  file: FileCreateOneInput;
 }
 
 export interface UserCreateOneInput {
@@ -1053,90 +1318,19 @@ export interface UserCreateInput {
   password: String;
 }
 
-export interface InteractionUpdateInput {
-  nendoroid?: Maybe<NendoroidUpdateOneRequiredWithoutInteractionsInput>;
-  user?: Maybe<UserUpdateOneRequiredInput>;
-  type?: Maybe<InteractionType>;
+export interface SerieCreateOneInput {
+  create?: Maybe<SerieCreateInput>;
+  connect?: Maybe<SerieWhereUniqueInput>;
 }
 
-export interface NendoroidUpdateOneRequiredWithoutInteractionsInput {
-  create?: Maybe<NendoroidCreateWithoutInteractionsInput>;
-  update?: Maybe<NendoroidUpdateWithoutInteractionsDataInput>;
-  upsert?: Maybe<NendoroidUpsertWithoutInteractionsInput>;
-  connect?: Maybe<NendoroidWhereUniqueInput>;
-}
-
-export interface NendoroidUpdateWithoutInteractionsDataInput {
-  name?: Maybe<String>;
-  number?: Maybe<Int>;
-  formattedName?: Maybe<String>;
-  title?: Maybe<String>;
-  description?: Maybe<NendoroidUpdatedescriptionInput>;
-  images?: Maybe<NendoroidUpdateimagesInput>;
-  series?: Maybe<String>;
-  manufacturer?: Maybe<String>;
-  category?: Maybe<String>;
-  price?: Maybe<Int>;
-  releaseDate?: Maybe<DateTimeInput>;
-  specifications?: Maybe<String>;
-  sculptor?: Maybe<String>;
-  cooperation?: Maybe<String>;
-  planningProduction?: Maybe<String>;
-  releasedBy?: Maybe<String>;
-  distributedBy?: Maybe<String>;
-  srcUrl?: Maybe<String>;
-  range?: Maybe<String>;
-}
-
-export interface NendoroidUpdatedescriptionInput {
-  set?: Maybe<String[] | String>;
-}
-
-export interface NendoroidUpdateimagesInput {
-  set?: Maybe<String[] | String>;
-}
-
-export interface NendoroidUpsertWithoutInteractionsInput {
-  update: NendoroidUpdateWithoutInteractionsDataInput;
-  create: NendoroidCreateWithoutInteractionsInput;
-}
-
-export interface UserUpdateOneRequiredInput {
-  create?: Maybe<UserCreateInput>;
-  update?: Maybe<UserUpdateDataInput>;
-  upsert?: Maybe<UserUpsertNestedInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface UserUpdateDataInput {
-  firstName?: Maybe<String>;
-  lastName?: Maybe<String>;
-  pseudo?: Maybe<String>;
-  email?: Maybe<String>;
-  avatar?: Maybe<String>;
-  password?: Maybe<String>;
-}
-
-export interface UserUpsertNestedInput {
-  update: UserUpdateDataInput;
-  create: UserCreateInput;
-}
-
-export interface InteractionUpdateManyMutationInput {
-  type?: Maybe<InteractionType>;
-}
-
-export interface ManufacturerCreateInput {
+export interface SerieCreateInput {
   id?: Maybe<ID_Input>;
   name: String;
 }
 
-export interface ManufacturerUpdateInput {
-  name?: Maybe<String>;
-}
-
-export interface ManufacturerUpdateManyMutationInput {
-  name?: Maybe<String>;
+export interface NendoroidCreateManyInput {
+  create?: Maybe<NendoroidCreateInput[] | NendoroidCreateInput>;
+  connect?: Maybe<NendoroidWhereUniqueInput[] | NendoroidWhereUniqueInput>;
 }
 
 export interface NendoroidCreateInput {
@@ -1163,6 +1357,14 @@ export interface NendoroidCreateInput {
   interactions?: Maybe<InteractionCreateManyWithoutNendoroidInput>;
 }
 
+export interface NendoroidCreatedescriptionInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface NendoroidCreateimagesInput {
+  set?: Maybe<String[] | String>;
+}
+
 export interface InteractionCreateManyWithoutNendoroidInput {
   create?: Maybe<
     | InteractionCreateWithoutNendoroidInput[]
@@ -1177,7 +1379,90 @@ export interface InteractionCreateWithoutNendoroidInput {
   type: InteractionType;
 }
 
-export interface NendoroidUpdateInput {
+export interface ImageCreatetagsInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface FileCreateOneInput {
+  create?: Maybe<FileCreateInput>;
+  connect?: Maybe<FileWhereUniqueInput>;
+}
+
+export interface ImageUpdateInput {
+  likes?: Maybe<Int>;
+  views?: Maybe<Int>;
+  user?: Maybe<UserUpdateOneRequiredInput>;
+  serie?: Maybe<SerieUpdateOneRequiredInput>;
+  title?: Maybe<String>;
+  nendoroids?: Maybe<NendoroidUpdateManyInput>;
+  tags?: Maybe<ImageUpdatetagsInput>;
+  file?: Maybe<FileUpdateOneRequiredInput>;
+}
+
+export interface UserUpdateOneRequiredInput {
+  create?: Maybe<UserCreateInput>;
+  update?: Maybe<UserUpdateDataInput>;
+  upsert?: Maybe<UserUpsertNestedInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserUpdateDataInput {
+  firstName?: Maybe<String>;
+  lastName?: Maybe<String>;
+  pseudo?: Maybe<String>;
+  email?: Maybe<String>;
+  avatar?: Maybe<String>;
+  password?: Maybe<String>;
+}
+
+export interface UserUpsertNestedInput {
+  update: UserUpdateDataInput;
+  create: UserCreateInput;
+}
+
+export interface SerieUpdateOneRequiredInput {
+  create?: Maybe<SerieCreateInput>;
+  update?: Maybe<SerieUpdateDataInput>;
+  upsert?: Maybe<SerieUpsertNestedInput>;
+  connect?: Maybe<SerieWhereUniqueInput>;
+}
+
+export interface SerieUpdateDataInput {
+  name?: Maybe<String>;
+}
+
+export interface SerieUpsertNestedInput {
+  update: SerieUpdateDataInput;
+  create: SerieCreateInput;
+}
+
+export interface NendoroidUpdateManyInput {
+  create?: Maybe<NendoroidCreateInput[] | NendoroidCreateInput>;
+  update?: Maybe<
+    | NendoroidUpdateWithWhereUniqueNestedInput[]
+    | NendoroidUpdateWithWhereUniqueNestedInput
+  >;
+  upsert?: Maybe<
+    | NendoroidUpsertWithWhereUniqueNestedInput[]
+    | NendoroidUpsertWithWhereUniqueNestedInput
+  >;
+  delete?: Maybe<NendoroidWhereUniqueInput[] | NendoroidWhereUniqueInput>;
+  connect?: Maybe<NendoroidWhereUniqueInput[] | NendoroidWhereUniqueInput>;
+  set?: Maybe<NendoroidWhereUniqueInput[] | NendoroidWhereUniqueInput>;
+  disconnect?: Maybe<NendoroidWhereUniqueInput[] | NendoroidWhereUniqueInput>;
+  deleteMany?: Maybe<NendoroidScalarWhereInput[] | NendoroidScalarWhereInput>;
+  updateMany?: Maybe<
+    | NendoroidUpdateManyWithWhereNestedInput[]
+    | NendoroidUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface NendoroidUpdateWithWhereUniqueNestedInput {
+  where: NendoroidWhereUniqueInput;
+  data: NendoroidUpdateDataInput;
+}
+
+export interface NendoroidUpdateDataInput {
   name?: Maybe<String>;
   number?: Maybe<Int>;
   formattedName?: Maybe<String>;
@@ -1198,6 +1483,14 @@ export interface NendoroidUpdateInput {
   srcUrl?: Maybe<String>;
   range?: Maybe<String>;
   interactions?: Maybe<InteractionUpdateManyWithoutNendoroidInput>;
+}
+
+export interface NendoroidUpdatedescriptionInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface NendoroidUpdateimagesInput {
+  set?: Maybe<String[] | String>;
 }
 
 export interface InteractionUpdateManyWithoutNendoroidInput {
@@ -1293,6 +1586,440 @@ export interface InteractionUpdateManyDataInput {
   type?: Maybe<InteractionType>;
 }
 
+export interface NendoroidUpsertWithWhereUniqueNestedInput {
+  where: NendoroidWhereUniqueInput;
+  update: NendoroidUpdateDataInput;
+  create: NendoroidCreateInput;
+}
+
+export interface NendoroidScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  number?: Maybe<Int>;
+  number_not?: Maybe<Int>;
+  number_in?: Maybe<Int[] | Int>;
+  number_not_in?: Maybe<Int[] | Int>;
+  number_lt?: Maybe<Int>;
+  number_lte?: Maybe<Int>;
+  number_gt?: Maybe<Int>;
+  number_gte?: Maybe<Int>;
+  formattedName?: Maybe<String>;
+  formattedName_not?: Maybe<String>;
+  formattedName_in?: Maybe<String[] | String>;
+  formattedName_not_in?: Maybe<String[] | String>;
+  formattedName_lt?: Maybe<String>;
+  formattedName_lte?: Maybe<String>;
+  formattedName_gt?: Maybe<String>;
+  formattedName_gte?: Maybe<String>;
+  formattedName_contains?: Maybe<String>;
+  formattedName_not_contains?: Maybe<String>;
+  formattedName_starts_with?: Maybe<String>;
+  formattedName_not_starts_with?: Maybe<String>;
+  formattedName_ends_with?: Maybe<String>;
+  formattedName_not_ends_with?: Maybe<String>;
+  title?: Maybe<String>;
+  title_not?: Maybe<String>;
+  title_in?: Maybe<String[] | String>;
+  title_not_in?: Maybe<String[] | String>;
+  title_lt?: Maybe<String>;
+  title_lte?: Maybe<String>;
+  title_gt?: Maybe<String>;
+  title_gte?: Maybe<String>;
+  title_contains?: Maybe<String>;
+  title_not_contains?: Maybe<String>;
+  title_starts_with?: Maybe<String>;
+  title_not_starts_with?: Maybe<String>;
+  title_ends_with?: Maybe<String>;
+  title_not_ends_with?: Maybe<String>;
+  series?: Maybe<String>;
+  series_not?: Maybe<String>;
+  series_in?: Maybe<String[] | String>;
+  series_not_in?: Maybe<String[] | String>;
+  series_lt?: Maybe<String>;
+  series_lte?: Maybe<String>;
+  series_gt?: Maybe<String>;
+  series_gte?: Maybe<String>;
+  series_contains?: Maybe<String>;
+  series_not_contains?: Maybe<String>;
+  series_starts_with?: Maybe<String>;
+  series_not_starts_with?: Maybe<String>;
+  series_ends_with?: Maybe<String>;
+  series_not_ends_with?: Maybe<String>;
+  manufacturer?: Maybe<String>;
+  manufacturer_not?: Maybe<String>;
+  manufacturer_in?: Maybe<String[] | String>;
+  manufacturer_not_in?: Maybe<String[] | String>;
+  manufacturer_lt?: Maybe<String>;
+  manufacturer_lte?: Maybe<String>;
+  manufacturer_gt?: Maybe<String>;
+  manufacturer_gte?: Maybe<String>;
+  manufacturer_contains?: Maybe<String>;
+  manufacturer_not_contains?: Maybe<String>;
+  manufacturer_starts_with?: Maybe<String>;
+  manufacturer_not_starts_with?: Maybe<String>;
+  manufacturer_ends_with?: Maybe<String>;
+  manufacturer_not_ends_with?: Maybe<String>;
+  category?: Maybe<String>;
+  category_not?: Maybe<String>;
+  category_in?: Maybe<String[] | String>;
+  category_not_in?: Maybe<String[] | String>;
+  category_lt?: Maybe<String>;
+  category_lte?: Maybe<String>;
+  category_gt?: Maybe<String>;
+  category_gte?: Maybe<String>;
+  category_contains?: Maybe<String>;
+  category_not_contains?: Maybe<String>;
+  category_starts_with?: Maybe<String>;
+  category_not_starts_with?: Maybe<String>;
+  category_ends_with?: Maybe<String>;
+  category_not_ends_with?: Maybe<String>;
+  price?: Maybe<Int>;
+  price_not?: Maybe<Int>;
+  price_in?: Maybe<Int[] | Int>;
+  price_not_in?: Maybe<Int[] | Int>;
+  price_lt?: Maybe<Int>;
+  price_lte?: Maybe<Int>;
+  price_gt?: Maybe<Int>;
+  price_gte?: Maybe<Int>;
+  releaseDate?: Maybe<DateTimeInput>;
+  releaseDate_not?: Maybe<DateTimeInput>;
+  releaseDate_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  releaseDate_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  releaseDate_lt?: Maybe<DateTimeInput>;
+  releaseDate_lte?: Maybe<DateTimeInput>;
+  releaseDate_gt?: Maybe<DateTimeInput>;
+  releaseDate_gte?: Maybe<DateTimeInput>;
+  specifications?: Maybe<String>;
+  specifications_not?: Maybe<String>;
+  specifications_in?: Maybe<String[] | String>;
+  specifications_not_in?: Maybe<String[] | String>;
+  specifications_lt?: Maybe<String>;
+  specifications_lte?: Maybe<String>;
+  specifications_gt?: Maybe<String>;
+  specifications_gte?: Maybe<String>;
+  specifications_contains?: Maybe<String>;
+  specifications_not_contains?: Maybe<String>;
+  specifications_starts_with?: Maybe<String>;
+  specifications_not_starts_with?: Maybe<String>;
+  specifications_ends_with?: Maybe<String>;
+  specifications_not_ends_with?: Maybe<String>;
+  sculptor?: Maybe<String>;
+  sculptor_not?: Maybe<String>;
+  sculptor_in?: Maybe<String[] | String>;
+  sculptor_not_in?: Maybe<String[] | String>;
+  sculptor_lt?: Maybe<String>;
+  sculptor_lte?: Maybe<String>;
+  sculptor_gt?: Maybe<String>;
+  sculptor_gte?: Maybe<String>;
+  sculptor_contains?: Maybe<String>;
+  sculptor_not_contains?: Maybe<String>;
+  sculptor_starts_with?: Maybe<String>;
+  sculptor_not_starts_with?: Maybe<String>;
+  sculptor_ends_with?: Maybe<String>;
+  sculptor_not_ends_with?: Maybe<String>;
+  cooperation?: Maybe<String>;
+  cooperation_not?: Maybe<String>;
+  cooperation_in?: Maybe<String[] | String>;
+  cooperation_not_in?: Maybe<String[] | String>;
+  cooperation_lt?: Maybe<String>;
+  cooperation_lte?: Maybe<String>;
+  cooperation_gt?: Maybe<String>;
+  cooperation_gte?: Maybe<String>;
+  cooperation_contains?: Maybe<String>;
+  cooperation_not_contains?: Maybe<String>;
+  cooperation_starts_with?: Maybe<String>;
+  cooperation_not_starts_with?: Maybe<String>;
+  cooperation_ends_with?: Maybe<String>;
+  cooperation_not_ends_with?: Maybe<String>;
+  planningProduction?: Maybe<String>;
+  planningProduction_not?: Maybe<String>;
+  planningProduction_in?: Maybe<String[] | String>;
+  planningProduction_not_in?: Maybe<String[] | String>;
+  planningProduction_lt?: Maybe<String>;
+  planningProduction_lte?: Maybe<String>;
+  planningProduction_gt?: Maybe<String>;
+  planningProduction_gte?: Maybe<String>;
+  planningProduction_contains?: Maybe<String>;
+  planningProduction_not_contains?: Maybe<String>;
+  planningProduction_starts_with?: Maybe<String>;
+  planningProduction_not_starts_with?: Maybe<String>;
+  planningProduction_ends_with?: Maybe<String>;
+  planningProduction_not_ends_with?: Maybe<String>;
+  releasedBy?: Maybe<String>;
+  releasedBy_not?: Maybe<String>;
+  releasedBy_in?: Maybe<String[] | String>;
+  releasedBy_not_in?: Maybe<String[] | String>;
+  releasedBy_lt?: Maybe<String>;
+  releasedBy_lte?: Maybe<String>;
+  releasedBy_gt?: Maybe<String>;
+  releasedBy_gte?: Maybe<String>;
+  releasedBy_contains?: Maybe<String>;
+  releasedBy_not_contains?: Maybe<String>;
+  releasedBy_starts_with?: Maybe<String>;
+  releasedBy_not_starts_with?: Maybe<String>;
+  releasedBy_ends_with?: Maybe<String>;
+  releasedBy_not_ends_with?: Maybe<String>;
+  distributedBy?: Maybe<String>;
+  distributedBy_not?: Maybe<String>;
+  distributedBy_in?: Maybe<String[] | String>;
+  distributedBy_not_in?: Maybe<String[] | String>;
+  distributedBy_lt?: Maybe<String>;
+  distributedBy_lte?: Maybe<String>;
+  distributedBy_gt?: Maybe<String>;
+  distributedBy_gte?: Maybe<String>;
+  distributedBy_contains?: Maybe<String>;
+  distributedBy_not_contains?: Maybe<String>;
+  distributedBy_starts_with?: Maybe<String>;
+  distributedBy_not_starts_with?: Maybe<String>;
+  distributedBy_ends_with?: Maybe<String>;
+  distributedBy_not_ends_with?: Maybe<String>;
+  srcUrl?: Maybe<String>;
+  srcUrl_not?: Maybe<String>;
+  srcUrl_in?: Maybe<String[] | String>;
+  srcUrl_not_in?: Maybe<String[] | String>;
+  srcUrl_lt?: Maybe<String>;
+  srcUrl_lte?: Maybe<String>;
+  srcUrl_gt?: Maybe<String>;
+  srcUrl_gte?: Maybe<String>;
+  srcUrl_contains?: Maybe<String>;
+  srcUrl_not_contains?: Maybe<String>;
+  srcUrl_starts_with?: Maybe<String>;
+  srcUrl_not_starts_with?: Maybe<String>;
+  srcUrl_ends_with?: Maybe<String>;
+  srcUrl_not_ends_with?: Maybe<String>;
+  range?: Maybe<String>;
+  range_not?: Maybe<String>;
+  range_in?: Maybe<String[] | String>;
+  range_not_in?: Maybe<String[] | String>;
+  range_lt?: Maybe<String>;
+  range_lte?: Maybe<String>;
+  range_gt?: Maybe<String>;
+  range_gte?: Maybe<String>;
+  range_contains?: Maybe<String>;
+  range_not_contains?: Maybe<String>;
+  range_starts_with?: Maybe<String>;
+  range_not_starts_with?: Maybe<String>;
+  range_ends_with?: Maybe<String>;
+  range_not_ends_with?: Maybe<String>;
+  AND?: Maybe<NendoroidScalarWhereInput[] | NendoroidScalarWhereInput>;
+  OR?: Maybe<NendoroidScalarWhereInput[] | NendoroidScalarWhereInput>;
+  NOT?: Maybe<NendoroidScalarWhereInput[] | NendoroidScalarWhereInput>;
+}
+
+export interface NendoroidUpdateManyWithWhereNestedInput {
+  where: NendoroidScalarWhereInput;
+  data: NendoroidUpdateManyDataInput;
+}
+
+export interface NendoroidUpdateManyDataInput {
+  name?: Maybe<String>;
+  number?: Maybe<Int>;
+  formattedName?: Maybe<String>;
+  title?: Maybe<String>;
+  description?: Maybe<NendoroidUpdatedescriptionInput>;
+  images?: Maybe<NendoroidUpdateimagesInput>;
+  series?: Maybe<String>;
+  manufacturer?: Maybe<String>;
+  category?: Maybe<String>;
+  price?: Maybe<Int>;
+  releaseDate?: Maybe<DateTimeInput>;
+  specifications?: Maybe<String>;
+  sculptor?: Maybe<String>;
+  cooperation?: Maybe<String>;
+  planningProduction?: Maybe<String>;
+  releasedBy?: Maybe<String>;
+  distributedBy?: Maybe<String>;
+  srcUrl?: Maybe<String>;
+  range?: Maybe<String>;
+}
+
+export interface ImageUpdatetagsInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface FileUpdateOneRequiredInput {
+  create?: Maybe<FileCreateInput>;
+  update?: Maybe<FileUpdateDataInput>;
+  upsert?: Maybe<FileUpsertNestedInput>;
+  connect?: Maybe<FileWhereUniqueInput>;
+}
+
+export interface FileUpdateDataInput {
+  filename?: Maybe<String>;
+  mimetype?: Maybe<String>;
+  encoding?: Maybe<String>;
+  url?: Maybe<String>;
+}
+
+export interface FileUpsertNestedInput {
+  update: FileUpdateDataInput;
+  create: FileCreateInput;
+}
+
+export interface ImageUpdateManyMutationInput {
+  likes?: Maybe<Int>;
+  views?: Maybe<Int>;
+  title?: Maybe<String>;
+  tags?: Maybe<ImageUpdatetagsInput>;
+}
+
+export interface InteractionCreateInput {
+  id?: Maybe<ID_Input>;
+  nendoroid: NendoroidCreateOneWithoutInteractionsInput;
+  user: UserCreateOneInput;
+  type: InteractionType;
+}
+
+export interface NendoroidCreateOneWithoutInteractionsInput {
+  create?: Maybe<NendoroidCreateWithoutInteractionsInput>;
+  connect?: Maybe<NendoroidWhereUniqueInput>;
+}
+
+export interface NendoroidCreateWithoutInteractionsInput {
+  id?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  number?: Maybe<Int>;
+  formattedName: String;
+  title?: Maybe<String>;
+  description?: Maybe<NendoroidCreatedescriptionInput>;
+  images?: Maybe<NendoroidCreateimagesInput>;
+  series?: Maybe<String>;
+  manufacturer?: Maybe<String>;
+  category?: Maybe<String>;
+  price?: Maybe<Int>;
+  releaseDate?: Maybe<DateTimeInput>;
+  specifications?: Maybe<String>;
+  sculptor?: Maybe<String>;
+  cooperation?: Maybe<String>;
+  planningProduction?: Maybe<String>;
+  releasedBy?: Maybe<String>;
+  distributedBy?: Maybe<String>;
+  srcUrl?: Maybe<String>;
+  range?: Maybe<String>;
+}
+
+export interface InteractionUpdateInput {
+  nendoroid?: Maybe<NendoroidUpdateOneRequiredWithoutInteractionsInput>;
+  user?: Maybe<UserUpdateOneRequiredInput>;
+  type?: Maybe<InteractionType>;
+}
+
+export interface NendoroidUpdateOneRequiredWithoutInteractionsInput {
+  create?: Maybe<NendoroidCreateWithoutInteractionsInput>;
+  update?: Maybe<NendoroidUpdateWithoutInteractionsDataInput>;
+  upsert?: Maybe<NendoroidUpsertWithoutInteractionsInput>;
+  connect?: Maybe<NendoroidWhereUniqueInput>;
+}
+
+export interface NendoroidUpdateWithoutInteractionsDataInput {
+  name?: Maybe<String>;
+  number?: Maybe<Int>;
+  formattedName?: Maybe<String>;
+  title?: Maybe<String>;
+  description?: Maybe<NendoroidUpdatedescriptionInput>;
+  images?: Maybe<NendoroidUpdateimagesInput>;
+  series?: Maybe<String>;
+  manufacturer?: Maybe<String>;
+  category?: Maybe<String>;
+  price?: Maybe<Int>;
+  releaseDate?: Maybe<DateTimeInput>;
+  specifications?: Maybe<String>;
+  sculptor?: Maybe<String>;
+  cooperation?: Maybe<String>;
+  planningProduction?: Maybe<String>;
+  releasedBy?: Maybe<String>;
+  distributedBy?: Maybe<String>;
+  srcUrl?: Maybe<String>;
+  range?: Maybe<String>;
+}
+
+export interface NendoroidUpsertWithoutInteractionsInput {
+  update: NendoroidUpdateWithoutInteractionsDataInput;
+  create: NendoroidCreateWithoutInteractionsInput;
+}
+
+export interface InteractionUpdateManyMutationInput {
+  type?: Maybe<InteractionType>;
+}
+
+export interface ManufacturerCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+}
+
+export interface ManufacturerUpdateInput {
+  name?: Maybe<String>;
+}
+
+export interface ManufacturerUpdateManyMutationInput {
+  name?: Maybe<String>;
+}
+
+export interface NendoroidUpdateInput {
+  name?: Maybe<String>;
+  number?: Maybe<Int>;
+  formattedName?: Maybe<String>;
+  title?: Maybe<String>;
+  description?: Maybe<NendoroidUpdatedescriptionInput>;
+  images?: Maybe<NendoroidUpdateimagesInput>;
+  series?: Maybe<String>;
+  manufacturer?: Maybe<String>;
+  category?: Maybe<String>;
+  price?: Maybe<Int>;
+  releaseDate?: Maybe<DateTimeInput>;
+  specifications?: Maybe<String>;
+  sculptor?: Maybe<String>;
+  cooperation?: Maybe<String>;
+  planningProduction?: Maybe<String>;
+  releasedBy?: Maybe<String>;
+  distributedBy?: Maybe<String>;
+  srcUrl?: Maybe<String>;
+  range?: Maybe<String>;
+  interactions?: Maybe<InteractionUpdateManyWithoutNendoroidInput>;
+}
+
 export interface NendoroidUpdateManyMutationInput {
   name?: Maybe<String>;
   number?: Maybe<Int>;
@@ -1328,11 +2055,6 @@ export interface SculptorUpdateManyMutationInput {
   name?: Maybe<String>;
 }
 
-export interface SerieCreateInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-}
-
 export interface SerieUpdateInput {
   name?: Maybe<String>;
 }
@@ -1357,6 +2079,24 @@ export interface UserUpdateManyMutationInput {
   email?: Maybe<String>;
   avatar?: Maybe<String>;
   password?: Maybe<String>;
+}
+
+export interface FileSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<FileWhereInput>;
+  AND?: Maybe<FileSubscriptionWhereInput[] | FileSubscriptionWhereInput>;
+}
+
+export interface ImageSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ImageWhereInput>;
+  AND?: Maybe<ImageSubscriptionWhereInput[] | ImageSubscriptionWhereInput>;
 }
 
 export interface InteractionSubscriptionWhereInput {
@@ -1425,42 +2165,289 @@ export interface NodeNode {
   id: ID_Output;
 }
 
-export interface Interaction {
+export interface File {
   id: ID_Output;
-  type: InteractionType;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
+  filename: String;
+  mimetype: String;
+  encoding: String;
+  url: String;
 }
 
-export interface InteractionPromise extends Promise<Interaction>, Fragmentable {
+export interface FilePromise extends Promise<File>, Fragmentable {
   id: () => Promise<ID_Output>;
-  nendoroid: <T = NendoroidPromise>() => T;
-  user: <T = UserPromise>() => T;
-  type: () => Promise<InteractionType>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
+  filename: () => Promise<String>;
+  mimetype: () => Promise<String>;
+  encoding: () => Promise<String>;
+  url: () => Promise<String>;
 }
 
-export interface InteractionSubscription
-  extends Promise<AsyncIterator<Interaction>>,
+export interface FileSubscription
+  extends Promise<AsyncIterator<File>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  nendoroid: <T = NendoroidSubscription>() => T;
-  user: <T = UserSubscription>() => T;
-  type: () => Promise<AsyncIterator<InteractionType>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  filename: () => Promise<AsyncIterator<String>>;
+  mimetype: () => Promise<AsyncIterator<String>>;
+  encoding: () => Promise<AsyncIterator<String>>;
+  url: () => Promise<AsyncIterator<String>>;
 }
 
-export interface InteractionNullablePromise
-  extends Promise<Interaction | null>,
+export interface FileNullablePromise
+  extends Promise<File | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  nendoroid: <T = NendoroidPromise>() => T;
-  user: <T = UserPromise>() => T;
-  type: () => Promise<InteractionType>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
+  filename: () => Promise<String>;
+  mimetype: () => Promise<String>;
+  encoding: () => Promise<String>;
+  url: () => Promise<String>;
+}
+
+export interface FileConnection {
+  pageInfo: PageInfo;
+  edges: FileEdge[];
+}
+
+export interface FileConnectionPromise
+  extends Promise<FileConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<FileEdge>>() => T;
+  aggregate: <T = AggregateFilePromise>() => T;
+}
+
+export interface FileConnectionSubscription
+  extends Promise<AsyncIterator<FileConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<FileEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateFileSubscription>() => T;
+}
+
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
+}
+
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
+}
+
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
+    Fragmentable {
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface FileEdge {
+  node: File;
+  cursor: String;
+}
+
+export interface FileEdgePromise extends Promise<FileEdge>, Fragmentable {
+  node: <T = FilePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface FileEdgeSubscription
+  extends Promise<AsyncIterator<FileEdge>>,
+    Fragmentable {
+  node: <T = FileSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateFile {
+  count: Int;
+}
+
+export interface AggregateFilePromise
+  extends Promise<AggregateFile>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateFileSubscription
+  extends Promise<AsyncIterator<AggregateFile>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface Image {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  likes: Int;
+  views: Int;
+  title: String;
+  tags: String[];
+}
+
+export interface ImagePromise extends Promise<Image>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  likes: () => Promise<Int>;
+  views: () => Promise<Int>;
+  user: <T = UserPromise>() => T;
+  serie: <T = SeriePromise>() => T;
+  title: () => Promise<String>;
+  nendoroids: <T = FragmentableArray<Nendoroid>>(args?: {
+    where?: NendoroidWhereInput;
+    orderBy?: NendoroidOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  tags: () => Promise<String[]>;
+  file: <T = FilePromise>() => T;
+}
+
+export interface ImageSubscription
+  extends Promise<AsyncIterator<Image>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  likes: () => Promise<AsyncIterator<Int>>;
+  views: () => Promise<AsyncIterator<Int>>;
+  user: <T = UserSubscription>() => T;
+  serie: <T = SerieSubscription>() => T;
+  title: () => Promise<AsyncIterator<String>>;
+  nendoroids: <T = Promise<AsyncIterator<NendoroidSubscription>>>(args?: {
+    where?: NendoroidWhereInput;
+    orderBy?: NendoroidOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  tags: () => Promise<AsyncIterator<String[]>>;
+  file: <T = FileSubscription>() => T;
+}
+
+export interface ImageNullablePromise
+  extends Promise<Image | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  likes: () => Promise<Int>;
+  views: () => Promise<Int>;
+  user: <T = UserPromise>() => T;
+  serie: <T = SeriePromise>() => T;
+  title: () => Promise<String>;
+  nendoroids: <T = FragmentableArray<Nendoroid>>(args?: {
+    where?: NendoroidWhereInput;
+    orderBy?: NendoroidOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  tags: () => Promise<String[]>;
+  file: <T = FilePromise>() => T;
+}
+
+export interface User {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  firstName?: String;
+  lastName?: String;
+  pseudo?: String;
+  email: String;
+  avatar?: String;
+  password: String;
+}
+
+export interface UserPromise extends Promise<User>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  firstName: () => Promise<String>;
+  lastName: () => Promise<String>;
+  pseudo: () => Promise<String>;
+  email: () => Promise<String>;
+  avatar: () => Promise<String>;
+  password: () => Promise<String>;
+}
+
+export interface UserSubscription
+  extends Promise<AsyncIterator<User>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  firstName: () => Promise<AsyncIterator<String>>;
+  lastName: () => Promise<AsyncIterator<String>>;
+  pseudo: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  avatar: () => Promise<AsyncIterator<String>>;
+  password: () => Promise<AsyncIterator<String>>;
+}
+
+export interface UserNullablePromise
+  extends Promise<User | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  firstName: () => Promise<String>;
+  lastName: () => Promise<String>;
+  pseudo: () => Promise<String>;
+  email: () => Promise<String>;
+  avatar: () => Promise<String>;
+  password: () => Promise<String>;
+}
+
+export interface Serie {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  name: String;
+}
+
+export interface SeriePromise extends Promise<Serie>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  name: () => Promise<String>;
+}
+
+export interface SerieSubscription
+  extends Promise<AsyncIterator<Serie>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  name: () => Promise<AsyncIterator<String>>;
+}
+
+export interface SerieNullablePromise
+  extends Promise<Serie | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  name: () => Promise<String>;
 }
 
 export interface Nendoroid {
@@ -1594,56 +2581,96 @@ export interface NendoroidNullablePromise
   }) => T;
 }
 
-export interface User {
+export interface Interaction {
   id: ID_Output;
+  type: InteractionType;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
-  firstName?: String;
-  lastName?: String;
-  pseudo?: String;
-  email: String;
-  avatar?: String;
-  password: String;
 }
 
-export interface UserPromise extends Promise<User>, Fragmentable {
+export interface InteractionPromise extends Promise<Interaction>, Fragmentable {
   id: () => Promise<ID_Output>;
+  nendoroid: <T = NendoroidPromise>() => T;
+  user: <T = UserPromise>() => T;
+  type: () => Promise<InteractionType>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
-  firstName: () => Promise<String>;
-  lastName: () => Promise<String>;
-  pseudo: () => Promise<String>;
-  email: () => Promise<String>;
-  avatar: () => Promise<String>;
-  password: () => Promise<String>;
 }
 
-export interface UserSubscription
-  extends Promise<AsyncIterator<User>>,
+export interface InteractionSubscription
+  extends Promise<AsyncIterator<Interaction>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  nendoroid: <T = NendoroidSubscription>() => T;
+  user: <T = UserSubscription>() => T;
+  type: () => Promise<AsyncIterator<InteractionType>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  firstName: () => Promise<AsyncIterator<String>>;
-  lastName: () => Promise<AsyncIterator<String>>;
-  pseudo: () => Promise<AsyncIterator<String>>;
-  email: () => Promise<AsyncIterator<String>>;
-  avatar: () => Promise<AsyncIterator<String>>;
-  password: () => Promise<AsyncIterator<String>>;
 }
 
-export interface UserNullablePromise
-  extends Promise<User | null>,
+export interface InteractionNullablePromise
+  extends Promise<Interaction | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  nendoroid: <T = NendoroidPromise>() => T;
+  user: <T = UserPromise>() => T;
+  type: () => Promise<InteractionType>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
-  firstName: () => Promise<String>;
-  lastName: () => Promise<String>;
-  pseudo: () => Promise<String>;
-  email: () => Promise<String>;
-  avatar: () => Promise<String>;
-  password: () => Promise<String>;
+}
+
+export interface ImageConnection {
+  pageInfo: PageInfo;
+  edges: ImageEdge[];
+}
+
+export interface ImageConnectionPromise
+  extends Promise<ImageConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ImageEdge>>() => T;
+  aggregate: <T = AggregateImagePromise>() => T;
+}
+
+export interface ImageConnectionSubscription
+  extends Promise<AsyncIterator<ImageConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ImageEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateImageSubscription>() => T;
+}
+
+export interface ImageEdge {
+  node: Image;
+  cursor: String;
+}
+
+export interface ImageEdgePromise extends Promise<ImageEdge>, Fragmentable {
+  node: <T = ImagePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ImageEdgeSubscription
+  extends Promise<AsyncIterator<ImageEdge>>,
+    Fragmentable {
+  node: <T = ImageSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateImage {
+  count: Int;
+}
+
+export interface AggregateImagePromise
+  extends Promise<AggregateImage>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateImageSubscription
+  extends Promise<AsyncIterator<AggregateImage>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface InteractionConnection {
@@ -1665,29 +2692,6 @@ export interface InteractionConnectionSubscription
   pageInfo: <T = PageInfoSubscription>() => T;
   edges: <T = Promise<AsyncIterator<InteractionEdgeSubscription>>>() => T;
   aggregate: <T = AggregateInteractionSubscription>() => T;
-}
-
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
-}
-
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
-    Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface InteractionEdge {
@@ -1959,38 +2963,6 @@ export interface AggregateSculptorSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface Serie {
-  id: ID_Output;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-  name: String;
-}
-
-export interface SeriePromise extends Promise<Serie>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  name: () => Promise<String>;
-}
-
-export interface SerieSubscription
-  extends Promise<AsyncIterator<Serie>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  name: () => Promise<AsyncIterator<String>>;
-}
-
-export interface SerieNullablePromise
-  extends Promise<Serie | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  name: () => Promise<String>;
-}
-
 export interface SerieConnection {
   pageInfo: PageInfo;
   edges: SerieEdge[];
@@ -2113,6 +3085,124 @@ export interface BatchPayloadSubscription
   extends Promise<AsyncIterator<BatchPayload>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Long>>;
+}
+
+export interface FileSubscriptionPayload {
+  mutation: MutationType;
+  node: File;
+  updatedFields: String[];
+  previousValues: FilePreviousValues;
+}
+
+export interface FileSubscriptionPayloadPromise
+  extends Promise<FileSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = FilePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = FilePreviousValuesPromise>() => T;
+}
+
+export interface FileSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<FileSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = FileSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = FilePreviousValuesSubscription>() => T;
+}
+
+export interface FilePreviousValues {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  filename: String;
+  mimetype: String;
+  encoding: String;
+  url: String;
+}
+
+export interface FilePreviousValuesPromise
+  extends Promise<FilePreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  filename: () => Promise<String>;
+  mimetype: () => Promise<String>;
+  encoding: () => Promise<String>;
+  url: () => Promise<String>;
+}
+
+export interface FilePreviousValuesSubscription
+  extends Promise<AsyncIterator<FilePreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  filename: () => Promise<AsyncIterator<String>>;
+  mimetype: () => Promise<AsyncIterator<String>>;
+  encoding: () => Promise<AsyncIterator<String>>;
+  url: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ImageSubscriptionPayload {
+  mutation: MutationType;
+  node: Image;
+  updatedFields: String[];
+  previousValues: ImagePreviousValues;
+}
+
+export interface ImageSubscriptionPayloadPromise
+  extends Promise<ImageSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ImagePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ImagePreviousValuesPromise>() => T;
+}
+
+export interface ImageSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ImageSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ImageSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ImagePreviousValuesSubscription>() => T;
+}
+
+export interface ImagePreviousValues {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  likes: Int;
+  views: Int;
+  title: String;
+  tags: String[];
+}
+
+export interface ImagePreviousValuesPromise
+  extends Promise<ImagePreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  likes: () => Promise<Int>;
+  views: () => Promise<Int>;
+  title: () => Promise<String>;
+  tags: () => Promise<String[]>;
+}
+
+export interface ImagePreviousValuesSubscription
+  extends Promise<AsyncIterator<ImagePreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  likes: () => Promise<AsyncIterator<Int>>;
+  views: () => Promise<AsyncIterator<Int>>;
+  title: () => Promise<AsyncIterator<String>>;
+  tags: () => Promise<AsyncIterator<String[]>>;
 }
 
 export interface InteractionSubscriptionPayload {
@@ -2544,6 +3634,14 @@ export const models: Model[] = [
   },
   {
     name: "Sculptor",
+    embedded: false
+  },
+  {
+    name: "File",
+    embedded: false
+  },
+  {
+    name: "Image",
     embedded: false
   },
   {

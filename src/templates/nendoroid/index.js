@@ -4,7 +4,7 @@ import { Link } from "gatsby";
 import { useQuery } from "@apollo/react-hooks";
 import Carousel from "../../components/carousel/index";
 import { GET_INTERACTIONS_QUERY } from "../../apollo/queries/index";
-import { useStaticQuery, graphql } from "gatsby";
+import moment from "moment";
 
 const More = props => {
   return (
@@ -75,8 +75,8 @@ const Nendoroid = ({ pageContext: { manufacturer, releaseDate, id, formattedName
                 <More title="Series" value={series} />
                 <More title="Manufacturer" value={manufacturer} />
                 <More title="Category" value={category} />
-                <More title="Price" value={price} />
-                <More title="Release Date" value={releaseDate} />
+                <More title="Price" value={`¥${price} (Before Tax)`} />
+                <More title="Release Date" value={moment(releaseDate).format('YYYY/MM')} />
                 <More title="Sculptor" value={sculptor} />
                 <More title="Cooperation" value={cooperation} />
                 <More title="Specifications" value={specifications} />

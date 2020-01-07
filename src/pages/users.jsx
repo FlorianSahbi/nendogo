@@ -22,7 +22,10 @@ const UsersPage = ({
 }) => {
   return (
     <Layout header>
-      <section className={classes.usersContainer}>
+      <section
+        style={{ background: "#121415", minHeight: "100vh" }}
+        className={classes.usersContainer}
+      >
         <div className={classes.wrapper}>{renderCards(users)}</div>
       </section>
     </Layout>
@@ -32,7 +35,7 @@ const UsersPage = ({
 export const query = graphql`
   {
     prisma {
-      users(orderBy: createdAt_DESC, skip: 0, first: 10) {
+      users(orderBy: createdAt_DESC) {
         avatar
         id
         pseudo

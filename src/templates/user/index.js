@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useCallback } from "react";
 import classes from "./style.module.css";
 import Carousel from "../../components/carousel/index";
 import Card from "../../components/card/nendoroid";
@@ -23,10 +23,46 @@ const nendoStories = [
   "https://live.staticflickr.com/1957/44819518934_62037c288f_b.jpg"
 ];
 
+
+import { useDropzone } from "react-dropzone";
+import S3 from "react-aws-s3";
+import { useMutation } from "@apollo/react-hooks";
+
+const config = {
+  bucketName: "nendogo",
+  dirName: "beelphiew",
+  region: "eu-west-3",
+  accessKeyId: "AKIAIQNA2XPZ2HWNDTIA",
+  secretAccessKey: "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",
+  s3Url: "https://nendogo.s3.eu-west-3.amazonaws.com/"
+};
+const ReactS3Client = new S3(config);
+
+
 const User = (props) => {
   const currentUser = useContext(UserContext);
   const [scrolled, setScrolled] = useState(false);
   const [selected, setSelected] = useState("like");
+
+  const [img, setImg] = useState(props.pageContext.avatar)
+
+
+
+  const onDrop = useCallback(
+    ([file]) => {
+      console.log(file)
+      ReactS3Client.uploadFile(file, "yul")
+        .then(data => {
+          console.log(data)
+          setImg(data.location)
+          
+        })
+        .catch(err => console.error(err));
+    }
+  );
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
+
 
   let {
     error: errorNendoL,
@@ -74,10 +110,26 @@ const User = (props) => {
     <Layout footer={false}>
       <div className={classes.container}>
         <div className={classes.wrapper}>
+
+
+
+
+          <div {...getRootProps()}>
+            <input {...getInputProps()} />
+            {isDragActive ? (
+              <p>Drop the files here ...</p>
+            ) : (
+                <p>Drag 'n' drop some files here, or click to select files</p>
+              )}
+          </div>
+
+
+
+
           <div className={scrolled ? classes.hA : classes.imgWrapper}>
             <img src={imgUrl} alt="dunno" />
             <div className={scrolled ? classes.ppA : classes.profileImg}>
-              <img src={props.pageContext.avatar} alt="dunnon" />
+              <img src={img} alt="dunnon" />
             </div>
           </div>
 

@@ -1,12 +1,14 @@
 .container {
   height: 100%;
   width: 100%;
+  min-height: 200px;
   border-radius: 10px;
   position: relative;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: white;
 }
 
 .container img {
@@ -124,4 +126,13 @@
   .container {
     width: 190px;
   }
+}
+
+.MuiSkeleton-root {
+  height: 100%;
+  display: block;
+  background-color: rgba(0, 0, 0, 0.13);
+  width: 100%;
+  position: absolute;
+  z-index: 999;
 }

@@ -23,7 +23,10 @@ const ManufacturersPage = ({
 
   return (
     <Layout header={true}>
-      <section className={classes.nendoroidsContainer}>
+      <section
+        style={{ background: "#121415", minHeight: "100vh" }}
+        className={classes.nendoroidsContainer}
+      >
         <div className={classes.wrapper}>
           {renderCards(manufacturers, currentUser)}
         </div>
@@ -35,7 +38,7 @@ const ManufacturersPage = ({
 export const query = graphql`
   {
     prisma {
-      manufacturers(orderBy: name_ASC, skip: 0, first: 10) {
+      manufacturers(orderBy: name_ASC) {
         name
         id
       }

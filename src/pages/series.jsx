@@ -25,7 +25,10 @@ const SeriesPage = ({
 
   return (
     <Layout header={true}>
-      <section className={classes.nendoroidsContainer}>
+      <section
+        style={{ background: "#121415", minHeight: "100vh" }}
+        className={classes.nendoroidsContainer}
+      >
         <div className={classes.wrapper}>
           {renderCards(series, currentUser)}
         </div>
@@ -37,7 +40,7 @@ const SeriesPage = ({
 export const query = graphql`
   {
     prisma {
-      series(orderBy: name_ASC, skip: 0, first: 10) {
+      series(orderBy: name_ASC) {
         name
         id
       }

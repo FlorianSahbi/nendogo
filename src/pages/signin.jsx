@@ -3,6 +3,14 @@ import classes from "./signin.module.css";
 import { useMutation } from "@apollo/react-hooks";
 import { SIGNIN_MUTATION } from "../apollo/queries/index";
 
+import Button from "@material-ui/core/Button";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+import { makeStyles } from "@material-ui/core/styles";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const nendoStories = [
   "https://lh5.googleusercontent.com/-TzOpjinrBhE/UTlrvrbQs0I/AAAAAAAAA1U/8cmIq__9KoM/s1617/IMG_0539.jpg",
@@ -14,9 +22,39 @@ const nendoStories = [
 ];
 
 const SigninPage = () => {
-  console.log("render signin")
+  console.log("render signin");
   const [pseudo, setPseudo] = useState("");
   const [password, setPassword] = useState("");
+
+  const [open, setOpen] = React.useState(false);
+  const [open2, setOpen2] = React.useState(false);
+
+  const handleClick = message => {
+    if (message === "GraphQL error: No such user found") {
+      setOpen(true);
+    }
+    if (message === "GraphQL error: Invalid password") {
+      setOpen2(true);
+    } else {
+      console.log("jsp");
+    }
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const handleClose2 = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen2(false);
+  };
 
   const [signin] = useMutation(SIGNIN_MUTATION, {
     onCompleted: data => {
@@ -31,6 +69,10 @@ const SigninPage = () => {
         localStorage.setItem("isLoggedIn", "true");
         window.location.href = "http://localhost:8000/nendoroids";
       }
+    },
+    onError: error => {
+      console.log(error.message);
+      handleClick(error.message);
     }
   });
 
@@ -125,8 +167,19 @@ const SigninPage = () => {
           </form>
         </div>
       </div>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} color="error">
+          Cet utilisateur n'existe pas.
+        </Alert>
+      </Snackbar>
+
+      <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}>
+        <Alert onClose={handleClose2} color="error">
+          Mauvaise password.
+        </Alert>
+      </Snackbar>
     </section>
   );
-}
+};
 
 export default SigninPage;

@@ -1,9 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Layout from "../components/layout";
 import classes from "./nendoroids.module.css";
 import Card from "../components/card/nendoroid";
 import { UserContext } from "../components/layout/index";
 import { graphql } from "gatsby";
+
+import Skeleton from "@material-ui/lab/Skeleton";
 
 const isLikedBy = (i, userId) => {
   let b = [...i.filter(e => e.user.id === userId && e.type === "LIKE")][0];
@@ -39,6 +41,13 @@ const isOwnedBy = (i, userId) => {
   }
 };
 
+const handleLoading = () => {
+  const imgs = [...document.querySelectorAll(`#con img`)];
+  // console.log(imgs)
+  const tab = [...imgs.filter(i => i.complete === false)];
+  console.log(tab);
+};
+
 const renderCards = (nendoroids, currentUser) => {
   const cards = nendoroids.map(
     ({ id, formattedName, number, images, interactions }) => {
@@ -50,6 +59,7 @@ const renderCards = (nendoroids, currentUser) => {
           number={number}
           images={images}
           isLiked={isLikedBy(interactions, currentUser.id)}
+          isLoaded={handleLoading}
         />
       );
     }
@@ -65,11 +75,19 @@ const NendoroidsPage = ({
   console.log("render Nendoroids");
 
   const currentUser = useContext(UserContext);
+  const [isLoading, setIsLoading] = useState(true);
 
   return (
     <Layout header={true}>
-      <section className={classes.nendoroidsContainer}>
-        <div className={classes.wrapper}>
+      <section
+        style={{ background: "#121415", minHeight: "100vh" }}
+        className={classes.nendoroidsContainer}
+      >
+        <div id="con" className={classes.wrapper}>
+          {/* <Skeleton variant="text" />
+          <Skeleton variant="circle" width={40} height={40} />
+          <Skeleton variant="rect" width={210} height={118} /> */}
+
           {renderCards(nendoroids, currentUser)}
         </div>
       </section>
@@ -80,7 +98,7 @@ const NendoroidsPage = ({
 export const query = graphql`
   {
     prisma {
-      nendoroids(orderBy: number_ASC, skip: 0, first: 50) {
+      nendoroids(orderBy: number_ASC) {
         id
         formattedName
         number
