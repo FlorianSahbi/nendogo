@@ -157,16 +157,28 @@ export const GET_NENDOROIDS_BY_RANGE_QUERY = gql`
 `;
 
 export const GET_SERIES_QUERY = gql`
-  {
-    getSeries {
-      series {
-        id
-        name
-      }
-      count
+  query GetSeries {
+  prisma {
+    series(orderBy: name_ASC, skip: 0, first: 10) {
+      name
+      id
     }
   }
+}
 `;
+
+export const GET_MANU_QUERRY = gql`
+query GetManu($manuName: String) {
+  prisma {
+    nendoroids(where: {manufacturer_contains: "Good Smile Company"}) {
+      id
+      formattedName
+      number
+      images
+    }
+  }
+}
+`
 
 export const GET_MANUFACTURERS_QUERY = gql`
   {
@@ -192,18 +204,7 @@ export const GET_SCULPTORS_QUERY = gql`
   }
 `;
 
-export const GET_MANU_QUERRY = gql`
-query GetManu($manuName: String) {
-  prisma {
-    nendoroids(where: {manufacturer_contains: "Good Smile Company"}) {
-      id
-      formattedName
-      number
-      images
-    }
-  }
-}
-`
+
 
 
 export const UPLOAD_FILE = gql`

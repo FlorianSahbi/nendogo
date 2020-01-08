@@ -18,7 +18,6 @@ const Header = () => {
           <Link to="/series/">Series </Link>
           <Link to="/manufacturers/">Manufacturers </Link>
           <Link to="/sculptors/">Sculptors </Link>
-          <Link to="/series/">Series </Link>
         </div>
 
         <div className={classes.column}>

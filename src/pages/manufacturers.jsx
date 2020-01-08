@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useLazyQuery } from "@apollo/react-hooks";
+import React, { useContext } from "react";
 import Layout from "../components/layout";
 import classes from "./nendoroids.module.css";
 import Card from "../components/card/serie";
-import { GET_MANUFACTURERS_QUERY } from "../apollo/queries/index";
 import { UserContext } from "../components/layout/index";
+import { graphql } from "gatsby";
 
 const renderCards = (nendoroids, currentUser) => {
   const cards = nendoroids.map(({ id, name }) => {
@@ -13,44 +12,35 @@ const renderCards = (nendoroids, currentUser) => {
   return cards;
 };
 
-const ManufacturersPage = () => {
+const ManufacturersPage = ({
+  data: {
+    prisma: { manufacturers }
+  }
+}) => {
   console.log("render Series");
 
   const currentUser = useContext(UserContext);
-
-  const [manufacturers, setManufacturers] = useState(null);
-
-  const [getManufacturers, { loading, data }] = useLazyQuery(
-    GET_MANUFACTURERS_QUERY,
-    {
-      onCompleted: data => {
-        setManufacturers(data);
-      }
-    }
-  );
-
-  useEffect(() => {
-    getManufacturers();
-  }, []);
-
-  if (loading) return <p style={{ color: "white" }}>Loading...</p>;
-
-  console.log(data);
 
   return (
     <Layout header={true}>
       <section className={classes.nendoroidsContainer}>
         <div className={classes.wrapper}>
-          {manufacturers &&
-            manufacturers.getManufacturers &&
-            renderCards(
-              manufacturers.getManufacturers.manufacturers,
-              currentUser
-            )}
+          {renderCards(manufacturers, currentUser)}
         </div>
       </section>
     </Layout>
   );
 };
+
+export const query = graphql`
+  {
+    prisma {
+      manufacturers(orderBy: name_ASC, skip: 0, first: 10) {
+        name
+        id
+      }
+    }
+  }
+`;
 
 export default ManufacturersPage;
