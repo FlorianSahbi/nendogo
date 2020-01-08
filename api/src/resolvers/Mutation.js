@@ -70,7 +70,6 @@ async function deleteInteraction(parent, args, context, info) {
 }
 
 async function uploadFile(_, { file }) {
-  console.log("hello")
   const { createReadStream, filename } = await file;
   await new Promise(res =>
     createReadStream()

@@ -17,11 +17,9 @@ const SeriesPage = ({
     prisma: { series }
   }
 }) => {
-  console.log("render Series");
 
   const currentUser = useContext(UserContext);
 
-  console.log(series);
 
   return (
     <Layout header={true}>

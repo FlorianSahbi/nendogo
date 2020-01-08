@@ -3,6 +3,8 @@ import classes from "./users.module.css";
 import Layout from "../components/layout";
 import Card from "../components/card/user";
 import { graphql } from "gatsby";
+import { useQuery } from "@apollo/react-hooks";
+import { GET_USERS_QUERY } from "../apollo/queries/index";
 
 const renderCards = userArray => {
   return userArray.map(user => (
@@ -15,11 +17,31 @@ const renderCards = userArray => {
   ));
 };
 
-const UsersPage = ({
-  data: {
-    prisma: { users }
+const UsersPage = () => {
+
+  const { error, loading, data } = useQuery(GET_USERS_QUERY, {
+    onCompleted: data => {
+      
+    },
+    onError: error => {
+      
+    }
+  });
+
+  if (error) {
+    return (
+      <>
+        <span>err</span>
+      </>
+    );
   }
-}) => {
+  if (loading) {
+    return <>loading...</>;
+  }
+  let {
+    getUsers: { users }
+  } = data;
+
   return (
     <Layout header>
       <section

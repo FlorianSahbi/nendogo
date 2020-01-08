@@ -50,10 +50,8 @@ const User = (props) => {
 
   const onDrop = useCallback(
     ([file]) => {
-      console.log(file)
       ReactS3Client.uploadFile(file, "yul")
         .then(data => {
-          console.log(data)
           setImg(data.location)
           
         })

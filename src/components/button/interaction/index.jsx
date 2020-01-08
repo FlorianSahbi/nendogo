@@ -13,7 +13,6 @@ const InteractionButton = props => {
   const [createInteraction] = useMutation(CREATE_INTERACTION_MUTATION);
   const [deleteInteraction] = useMutation(DELETE_INTERACTION_MUTATION);
 
-  // console.log(props.isActive.interactionId)
 
   const handleClick = type => {
     isActive ? setIsActive(false) : setIsActive(true);

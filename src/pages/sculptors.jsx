@@ -17,7 +17,6 @@ const SculptorsPage = ({
     prisma: { sculptors }
   }
 }) => {
-  console.log("render Sculptor");
 
   const currentUser = useContext(UserContext);
 

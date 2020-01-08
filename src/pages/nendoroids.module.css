@@ -7,7 +7,7 @@
   padding: 1em;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: auto;
+  grid-auto-rows: 350px;
 
   grid-column-gap: 1em;
   grid-row-gap: 1em;

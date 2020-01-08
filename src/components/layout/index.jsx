@@ -23,7 +23,6 @@ const logout = () => {
 };
 
 export default function Layout({ children, header, footer }) {
-  console.log("render Layout");
 
   return (
     <IconContext.Provider value={{ className: "react-icons" }}>

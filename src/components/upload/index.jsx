@@ -55,7 +55,6 @@ const Upload = () => {
       uploadFile({ variables: { file } });
       ReactS3Client.uploadFile(file, newFileName)
         .then(data => {
-          // console.log({ data, file });
           let object = {
             id: "msofjkeozjvnqpf",
             bucket: data.bucket,
@@ -83,7 +82,6 @@ const Upload = () => {
               url: data.location
             }
           };
-          console.log(object);
         })
         .catch(err => console.error(err));
     },
@@ -102,7 +100,9 @@ const Upload = () => {
         )}
       </div>
 
-      <FormControl onSubmit={(e) => console.log(e)}>
+      <FormControl onSubmit={(e) => {
+        
+      }}>
         <TextField id="outlined-basic" label="Outlined" variant="outlined" />
         <Autocomplete
           multiple

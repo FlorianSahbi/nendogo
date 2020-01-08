@@ -2,7 +2,6 @@ import React from "react";
 import classes from "./style.module.css";
 import { Link } from "gatsby";
 import AniLink from "gatsby-plugin-transition-link/AniLink";
-
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import PeopleAltRoundedIcon from "@material-ui/icons/PeopleAltRounded";
@@ -11,8 +10,49 @@ import TitleRoundedIcon from "@material-ui/icons/TitleRounded";
 import ApartmentRoundedIcon from "@material-ui/icons/ApartmentRounded";
 import BrushRoundedIcon from "@material-ui/icons/BrushRounded";
 import VpnKeyRoundedIcon from "@material-ui/icons/VpnKeyRounded";
+import Avatar from "@material-ui/core/Avatar";
+import PersonRoundedIcon from "@material-ui/icons/PersonRounded";
+import ExitToAppRoundedIcon from "@material-ui/icons/ExitToAppRounded";
+
+import Auth from "../../globalStates/useAuth";
+
+const handleLogout = () => {
+  localStorage.removeItem("user");
+  localStorage.setItem("isLoggedIn", "false");
+};
+
+const ID = () => {
+  let currentUser = Auth.useContainer();
+  if (currentUser.isAuth) {
+    return (
+      <>
+        <Button startIcon={<PersonRoundedIcon />}>
+          {currentUser.user.pseudo}
+        </Button>
+        <Avatar alt={currentUser.user.pseudo} src={currentUser.user.avatar} />
+        <Button
+          onClick={() => {
+            handleLogout();
+            currentUser.signout();
+            currentUser.setCurrentUser(undefined);
+          }}
+          startIcon={<ExitToAppRoundedIcon />}
+        >
+          Logout
+        </Button>
+      </>
+    );
+  } else {
+    return (
+      <AniLink cover direction="down" bg="#FFC0CC" to="/signin/">
+        <Button startIcon={<VpnKeyRoundedIcon />}>Login</Button>
+      </AniLink>
+    );
+  }
+};
 
 const Header = () => {
+  const auth = Auth.useContainer();
   return (
     <header className={classes.container}>
       <div className={classes.wrapper}>
@@ -35,9 +75,13 @@ const Header = () => {
           <AniLink cover direction="down" bg="#FFC0CC" to="/sculptors/">
             <Button startIcon={<BrushRoundedIcon />}>Sculptors</Button>
           </AniLink>
-          <AniLink cover direction="down" bg="#FFC0CC" to="/signin/">
-            <Button startIcon={<VpnKeyRoundedIcon />}>Login</Button>
-          </AniLink>
+          <Button
+            onClick={() => auth.getCurrentUser()}
+            startIcon={<ExitToAppRoundedIcon />}
+          >
+            info
+          </Button>
+          <ID auth={auth} />
         </div>
       </div>
     </header>

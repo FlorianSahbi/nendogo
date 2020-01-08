@@ -6,12 +6,9 @@ import Layout from "../components/layout";
 import { useState } from "react";
 
 const IndexPage = () => {
-  console.log("render Index");
 
   useEffect(() => {
-    console.log("did mount");
     return () => {
-      console.log("unmount");
     };
   });
 

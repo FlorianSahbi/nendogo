@@ -40,7 +40,7 @@ export default function Carousel(props) {
       {showPreview && (
         <section className={classes.modalPrerviewContainer}>
           <div onClick={() => setshowPreview(false)} className={classes.modalPrerviewWrapper}>
-            <img src={images[index]} alt="bla" />
+            <img src={currentImage} alt="bla" />
           </div>
         </section>
       )}

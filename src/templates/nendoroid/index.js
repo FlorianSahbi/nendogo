@@ -5,6 +5,7 @@ import { useQuery } from "@apollo/react-hooks";
 import Carousel from "../../components/carousel/index";
 import { GET_INTERACTIONS_QUERY } from "../../apollo/queries/index";
 import moment from "moment";
+import Layout from "../../components/layout/index";
 
 const More = props => {
   return (
@@ -44,7 +45,6 @@ const InteractionsList = (props) => {
 };
 
 const Nendoroid = ({ pageContext: { manufacturer, releaseDate, id, formattedName, title, description, name, series, category, price, sculptor, cooperation, specifications, srcUrl, images, number } }) => {
-  console.log(description)
   const { loading, error, data } = useQuery(GET_INTERACTIONS_QUERY, {
     variables: { id: id },
     fetchPolicy: "no-cache"
@@ -54,7 +54,7 @@ const Nendoroid = ({ pageContext: { manufacturer, releaseDate, id, formattedName
   if (error) return <span style={{ color: "white" }}>{error.message}</span>;
 
   return (
-    <>
+    <Layout header>
       <div className={classes.container}>
         <div className={classes.wrapper}>
           <div className={classes.info}>
@@ -102,7 +102,7 @@ const Nendoroid = ({ pageContext: { manufacturer, releaseDate, id, formattedName
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   );
 }
 

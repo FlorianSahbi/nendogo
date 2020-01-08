@@ -17,7 +17,6 @@ const ManufacturersPage = ({
     prisma: { manufacturers }
   }
 }) => {
-  console.log("render Series");
 
   const currentUser = useContext(UserContext);
 

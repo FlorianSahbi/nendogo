@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import classes from "./signup.module.css";
-import { useMutation } from "@apollo/react-hooks";
-import { SIGNUP_MUTATION } from "../apollo/queries/index";
+import React from "react";
+import classes from "./signin.module.css";
+import SignupForm from "../components/form/signup";
 
 const nendoStories = [
   "https://lh5.googleusercontent.com/-TzOpjinrBhE/UTlrvrbQs0I/AAAAAAAAA1U/8cmIq__9KoM/s1617/IMG_0539.jpg",
@@ -12,125 +11,60 @@ const nendoStories = [
   "https://live.staticflickr.com/1957/44819518934_62037c288f_b.jpg"
 ];
 
-const SignupPage = () => {
-  console.log("render signup");
-  const [pseudo, setPseudo] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const [signup] = useMutation(SIGNUP_MUTATION, {
-    onCompleted: data => {
-      const currentUser = {
-        token: data.login.token,
-        id: data.login.user.id,
-        pseudo: data.login.user.pseudo,
-        avatar: data.login.user.avatar
-      };
-      if (typeof window !== "undefined") {
-        localStorage.setItem("user", JSON.stringify(currentUser));
-        localStorage.setItem("isLoggedIn", "true");
-        window.location.href = "http://localhost:8000/nendoroids";
-      }
-    }
-  });
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    signup({ variables: { pseudo, email, password } });
-    setPseudo("");
-    setEmail("");
-    setPassword("");
-  };
-
-  const handleInputPseudo = e => {
-    setPseudo(e.target.value);
-  };
-
-  const handleInputEmail = e => {
-    setEmail(e.target.value);
-  };
-
-  const handleInputPassword = e => {
-    setPassword(e.target.value);
-  };
-
-  const renderCardsBacbground = () => {
-    const cards = nendoStories.map(elem => {
-      return (
-        <div style={{ height: "200px", width: "100%", padding: "5px" }}>
-          <img
-            style={{ height: "100%", width: "100%", objectFit: "cover" }}
-            src={elem}
-            alt="ok"
-          />
-        </div>
-      );
-    });
-
+const renderCardsBacbground = () => {
+  const cards = nendoStories.map(elem => {
     return (
       <div
-        style={{
-          overflow: "hidden",
-          height: "100%",
-          width: "100%",
-          display: "flex"
-        }}
+        key={elem}
+        style={{ height: "200px", width: "100%", padding: "5px" }}
       >
-        <div style={{ flex: "auto" }} className={classes.column}>
-          {cards}
-        </div>
-        <div
-          style={{ flex: "auto", transform: "translateY(-240px)" }}
-          className={classes.column}
-        >
-          {cards}
-        </div>
-        <div style={{ flex: "auto" }} className={classes.column}>
-          {cards}
-        </div>
-        <div style={{ flex: "auto" }} className={classes.column}>
-          {cards}
-        </div>
+        <img
+          style={{ height: "100%", width: "100%", objectFit: "cover" }}
+          src={elem}
+          alt="ok"
+        />
       </div>
     );
-  };
+  });
 
+  return (
+    <div
+      style={{
+        overflow: "hidden",
+        height: "100%",
+        width: "100%",
+        display: "flex"
+      }}
+    >
+      <div style={{ flex: "auto" }} className={classes.column}>
+        {cards}
+      </div>
+      <div
+        style={{ flex: "auto", transform: "translateY(-240px)" }}
+        className={classes.column}
+      >
+        {cards}
+      </div>
+      <div style={{ flex: "auto" }} className={classes.column}>
+        {cards}
+      </div>
+      <div
+        style={{ flex: "auto", transform: "translateY(-180px)" }}
+        className={classes.column}
+      >
+        {cards}
+      </div>
+    </div>
+  );
+};
+
+const SignupPage = () => {
   return (
     <section className={classes.signUpContainer}>
       <div className={classes.wrapper}>
         <div className={classes.leftPanel}>{renderCardsBacbground()}</div>
         <div className={classes.rightPanel}>
-          <form onSubmit={handleSubmit}>
-            <h2
-              style={{
-                textAlign: "center",
-                textTransform: "uppercase",
-                fontFamily: "'Cinzel",
-                fontSize: "1.5em"
-              }}
-            >
-              Sign up
-            </h2>
-            <input
-              type="text"
-              value={pseudo}
-              onChange={handleInputPseudo}
-              placeholder="Type your pseudo"
-            />
-            <input
-              type="mail"
-              value={email}
-              onChange={handleInputEmail}
-              placeholder="Type your email"
-            />
-            <input
-              type="password"
-              value={password}
-              onChange={handleInputPassword}
-              placeholder="Type your password"
-            />
-            <input type="submit" value="signup" />
-          </form>
+          <SignupForm />
         </div>
       </div>
     </section>
