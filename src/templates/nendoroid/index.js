@@ -50,7 +50,7 @@ const Nendoroid = ({ pageContext: { manufacturer, releaseDate, id, formattedName
     fetchPolicy: "no-cache"
   });
 
-  if (loading) return <span style={{ color: "white" }}>Loading ...</span>;
+
   if (error) return <span style={{ color: "white" }}>{error.message}</span>;
 
   return (
@@ -61,7 +61,6 @@ const Nendoroid = ({ pageContext: { manufacturer, releaseDate, id, formattedName
             <div className={classes.meta}>
 
               <div className={classes.title}>
-                <Link to={`/nendoroids`}>back</Link>
                 <h2>{formattedName}</h2>
               </div>
 
@@ -79,12 +78,12 @@ const Nendoroid = ({ pageContext: { manufacturer, releaseDate, id, formattedName
                 <More title="Release Date" value={moment(releaseDate).format('YYYY/MM')} />
                 <More title="Sculptor" value={sculptor} />
                 <More title="Cooperation" value={cooperation} />
-                <More title="Specifications" value={specifications} />
-                <a
+                {/* <More title="Specifications" value={specifications} /> */}
+                {/* <a
                   target="_blank"
                   rel="noopener noreferrer"
                   href={srcUrl}
-                >{`See ${formattedName}`}</a>
+                >{`See ${formattedName}`}</a> */}
               </div>
 
             </div>
@@ -95,11 +94,40 @@ const Nendoroid = ({ pageContext: { manufacturer, releaseDate, id, formattedName
             </div>
 
           </div>
-          <div className={classes.user}>
-            <InteractionsList title="Like" type="LIKE" data={data.getNendoroid.interactions} />
-            <InteractionsList title="Wish" type="WISH" data={data.getNendoroid.interactions} />
-            <InteractionsList title="Own" type="OWN" data={data.getNendoroid.interactions} />
-          </div>
+
+          {loading
+            ? (<span style={{ color: "white" }}>Loading ...</span>)
+            :
+            (<div className={classes.user}>
+              <div className={classes.blankL}>
+              </div>
+              <div className={classes.like}>
+                <InteractionsList title="They like it." type="LIKE" data={data.getNendoroid.interactions} />
+              </div>
+              <div className={classes.blankML}>
+              </div>
+              <div className={classes.own}>
+                <InteractionsList title="They own it." type="OWN" data={data.getNendoroid.interactions} />
+                <ProfilPic src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Anime-wallpaper-1.png" alt="ok" />
+                <ProfilPic src="http://eskipaper.com/images/anime-wallpaper-8.jpg" alt="ok" />
+                <ProfilPic src="https://i2.wp.com/recommendmeanime.com/wp-content/uploads/2017/04/best-sites-to-find-free-anime-wallpapers.jpg?fit=584%2C329&ssl=1" alt="ok" />
+                <ProfilPic src="https://mocah.org/uploads/posts/4500265-anime-anime-girls-spirited-away-studio-ghibli.jpg" alt="ok" />
+                <ProfilPic src="https://wallpapersite.com/images/pages/pic_w/19265.jpg" alt="ok" />
+              </div>
+              <div className={classes.blankMR}></div>
+              <div className={classes.wish}>
+                <InteractionsList title="They want it." type="WISH" data={data.getNendoroid.interactions} />
+                <ProfilPic src="https://www.itl.cat/pngfile/big/93-931458_2019-anime-wallpaper-anime-wallpaper-background-anime.jpg" alt="ok" />
+                <ProfilPic src="https://www.xtrafondos.com/wallpapers/resized/shinobu-kocho-de-kimetsu-no-yaiba-3717.jpg?s=large" alt="ok" />
+                <ProfilPic src="https://steamuserimages-a.akamaihd.net/ugc/777357228030313022/C7FFE68928D4E7A820F10B3FDEF3A32D6FE97657/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true" alt="ok" />
+                <ProfilPic src="https://hdqwalls.com/wallpapers/ahri-lol-j5.jpg" alt="ok" />
+
+              </div>
+              <div className={classes.blankR}>
+              </div>
+              <div className={classes.b}></div>
+            </div>)
+          }
         </div>
       </div>
     </Layout>

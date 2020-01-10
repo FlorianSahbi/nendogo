@@ -6,6 +6,17 @@ import { graphql } from "gatsby";
 import { useQuery } from "@apollo/react-hooks";
 import { GET_USERS_QUERY } from "../apollo/queries/index";
 
+
+const handleLoading = () => {
+  // const imgs = [...document.querySelectorAll(`#con img`)];
+  // const tab = [...imgs.filter(i => i.complete === false)];
+  // if (tab.length > 0) {
+  //   return true;
+  // }
+  // return false;
+  return;
+};
+
 const renderCards = userArray => {
   return userArray.map(user => (
     <Card
@@ -18,14 +29,9 @@ const renderCards = userArray => {
 };
 
 const UsersPage = () => {
-
   const { error, loading, data } = useQuery(GET_USERS_QUERY, {
-    onCompleted: data => {
-      
-    },
-    onError: error => {
-      
-    }
+    onCompleted: data => {},
+    onError: error => {}
   });
 
   if (error) {

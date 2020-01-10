@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import classes from "./style.module.css";
 import { Link } from "gatsby";
-import default_nendoroid from "../../../images/default_nendoroid.jpg";
+import default_user from "../../../images/default_user.jpg";
 
-const Card = props => {
+const Card = ({ name, images }) => {
   const [isHovered, setIsHovered] = useState(false);
+
+  console.log(images[0] === null);
 
   const handleMouseEnter = e => {
     e.preventDefault();
@@ -26,17 +28,17 @@ const Card = props => {
           : `${classes.container} ${classes.default}`
       }
     >
-      {props.images ? (
-        <img src={props.images[0]} alt="img_nendo" />
+      {images[0] !== null ? (
+        <img src={images[0]} alt="img_nendo" />
       ) : (
-        <img src={default_nendoroid} alt="img_nendo" />
+        <img src={default_user} alt="default_user" />
       )}
 
       <div className={classes.wrapper}>
-        <h2 className={classes.title}>{props.name}</h2>
+        <h2 className={classes.title}>{name}</h2>
 
         <div className={`${classes.link} ${classes.default}`}>
-          <a href={`../user/${props.name}/`}>Details</a>
+          <a href={`../user/${name}/`}>Details</a>
         </div>
       </div>
     </div>

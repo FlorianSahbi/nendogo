@@ -70,8 +70,9 @@ const renderCards = (nendoroids, currentUser) => {
   return cards;
 };
 
-const NendoroidsPage = () => {
+const NendoroidsPage = (props) => {
 
+  console.log(props)
   const getByRange = range => {
     lazyNen({ variables: { range } });
   };
@@ -83,45 +84,35 @@ const NendoroidsPage = () => {
         <button onClick={() => getByRange("101-200")}>101-200</button>
         <button onClick={() => getByRange("201-300")}>201-300</button>
         <button onClick={() => getByRange("301-400")}>301-400</button>
+        <button onClick={() => getByRange("401-500")}>401-500</button>
+        <button onClick={() => getByRange("501-600")}>501-600</button>
+        <button onClick={() => getByRange("601-70")}>601-70</button>
+        <button onClick={() => getByRange("701-800")}>701-800</button>
+        <button onClick={() => getByRange("801-900")}>801-900</button>
+        <button onClick={() => getByRange("901-1000")}>901-1000</button>
+        <button onClick={() => getByRange("1001-1100")}>1001-1100</button>
+        <button onClick={() => getByRange("1101-1200")}>1101-1200</button>
+        <button onClick={() => getByRange("1201-1300")}>1201-1300</button>
       </div>
     );
   };
 
   const currentUser = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(true);
-  const [lazyNen] = useLazyQuery(GET_NENDOROIDS_BY_RANGE_QUERY);
+  const [nens, setNens] = useState(null);
 
-  const { error, loading, data } = useQuery(GET_NENDOROIDS_BY_RANGE_QUERY, {
-    variables: { range: "000-100" },
-    onCompleted: data => {
-      
-    },
-    onError: error => {
-      
-    }
+  const [lazyNen] = useLazyQuery(GET_NENDOROIDS_BY_RANGE_QUERY, {
+    onCompleted: data => setNens(data.getNendoroidsByRange.nendoroids),
+    fetchPolicy: "no-cache"
   });
 
-  if (error) {
-    return (
-      <>
-        <Skeleton variant="text" />
-        <Skeleton variant="circle" width={40} height={40} />
-        <Skeleton variant="rect" width={210} height={118} />
-      </>
-    );
-  }
-  if (loading) {
-    return (
-      <>
-        <Skeleton variant="text" />
-        <Skeleton variant="circle" width={40} height={40} />
-        <Skeleton variant="rect" width={210} height={118} />
-      </>
-    );
-  }
-  let {
-    getNendoroidsByRange: { nendoroids }
-  } = data;
+  const { error, loading, data } = useQuery(GET_NENDOROIDS_BY_RANGE_QUERY, {
+    variables: { range: "901-1000" },
+    onCompleted: data => {
+      setNens(data.getNendoroidsByRange.nendoroids);
+    },
+    onError: error => {}
+  });
 
   return (
     <Layout header={true}>
@@ -131,7 +122,7 @@ const NendoroidsPage = () => {
       >
         {renderFilter()}
         <div id="con" className={classes.wrapper}>
-          {renderCards(nendoroids, currentUser)}
+          {nens && renderCards(nens, currentUser)}
         </div>
       </section>
     </Layout>

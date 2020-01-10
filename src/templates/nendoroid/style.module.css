@@ -5,9 +5,8 @@
 }
 
 .container {
-  height: 100vh;
+  height: calc(100vh - 50px);
   width: 100vw;
-  /* border: 2px solid blue; */
   background: #131515;
 }
 
@@ -20,9 +19,16 @@
 .info {
   height: 100%;
   width: 100%;
+  color: #f0e6d2;
   /* border: 10px solid pink; */
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.wish, .own {
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
 }
 
@@ -33,6 +39,7 @@
   padding: 3em;
   justify-content: center;
   align-items: center;
+  color: #f0e6d2;
   display: flex;
   flex-direction: column;
 }
@@ -42,6 +49,7 @@
   color: white;
   font-size: 2em;
   text-align: center;
+  color: #f0e6d2;
   font-family: "Cinzel";
   font-weight: lighter;
   padding: 1em;
@@ -53,6 +61,7 @@
   /* border: 2px solid white; */
   color: white;
   font-family: "Raleway";
+  color: #f0e6d2;
   font-weight: 400;
   padding: 1em;
 }
@@ -60,10 +69,16 @@
 .description h2 {
   margin-bottom: 1em;
   font-size: 1.5em;
+  font-family: "Cinzel";
+
   color: lightgoldenrodyellow;
 }
 
 .description p {
+  color: #f0e6d2;
+  font-family: "Raleway";
+  line-height: 1.2em;
+  letter-spacing: 1px;
   margin-bottom: 1em;
 }
 
@@ -115,37 +130,57 @@
 }
 
 .user {
-  width: 100%;
-  /* border: 5px solid red; */
+  display: grid;
+  grid-template-columns: 0fr 1fr 3fr 3fr 1fr 3fr 3fr 1fr 3fr 3fr 1fr 0fr;
+  grid-auto-rows: auto;
+  column-gap: 1em;
+  row-gap: 1em;
+  padding: 1em;
+  grid-template-areas: "blankL blankL like like blankML own own blankMR wish wish blankR blankR";
+}
+
+.blankL {
+  /* border: 2px solid green; */
+  grid-area: blankL;
+}
+.like {
+  border: 2px solid pink;
+  grid-area: like;
+  border-radius: 5px;
+  padding: 0.5em;
+}
+.blankML {
+  /* border: 2px solid green; */
+  grid-area: blankML;
+}
+.own {
+  border: 2px solid pink;
+  grid-area: own;
+  padding: 0.5em;
+  border-radius: 5px;
+}
+.blankMR {
+  /* border: 2px solid green; */
+  grid-area: blankMR;
+}
+.wish {
+  border: 2px solid pink;
+  grid-area: wish;
+  padding: 0.5em;
+  border-radius: 5px;
+}
+.blankR {
+  /* border: 2px solid green; */
+  grid-area: blankR;
 }
 
 .userlike {
   width: 100%;
   display: flex;
   flex-direction: column;
-  border: grey 1px solid;
   color: white;
   font-family: "Raleway";
-  font-weight: 200;
-}
-
-.userlove {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  border: grey 1px solid;
-  color: white;
-  font-family: "Raleway";
-  font-weight: 200;
-}
-
-.userwant {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  /* border: grey 1px solid; */
-  color: white;
-  font-family: "Raleway";
+  font-size: 1em;
   font-weight: 200;
 }
 
@@ -168,20 +203,6 @@
 }
 
 .userlikelist {
-  /* border: 2px solid blue; */
-  display: flex;
-  overflow: hidden;
-  flex-wrap: wrap;
-}
-
-.userlovelist {
-  /* border: 2px solid blue; */
-  display: flex;
-  overflow: hidden;
-  flex-wrap: wrap;
-}
-
-.userwantlist {
   /* border: 2px solid blue; */
   display: flex;
   overflow: hidden;

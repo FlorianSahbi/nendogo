@@ -1,34 +1,22 @@
-import React, { useContext } from "react";
+import React from "react";
 import Layout from "../components/layout";
-import classes from "./nendoroids.module.css";
+import classes from "./series.module.css";
 import Card from "../components/card/serie";
-import { UserContext } from "../components/layout/index";
 import { graphql } from "gatsby";
 
-const renderCards = (nendoroids, currentUser) => {
-  const cards = nendoroids.map(({ id, name }) => {
-    return <Card key={id} id={id} name={name} number={"0"} images={"o"} />;
-  });
-  return cards;
-};
+const renderCards = series =>
+  series.map(({ id, name }) => <Card key={id} id={id} name={name} />);
 
 const SeriesPage = ({
   data: {
     prisma: { series }
   }
 }) => {
-
-  const currentUser = useContext(UserContext);
-
-
   return (
     <Layout header={true}>
-      <section
-        style={{ background: "#121415", minHeight: "100vh" }}
-        className={classes.nendoroidsContainer}
-      >
+      <section className={classes.seriesPageContainer}>
         <div className={classes.wrapper}>
-          {renderCards(series, currentUser)}
+          {renderCards(series.slice(0, 52))}
         </div>
       </section>
     </Layout>

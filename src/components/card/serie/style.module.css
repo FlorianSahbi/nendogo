@@ -1,127 +1,60 @@
-.container {
+a {
+  text-decoration: none;
+}
+
+.containerCardSerie {
   height: 100%;
   width: 100%;
   border-radius: 10px;
   position: relative;
   cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  border: 2px solid pink;
+  transition: all 0.5s ease;
 }
 
-.container img {
-  border-radius: 10px;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  object-position: center;
+.containerCardSerie:hover {
+  box-shadow: 0px 0px 5px pink;
 }
 
 .wrapper {
-  border: 7px double beige;
-  border-radius: 10px;
-  position: absolute;
-  height: 95%;
-  width: 90%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  transition: all 0.5s ease;
-}
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 100%;
+  grid-template-areas: "name nendoroids";
 
-.likeButtonContainer {
-  height: 40px;
-  width: 40px;
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.title {
-  transition: all 0.5s ease;
-  color: beige;
-  font-family: "Raleway";
-  font-size: 1.3em;
-  text-align: center;
-  text-decoration: none;
-  margin-bottom: 0.5em;
-  font-size: bold;
-}
-
-.number {
-  color: beige;
-  font-family: "Raleway";
-  font-size: 1em;
-  text-decoration: none;
-  transition: all 0.5s ease;
-  margin-top: 0.5em;
-}
-
-.link {
-  position: absolute;
-  width: auto;
-  border: 7px double beige;
-  border-bottom: none;
-  padding: 0.5rem;
-  border-radius: 5px 5px 0 0;
-  bottom: 0;
-  height: -10px;
-  transition: all 0.5s ease;
-}
-
-.link a {
-  color: beige;
-  font-family: "Raleway";
-  font-size: 1em;
-  text-decoration: none;
-  height: 100%;
+  padding: 0em 1em;
   width: 100%;
+  height: 100%;
 }
 
-.hover .title,
-.hover .number,
-.hover .link {
-  transform: translate3d(0, 0, 0);
-  opacity: 1;
+.name {
+  transition: all 0.5s ease;
+  color: beige;
+  font-family: "Cinzel";
+  font-size: 1.3em;
+  font-size: bold;
+  text-align: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  grid-area: name;
 }
 
-.hover .wrapper {
-  backdrop-filter: brightness(70%) blur(5px);
+.nendoroids {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+  grid-area: nendoroids;
+  padding: 1em;
 }
 
-.default .title {
-  transform: translate3d(0, -100px, 0);
-  opacity: 0;
-}
-
-.default .number {
-  transform: translate3d(0, 100px, 0);
-  opacity: 0;
-}
-
-.default .link {
-  transform: translate3d(0, 5px, 0);
-  opacity: 0;
-}
-
-/* .default .likeButton {
-    opacity: 0;
-}
-
-.hover .likeButton {
-    opacity: 1;
-} */
-
-.default .wrapper {
-  backdrop-filter: none;
-}
-
-@media screen and (max-width: 440px) {
-  .container {
-    width: 190px;
-  }
+.avatar {
+  height: 3em;
+  width: 3em;
+  background: transparent;
+  border: 2px solid pink;
+  font-family: "Cinzel";
 }

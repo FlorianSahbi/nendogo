@@ -53,7 +53,7 @@ const User = (props) => {
       ReactS3Client.uploadFile(file, "yul")
         .then(data => {
           setImg(data.location)
-          
+
         })
         .catch(err => console.error(err));
     }
@@ -100,6 +100,7 @@ const User = (props) => {
         images={nendo.images}
         name={nendo.formattedName}
         number={nendo.number}
+        isLoaded={() => { }}
       />
     ));
   };
