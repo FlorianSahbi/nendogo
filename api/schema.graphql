@@ -39,6 +39,10 @@ type Query {
   getNendoroidsWishedBy(id: ID!): Nendoroids!
   getNendoroidsOwnedBy(id: ID!): Nendoroids!
   getNendoroidsByRange(range: String!): Nendoroids!
+
+  getNendoroidsBySerie(series: String!): Nendoroids!
+  getNendoroidsByManufacturer(manufacturer: String!): Nendoroids!
+  getNendoroidsBySculptor(sculptor: String!): Nendoroids!
   files: [String]
 }
 

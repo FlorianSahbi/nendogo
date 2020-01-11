@@ -16,7 +16,7 @@ const SeriesPage = ({
     <Layout header={true}>
       <section className={classes.seriesPageContainer}>
         <div className={classes.wrapper}>
-          {renderCards(series.slice(0, 52))}
+          {renderCards(series.slice(0, 622))}
         </div>
       </section>
     </Layout>

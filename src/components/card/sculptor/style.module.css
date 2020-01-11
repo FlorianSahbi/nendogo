@@ -2,6 +2,11 @@ a {
   text-decoration: none;
 }
 
+.link {
+  border: unset;
+}
+
+
 .containerCardSculptor {
   height: 100%;
   width: 100%;
@@ -52,8 +57,8 @@ a {
 }
 
 .avatar {
-  height: 3em;
-  width: 3em;
+  height: 4em;
+  width: 4em;
   background: transparent;
   border: 2px solid pink;
   font-family: "Cinzel";

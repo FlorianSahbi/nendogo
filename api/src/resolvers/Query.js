@@ -255,6 +255,66 @@ async function getNendoroidsByRange(parent, args, context, info) {
   }
 }
 
+async function getNendoroidsBySerie(parent, args, context, info) {
+  const nendoroids = await context.prisma.nendoroids({
+    where: {
+      series: args.series
+    },
+  })
+  const count = await context.prisma
+    .nendoroidsConnection({
+      where: {
+        series: args.series
+      },
+    })
+    .aggregate()
+    .count()
+  return {
+    nendoroids,
+    count,
+  }
+}
+async function getNendoroidsByManufacturer(parent, args, context, info) {
+  const nendoroids = await context.prisma.nendoroids({
+    where: {
+      manufacturer: args.manufacturer
+    },
+  })
+  const count = await context.prisma
+    .nendoroidsConnection({
+      where: {
+        manufacturer: args.manufacturer
+      },
+    })
+    .aggregate()
+    .count()
+  return {
+    nendoroids,
+    count,
+  }
+}
+async function getNendoroidsBySculptor(parent, args, context, info) {
+  const nendoroids = await context.prisma.nendoroids({
+    where: {
+      sculptor: args.sculptor
+    },
+  })
+  const count = await context.prisma
+    .nendoroidsConnection({
+      where: {
+        sculptor: args.sculptor
+      },
+    })
+    .aggregate()
+    .count()
+  return {
+    nendoroids,
+    count,
+  }
+}
+
+
+
 async function files(parent, args, context, info) {
   return files;
 }
@@ -273,4 +333,8 @@ module.exports = {
   getInteractions,
   getNendoroidsByRange,
   files,
+  getNendoroidsBySerie,
+  getNendoroidsBySerie,
+  getNendoroidsByManufacturer,
+  getNendoroidsBySculptor,
 }

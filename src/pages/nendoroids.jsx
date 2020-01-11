@@ -51,6 +51,7 @@ const handleLoading = () => {
   return false;
 };
 
+
 const renderCards = (nendoroids, currentUser) => {
   const cards = nendoroids.map(
     ({ id, formattedName, number, images, interactions }) => {
@@ -70,9 +71,8 @@ const renderCards = (nendoroids, currentUser) => {
   return cards;
 };
 
-const NendoroidsPage = (props) => {
-
-  console.log(props)
+const NendoroidsPage = props => {
+  console.log(props);
   const getByRange = range => {
     lazyNen({ variables: { range } });
   };
@@ -109,6 +109,7 @@ const NendoroidsPage = (props) => {
   const { error, loading, data } = useQuery(GET_NENDOROIDS_BY_RANGE_QUERY, {
     variables: { range: "901-1000" },
     onCompleted: data => {
+      console.log(data.getNendoroidsByRange.nendoroids);
       setNens(data.getNendoroidsByRange.nendoroids);
     },
     onError: error => {}

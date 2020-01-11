@@ -1,5 +1,47 @@
 import gql from 'graphql-tag';
 
+export const TEST = gql`
+query getS($name: String!) {
+  getNendoroidsBySerie(series: $name) {
+    nendoroids {
+      id
+      formattedName
+      images
+      number
+    }
+    count
+  }
+}
+`;
+
+export const TEST_MANU = gql`
+query getS($name: String!) {
+  getNendoroidsByManufacturer(manufacturer: $name) {
+    nendoroids {
+      id
+      formattedName
+      images
+      number
+    }
+    count
+  }
+}
+`;
+
+export const TEST_SCULPTOR = gql`
+query getS($name: String!) {
+  getNendoroidsBySculptor(sculptor: $name) {
+    nendoroids {
+      id
+      formattedName
+      images
+      number
+    }
+    count
+  }
+}
+`;
+
 export const CREATE_INTERACTION_MUTATION = gql`
   mutation CreateInteraction($nendoroidId: ID!, $userId: ID!, $type: InteractionType!){
     createInteraction(nendoroidId: $nendoroidId , userId: $userId, type: $type) {

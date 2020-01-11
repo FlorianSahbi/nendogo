@@ -71,12 +71,18 @@ const Nendoroid = ({ pageContext: { manufacturer, releaseDate, id, formattedName
 
               <div className={classes.more}>
                 <More title="Product Name" value={name} />
-                <More title="Series" value={series} />
-                <More title="Manufacturer" value={manufacturer} />
+                <a href={`../../serie/${series}`} >
+                  <More title="Series" value={series} />
+                </a>
+                <a href={`../../manufacturer/${manufacturer}`} >
+                  <More title="Manufacturer" value={manufacturer} />
+                </a>
                 <More title="Category" value={category} />
                 <More title="Price" value={`¥${price} (Before Tax)`} />
                 <More title="Release Date" value={moment(releaseDate).format('YYYY/MM')} />
-                <More title="Sculptor" value={sculptor} />
+                <a href={`../../sculptor/${sculptor}`} >
+                  <More title="Sculptor" value={sculptor} />
+                </a>
                 <More title="Cooperation" value={cooperation} />
                 {/* <More title="Specifications" value={specifications} /> */}
                 {/* <a

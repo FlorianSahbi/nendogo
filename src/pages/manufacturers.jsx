@@ -16,7 +16,7 @@ const ManufacturersPage = ({
     <Layout header={true}>
       <section className={classes.manufacturersPageContainer}>
         <div className={classes.wrapper}>
-          {renderCards(manufacturers.slice(0, 52))}
+          {renderCards(manufacturers.slice(0, 902))}
         </div>
       </section>
     </Layout>

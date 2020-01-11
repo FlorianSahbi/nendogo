@@ -13,6 +13,7 @@ import VpnKeyRoundedIcon from "@material-ui/icons/VpnKeyRounded";
 import Avatar from "@material-ui/core/Avatar";
 import PersonRoundedIcon from "@material-ui/icons/PersonRounded";
 import ExitToAppRoundedIcon from "@material-ui/icons/ExitToAppRounded";
+import ImageIcon from '@material-ui/icons/Image';
 
 import Auth from "../../globalStates/useAuth";
 
@@ -27,7 +28,14 @@ const ID = () => {
     return (
       <>
         <Button startIcon={<PersonRoundedIcon />}>
-          {currentUser.user.pseudo}
+          <AniLink
+            cover
+            direction="down"
+            bg="#FFC0CC"
+            to={`/user/${currentUser.user.pseudo}`}
+          >
+            {currentUser.user.pseudo}
+          </AniLink>
         </Button>
         <Avatar alt={currentUser.user.pseudo} src={currentUser.user.avatar} />
         <Button
@@ -74,6 +82,9 @@ const Header = () => {
           </AniLink>
           <AniLink cover direction="down" bg="#FFC0CC" to="/sculptors/">
             <Button startIcon={<BrushRoundedIcon />}>Sculptors</Button>
+          </AniLink>
+          <AniLink cover direction="down" bg="#FFC0CC" to="/images/">
+            <Button startIcon={<ImageIconfig />}>images</Button>
           </AniLink>
           <Button
             onClick={() => auth.getCurrentUser()}
