@@ -156,6 +156,10 @@ async function getUser(parent, args, context) {
   const user = await context.prisma.user({ id: args.id });
   return user;
 }
+async function getUserByPseudo(parent, args, context) {
+  const user = await context.prisma.user({ pseudo: args.pseudo });
+  return user;
+}
 
 async function getNendoroidsLikedBy(parent, args, context, info) {
   const nendoroids = await context.prisma.nendoroids({
@@ -337,4 +341,5 @@ module.exports = {
   getNendoroidsBySerie,
   getNendoroidsByManufacturer,
   getNendoroidsBySculptor,
+  getUserByPseudo,
 }

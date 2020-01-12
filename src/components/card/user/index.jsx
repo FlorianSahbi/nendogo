@@ -6,7 +6,6 @@ import default_user from "../../../images/default_user.jpg";
 const Card = ({ name, images }) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  console.log(images[0] === null);
 
   const handleMouseEnter = e => {
     e.preventDefault();

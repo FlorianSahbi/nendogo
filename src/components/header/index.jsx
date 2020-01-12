@@ -84,7 +84,7 @@ const Header = () => {
             <Button startIcon={<BrushRoundedIcon />}>Sculptors</Button>
           </AniLink>
           <AniLink cover direction="down" bg="#FFC0CC" to="/images/">
-            <Button startIcon={<ImageIconfig />}>images</Button>
+            <Button startIcon={<ImageIcon />}>images</Button>
           </AniLink>
           <Button
             onClick={() => auth.getCurrentUser()}

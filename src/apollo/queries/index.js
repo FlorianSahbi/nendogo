@@ -274,3 +274,13 @@ export const uploadFileMutation = gql`
     uploadFile(file: $file)
   }
 `;
+
+export const GET_CLIENT_ONLY_USER = gql`
+query getOneByPseudo($pseudo: String!) {
+  getUserByPseudo(pseudo: $pseudo) {
+    id
+    pseudo
+    avatar
+  }
+}
+`

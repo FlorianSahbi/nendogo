@@ -1,15 +1,16 @@
 import React, { useState, useCallback } from "react";
 import classes from "./style.module.css";
-import Carousel from "../../components/carousel/index";
-import Card from "../../components/card/nendoroid";
-import Layout from "../../components/layout/index";
+import Carousel from "../../../components/carousel/index";
+import Card from "../../../components/card/nendoroid";
+import Layout from "../../../components/layout/index";
 import { useQuery } from "@apollo/react-hooks";
 import {
   GET_INTERACTION_LIKE_QUERY,
   GET_INTERACTION_WISH_QUERY,
-  GET_INTERACTION_OWN_QUERY
-} from "../../apollo/queries";
-import Auth from "../../globalStates/useAuth";
+  GET_INTERACTION_OWN_QUERY,
+  GET_CLIENT_ONLY_USER
+} from "../../../apollo/queries";
+import Auth from "../../../globalStates/useAuth";
 
 const imgUrl = "https://images2.alphacoders.com/742/thumb-1920-742320.png";
 
@@ -22,44 +23,54 @@ const nendoStories = [
   "https://live.staticflickr.com/1957/44819518934_62037c288f_b.jpg"
 ];
 
-
-
-
-
 const User = (props) => {
+  const auth = Auth.useContainer();
   const [scrolled, setScrolled] = useState(false);
   const [selected, setSelected] = useState("like");
-  const [img, setImg] = useState(props.pageContext.avatar)
+  const [user, setUser] = useState(null);
 
-  let {
-    error: errorNendoL,
-    loading: LoadingNendoL,
-    data: dataNendoL
-  } = useQuery(GET_INTERACTION_LIKE_QUERY, {
-    variables: { id: props.pageContext.id },
-    fetchPolicy: "no-cache"
-  });
+  const { error, loading, data } = useQuery(GET_CLIENT_ONLY_USER,
+    {
+      variables: { pseudo: props.pseudo },
+      onCompleted: data => {
+        setUser(data.getUserByPseudo)
+        console.log(data.getUserByPseudo)
+      },onError: err => {
+        location.href = "/nendoroids";
+      }
 
-  let {
-    error: errorNendoW,
-    loading: LoadingNendoW,
-    data: dataNendoW
-  } = useQuery(GET_INTERACTION_WISH_QUERY, {
-    variables: { id: props.pageContext.id },
-    fetchPolicy: "no-cache"
-  });
+    }
+  );
 
-  let {
-    error: errorNendoO,
-    loading: LoadingNendoO,
-    data: dataNendoO
-  } = useQuery(GET_INTERACTION_OWN_QUERY, {
-    variables: { id: props.pageContext.id },
-    fetchPolicy: "no-cache"
-  });
+  // let {
+  //   error: errorNendoL,
+  //   loading: LoadingNendoL,
+  //   data: dataNendoL
+  // } = useQuery(GET_INTERACTION_LIKE_QUERY, {
+  //   variables: { id: user.id },
+  //   fetchPolicy: "no-cache"
+  // });
 
-  if (errorNendoL | errorNendoW | errorNendoO) return <span>WAIT</span>;
-  if (LoadingNendoL | LoadingNendoW | LoadingNendoO) return <p>Loading ...</p>;
+  // let {
+  //   error: errorNendoW,
+  //   loading: LoadingNendoW,
+  //   data: dataNendoW
+  // } = useQuery(GET_INTERACTION_WISH_QUERY, {
+  //   variables: { id: user.id },
+  //   fetchPolicy: "no-cache"
+  // });
+
+  // let {
+  //   error: errorNendoO,
+  //   loading: LoadingNendoO,
+  //   data: dataNendoO
+  // } = useQuery(GET_INTERACTION_OWN_QUERY, {
+  //   variables: { id: user.id },
+  //   fetchPolicy: "no-cache"
+  // });
+
+  // if (errorNendoL | errorNendoW | errorNendoO) return <span>WAIT</span>;
+  // if (LoadingNendoL | LoadingNendoW | LoadingNendoO) return <p>Loading ...</p>;
 
   const renderCards = array => {
     return array.map(nendo => (
@@ -81,7 +92,7 @@ const User = (props) => {
           <div className={scrolled ? classes.hA : classes.imgWrapper}>
             <img src={imgUrl} alt="dunno" />
             <div className={scrolled ? classes.ppA : classes.profileImg}>
-              <img src={img} alt="dunnon" />
+              {/* <img src={img} alt="dunnon" /> */}
             </div>
           </div>
           <div className={classes.content}>
@@ -99,7 +110,7 @@ const User = (props) => {
             </div>
             <div className={classes.contentWrapper}>
               <div className={classes.name}>
-                <h2>{props.pageContext.pseudo}</h2>
+                <h2>{user && user.pseudo}</h2>
               </div>
               <div className={classes.name}>
                 <span>Add</span>
@@ -114,14 +125,14 @@ const User = (props) => {
                 <span onClick={() => setSelected("own")}>Own</span>
               </div>
 
-              <div className={classes.contentCollectionResultWrapper}>
+              {/* <div className={classes.contentCollectionResultWrapper}>
                 {selected === "like" &&
                   renderCards(dataNendoL.getNendoroidsLikedBy.nendoroids)}
                 {selected === "want" &&
                   renderCards(dataNendoW.getNendoroidsWishedBy.nendoroids)}
                 {selected === "own" &&
                   renderCards(dataNendoO.getNendoroidsOwnedBy.nendoroids)}
-              </div>
+              </div> */}
             </div>
           </div>
 

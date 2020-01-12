@@ -26,7 +26,6 @@ const Card = ({ name }) => {
             <AvatarGroup className={classes.groupAvatar}>
               {data &&
                 data.getNendoroidsByManufacturer.nendoroids.slice(0, 3).map(e => {
-                  console.log(e);
                   return (
                     <a
                       className={classes.link}

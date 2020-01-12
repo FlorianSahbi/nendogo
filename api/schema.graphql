@@ -34,6 +34,7 @@ type Query {
   ): Sculptors!
   getNendoroid(id: ID!): Nendoroid!
   getUser(id: ID!): User!
+  getUserByPseudo(pseudo: String!): User!
   getInteractions: Interactions!
   getNendoroidsLikedBy(id: ID!): Nendoroids!
   getNendoroidsWishedBy(id: ID!): Nendoroids!

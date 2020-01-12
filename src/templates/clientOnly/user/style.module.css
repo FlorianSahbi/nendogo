@@ -1,0 +1,161 @@
+@import url("https://fonts.googleapis.com/css?family=Cinzel:400,700|Raleway:100,300,400&display=swap");
+* {
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.container {
+  height: auto;
+  width: 100vw;
+}
+
+.wrapper {
+  height: 100%;
+  width: 100%;
+}
+
+.imgWrapper {
+  height: 60vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: white 5px solid;
+  transition: all 0.5s ease-in;
+}
+
+.imgWrapper img,
+.hA img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.profileImg {
+  position: absolute;
+  z-index: 999;
+  border: 5px solid white;
+  border-radius: 50%;
+  height: 256px;
+  width: 256px;
+  overflow: hidden;
+  bottom: calc(-256px / 2);
+  transition: all 0.5s ease-in;
+}
+
+.profileImg img,
+.ppA img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.content {
+  /* border: 5px solid green; */
+  height: 100vh;
+  width: 100vw;
+}
+
+.contentWrapper {
+  width: 50%;
+  /* border: 2px solid pink; */
+  height: calc(256px / 2);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em;
+}
+
+.content .contentWrapper h2 {
+  color: beige;
+  font-size: 3rem;
+  font-family: "Cinzel";
+}
+
+.content .contentWrapper p {
+  color: beige;
+  font-family: "Raleway";
+  line-height: 1.5em;
+  font-size: 1.5em;
+}
+
+.content span {
+  color: beige;
+  font-family: "Raleway";
+  line-height: 1.5em;
+  font-size: 1.5em;
+  margin-left: 1em;
+}
+
+.pictures {
+  height: 100vh;
+  width: 100vw;
+  /* border: 5px solid pink; */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ppA {
+  position: absolute;
+  z-index: 999;
+  border: 5px solid white;
+  border-radius: 50%;
+  height: 140px;
+  width: 140px;
+  overflow: hidden;
+  bottom: 0;
+  right: 20px;
+  transition: all 0.5s ease-in;
+  top: 15px;
+}
+
+.hA {
+  height: 20vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: white 5px solid;
+  transition: all 0.5s ease-in;
+  overflow: hidden;
+}
+
+.contentCollection {
+  /* border: 5px solid blue; */
+  min-height: calc(100vh - 256px / 2);
+}
+
+.contentCollectionTabWrapper {
+  /* border: 2px solid green; */
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contentCollectionTabWrapper span {
+  margin: 0.5em 1em;
+}
+
+.contentCollectionResultWrapper {
+  padding: 1em;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: auto;
+
+  grid-column-gap: 1em;
+  grid-row-gap: 1em;
+
+  justify-items: stretch;
+  align-items: stretch;
+
+  justify-content: center;
+  align-content: center;
+
+  grid-auto-flow: row;
+}

@@ -4,31 +4,44 @@ import {
   CREATE_INTERACTION_MUTATION,
   DELETE_INTERACTION_MUTATION
 } from "../../../apollo/queries/index";
-import { UserContext } from "../../layout/index";
 
+import Auth from "../../../globalStates/useAuth";
+import Dial from "../../../globalStates/useDialog";
 const InteractionButton = props => {
-  const currentUser = useContext(UserContext);
+  const dial = Dial.useContainer();
+  const auth = Auth.useContainer();
+
 
   const [isActive, setIsActive] = useState(props.isActive.isActive);
   const [createInteraction] = useMutation(CREATE_INTERACTION_MUTATION);
   const [deleteInteraction] = useMutation(DELETE_INTERACTION_MUTATION);
 
+  const handleSetActive = type => {
+    setIsActive(true);
+    createInteraction({
+      variables: {
+        nendoroidId: props.srcId,
+        userId: auth.user.id,
+        type
+      }
+    });
+  };
+
+  const handleUnsetActive = () => {
+    setIsActive(false);
+    deleteInteraction({
+      variables: {
+        interactionId: props.isActive.interactionId
+      }
+    });
+  };
 
   const handleClick = type => {
-    isActive ? setIsActive(false) : setIsActive(true);
-    isActive
-      ? deleteInteraction({
-          variables: {
-            interactionId: props.isActive.interactionId
-          }
-        })
-      : createInteraction({
-          variables: {
-            nendoroidId: props.srcId,
-            userId: currentUser.id,
-            type
-          }
-        });
+    if (auth.user === null) {
+      dial.openDial();
+      return;
+    }
+    isActive ? handleUnsetActive() : handleSetActive(type);
   };
 
   return (

@@ -110,8 +110,8 @@ exports.createPages = async ({ graphql, actions }) => {
 exports.onCreatePage = async ({ page, actions }) => {
   const { createPage } = actions;
 
-  if (page.path.match(/^\/account/)) {
-    page.matchPath = "/account/*";
+  if (page.path.match(/^\/user/)) {
+    page.matchPath = "/user/*";
     createPage(page);
   };
 };

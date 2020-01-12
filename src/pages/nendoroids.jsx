@@ -1,12 +1,12 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState } from "react";
 import Layout from "../components/layout";
 import classes from "./nendoroids.module.css";
 import Card from "../components/card/nendoroid";
-import { UserContext } from "../components/layout/index";
 import { graphql } from "gatsby";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { useQuery, useLazyQuery } from "@apollo/react-hooks";
 import { GET_NENDOROIDS_BY_RANGE_QUERY } from "../apollo/queries/index";
+import Auth from "../globalStates/useAuth";
 
 const isLikedBy = (i, userId) => {
   let b = [...i.filter(e => e.user.id === userId && e.type === "LIKE")][0];
@@ -51,8 +51,13 @@ const handleLoading = () => {
   return false;
 };
 
-
 const renderCards = (nendoroids, currentUser) => {
+  let currentUserId = "à";
+  if (currentUser) {
+    currentUserId = currentUser.is;
+  } else {
+    currentUserId = "k";
+  }
   const cards = nendoroids.map(
     ({ id, formattedName, number, images, interactions }) => {
       return (
@@ -62,7 +67,7 @@ const renderCards = (nendoroids, currentUser) => {
           name={formattedName}
           number={number}
           images={images}
-          isLiked={isLikedBy(interactions, currentUser.id)}
+          isLiked={isLikedBy(interactions, currentUserId)}
           isLoaded={handleLoading}
         />
       );
@@ -72,7 +77,7 @@ const renderCards = (nendoroids, currentUser) => {
 };
 
 const NendoroidsPage = props => {
-  console.log(props);
+  const auth = Auth.useContainer();
   const getByRange = range => {
     lazyNen({ variables: { range } });
   };
@@ -97,7 +102,6 @@ const NendoroidsPage = props => {
     );
   };
 
-  const currentUser = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(true);
   const [nens, setNens] = useState(null);
 
@@ -109,7 +113,6 @@ const NendoroidsPage = props => {
   const { error, loading, data } = useQuery(GET_NENDOROIDS_BY_RANGE_QUERY, {
     variables: { range: "901-1000" },
     onCompleted: data => {
-      console.log(data.getNendoroidsByRange.nendoroids);
       setNens(data.getNendoroidsByRange.nendoroids);
     },
     onError: error => {}
@@ -123,7 +126,7 @@ const NendoroidsPage = props => {
       >
         {renderFilter()}
         <div id="con" className={classes.wrapper}>
-          {nens && renderCards(nens, currentUser)}
+          {nens && renderCards(nens, auth.user)}
         </div>
       </section>
     </Layout>
