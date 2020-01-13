@@ -39,7 +39,12 @@ type Query {
   getNendoroidsLikedBy(id: ID!): Nendoroids!
   getNendoroidsWishedBy(id: ID!): Nendoroids!
   getNendoroidsOwnedBy(id: ID!): Nendoroids!
-  getNendoroidsByRange(range: String!): Nendoroids!
+  getNendoroidsByRange(
+    min: Int!
+    max: Int!
+    name: String
+    orderBy: NendoroidOrderByInput
+  ): Nendoroids!
 
   getNendoroidsBySerie(series: String!): Nendoroids!
   getNendoroidsByManufacturer(manufacturer: String!): Nendoroids!
@@ -164,6 +169,8 @@ enum NendoroidOrderByInput {
   createdAt_DESC
   number_ASC
   number_DESC
+  formattedName_ASC
+  formattedName_DESC
 }
 
 enum InteractionType {

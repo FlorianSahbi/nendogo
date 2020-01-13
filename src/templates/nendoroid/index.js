@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import classes from "./style.module.css";
 import { Link } from "gatsby";
 import { useQuery } from "@apollo/react-hooks";
-import Carousel from "../../components/carousel/index";
+// import Carousel from "../../components/carousel/index";
 import { GET_INTERACTIONS_QUERY } from "../../apollo/queries/index";
 import moment from "moment";
 import Layout from "../../components/layout/index";
+
+
+import Gallery from "react-photo-gallery";
+import Carousel, { Modal, ModalGateway } from "react-images";
 
 const More = props => {
   return (
@@ -50,8 +54,26 @@ const Nendoroid = ({ pageContext: { manufacturer, releaseDate, id, formattedName
     fetchPolicy: "no-cache"
   });
 
+  const testI = images.map(e => {
+    return { src: e, width: 3, height: 4 }
+  })
+
+  console.log(testI)
 
   if (error) return <span style={{ color: "white" }}>{error.message}</span>;
+
+  const [currentImage, setCurrentImage] = useState(0);
+  const [viewerIsOpen, setViewerIsOpen] = useState(false);
+
+  const openLightbox = useCallback((event, { photo, index }) => {
+    setCurrentImage(index);
+    setViewerIsOpen(true);
+  }, []);
+
+  const closeLightbox = () => {
+    setCurrentImage(0);
+    setViewerIsOpen(false);
+  };
 
   return (
     <Layout header>
@@ -95,7 +117,32 @@ const Nendoroid = ({ pageContext: { manufacturer, releaseDate, id, formattedName
             </div>
 
             <div className={classes.preview}>
-              {images && <Carousel images={images} />}
+              {images &&
+                // <Carousel images={images} />
+
+
+
+                <>
+                  <Gallery photos={testI} onClick={openLightbox} />
+                  <ModalGateway>
+                    {viewerIsOpen ? (
+                      <Modal onClose={closeLightbox}>
+                        <Carousel
+                          currentIndex={currentImage}
+                          views={testI.map(x => ({
+                            ...x,
+                            srcset: x.srcSet,
+                            caption: x.title
+                          }))}
+                        />
+                      </Modal>
+                    ) : null}
+                  </ModalGateway>
+                </>
+              }
+
+
+
               <div className={classes.number}>#{number}</div>
             </div>
 

@@ -1,7 +1,7 @@
 .container {
   height: 100%;
   width: 100%;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   position: relative;
   cursor: pointer;
   display: flex;
@@ -11,7 +11,7 @@
 }
 
 .container img {
-  border-radius: 10px;
+  /* border-radius: 10px; */
   height: 100%;
   width: 100%;
   object-fit: cover;
@@ -20,7 +20,7 @@
 
 .wrapper {
   border: 7px double beige;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   position: absolute;
   height: 95%;
   width: 90%;
@@ -68,7 +68,7 @@
   border: 7px double beige;
   border-bottom: none;
   padding: 0.5rem;
-  border-radius: 5px 5px 0 0;
+  /* border-radius: 5px 5px 0 0; */
   bottom: 0;
   height: -10px;
   transition: all 0.5s ease;

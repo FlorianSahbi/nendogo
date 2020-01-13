@@ -26,6 +26,24 @@ async function getNendoroids(parent, args, context) {
   }
 }
 
+async function getNendoroidsByRange(parent, args, context, info) {
+  const nendoroids = await context.prisma.nendoroids({
+    where: { formattedName_contains: args.name, number_lte: args.max, AND: { number_gte: args.min } },
+    orderBy: args.orderBy,
+  })
+  const count = await context.prisma
+    .nendoroidsConnection({
+      where: { formattedName_contains: args.name, number_lte: args.max, AND: { number_gte: args.min } },
+      orderBy: args.orderBy,
+    })
+    .aggregate()
+    .count()
+  return {
+    nendoroids,
+    count,
+  }
+}
+
 async function getUsers(parent, args, context) {
   const where = args.filter
     ? {
@@ -239,25 +257,7 @@ async function getNendoroidsOwnedBy(parent, args, context, info) {
   }
 }
 
-async function getNendoroidsByRange(parent, args, context, info) {
-  const nendoroids = await context.prisma.nendoroids({
-    where: {
-      range: args.range
-    },
-  })
-  const count = await context.prisma
-    .nendoroidsConnection({
-      where: {
-        range: args.range
-      },
-    })
-    .aggregate()
-    .count()
-  return {
-    nendoroids,
-    count,
-  }
-}
+
 
 async function getNendoroidsBySerie(parent, args, context, info) {
   const nendoroids = await context.prisma.nendoroids({

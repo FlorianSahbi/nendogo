@@ -177,8 +177,8 @@ export const GET_NENDOROIDS_QUERY = gql`
 `;
 
 export const GET_NENDOROIDS_BY_RANGE_QUERY = gql`
-  query GetNendoroidsByRange($range: String!){
-    getNendoroidsByRange(range: $range) {
+  query GetNendoroidsByRange($min: Int!, $max: Int!, $orderBy: NendoroidOrderByInput!, $name: String){
+    getNendoroidsByRange(min: $min, max: $max, orderBy: $orderBy, name: $name) {
       nendoroids {
         formattedName
         number

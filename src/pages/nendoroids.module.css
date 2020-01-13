@@ -1,6 +1,8 @@
 .nendoroidsContainer {
   height: 100%;
   width: 100%;
+  background: #121415;
+  min-height: 100vh;
 }
 
 .wrapper {
@@ -10,15 +12,18 @@
   grid-auto-rows: 350px;
   grid-auto-flow: row;
 
-  grid-column-gap: 1em;
-  grid-row-gap: 1em;
+  grid-column-gap: 0.8em;
+  grid-row-gap: 0.8em;
 
   justify-items: stretch;
   align-items: stretch;
 
   justify-content: center;
   align-content: center;
+}
 
+.filters {
+  background: rgb(255, 164, 180);
 }
 
 @media screen and (max-width: 1000px) {

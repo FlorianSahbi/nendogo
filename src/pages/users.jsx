@@ -29,6 +29,7 @@ const renderCards = userArray => {
 };
 
 const UsersPage = () => {
+  console.log("user page")
   const { error, loading, data } = useQuery(GET_USERS_QUERY, {
     onCompleted: data => {},
     onError: error => {}
