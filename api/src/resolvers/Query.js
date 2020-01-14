@@ -71,6 +71,33 @@ async function getUsers(parent, args, context) {
   }
 }
 
+async function getImages(parent, args, context) {
+  const where = args.filter
+    ? {
+      OR: [
+        { url_contains: args.filter },
+      ],
+    }
+    : {}
+
+  const images = await context.prisma.images({
+    where,
+    skip: args.skip,
+    first: args.first,
+    orderBy: args.orderBy,
+  })
+  const count = await context.prisma
+    .imagesConnection({
+      where,
+    })
+    .aggregate()
+    .count()
+  return {
+    images,
+    count,
+  }
+}
+
 async function getSeries(parent, args, context) {
   const where = args.filter
     ? {
@@ -174,6 +201,12 @@ async function getUser(parent, args, context) {
   const user = await context.prisma.user({ id: args.id });
   return user;
 }
+
+async function getImage(parent, args, context) {
+  const image = await context.prisma.image({ id: args.id });
+  return image;
+}
+
 async function getUserByPseudo(parent, args, context) {
   const user = await context.prisma.user({ pseudo: args.pseudo });
   return user;
@@ -342,4 +375,6 @@ module.exports = {
   getNendoroidsByManufacturer,
   getNendoroidsBySculptor,
   getUserByPseudo,
+  getImage,
+  getImages,
 }

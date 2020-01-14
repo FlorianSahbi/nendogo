@@ -32,7 +32,14 @@ type Query {
     first: Int
     orderBy: NendoroidOrderByInput
   ): Sculptors!
+  getImages(
+    filter: String
+    skip: Int
+    first: Int
+    orderBy: NendoroidOrderByInput
+  ): Images!
   getNendoroid(id: ID!): Nendoroid!
+  getImage(id: ID!): Image!
   getUser(id: ID!): User!
   getUserByPseudo(pseudo: String!): User!
   getInteractions: Interactions!
@@ -197,4 +204,9 @@ type Image {
   mimetype: String!
   encoding: String!
   url: String!
+}
+
+type Images {
+  images: [Image!]!
+  count: Int!
 }
