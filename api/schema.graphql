@@ -53,7 +53,10 @@ type Query {
 }
 
 type Mutation {
+  createImage(id: ID!): Image!
+  signS3(filename: String!, filetype: String!): S3Payload!
   createNendoroid(formattedName: String!, number: String!): Nendoroid!
+  updateUser(id: ID!, firstName: String, lastName: String): User!
   signup(email: String!, password: String!, pseudo: String!): AuthPayload
   login(pseudo: String!, password: String!): AuthPayload
   createInteraction(
@@ -68,6 +71,11 @@ type Mutation {
 type AuthPayload {
   token: String
   user: User
+}
+
+type S3Payload {
+  signedRequest: String!
+  url: String!
 }
 
 type Nendoroids {
@@ -179,20 +187,14 @@ enum InteractionType {
   OWN
 }
 
-type File {
-  filename: String!
-  mimetype: String!
-  encoding: String!
-}
-
 type Image {
   id: ID!
   likes: Int!
   views: Int!
   user: User!
-  serie: Serie!
   title: String!
-  nendoroids: [Nendoroids!]!
-  tags: [String!]!
-  file: File!
+  filename: String!
+  mimetype: String!
+  encoding: String!
+  url: String!
 }

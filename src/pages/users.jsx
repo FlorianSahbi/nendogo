@@ -6,7 +6,6 @@ import { graphql } from "gatsby";
 import { useQuery } from "@apollo/react-hooks";
 import { GET_USERS_QUERY } from "../apollo/queries/index";
 
-
 const handleLoading = () => {
   // const imgs = [...document.querySelectorAll(`#con img`)];
   // const tab = [...imgs.filter(i => i.complete === false)];
@@ -29,7 +28,8 @@ const renderCards = userArray => {
 };
 
 const UsersPage = () => {
-  console.log("user page")
+  console.log("user page");
+
   const { error, loading, data } = useQuery(GET_USERS_QUERY, {
     onCompleted: data => {},
     onError: error => {}

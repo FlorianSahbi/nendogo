@@ -138,7 +138,7 @@ const NendoroidsPage = props => {
         <button onClick={() => handleOrder("name_asc")}>name ASC</button>
         <button onClick={() => handleOrder("name_desc")}>name DESC</button>
         <button onClick={() => handleOrder("number_desc")}>number DESC</button>
-        <button onClick={() => handleOrder("number_desc")}>number DESC</button>
+        <button onClick={() => handleOrder("number_asc")}>number ASC</button>
       </div>
     );
   };
@@ -176,10 +176,10 @@ const NendoroidsPage = props => {
         setOrderBy("formattedName_DESC");
         break;
       case "number_desc":
-        setOrderBy("number_ASC");
-        break;
-      case "number_desc":
         setOrderBy("number_DESC");
+        break;
+      case "number_asc":
+        setOrderBy("number_ASC");
         break;
 
       default:

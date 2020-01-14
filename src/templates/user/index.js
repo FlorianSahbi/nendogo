@@ -4,6 +4,7 @@ import Carousel from "../../components/carousel/index";
 import Card from "../../components/card/nendoroid";
 import Layout from "../../components/layout/index";
 import { useQuery } from "@apollo/react-hooks";
+import UserForm from "../../components/form/user"
 import {
   GET_INTERACTION_LIKE_QUERY,
   GET_INTERACTION_WISH_QUERY,
@@ -78,6 +79,8 @@ const User = (props) => {
     <Layout header>
       <div className={classes.container}>
         <div className={classes.wrapper}>
+          <h1 style={{color: "white"}}>TEMPLATE</h1>
+          <UserForm />
           <div className={scrolled ? classes.hA : classes.imgWrapper}>
             <img src={imgUrl} alt="dunno" />
             <div className={scrolled ? classes.ppA : classes.profileImg}>

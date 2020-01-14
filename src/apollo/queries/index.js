@@ -284,3 +284,36 @@ query getOneByPseudo($pseudo: String!) {
   }
 }
 `
+
+export const UPDATE_USER = gql`
+mutation UpdateUser($id: ID!, $lastName: String, $firstName: String) {
+  updateUser(id: $id, firstName: $firstName, lastName: $lastName) {
+    id
+    pseudo
+    avatar
+  }
+}
+`;
+
+
+
+
+
+export const AFTER_UPLOAD = gql`
+  mutation CreateImage($id: ID!) {
+    createImage(id: $id) {
+      id
+      likes
+      url
+    }
+  }
+`;
+
+export const S3_SIGN_MUTATION = gql`
+  mutation($filename: String!, $filetype: String!) {
+    signS3(filename: $filename, filetype: $filetype) {
+      url
+      signedRequest
+    }
+  }
+`;
