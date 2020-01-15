@@ -1,37 +1,40 @@
-import React from "react";
-import Layout from "../components/layout";
+import React, { useState } from "react";
 import classes from "./manufacturers.module.css";
+import Layout from "../components/layout";
 import Card from "../components/card/manufacturer";
-import { graphql } from "gatsby";
+import ManufacturersFiltersForm from "../components/form/manufacturersFilters";
+import { GET_MANUFACTURERS } from "../apollo/graphql/queries";
+import { useQuery } from "@apollo/react-hooks";
 
 const renderCards = manufacturers =>
   manufacturers.map(({ id, name }) => <Card key={id} id={id} name={name} />);
 
-const ManufacturersPage = ({
-  data: {
-    prisma: { manufacturers }
-  }
-}) => {
+const ManufacturersPage = () => {
+  const [manufacturers, setManufacturers] = useState(null);
+  const [name, setName] = useState("");
+  const [orderBy, setOrderBy] = useState("name_ASC");
+
+  const { error, loading, data } = useQuery(GET_MANUFACTURERS, {
+    variables: { name, orderBy },
+    onCompleted: data => setManufacturers(data.getManufacturers.manufacturers),
+    onError: error => console.log(error)
+  });
+
   return (
-    <Layout header={true}>
+    <Layout header>
       <section className={classes.manufacturersPageContainer}>
-        <div className={classes.wrapper}>
-          {renderCards(manufacturers.slice(0, 902))}
-        </div>
+        <ManufacturersFiltersForm
+          filter={value => setName(value.filter)}
+        />
+        {loading && <div style={{ color: "white" }}>Loading...</div>}
+        {!loading && (
+          <div className={classes.wrapper}>
+            {manufacturers && renderCards(manufacturers)}
+          </div>
+        )}
       </section>
     </Layout>
   );
 };
-
-export const query = graphql`
-  {
-    prisma {
-      manufacturers(orderBy: name_ASC) {
-        name
-        id
-      }
-    }
-  }
-`;
 
 export default ManufacturersPage;

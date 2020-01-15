@@ -1,20 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./users.module.css";
 import Layout from "../components/layout";
 import Card from "../components/card/user";
-import { graphql } from "gatsby";
 import { useQuery } from "@apollo/react-hooks";
-import { GET_USERS_QUERY } from "../apollo/queries/index";
-
-const handleLoading = () => {
-  // const imgs = [...document.querySelectorAll(`#con img`)];
-  // const tab = [...imgs.filter(i => i.complete === false)];
-  // if (tab.length > 0) {
-  //   return true;
-  // }
-  // return false;
-  return;
-};
+import { GET_USERS } from "../apollo/graphql/queries";
 
 const renderCards = userArray => {
   return userArray.map(user => (
@@ -28,49 +17,26 @@ const renderCards = userArray => {
 };
 
 const UsersPage = () => {
-  console.log("user page");
+  const [pseudo, setPseudo] = useState("");
+  const [orderBy, setOrderBy] = useState("pseudo_ASC");
+  const [users, setUsers] = useState(null);
 
-  const { error, loading, data } = useQuery(GET_USERS_QUERY, {
-    onCompleted: data => {},
-    onError: error => {}
+  const { error, loading, data } = useQuery(GET_USERS, {
+    variables: { pseudo, orderBy },
+    onCompleted: data => setUsers(data.getUsers.users),
+    onError: error => console.log(error)
   });
 
-  if (error) {
-    return (
-      <>
-        <span>err</span>
-      </>
-    );
-  }
-  if (loading) {
-    return <>loading...</>;
-  }
-  let {
-    getUsers: { users }
-  } = data;
-
   return (
-    <Layout header>
-      <section
-        style={{ background: "#121415", minHeight: "100vh" }}
-        className={classes.usersContainer}
-      >
-        <div className={classes.wrapper}>{renderCards(users)}</div>
-      </section>
-    </Layout>
+    <div>Consoleokokoko</div>
+    // <Layout>
+    //   <section className={classes.usersContainer}>
+    //     <div>Loading</div>
+    //     {/* {loading && <div style={{color: "white"}}>Loading...</div>} */}
+    //     {/* <div className={classes.wrapper}>{!loading && renderCards(users)}</div> */}
+    //   </section>
+    // </Layout>
   );
 };
-
-export const query = graphql`
-  {
-    prisma {
-      users(orderBy: createdAt_DESC) {
-        avatar
-        id
-        pseudo
-      }
-    }
-  }
-`;
 
 export default UsersPage;

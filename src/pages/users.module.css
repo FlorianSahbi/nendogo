@@ -1,8 +1,8 @@
 .usersContainer {
   height: 100%;
   width: 100%;
-
-  /* border: 5px solid green; */
+  background: #121415;
+  min-height: 100vh;
 }
 
 .wrapper {

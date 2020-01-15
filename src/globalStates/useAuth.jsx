@@ -2,18 +2,22 @@ import React, { useState } from "react";
 import { createContainer } from "unstated-next";
 
 const isConnected = () => {
-  if (localStorage.getItem("isLoggedIn") === "true") {
-    return true;
+  if (typeof window !== "undefined") {
+    if (localStorage.getItem("isLoggedIn") === "true") {
+      return true;
+    }
+    return false;
   }
-  return false;
 };
 
 function functione() {
-  if (isConnected) {
-    let currentUser = JSON.parse(localStorage.getItem("user"));
-    return currentUser;
+  if (typeof window !== "undefined") {
+    if (isConnected) {
+      let currentUser = JSON.parse(localStorage.getItem("user"));
+      return currentUser;
+    }
+    return undefined;
   }
-  return undefined;
 }
 
 function useAuth(isLoggedIn = isConnected(), loggedInUser = functione()) {
@@ -23,9 +27,7 @@ function useAuth(isLoggedIn = isConnected(), loggedInUser = functione()) {
   let signout = () => setIsAuth(false);
 
   let setCurrentUser = user => setUser(user);
-  let getCurrentUser = () => {
-    
-  };
+  let getCurrentUser = () => {};
   return {
     isAuth,
     user,

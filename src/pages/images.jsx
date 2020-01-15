@@ -1,94 +1,113 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../components/layout/index";
 import Gallery from "react-photo-gallery";
+import { useQuery } from "@apollo/react-hooks";
+import { GET_IMAGES } from "../apollo/queries/index";
+import classes from "./images.module.css";
 
-const images = [
+import Avatar from "@material-ui/core/Avatar";
+import AvatarGroup from "@material-ui/lab/AvatarGroup";
+import Tooltip from "@material-ui/core/Tooltip";
+import moment from "moment";
+import VisibilityRoundedIcon from "@material-ui/icons/VisibilityRounded";
+
+const nendos = [
   {
-    src: "http://eskipaper.com/images/anime-wallpaper-8.jpg",
-    width: 4,
-    height: 3
+    formattedName: "Caster/Merlin: Magus of Flowers Ver.",
+    number: 970,
+    id: "5e14ef67d69c7f0d81927b7f",
+    images: [
+      "https://images.goodsmile.info/cgm/images/product/20191220/9125/66325/large/2aef16ee876735a4e36dee4d39ac4dc7.jpg"
+    ],
+    interactions: []
   },
   {
-    src:
-      "http://www.leparisien.fr/resizer/Ekey4nVHfB657a0M9RiiTSIPYyw=/932x582/arc-anglerfish-eu-central-1-prod-leparisien.s3.amazonaws.com/public/WXK2TZGDJ7NAZXFKB2LCK6SW64.jpg",
-    width: 4,
-    height: 3
-  },
-  {
-    src:
-      "https://mocah.org/uploads/posts/4500265-anime-anime-girls-spirited-away-studio-ghibli.jpg",
-    width: 4,
-    height: 3
-  },
-  {
-    src: "https://wallpapersite.com/images/pages/pic_w/19265.jpg",
-    width: 4,
-    height: 3
-  },
-  {
-    src:
-      "https://www.itl.cat/pngfile/big/93-931458_2019-anime-wallpaper-anime-wallpaper-background-anime.jpg",
-    width: 4,
-    height: 3
-  },
-  {
-    src:
-      "https://www.xtrafondos.com/wallpapers/resized/shinobu-kocho-de-kimetsu-no-yaiba-3717.jpg?s=large",
-    width: 4,
-    height: 3
-  },
-  {
-    src: "https://hdqwalls.com/wallpapers/ahri-lol-j5.jpg",
-    width: 4,
-    height: 3
-  },
-  {
-    src:
-      "https://upload.wikimedia.org/wikipedia/commons/9/9e/Anime-wallpaper-1.png",
-    width: 4,
-    height: 3
-  },
-  {
-    src: "http://eskipaper.com/images/anime-wallpaper-8.jpg",
-    width: 4,
-    height: 3
-  },
-  {
-    src:
-      "https://i2.wp.com/recommendmeanime.com/wp-content/uploads/2017/04/best-sites-to-find-free-anime-wallpapers.jpg?fit=584%2C329&ssl=1",
-    width: 4,
-    height: 3
-  },
-  {
-    src:
-      "https://mocah.org/uploads/posts/4500265-anime-anime-girls-spirited-away-studio-ghibli.jpg",
-    width: 4,
-    height: 3
-  },
-  {
-    src:
-      "https://www.itl.cat/pngfile/big/93-931458_2019-anime-wallpaper-anime-wallpaper-background-anime.jpg",
-    width: 4,
-    height: 3
-  },
-  {
-    src:
-      "https://www.ledojomanga.com/bdd_local/upload/images/Plunderer-visuel-officiel.jpg",
-    width: 3,
-    height: 4
-  },
-  {
-    src:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSTGT7S3xlprCVt3JQHc1urq5L-Vtw0BKtXLKybE0mH9Z-Op8NA",
-    width: 3,
-    height: 4
+    formattedName: "Caster/Merlin: Magus of Flowers Ver.",
+    number: 970,
+    id: "5e14ef67d69c7f0d81927b7f",
+    images: [
+      "https://images.goodsmile.info/cgm/images/product/20191220/9125/66325/large/2aef16ee876735a4e36dee4d39ac4dc7.jpg"
+    ],
+    interactions: []
   }
 ];
+const now = new Date();
+
+const Card = ({ url, title, user, views }) => {
+  const [isHover, setIsHover] = useState(false);
+  return (
+    <div
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
+      className={`${classes.card}`}
+    >
+      <img src={url} alt="g" />
+
+      {/* List of nendos */}
+      <div className={`${classes.avagroup} ${isHover ? "" : classes.hid}`}>
+        <AvatarGroup className={classes.abg}>
+          {nendos.map(n => {
+            return (
+              <Avatar
+                className={classes.avatarg}
+                alt="Remy Sharp"
+                src={n.images[0]}
+              />
+            );
+          })}
+          <Tooltip title="Foo • Bar • Baz">
+            <Avatar className={classes.avatarg}>+3</Avatar>
+          </Tooltip>
+        </AvatarGroup>
+      </div>
+
+      {/* Counter */}
+      <div className={`${classes.viewCount} ${isHover ? "" : classes.hid}`}>
+        <VisibilityRoundedIcon style={{ marginRight: "0.5em" }} />
+        <span style={{ color: "white" }}>
+          {new Intl.NumberFormat("en-EN").format(views)}
+        </span>
+      </div>
+
+      {/* Title */}
+      <div className={`${classes.title} ${isHover ? "" : classes.hid}`}>
+        <h2 style={{ color: "white" }}>{title}</h2>
+      </div>
+
+      {/* Uploader info */}
+      <div className={`${classes.a} ${isHover ? "" : classes.hid}`}>
+        <Avatar className={classes.avatar} alt="Remy Sharp" src={user.avatar} />
+        <span style={{ color: "white" }}>
+          {user.pseudo} {moment("2020-01-14T06:02:02.630+00:00").fromNow()}
+        </span>
+      </div>
+    </div>
+  );
+};
 
 const ImagesPage = () => {
+  const [images, setimages] = useState(null);
+
+  console.log(images);
+  const { error, loading, data } = useQuery(GET_IMAGES, {
+    onCompleted: data => setimages(data.getImages.images),
+    onError: error => console.log(error)
+  });
+
+  if (error) return <div>{error.message}</div>;
+  if (loading) return <div>Loading...</div>;
+
   return (
     <Layout header footer>
-      <Gallery  onClick={() => console.log("e")} photos={images} />
+      {loading && <div>Loading...</div>}
+      {!loading && (
+        <div className={classes.grid}>
+          {images &&
+            images.map(i => (
+              <Card url={i.url} title={i.title} user={i.user} views={i.views} />
+            ))}
+        </div>
+      )}
     </Layout>
   );
 };

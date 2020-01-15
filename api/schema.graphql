@@ -2,36 +2,12 @@ scalar Date
 scalar Upload
 
 type Query {
-  getNendoroids(
-    filter: String
-    skip: Int
-    first: Int
-    orderBy: NendoroidOrderByInput
-  ): Nendoroids!
-  getUsers(
-    filter: String
-    skip: Int
-    first: Int
-    orderBy: NendoroidOrderByInput
-  ): Users!
-  getSeries(
-    filter: String
-    skip: Int
-    first: Int
-    orderBy: NendoroidOrderByInput
-  ): Series!
-  getManufacturers(
-    filter: String
-    skip: Int
-    first: Int
-    orderBy: NendoroidOrderByInput
-  ): Manufacturers!
-  getSculptors(
-    filter: String
-    skip: Int
-    first: Int
-    orderBy: NendoroidOrderByInput
-  ): Sculptors!
+  getNendoroids(formattedName: String orderBy: NendoroidOrderByInput): Nendoroids!
+  getUsers(pseudo: String, orderBy: UserOrderByInput): Users!
+  getSeries(name: String, orderBy: SerieOrderByInput): Series!
+  getManufacturers(name: String, orderBy: ManufacturerOrderByInput): Manufacturers!
+  getSculptors(name: String, orderBy: SculptorOrderByInput): Sculptors!
+
   getImages(
     filter: String
     skip: Int
@@ -60,7 +36,7 @@ type Query {
 }
 
 type Mutation {
-  createImage(id: ID!): Image!
+  createImage(id: ID!, title: String!, filename: String!, url: String!): Image!
   signS3(filename: String!, filetype: String!): S3Payload!
   createNendoroid(formattedName: String!, number: String!): Nendoroid!
   updateUser(id: ID!, firstName: String, lastName: String): User!
@@ -186,6 +162,22 @@ enum NendoroidOrderByInput {
   number_DESC
   formattedName_ASC
   formattedName_DESC
+}
+enum SerieOrderByInput {
+  name_ASC
+  name_DESC
+}
+enum UserOrderByInput {
+  pseudo_ASC
+  pseudo_DESC
+}
+enum ManufacturerOrderByInput {
+  name_ASC
+  name_DESC
+}
+enum SculptorOrderByInput {
+  name_ASC
+  name_DESC
 }
 
 enum InteractionType {

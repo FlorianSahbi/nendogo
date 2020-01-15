@@ -10,6 +10,8 @@ import Avatar from "@material-ui/core/Avatar";
 import AvatarGroup from "@material-ui/lab/AvatarGroup";
 import Tooltip from "@material-ui/core/Tooltip";
 
+import ImageForm from "../../components/form/image";
+
 import { AFTER_UPLOAD, S3_SIGN_MUTATION } from "../../apollo/queries/index";
 import { useMutation } from "@apollo/react-hooks";
 import axios from "axios";
@@ -19,9 +21,12 @@ const UploadPage = () => {
   let currentUser = Auth.useContainer();
 
   // Hooks
-  const [fileName, setFileName] = useState("Rikka wants to play some N64");
+  const [filename, setFilename] = useState("Rikka wants to play some N64");
   const [file, setFile] = useState(null);
 
+  console.log(filename)
+
+  console.log(file)
   // Hooks graphql
   const [createImage] = useMutation(AFTER_UPLOAD, {
     onCompleted: data => console.log(data),
@@ -102,7 +107,10 @@ const UploadPage = () => {
 
     const graphqlResponse = await createImage({
       variables: {
-        id: currentUser.user.id
+        id: currentUser.user.id,
+        title: filename,
+        filename: formatFilename(file.name),
+        url: url,
       }
     });
 
@@ -132,7 +140,18 @@ const UploadPage = () => {
             <p>Drag 'n' drop some files here, or click to select files</p>
           )} */}
 
-          {file && <img style={{ width: "10%" }} src={file.preview} alt="ok" />}
+          {file && (
+            <img
+              style={{
+                width: "100%",
+                heigh: "100%",
+                objectFit: "cover",
+                objectPosition: "center"
+              }}
+              src={file.preview}
+              alt="ok"
+            />
+          )}
 
           {/* List of nendos */}
           <div className={classes.avagroup}>
@@ -162,7 +181,7 @@ const UploadPage = () => {
 
           {/* Title */}
           <div className={classes.title}>
-            <h2 style={{ color: "white" }}>{fakeName}</h2>
+            <h2 style={{ color: "white" }}>{filename}</h2>
           </div>
 
           {/* Uploader info */}
@@ -183,6 +202,11 @@ const UploadPage = () => {
           )}
         </div>
       </section>
+      <ImageForm
+        filter={filter => {
+          setFilename(filter.filename);
+        }}
+      />
     </Layout>
   );
 };

@@ -13,6 +13,7 @@ const { createWriteStream, existsSync, mkdirSync } = require("fs");
 const Query = require('./resolvers/Query');
 const Mutation = require('./resolvers/Mutation');
 const User = require('./resolvers/User');
+const Image = require('./resolvers/Image');
 const Nendoroid = require('./resolvers/Nendoroid');
 const Interaction = require('./resolvers/Interaction');
 
@@ -23,6 +24,7 @@ const resolvers = {
     Mutation,
     Subscription,
     User,
+    Image,
     Nendoroid,
     Interaction,
 }

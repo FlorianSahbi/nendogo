@@ -3,25 +3,25 @@ import { Formik, Form } from "formik";
 import MyTextInput from "./input/text";
 import * as Yup from "yup";
 
-const ImageForm = props => {
+const SeriesFiltersForm = props => {
   return (
     <Formik
       initialValues={{
-        filename: ""
+        filter: ""
       }}
       validationSchema={Yup.object({
-        filename: Yup.string()
+        filter: Yup.string()
       })}
       onSubmit={values => {
         props.filter(values);
       }}
     >
       <Form>
-        <MyTextInput name="filename" type="text" placeholder="Filename" />
+        <MyTextInput name="filter" type="text" placeholder="Filter" />
         <button type="submit">Submit</button>
       </Form>
     </Formik>
   );
 };
 
-export default ImageForm;
+export default SeriesFiltersForm;

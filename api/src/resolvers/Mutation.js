@@ -90,16 +90,16 @@ async function uploadFile(_, { file }) {
   return true;
 }
 
-async function createImage(parent, args, context, info) {
+async function createImage(parent, { id, title, filename, url }, context, info) {
   return context.prisma.createImage({
     likes: 0,
     views: 0,
-    user: { connect: { id: args.id } },
-    title: "ok",
-    filename: "filename",
+    user: { connect: { id } },
+    title: title,
+    filename: filename,
     mimetype: "image/jpg",
     encoding: "dunno",
-    url: "https://nendogo.s3.eu-west-3.amazonaws.com/images/20200114-qeohs-yulric-profile-picture-jpg",
+    url: url,
   })
 }
 

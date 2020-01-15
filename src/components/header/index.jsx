@@ -13,13 +13,15 @@ import VpnKeyRoundedIcon from "@material-ui/icons/VpnKeyRounded";
 import Avatar from "@material-ui/core/Avatar";
 import PersonRoundedIcon from "@material-ui/icons/PersonRounded";
 import ExitToAppRoundedIcon from "@material-ui/icons/ExitToAppRounded";
-import ImageIcon from '@material-ui/icons/Image';
+import ImageIcon from "@material-ui/icons/Image";
 
 import Auth from "../../globalStates/useAuth";
 
 const handleLogout = () => {
-  localStorage.removeItem("user");
-  localStorage.setItem("isLoggedIn", "false");
+  if (typeof window !== "undefined") {
+    localStorage.removeItem("user");
+    localStorage.setItem("isLoggedIn", "false");
+  }
 };
 
 const ID = () => {
@@ -27,17 +29,24 @@ const ID = () => {
   if (currentUser.isAuth) {
     return (
       <>
-        <Button startIcon={<PersonRoundedIcon />}>
-          <AniLink
-            cover
-            direction="down"
-            bg="#FFC0CC"
-            to={`/user/${currentUser.user.pseudo}`}
+        <AniLink
+          cover
+          direction="down"
+          bg="#FFC0CC"
+          to={`/user/${currentUser.user.pseudo}`}
+        >
+          <Button
+            startIcon={
+              <Avatar
+                alt={currentUser.user.pseudo}
+                src={currentUser.user.avatar}
+              />
+            }
           >
             {currentUser.user.pseudo}
-          </AniLink>
-        </Button>
-        <Avatar alt={currentUser.user.pseudo} src={currentUser.user.avatar} />
+          </Button>
+        </AniLink>
+
         <Button
           onClick={() => {
             handleLogout();

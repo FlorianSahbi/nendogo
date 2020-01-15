@@ -300,8 +300,8 @@ mutation UpdateUser($id: ID!, $lastName: String, $firstName: String) {
 
 
 export const AFTER_UPLOAD = gql`
-  mutation CreateImage($id: ID!) {
-    createImage(id: $id) {
+  mutation CreateImage($id: ID!, $title: String!, $filename: String!, $url: String!) {
+    createImage(id: $id, title: $title, filename: $filename, url: $url) {
       id
       likes
       url
@@ -315,5 +315,24 @@ export const S3_SIGN_MUTATION = gql`
       url
       signedRequest
     }
+  }
+`;
+
+export const GET_IMAGES = gql`
+  query GetImages {
+    getImages {
+    count
+    images {
+      id
+      views
+      title
+      url
+      user {
+        avatar
+        id
+        pseudo
+      }
+    }
+  }
   }
 `;
