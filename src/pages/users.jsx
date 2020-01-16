@@ -20,6 +20,7 @@ const UsersPage = () => {
   const [pseudo, setPseudo] = useState("");
   const [orderBy, setOrderBy] = useState("pseudo_ASC");
   const [users, setUsers] = useState(null);
+  console.log(users)
 
   const { error, loading, data } = useQuery(GET_USERS, {
     variables: { pseudo, orderBy },
@@ -28,14 +29,12 @@ const UsersPage = () => {
   });
 
   return (
-    <div>Consoleokokoko</div>
-    // <Layout>
-    //   <section className={classes.usersContainer}>
-    //     <div>Loading</div>
-    //     {/* {loading && <div style={{color: "white"}}>Loading...</div>} */}
-    //     {/* <div className={classes.wrapper}>{!loading && renderCards(users)}</div> */}
-    //   </section>
-    // </Layout>
+    <Layout>
+      <section className={classes.usersContainer}>
+        {loading && <div style={{color: "white"}}>Loading...</div>}
+        <div className={classes.wrapper}>{!loading && users && renderCards(users)}</div>
+      </section>
+    </Layout>
   );
 };
 

@@ -67,8 +67,9 @@ exports.createPages = async ({ graphql, actions }) => {
   const { data: { prisma: { nendoroids, users, series, sculptors, manufacturers } } } = await PAGES;
 
   nendoroids.forEach((nendoroid) => {
+    console.log(nendoroid.formattedName.trim().toLowerCase().replace(/ /g, "-").replace(":", "").replace("&", "and").replace("(", "").replace(")", "").replace(".", ""))
     createPage({
-      path: `nendoroid/${nendoroid.formattedName}`,
+      path: `nendoroid/${nendoroid.formattedName.trim().toLowerCase().replace(/ /g, "-").replace(":", "").replace("&", "and").replace("(", "").replace(")", "").replace(".", "")}`,
       component: templateNendo,
       context: nendoroid,
     })
@@ -107,11 +108,11 @@ exports.createPages = async ({ graphql, actions }) => {
   });
 };
 
-exports.onCreatePage = async ({ page, actions }) => {
-  const { createPage } = actions;
+// exports.onCreatePage = async ({ page, actions }) => {
+//   const { createPage } = actions;
 
-  if (page.path.match(/^\/user/)) {
-    page.matchPath = "/user/*";
-    createPage(page);
-  };
-};
+//   if (page.path.match(/^\/user/)) {
+//     page.matchPath = "/user/*";
+//     createPage(page);
+//   };
+// };

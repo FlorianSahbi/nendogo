@@ -93,7 +93,7 @@ export default function Card(props) {
           <p className={classes.number}>{props.number}</p>
 
           <div className={`${classes.link} ${classes.default}`}>
-            <a href={`../nendoroid/${props.name}/`}>Details</a>
+            <a href={`../../nendoroid/${props.name.trim().toLowerCase().replace(/ /g, "-").replace(":","").replace("&","and").replace("(","").replace(")","").replace(".","")}/`}>Details</a>
           </div>
         </div>
       </div>

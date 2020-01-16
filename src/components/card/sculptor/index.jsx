@@ -29,7 +29,7 @@ const Card = ({ name }) => {
                   return (
                     <a
                       className={classes.link}
-                      href={`../../nendoroid/${e.formattedName}`}
+                      href={`../../nendoroid/${e.formattedName.trim().toLowerCase().replace(" ","-")}`}
                     >
                       <Avatar
                         className={classes.avatar}

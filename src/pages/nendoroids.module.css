@@ -22,8 +22,31 @@
   align-content: center;
 }
 
+.grid { 
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+}
+
 .filters {
   background: rgb(255, 164, 180);
+  border-radius: 0 0 5px 5px;
+
+}
+
+.hid {
+  transform: translateY(-500px);
+}
+
+.fakeSelect {
+  width: 90%;
+  z-index: 99;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  /* border: 2px solid green; */
+  transition: all 0.3s ease;
 }
 
 @media screen and (max-width: 1000px) {
