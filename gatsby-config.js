@@ -23,6 +23,14 @@ module.exports = {
     {
       resolve: `gatsby-plugin-material-ui`,
       options: {
+        theme: {
+          typography: {
+            fontFamily: [
+              "Cinzel",
+              "Raleway",
+            ].join(","),
+          },
+        },
         stylesProvider: {
           injectFirst: true,
         },
