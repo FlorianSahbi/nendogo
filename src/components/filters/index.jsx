@@ -1,19 +1,14 @@
 import React, { useState } from "react";
-import useStyles from "./style";
-
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Grid from "@material-ui/core/Grid";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
-import Slide from "@material-ui/core/Slide";
-
-import Popper from "@material-ui/core/Popper";
-import Fade from "@material-ui/core/Fade";
-import Paper from "@material-ui/core/Paper";
-
+import AppBar from "@material-ui/core/AppBar";
 import { FiltersNendoroids } from "../../globalStates/useFilters";
+import { useTheme } from "@material-ui/styles";
+import Popper from "@material-ui/core/Popper";
+import Slide from "@material-ui/core/Slide";
 
 const Filters = () => {
   // HOOKS
@@ -25,16 +20,23 @@ const Filters = () => {
     orderBy,
     setOrderBy
   } = FiltersNendoroids.useContainer();
+  const theme = useTheme();
 
-  const classes = useStyles();
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl1, setAnchorEl1] = useState(null);
+  const [anchorEl2, setAnchorEl2] = useState(null);
 
-  const handleClick = event => {
-    setAnchorEl(anchorEl ? null : event.currentTarget);
+  const handleClick1 = event => {
+    setAnchorEl1(anchorEl1 ? null : event.currentTarget);
+  };
+  const handleClick2 = event => {
+    setAnchorEl2(anchorEl2 ? null : event.currentTarget);
   };
 
-  const open = Boolean(anchorEl);
-  const id = open ? "transitions-popper" : undefined;
+  const open1 = Boolean(anchorEl1);
+  const open2 = Boolean(anchorEl2);
+
+  const id1 = open1 ? "rangeSubMenu" : undefined;
+  const id2 = open2 ? "orderBySubMenu" : undefined;
 
   // FUNCTIONS
   const handleClickAway = () => {};
@@ -61,10 +63,24 @@ const Filters = () => {
       setRange({ min, max });
     };
     return (
-      <Grid container classes={{ root: classes.rangeSelect }}>
+      <Grid
+        container
+        style={{
+          background: theme.palette.primary.main,
+          border: `1px solid ${theme.palette.primary.contrastText}`
+        }}
+      >
         {ranges.map(({ name, min, max }) => (
-          <Grid item xs={6}>
-            <Button onClick={() => handleClick(min, max)} fullWidth>
+          <Grid
+            item
+            xs={6}
+            style={{ widht: "50%", padding: theme.spacing(0.5) }}
+          >
+            <Button
+              style={{ color: theme.palette.primary.contrastText }}
+              onClick={() => handleClick(min, max)}
+              fullWidth
+            >
               {name}
             </Button>
           </Grid>
@@ -85,10 +101,20 @@ const Filters = () => {
       setOrderBy(filter);
     };
     return (
-      <Grid container classes={{ root: classes.orderBySelect }}>
+      <Grid
+        container
+        style={{
+          background: theme.palette.primary.main,
+          border: `1px solid ${theme.palette.primary.contrastText}`
+        }}
+      >
         {filters.map(({ name, value }) => (
           <Grid item xs={6}>
-            <Button onClick={() => handleClick(value)} fullWidth>
+            <Button
+              style={{ color: theme.palette.primary.contrastText }}
+              onClick={() => handleClick(value)}
+              fullWidth
+            >
               {name}
             </Button>
           </Grid>
@@ -119,30 +145,63 @@ const Filters = () => {
   return (
     <>
       <CssBaseline />
-      <Popper id={id} open={open} anchorEl={anchorEl}>
-        <RangeSelect />
+      <Popper
+        id={id1}
+        open={open1}
+        anchorEl={anchorEl1}
+        style={{ zIndex: 1 }}
+        placement={"bottom-start"}
+        transition
+      >
+        <RangeSelect onChange={() => setAnchorEl1(null)} />
       </Popper>
-      <Grid container classes={{ root: classes.filtersContainer }}>
-        <Grid item xs={4}>
-          <NameFilter />
+      <Popper
+        id={id2}
+        open={open2}
+        anchorEl={anchorEl2}
+        style={{ zIndex: 1 }}
+        placement={"bottom-start"}
+        transition
+      >
+        <OrderBySelect onChange={() => setAnchorEl2(null)} />
+      </Popper>
+      <AppBar
+        style={{ zIndex: 5 }}
+        position="static"
+        style={{
+          background: theme.palette.primary.main,
+          borderTop: `1px solid ${theme.palette.primary.contrastText}`,
+          borderLeft: `0px solid ${theme.palette.primary.contrastText}`,
+          borderBottom: `1px solid ${theme.palette.primary.contrastText}`,
+          borderRight: `0px solid ${theme.palette.primary.contrastText}`
+        }}
+      >
+        <Grid container justify="center" alignItems="center">
+          <Grid item xs={4}>
+            {/* <NameFilter /> */}
+          </Grid>
+          <Grid item xs={4}>
+            <Button onClick={handleClick1} aria-describedby={id1}>
+              <Typography
+                variant="h6"
+                style={{ color: theme.palette.primary.contrastText }}
+              >
+                Range : {min}-{max}
+              </Typography>
+            </Button>
+          </Grid>
+          <Grid item xs={4}>
+            <Button onClick={handleClick2} aria-describedby={id2}>
+              <Typography
+                variant="h6"
+                style={{ color: theme.palette.primary.contrastText }}
+              >
+                Order By : {orderBy}
+              </Typography>
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item xs={4} classes={{ root: classes.menu }}>
-          <Button
-            aria-describedby={id}
-            classes={{ root: classes.buttons }}
-            onClick={handleClick}
-          >
-            <Typography variant="h6">
-              Range : {min}-{max}
-            </Typography>
-          </Button>
-        </Grid>
-        <Grid item xs={4} classes={{ root: classes.menu }}>
-          <Button>
-            <Typography variant="h6">Order By : {orderBy}</Typography>
-          </Button>
-        </Grid>
-      </Grid>
+      </AppBar>
     </>
   );
 };

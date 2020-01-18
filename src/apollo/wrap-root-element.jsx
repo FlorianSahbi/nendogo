@@ -9,15 +9,29 @@ import {
   FiltersManufacturers
 } from "../globalStates/useFilters";
 
-const theme = createMuiTheme({
+export const darkTheme = createMuiTheme({
   typography: {
     fontFamily: ["Cinzel", "Raleway"].join(",")
-  }
+  },
+  palette: {
+    primary: {
+      light: '#36393c',
+      main: '#101316',
+      dark: '#000000',
+      contrastText: '#f0e6d2',
+    },
+    secondary: {
+      light: '#ffb2dd',
+      main: '#ff80ab',
+      dark: '#c94f7c',
+      contrastText: '#f0e6d2',
+    },
+  },
 });
 
 export const wrapRootElement = ({ element }) => {
   return (
-    <MuiThemeProvider theme={theme}>
+    <MuiThemeProvider theme={darkTheme}>
       <Auth.Provider>
         <Dial.Provider>
           <FiltersNendoroids.Provider>

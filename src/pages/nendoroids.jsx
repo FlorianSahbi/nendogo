@@ -5,6 +5,7 @@ import { useQuery, useLazyQuery } from "@apollo/react-hooks";
 import { GET_NENDOROIDS_BY_RANGE_QUERY } from "../apollo/queries/index";
 import Grid from "@material-ui/core/Grid";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { useTheme } from "@material-ui/styles";
 
 import Auth from "../globalStates/useAuth";
 import { FiltersNendoroids } from "../globalStates/useFilters";
@@ -82,6 +83,7 @@ const renderCards = (nendoroids, currentUser) => {
 };
 
 const NendoroidsPage = props => {
+  const theme = useTheme();
   const {
     range: { min, max },
     orderBy,
@@ -102,10 +104,10 @@ const NendoroidsPage = props => {
   return (
     <Layout header>
       <CssBaseline />
-        <Grid container>
-          <Filters />
-          {!loading && nens && renderCards(nens)}
-        </Grid>
+      <Filters />
+      <Grid container justify="flex-start" alignItems="center" spacing={2} style={{padding: theme.spacing(2)}}>
+        {!loading && nens && renderCards(nens)}
+      </Grid>
     </Layout>
   );
 };
