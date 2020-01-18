@@ -10,6 +10,7 @@ import Avatar from "@material-ui/core/Avatar";
 import ExitToAppRoundedIcon from "@material-ui/icons/ExitToAppRounded";
 import ImageIcon from "@material-ui/icons/Image";
 import AppBar from "@material-ui/core/AppBar";
+import Grid from "@material-ui/core/Grid";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
@@ -17,8 +18,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Auth from "../../globalStates/useAuth";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { useTheme } from '@material-ui/core/styles';
-
+import { useTheme } from "@material-ui/core/styles";
 
 const handleLogout = () => {
   if (typeof window !== "undefined") {
@@ -40,8 +40,7 @@ const ID = () => {
           to={`/user/${currentUser.user.pseudo}`}
         >
           <Button
-          
-            startIcon={
+            endIcon={
               <Avatar
                 alt={currentUser.user.pseudo}
                 src={currentUser.user.avatar}
@@ -58,7 +57,11 @@ const ID = () => {
             currentUser.signout();
             currentUser.setCurrentUser(undefined);
           }}
-          startIcon={<ExitToAppRoundedIcon style={{fill: theme.palette.primary.contrastText}}/>}
+          startIcon={
+            <ExitToAppRoundedIcon
+              style={{ fill: theme.palette.primary.contrastText }}
+            />
+          }
         >
           Logout
         </Button>
@@ -66,8 +69,21 @@ const ID = () => {
     );
   } else {
     return (
-      <AniLink cover direction="down" bg="#FFC0CC" to="/signin/">
-        <Button startIcon={<VpnKeyRoundedIcon style={{fill: theme.palette.primary.contrastText}}/>}>Login</Button>
+      <AniLink
+        cover
+        direction="down"
+        bg={theme.palette.primary.main}
+        to="/signin/"
+      >
+        <Button
+          startIcon={
+            <VpnKeyRoundedIcon
+              style={{ fill: theme.palette.primary.contrastText }}
+            />
+          }
+        >
+          Login
+        </Button>
       </AniLink>
     );
   }
@@ -81,79 +97,134 @@ const Header = () => {
       <CssBaseline />
       <AppBar position="sticky" style={{ zIndex: 5 }}>
         <Toolbar>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon style={{fill: theme.palette.primary.contrastText}} />
-          </IconButton>
-          <Typography variant="h5">NendoGO</Typography>
-          <AniLink
-            cover
-            direction="down"
-            bg={theme.palette.primary.main}
-            to="/users/"
-          >
-            <Button startIcon={<PeopleAltRoundedIcon style={{fill: theme.palette.primary.contrastText}} />}>
-              Users
-            </Button>
-          </AniLink>
-          <AniLink
-            cover
-            direction="down"
-            bg={theme.palette.primary.main}
-            to="/nendoroids/"
-          >
-            <Button startIcon={<ListAltRoundedIcon style={{fill: theme.palette.primary.contrastText}} />}>
-              Nendoroids
-            </Button>
-          </AniLink>
-          <AniLink
-            cover
-            direction="down"
-            bg={theme.palette.primary.main}
-            to="/series/"
-          >
-            <Button startIcon={<TitleRoundedIcon style={{fill: theme.palette.primary.contrastText}} />}>
-              Series
-            </Button>
-          </AniLink>
-          <AniLink
-            cover
-            direction="down"
-            bg={theme.palette.primary.main}
-            to="/manufacturers/"
-          >
-            <Button startIcon={<ApartmentRoundedIcon style={{fill: theme.palette.primary.contrastText}} />}>
-              Manufacturers
-            </Button>
-          </AniLink>
-          <AniLink
-            cover
-            direction="down"
-            bg={theme.palette.primary.main}
-            to="/sculptors/"
-          >
-            <Button startIcon={<BrushRoundedIcon style={{fill: theme.palette.primary.contrastText}} />}>
-              Sculptors
-            </Button>
-          </AniLink>
-          <AniLink
-            cover
-            direction="down"
-            bg={theme.palette.primary.main}
-            to="/images/"
-          >
-            <Button startIcon={<ImageIcon style={{fill: theme.palette.primary.contrastText}} />}>images</Button>
-          </AniLink>
-          <Button
-            onClick={() => auth.getCurrentUser()}
-            startIcon={<ExitToAppRoundedIcon style={{fill: theme.palette.primary.contrastText}} />}
-          >
-            info
-          </Button>
-          <ID auth={auth} />
+          <Grid container justify="space-between" alignItems="center">
+            <Grid
+              container
+              justify="flex-start"
+              alignItems="center"
+              sm={3}
+            >
+              <IconButton edge="start" color="inherit" aria-label="menu">
+                <MenuIcon
+                  style={{ fill: theme.palette.primary.contrastText }}
+                />
+              </IconButton>
+              <Typography variant="h5" component="span">
+                NendoGO
+              </Typography>
+            </Grid>
+            <Grid
+              container
+              justify="space-evenly"
+              alignItems="center"
+              sm={6}
+            >
+              <AniLink
+                cover
+                direction="down"
+                bg={theme.palette.primary.main}
+                to="/users/"
+              >
+                <Button
+                  startIcon={
+                    <PeopleAltRoundedIcon
+                      style={{ fill: theme.palette.primary.contrastText }}
+                    />
+                  }
+                >
+                  Users
+                </Button>
+              </AniLink>
+              <AniLink
+                cover
+                direction="down"
+                bg={theme.palette.primary.main}
+                to="/nendoroids/"
+              >
+                <Button
+                  startIcon={
+                    <ListAltRoundedIcon
+                      style={{ fill: theme.palette.primary.contrastText }}
+                    />
+                  }
+                >
+                  Nendoroids
+                </Button>
+              </AniLink>
+              <AniLink
+                cover
+                direction="down"
+                bg={theme.palette.primary.main}
+                to="/series/"
+              >
+                <Button
+                  startIcon={
+                    <TitleRoundedIcon
+                      style={{ fill: theme.palette.primary.contrastText }}
+                    />
+                  }
+                >
+                  Series
+                </Button>
+              </AniLink>
+              <AniLink
+                cover
+                direction="down"
+                bg={theme.palette.primary.main}
+                to="/manufacturers/"
+              >
+                <Button
+                  startIcon={
+                    <ApartmentRoundedIcon
+                      style={{ fill: theme.palette.primary.contrastText }}
+                    />
+                  }
+                >
+                  Manufacturers
+                </Button>
+              </AniLink>
+              <AniLink
+                cover
+                direction="down"
+                bg={theme.palette.primary.main}
+                to="/sculptors/"
+              >
+                <Button
+                  startIcon={
+                    <BrushRoundedIcon
+                      style={{ fill: theme.palette.primary.contrastText }}
+                    />
+                  }
+                >
+                  Sculptors
+                </Button>
+              </AniLink>
+              <AniLink
+                cover
+                direction="down"
+                bg={theme.palette.primary.main}
+                to="/images/"
+              >
+                <Button
+                  startIcon={
+                    <ImageIcon
+                      style={{ fill: theme.palette.primary.contrastText }}
+                    />
+                  }
+                >
+                  images
+                </Button>
+              </AniLink>
+            </Grid>
+            <Grid
+              container
+              justify="flex-end"
+              alignItems="center"
+              sm={3}
+            >
+              <ID auth={auth} />
+            </Grid>
+          </Grid>
         </Toolbar>
       </AppBar>
     </>

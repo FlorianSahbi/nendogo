@@ -10,23 +10,56 @@ import {
 } from "../globalStates/useFilters";
 
 export const darkTheme = createMuiTheme({
+  overrides: {
+    MuiButton: {
+      text: {
+        color: "#f0e6d2",
+        fontFamily: "Raleway",
+        "&:hover": {
+          color: "#ffb2dd"
+        }
+      }
+    }
+  },
   typography: {
-    fontFamily: ["Cinzel", "Raleway"].join(",")
+    fontFamily: ["Cinzel", "Raleway"].join(","),
+    h1: {
+      fontSize: 30,
+      color: "#f0e6d2"
+    },
+    h2: {
+      fontSize: 24,
+      color: "#f0e6d2"
+    },
+    h6: {
+      color: "#f0e6d2"
+    },
+    subtitle1: {
+      fontSize: 14,
+      color: "#f0e6d2"
+    },
+    subtitle2: {
+      fontSize: 12,
+      color: "#f0e6d2"
+    },
+    button: {
+      color: "#f0e6d2"
+    }
   },
   palette: {
     primary: {
-      light: '#36393c',
-      main: '#101316',
-      dark: '#000000',
-      contrastText: '#f0e6d2',
+      light: "#36393c",
+      main: "#101316",
+      dark: "#000000",
+      contrastText: "#f0e6d2"
     },
     secondary: {
-      light: '#ffb2dd',
-      main: '#ff80ab',
-      dark: '#c94f7c',
-      contrastText: '#f0e6d2',
-    },
-  },
+      light: "#ffb2dd",
+      main: "#ff80ab",
+      dark: "#c94f7c",
+      contrastText: "#f0e6d2"
+    }
+  }
 });
 
 export const wrapRootElement = ({ element }) => {

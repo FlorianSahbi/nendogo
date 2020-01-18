@@ -1,100 +1,62 @@
-import React, { useState } from "react";
-import classes from "./style.module.css";
-import InteractionButton from "../../button/interaction/index";
-import default_nendoroid from "../../../images/default_nendoroid.jpg";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import Skeleton from "@material-ui/lab/Skeleton";
+import React from "react";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import Typography from "@material-ui/core/Typography";
+import { useTheme } from "@material-ui/styles";
+import { slugify } from "../../../utils/index";
+import { makeStyles } from "@material-ui/core/styles";
 
-export default function Card(props) {
-  const [isHovered, setIsHovered] = useState(false);
+const useStyles = makeStyles({
+  cardContent: {
+    height: "100%",
+    backdropFilter: "0",
+    opacity: "0",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    "&:hover": {
+      backdropFilter: `brightness(70%) blur(5px)`,
+      opacity: "1"
+    }
+  }
+});
 
-  const handleMouseEnter = e => {
-    e.preventDefault();
-    setIsHovered(true);
-  };
-
-  const onMouseLeave = e => {
-    e.preventDefault();
-    setIsHovered(false);
-  };
+export default function Cards({ images, name, number }) {
+  const classes = useStyles();
+  const theme = useTheme();
 
   return (
-    <div
-      onMouseEnter={e => handleMouseEnter(e)}
-      onMouseLeave={e => onMouseLeave(e)}
-      className={
-        isHovered
-          ? `${classes.container} ${classes.hover}`
-          : `${classes.container} ${classes.default}`
-      }
-    >
-      {props.images ? (
-        <img
-          onLoad={() => props.isLoaded()}
-          src={props.images[0]}
-          alt="img_nendo"
-        />
-      ) : (
-        <img
-          onLoad={() => props.isLoaded()}
-          src={default_nendoroid}
-          alt="img_nendo"
-        />
-      )}
-
-      <div className={classes.wrapper}>
-        {props.isLiked !== undefined && (
-          <div className={classes.likeButtonContainer}>
-            <InteractionButton
-              srcId={props.id}
-              type="LIKE"
-              enabled={<AiFillHeart />}
-              disabled={<AiOutlineHeart />}
-              isActive={props.isLiked}
-            />
-          </div>
-        )}
-
-        {props.isWished !== undefined && (
-          <InteractionButton
-            srcId={props.id}
-            type="WISH"
-            enabled="★"
-            disabled="☆"
-            isActive={props.isWished}
-          />
-        )}
-
-        {props.isOwned !== undefined && (
-          <InteractionButton
-            srcId={props.id}
-            type="OWN"
-            enabled="✓"
-            disabled="X"
-            isActive={props.isOwned}
-          />
-        )}
-
-        <h2 className={classes.title}>{props.name}</h2>
-
-        <p className={classes.number}>{props.number}</p>
-
-        <div className={`${classes.link} ${classes.default}`}>
-          <a
-            href={`../../nendoroid/${props.name
-              .trim()
-              .toLowerCase()
-              .replace(/ /g, "-")
-              .replace(":", "")
-              .replace("&", "and")
-              .replace("(", "")
-              .replace(")", "")
-              .replace(".", "")}/`}
+    <a href={`../../nendoroid/${slugify(name)}/`}>
+      <Card
+        style={{
+          background: theme.palette.primary.light,
+          color: theme.palette.primary.contrastText,
+          borderRadius: "0px"
+        }}
+      >
+        <CardActionArea>
+          <CardMedia
+            align-items="center"
+            image={images[0]}
+            src={images[0]}
+            style={{
+              height: "400px"
+            }}
+            title="Contemplative Reptile"
           >
-            Details
-          </a>
-        </div>
-      </div>
-    </div>
+            <CardContent className={classes.cardContent}>
+              <Typography align="center" variant="h6" component="h1">
+                {name}
+              </Typography>
+              <Typography align="center" variant="h6" component="h1">
+                #{number}
+              </Typography>
+            </CardContent>
+          </CardMedia>
+        </CardActionArea>
+      </Card>
+    </a>
   );
 }
