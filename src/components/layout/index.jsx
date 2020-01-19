@@ -9,6 +9,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import { CssBaseline } from "@material-ui/styles";
 
 const DialogNendoroids = () => {
   const dial = Dial.useContainer();
@@ -19,9 +20,7 @@ const DialogNendoroids = () => {
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <DialogTitle>
-        Want to share your love ?
-      </DialogTitle>
+      <DialogTitle>Want to share your love ?</DialogTitle>
       <DialogContent>
         <DialogContentText>
           To start to share your preferences with people you first need to be
