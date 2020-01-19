@@ -39,7 +39,7 @@ const UsersPage = () => {
       <Grid
         container
         spacing={1}
-        style={{ background: theme.palette.primary.main, minHeight: "100vh", padding: "1em" }}
+        style={{ background: theme.palette.primary.main, minHeight: "100vh", padding: theme.spacing(1) }}
       >
         {!loading && users && renderCards(users)}
       </Grid>
