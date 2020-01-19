@@ -8,7 +8,7 @@ const DEFAULT_FILTERS = {
 };
 
 function useFiltersNendoroids() {
-  const [range, setRange] = useState({ min: 0, max: 31 });
+  const [range, setRange] = useState({ min: 500, max: 531 });
   const [orderBy, setOrderBy] = useState("number_ASC");
   const [name, setName] = useState("");
 

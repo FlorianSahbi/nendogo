@@ -1,15 +1,24 @@
 import React, { useState } from "react";
-import classes from "./sculptors.module.css";
 import Layout from "../components/layout";
 import Card from "../components/card/sculptor";
-import SculptorsFiltersForm from "../components/form/sculptorsFilters";
 import { GET_SCULPTORS } from "../apollo/graphql/queries";
 import { useQuery } from "@apollo/react-hooks";
+import Grid from "@material-ui/core/Grid";
+import { useTheme } from "@material-ui/styles";
 
-const renderCards = sculptors =>
-  sculptors.map(({ id, name }) => <Card key={id} id={id} name={name} />);
+const renderCards = sculptors => {
+  const theme = useTheme();
+  return sculptors.map(({ id, name }) => {
+    return (
+      <Grid item sm={6} xs={12} style={{ padding: theme.spacing(1) }}>
+        <Card key={id} id={id} name={name} />
+      </Grid>
+    );
+  });
+};
 
 const SculptorsPage = () => {
+  const theme = useTheme();
   const [sculptors, setSculptors] = useState(null);
   const [name, setName] = useState("");
   const [orderBy, setOrderBy] = useState("name_ASC");
@@ -20,27 +29,16 @@ const SculptorsPage = () => {
     onError: error => console.log(error)
   });
 
-  const renderFilter = () => {
-    return (
-      <nav className={classes.filters}>
-        <SculptorsFiltersForm filter={value => setName(value.filter)} />
-        <button onClick={() => setOrderBy("name_ASC")}>ASC</button>
-        <button onClick={() => setOrderBy("name_DESC")}>DESC</button>
-      </nav>
-    );
-  };
-
   return (
     <Layout header>
-      <section className={classes.sculptorsPageContainer}>
-        {renderFilter()}
-        {loading && <div style={{ color: "white" }}>Loading...</div>}
-        {!loading && (
-          <div className={classes.wrapper}>
-            {sculptors && renderCards(sculptors)}
-          </div>
-        )}
-      </section>
+      {loading && <div style={{ color: "white" }}>Loading...</div>}
+      <Grid
+        container
+        spacing={1}
+        style={{ background: theme.palette.primary.main }}
+      >
+        {!loading && sculptors && renderCards(sculptors)}
+      </Grid>
     </Layout>
   );
 };

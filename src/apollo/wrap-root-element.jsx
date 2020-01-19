@@ -24,7 +24,6 @@ export const darkTheme = createMuiTheme({
   typography: {
     fontFamily: ["Cinzel", "Raleway"].join(","),
     h1: {
-      fontSize: 30,
       color: "#f0e6d2"
     },
     h2: {

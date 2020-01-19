@@ -1,228 +1,81 @@
-@import url("https://fonts.googleapis.com/css?family=Cinzel:400,700|Raleway:100,300,400&display=swap");
-* {
-  box-sizing: border-box;
-  font-size: 14px;
+.header {
+  width: 100%;
+  height: 88vh;
+  position: relative;
 }
 
-.container {
-  height: calc(100vh - 50px);
-  width: 100vw;
-  background: #131515;
-}
-
-.wrapper {
-  /* border: 2px solid green; */
+.header img {
+  position: absolute;
+  object-fit: cover;
+  object-position: center;
   height: 100%;
   width: 100%;
-}
-
-.info {
-  height: 100%;
-  width: 100%;
-  color: #f0e6d2;
-  /* border: 10px solid pink; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.wish, .own {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.meta {
-  border: 2px solid red;
-  height: 100%;
-  width: 100%;
-  padding: 3em;
-  justify-content: center;
-  align-items: center;
-  color: #f0e6d2;
-  display: flex;
-  flex-direction: column;
 }
 
 .title {
-  /* border: 2px solid firebrick; */
-  color: white;
-  font-size: 2em;
-  text-align: center;
-  color: #f0e6d2;
-  font-family: "Cinzel";
-  font-weight: lighter;
-  padding: 1em;
-}
-
-.description {
-  /* border: 2px solid white; */
-  color: white;
-  /* border: 2px solid white; */
-  color: white;
-  font-family: "Raleway";
-  color: #f0e6d2;
-  font-weight: 400;
-  padding: 1em;
-}
-
-.description h2 {
-  margin-bottom: 1em;
-  font-size: 1.5em;
-  font-family: "Cinzel";
-
-  color: lightgoldenrodyellow;
-}
-
-.description p {
-  color: #f0e6d2;
-  font-family: "Raleway";
-  line-height: 1.2em;
-  letter-spacing: 1px;
-  margin-bottom: 1em;
-}
-
-.preview {
-  /* border: 5px solid palegreen; */
-  height: 100%;
-  width: 100%;
-}
-
-/* .preview img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  object-position: center;
-} */
-
-.more {
-  /* border: 2px solid purple; */
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  padding: 1em;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.morecontainer {
-  width: 40%;
-  margin: 1em;
-  /* border: 5px solid  blue; */
-}
-
-.moretitle {
-  color: #f0e6d2;
-  width: 100%;
-  font-family: "Cinzel";
-  font-size: 1em;
-
-  /* border: 5px dotted red; */
-}
-
-.morevalue {
-  color: #f0e6d2;
-  width: 100%;
-  font-family: "Raleway";
-  font-size: 1em;
-
-  /* border: 2px solid green; */
-}
-
-.user {
-  display: grid;
-  grid-template-columns: 0fr 1fr 3fr 3fr 1fr 3fr 3fr 1fr 3fr 3fr 1fr 0fr;
-  grid-auto-rows: auto;
-  column-gap: 1em;
-  row-gap: 1em;
-  padding: 1em;
-  grid-template-areas: "blankL blankL like like blankML own own blankMR wish wish blankR blankR";
-}
-
-.blankL {
-  /* border: 2px solid green; */
-  grid-area: blankL;
-}
-.like {
-  border: 2px solid pink;
-  grid-area: like;
-  border-radius: 5px;
-  padding: 0.5em;
-}
-.blankML {
-  /* border: 2px solid green; */
-  grid-area: blankML;
-}
-.own {
-  border: 2px solid pink;
-  grid-area: own;
-  padding: 0.5em;
-  border-radius: 5px;
-}
-.blankMR {
-  /* border: 2px solid green; */
-  grid-area: blankMR;
-}
-.wish {
-  border: 2px solid pink;
-  grid-area: wish;
-  padding: 0.5em;
-  border-radius: 5px;
-}
-.blankR {
-  /* border: 2px solid green; */
-  grid-area: blankR;
-}
-
-.userlike {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  color: white;
-  font-family: "Raleway";
-  font-size: 1em;
-  font-weight: 200;
-}
-
-.userroundedProfil {
-  height: 80px;
-  width: 80px;
-  overflow: hidden;
-  border-radius: 50%;
-  margin: 1em;
-  border: 2px solid pink;
-  cursor: pointer;
-  background: white;
-}
-
-.userroundedProfil img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.userlikelist {
-  /* border: 2px solid blue; */
-  display: flex;
-  overflow: hidden;
-  flex-wrap: wrap;
-}
-
-.number {
+  background-image: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 65%,
+    rgba(10, 10, 12, 0.1) 70%,
+    #111415 90%
+  );
   position: absolute;
-  color: beige;
-  font-size: 6em;
-  bottom: 0;
   right: 0;
-  padding: 1rem;
-  font-family: "Cinzel";
-  font-weight: bolder;
-  mix-blend-mode: soft-light;
+  bottom: 0;
+  left: 0;
+  /* padding-bottom: 35px; */
+  padding-top: 80%;
+  text-align: center;
+  width: 100%;
 }
 
-@media screen and (max-width: 800px) {
-  .info {
-    flex-direction: column;
-  }
+.bot {
+  height: 1000px;
+  color: #111415;
+  /* border: 2px solid green; */
+}
+
+.title {
+  border-bottom: 5px double white;
+}
+
+.own {
+  height: 30px;
+  width: 30px;
+}
+
+.cardinfo {
+  height: 100vh;
+  padding: 5em;
+  min-height: 100vh;
+}
+
+.column {
+  /* border-image: linear-gradient(#f0e6d2, #ffd582) 1; */
+  /* border-width: 1px;
+  border-style: solid; */
+}
+
+.cell {
+  border-image: linear-gradient(#f0e6d2, #ffd582) 1;
+  border-width: 1px;
+  border-style: solid;
+  padding: 0.5rem;
+  width: 100%;
+  margin: 0.5em;
+}
+
+.usersMidBot {
+  border: 1px solid #f0e6d2;
+}
+
+.usersRight {
+  border-image: linear-gradient(#f0e6d2, #ffd582) 1;
+  border-width: 1px;
+  border-style: solid;
+  padding: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0.5em;
 }

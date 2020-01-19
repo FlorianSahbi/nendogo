@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import classes from "./index.module.css";
 const img = "https://farm8.staticflickr.com/7653/16839072620_1a5ca7021f_o.jpg";
 
 import Layout from "../components/layout";
@@ -14,7 +13,7 @@ const IndexPage = () => {
 
   return (
     <Layout footer header>
-      <section className={classes.bg}>
+      <section>
         <img alt="bgHeader" src={img} />
       </section>
     </Layout>
