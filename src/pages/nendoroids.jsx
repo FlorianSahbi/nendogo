@@ -65,7 +65,16 @@ const renderCards = (nendoroids, currentUser) => {
   const cards = nendoroids.map(
     ({ id, formattedName, number, images, interactions }) => {
       return (
-        <Grid key={`${id}-gridId`} item xl={2} lg={2} md={3} sm={3} sm={4} xs={6}>
+        <Grid
+          key={`${id}-gridId`}
+          item
+          xl={2}
+          lg={2}
+          md={3}
+          sm={3}
+          sm={4}
+          xs={6}
+        >
           <Cards
             key={`${id}-nendoId`}
             id={id}
@@ -105,7 +114,16 @@ const NendoroidsPage = props => {
     <Layout header>
       <CssBaseline />
       <Filters />
-      <Grid container justify="flex-start" alignItems="center" spacing={2} style={{padding: theme.spacing(2)}}>
+      <Grid
+        container
+        justify="flex-start"
+        alignItems="center"
+        spacing={2}
+        style={{
+          padding: theme.spacing(2),
+          background: theme.palette.primary.main
+        }}
+      >
         {!loading && nens && renderCards(nens)}
       </Grid>
     </Layout>

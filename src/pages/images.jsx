@@ -114,7 +114,7 @@ const ImagesPage = () => {
 
   return (
     <Layout header>
-      <Grid container style={{ padding: theme.spacing(1) }} spacing={1}>
+      <Grid container style={{ padding: theme.spacing(1), background: theme.palette.primary.main }} spacing={1}>
         {loading && <div>Loading...</div>}
         {!loading && images && renderCards(images)}
       </Grid>
