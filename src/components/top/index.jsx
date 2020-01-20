@@ -89,7 +89,7 @@ const ID = () => {
   }
 };
 
-const Header = () => {
+const Top = () => {
   const theme = useTheme();
   const auth = Auth.useContainer();
   return (
@@ -231,4 +231,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Top;
