@@ -1,26 +1,30 @@
 import React, { useState } from "react";
-import classes from "./users.module.css";
 import Layout from "../components/layout";
-import Card from "../components/card/user";
+import Cards from "../components/card/user";
 import { useQuery } from "@apollo/react-hooks";
 import { GET_USERS } from "../apollo/graphql/queries";
+import { CssBaseline, Grid } from "@material-ui/core";
+import { useTheme } from "@material-ui/styles";
 
 const renderCards = userArray => {
-  return userArray.map(user => (
-    <Card
-      key={user.id}
-      id={user.id}
-      name={user.pseudo}
-      images={[user.avatar]}
-    />
+  return userArray.map(({id, pseudo, avatar}) => (
+    <Grid key={`${id}-gridId`} item xl={2} lg={2} md={3} sm={3} sm={4} xs={6}>
+      <Cards
+        key={id}
+        id={id}
+        pseudo={pseudo}
+        avatar={[avatar]}
+      />
+    </Grid>
   ));
 };
 
 const UsersPage = () => {
+  const theme = useTheme();
   const [pseudo, setPseudo] = useState("");
   const [orderBy, setOrderBy] = useState("pseudo_ASC");
   const [users, setUsers] = useState(null);
-  console.log(users)
+  console.log(users);
 
   const { error, loading, data } = useQuery(GET_USERS, {
     variables: { pseudo, orderBy },
@@ -29,11 +33,16 @@ const UsersPage = () => {
   });
 
   return (
-    <Layout>
-      <section className={classes.usersContainer}>
-        {loading && <div style={{color: "white"}}>Loading...</div>}
-        <div className={classes.wrapper}>{!loading && users && renderCards(users)}</div>
-      </section>
+    <Layout header>
+      <CssBaseline />
+      {loading && <div style={{ color: "white" }}>Loading...</div>}
+      <Grid
+        container
+        spacing={1}
+        style={{ background: theme.palette.primary.main, minHeight: "100vh", padding: theme.spacing(1) }}
+      >
+        {!loading && users && renderCards(users)}
+      </Grid>
     </Layout>
   );
 };

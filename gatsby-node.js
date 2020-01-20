@@ -1,5 +1,17 @@
 const path = require('path');
 
+const slugify = (string) => (
+  string
+    .trim()
+    .toLowerCase()
+    .replace(/ /g, "-")
+    .replace(":", "")
+    .replace("&", "and")
+    .replace("(", "")
+    .replace(")", "")
+    .replace(".", "")
+)
+
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
 
@@ -69,7 +81,7 @@ exports.createPages = async ({ graphql, actions }) => {
   nendoroids.forEach((nendoroid) => {
     console.log(nendoroid.formattedName.trim().toLowerCase().replace(/ /g, "-").replace(":", "").replace("&", "and").replace("(", "").replace(")", "").replace(".", ""))
     createPage({
-      path: `nendoroid/${nendoroid.formattedName.trim().toLowerCase().replace(/ /g, "-").replace(":", "").replace("&", "and").replace("(", "").replace(")", "").replace(".", "")}`,
+      path: `nendoroid/${slugify(nendoroid.formattedName)}`,
       component: templateNendo,
       context: nendoroid,
     })
@@ -77,7 +89,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   users.forEach((user) => {
     createPage({
-      path: `user/${user.pseudo}`,
+      path: `user/${slugify(user.pseudo)}`,
       component: templateUser,
       context: user,
     })
@@ -85,7 +97,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   series.forEach((serie) => {
     createPage({
-      path: `serie/${serie.name}`,
+      path: `serie/${slugify(serie.name)}`,
       component: templateSerie,
       context: serie,
     })
@@ -93,7 +105,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   sculptors.forEach((sculptor) => {
     createPage({
-      path: `sculptor/${sculptor.name}`,
+      path: `sculptor/${slugify(sculptor.name)}`,
       component: templateSculptor,
       context: sculptor,
     })
@@ -101,7 +113,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   manufacturers.forEach((manufacturer) => {
     createPage({
-      path: `manufacturer/${manufacturer.name}`,
+      path: `manufacturer/${slugify(manufacturer.name)}`,
       component: templateManufacturer,
       context: manufacturer,
     })

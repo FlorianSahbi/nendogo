@@ -1,47 +1,60 @@
-import React, { useState } from "react";
-import classes from "./style.module.css";
-import { Link } from "gatsby";
-import default_user from "../../../images/default_user.jpg";
+import React from "react";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import Typography from "@material-ui/core/Typography";
+import { useTheme } from "@material-ui/styles";
+import { slugify } from "../../../utils/index";
+import { makeStyles } from "@material-ui/core/styles";
 
-const Card = ({ name, images }) => {
-  const [isHovered, setIsHovered] = useState(false);
+const useStyles = makeStyles({
+  cardContent: {
+    height: "100%",
+    backdropFilter: "0",
+    opacity: "0",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    transition: "all 0.5s ease",
+    "&:hover": {
+      backdropFilter: `brightness(70%) blur(5px)`,
+      opacity: "1"
+    }
+  }
+});
 
-
-  const handleMouseEnter = e => {
-    e.preventDefault();
-    setIsHovered(true);
-  };
-
-  const onMouseLeave = e => {
-    e.preventDefault();
-    setIsHovered(false);
-  };
+export default function Cards({ avatar, pseudo }) {
+  const classes = useStyles();
+  const theme = useTheme();
 
   return (
-    <div
-      onMouseEnter={e => handleMouseEnter(e)}
-      onMouseLeave={e => onMouseLeave(e)}
-      className={
-        isHovered
-          ? `${classes.container} ${classes.hover}`
-          : `${classes.container} ${classes.default}`
-      }
-    >
-      {images[0] !== null ? (
-        <img src={images[0]} alt="img_nendo" />
-      ) : (
-        <img src={default_user} alt="default_user" />
-      )}
-
-      <div className={classes.wrapper}>
-        <h2 className={classes.title}>{name}</h2>
-
-        <div className={`${classes.link} ${classes.default}`}>
-          <a href={`../user/${name}/`}>Details</a>
-        </div>
-      </div>
-    </div>
+    <a href={`../../user/${slugify(pseudo)}/`}>
+      <Card
+        style={{
+          background: theme.palette.primary.light,
+          color: theme.palette.primary.contrastText,
+          borderRadius: "0px"
+        }}
+      >
+        <CardActionArea>
+          <CardMedia
+            align-items="center"
+            image={avatar}
+            src={avatar}
+            style={{
+              height: "400px"
+            }}
+            title={name}
+          >
+            <CardContent className={classes.cardContent}>
+              <Typography align="center" variant="h6" component="h1">
+                {pseudo}
+              </Typography>
+            </CardContent>
+          </CardMedia>
+        </CardActionArea>
+      </Card>
+    </a>
   );
-};
-
-export default Card;
+}

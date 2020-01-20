@@ -44,7 +44,7 @@ export default function Cards({ images, name, number }) {
             style={{
               height: "400px"
             }}
-            title="Contemplative Reptile"
+            title={name}
           >
             <CardContent className={classes.cardContent}>
               <Typography align="center" variant="h6" component="h1">

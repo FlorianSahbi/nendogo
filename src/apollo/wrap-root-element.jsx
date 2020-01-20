@@ -11,6 +11,19 @@ import {
 
 export const darkTheme = createMuiTheme({
   overrides: {
+    a: {
+      textDecoration: "unset",
+    },
+    MuiAvatar: {
+      root: {
+        border: `2px solid #ffb2dd`,
+        transition: "all 0.5s ease",
+        "&:hover": {
+          border: `3px solid #c94f7c`,
+          cursor: "pointer"
+        }
+      }
+    },
     MuiButton: {
       text: {
         color: "#f0e6d2",
@@ -24,7 +37,6 @@ export const darkTheme = createMuiTheme({
   typography: {
     fontFamily: ["Cinzel", "Raleway"].join(","),
     h1: {
-      fontSize: 30,
       color: "#f0e6d2"
     },
     h2: {

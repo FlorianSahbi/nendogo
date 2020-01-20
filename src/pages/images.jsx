@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import Layout from "../components/layout/index";
-import Gallery from "react-photo-gallery";
 import { useQuery } from "@apollo/react-hooks";
 import { GET_IMAGES } from "../apollo/queries/index";
-import classes from "./images.module.css";
-
 import Avatar from "@material-ui/core/Avatar";
 import AvatarGroup from "@material-ui/lab/AvatarGroup";
 import Tooltip from "@material-ui/core/Tooltip";
 import moment from "moment";
 import VisibilityRoundedIcon from "@material-ui/icons/VisibilityRounded";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import { useTheme } from "@material-ui/styles";
 
 const nendos = [
   {
@@ -33,59 +38,69 @@ const nendos = [
 ];
 const now = new Date();
 
-const Card = ({ url, title, user, views }) => {
+const Cards = ({ url, title, user, views }) => {
+  const theme = useTheme();
   const [isHover, setIsHover] = useState(false);
   return (
-    <div
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
-      className={`${classes.card}`}
+    <Card
+      style={{
+        background: theme.palette.primary.light,
+        color: theme.palette.primary.contrastText,
+        borderRadius: "0px"
+      }}
     >
-      <img src={url} alt="g" />
-
-      {/* List of nendos */}
-      <div className={`${classes.avagroup} ${isHover ? "" : classes.hid}`}>
-        <AvatarGroup className={classes.abg}>
-          {nendos.map(n => {
-            return (
-              <Avatar
-                className={classes.avatarg}
-                alt="Remy Sharp"
-                src={n.images[0]}
-              />
-            );
-          })}
-          <Tooltip title="Foo • Bar • Baz">
-            <Avatar className={classes.avatarg}>+3</Avatar>
-          </Tooltip>
-        </AvatarGroup>
-      </div>
-
-      {/* Counter */}
-      <div className={`${classes.viewCount} ${isHover ? "" : classes.hid}`}>
+      <CardActionArea>
+        <Typography gutterBottom variant="h6" component="h2">
+          {title}
+        </Typography>
+        <CardMedia
+          image={url}
+          src={url}
+          title={title}
+          style={{ height: "300px" }}
+        />
+        <CardContent></CardContent>
+      </CardActionArea>
+      <CardActions>
+        <Typography gutterBottom variant="h6" component="h2">
+          <Avatar alt="Remy Sharp" src={user.avatar} />
+        </Typography>
+        <Typography gutterBottom variant="span" component="h2">
+          {user.pseudo} {moment("2020-01-14T06:02:02.630+00:00").fromNow()}
+        </Typography>
+      </CardActions>
+      <CardActions>
         <VisibilityRoundedIcon style={{ marginRight: "0.5em" }} />
         <span style={{ color: "white" }}>
           {new Intl.NumberFormat("en-EN").format(views)}
         </span>
-      </div>
-
-      {/* Title */}
-      <div className={`${classes.title} ${isHover ? "" : classes.hid}`}>
-        <h2 style={{ color: "white" }}>{title}</h2>
-      </div>
-
-      {/* Uploader info */}
-      <div className={`${classes.a} ${isHover ? "" : classes.hid}`}>
-        <Avatar className={classes.avatar} alt="Remy Sharp" src={user.avatar} />
-        <span style={{ color: "white" }}>
-          {user.pseudo} {moment("2020-01-14T06:02:02.630+00:00").fromNow()}
-        </span>
-      </div>
-    </div>
+      </CardActions>
+      <CardActions>
+        <AvatarGroup>
+          {nendos.map(n => {
+            return <Avatar alt="Remy Sharp" src={n.images[0]} />;
+          })}
+          <Tooltip title="Foo • Bar • Baz">
+            <Avatar>+3</Avatar>
+          </Tooltip>
+        </AvatarGroup>
+      </CardActions>
+    </Card>
   );
 };
 
+const renderCards = cards => {
+  return cards.map(i => {
+    return (
+      <Grid item xl={2} lg={2} md={3} sm={3} sm={4} xs={6}>
+        <Cards url={i.url} title={i.title} user={i.user} views={i.views} />
+      </Grid>
+    );
+  });
+};
+
 const ImagesPage = () => {
+  const theme = useTheme();
   const [images, setimages] = useState(null);
 
   console.log(images);
@@ -98,16 +113,11 @@ const ImagesPage = () => {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <Layout header footer>
-      {loading && <div>Loading...</div>}
-      {!loading && (
-        <div className={classes.grid}>
-          {images &&
-            images.map(i => (
-              <Card url={i.url} title={i.title} user={i.user} views={i.views} />
-            ))}
-        </div>
-      )}
+    <Layout header>
+      <Grid container style={{ padding: theme.spacing(1), background: theme.palette.primary.main }} spacing={1}>
+        {loading && <div>Loading...</div>}
+        {!loading && images && renderCards(images)}
+      </Grid>
     </Layout>
   );
 };
