@@ -1,6 +1,6 @@
 import React from "react";
 import Footer from "../footer/index";
-import Top from "../top/index";
+import Header from "../header/index";
 import { Link } from "gatsby";
 import Dial from "../../globalStates/useDialog";
 import Button from "@material-ui/core/Button";
@@ -42,7 +42,7 @@ const DialogNendoroids = () => {
 export default function Layout({ children, header, footer }) {
   return (
     <>
-      {header && <Top />}
+      {header && <Header />}
       {children}
       {footer && <Footer />}
       <DialogNendoroids />
