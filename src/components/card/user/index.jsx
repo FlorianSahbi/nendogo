@@ -5,7 +5,6 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import { useTheme } from "@material-ui/styles";
-import { slugify } from "../../../utils/index";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
@@ -29,7 +28,7 @@ export default function Cards({ avatar, pseudo }) {
   const theme = useTheme();
 
   return (
-    <a href={`../../user/${slugify(pseudo)}/`}>
+    <a href={`../../user/${pseudo}/`}>
       <Card
         style={{
           background: theme.palette.primary.light,

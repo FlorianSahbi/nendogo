@@ -1,17 +1,5 @@
 const path = require('path');
 
-const slugify = (string) => (
-  string
-    .trim()
-    .toLowerCase()
-    .replace(/ /g, "-")
-    .replace(":", "")
-    .replace("&", "and")
-    .replace("(", "")
-    .replace(")", "")
-    .replace(".", "")
-)
-
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
 
@@ -81,7 +69,7 @@ exports.createPages = async ({ graphql, actions }) => {
   nendoroids.forEach((nendoroid) => {
     console.log(nendoroid.formattedName.trim().toLowerCase().replace(/ /g, "-").replace(":", "").replace("&", "and").replace("(", "").replace(")", "").replace(".", ""))
     createPage({
-      path: `nendoroid/${slugify(nendoroid.formattedName)}`,
+      path: `nendoroid/${nendoroid.formattedName}`,
       component: templateNendo,
       context: nendoroid,
     })
@@ -89,7 +77,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   users.forEach((user) => {
     createPage({
-      path: `user/${slugify(user.pseudo)}`,
+      path: `user/${user.pseudo}`,
       component: templateUser,
       context: user,
     })
@@ -97,7 +85,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   series.forEach((serie) => {
     createPage({
-      path: `serie/${slugify(serie.name)}`,
+      path: `serie/${serie.name}`,
       component: templateSerie,
       context: serie,
     })
@@ -105,7 +93,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   sculptors.forEach((sculptor) => {
     createPage({
-      path: `sculptor/${slugify(sculptor.name)}`,
+      path: `sculptor/${sculptor.name}`,
       component: templateSculptor,
       context: sculptor,
     })
@@ -113,7 +101,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   manufacturers.forEach((manufacturer) => {
     createPage({
-      path: `manufacturer/${slugify(manufacturer.name)}`,
+      path: `manufacturer/${manufacturer.name}`,
       component: templateManufacturer,
       context: manufacturer,
     })

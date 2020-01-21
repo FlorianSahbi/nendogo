@@ -7,7 +7,6 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { TEST_MANU } from "../../../apollo/queries/index";
 import { useQuery } from "@apollo/react-hooks";
-import { slugify } from "../../../utils/index";
 
 const useStyles = makeStyles(theme => ({
   containerCardManufacturer: {
@@ -39,7 +38,7 @@ const Card = ({ name }) => {
   if (loading) return <div>Loading</div>;
 
   return (
-    <a href={`../manufacturer/${slugify(name)}`}>
+    <a href={`../manufacturer/${name}`}>
       <Grid
         className={classes.containerCardManufacturer}
         container

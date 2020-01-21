@@ -6,7 +6,6 @@ import Layout from "../../components/layout/index";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
-import { slugify } from "../../utils/index";
 import { makeStyles } from "@material-ui/core/styles";
 
 
@@ -87,7 +86,7 @@ const Nendoroid = ({ pageContext: { manufacturer, releaseDate, id, formattedName
             <Grid container direction="row" justify="space-between" alignItems="stretch" style={{ height: "100%", padding: "0.5em" }}>
               <Grid className={classes.cell} container direction="row" justify="center" alignItems="center">
                 <Typography variant="h6" align="center" >
-                  <a href={`../../serie/${slugify(series)}`}>
+                  <a href={`../../serie/${series}`}>
                     {series}
                   </a>
                 </Typography>

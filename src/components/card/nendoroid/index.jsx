@@ -5,7 +5,6 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import { useTheme } from "@material-ui/styles";
-import { slugify } from "../../../utils/index";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
@@ -28,7 +27,7 @@ export default function Cards({ images, name, number }) {
   const theme = useTheme();
 
   return (
-    <a href={`../../nendoroid/${slugify(name)}/`}>
+    <a href={`../../nendoroid/${name}/`}>
       <Card
         style={{
           background: theme.palette.primary.light,
