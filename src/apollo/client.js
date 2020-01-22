@@ -3,7 +3,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { createUploadLink } from "apollo-upload-client";
 import fetch from 'isomorphic-fetch';
 
-const link = createUploadLink({ uri: process.env.NENDOGO_API_URL });
+const link = createUploadLink({ uri: "http://localhost:4000" });
 
 export const client = new ApolloClient({
   link,

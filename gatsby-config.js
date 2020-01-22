@@ -17,7 +17,7 @@ module.exports = {
       options: {
         typeName: "API",
         fieldName: "api",
-        url: process.env.NENDOGO_API_URL,
+        url: "http://localhost:4000",
       },
     },
     {

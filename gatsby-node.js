@@ -67,7 +67,6 @@ exports.createPages = async ({ graphql, actions }) => {
   const { data: { prisma: { nendoroids, users, series, sculptors, manufacturers } } } = await PAGES;
 
   nendoroids.forEach((nendoroid) => {
-    console.log(nendoroid.formattedName.trim().toLowerCase().replace(/ /g, "-").replace(":", "").replace("&", "and").replace("(", "").replace(")", "").replace(".", ""))
     createPage({
       path: `nendoroid/${nendoroid.formattedName}`,
       component: templateNendo,

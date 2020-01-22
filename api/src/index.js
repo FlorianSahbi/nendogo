@@ -9,6 +9,7 @@ const User = require('./resolvers/User');
 const Image = require('./resolvers/Image');
 const Nendoroid = require('./resolvers/Nendoroid');
 const Interaction = require('./resolvers/Interaction');
+require('dotenv').config();
 
 existsSync(path.join(__dirname, "../images")) || mkdirSync(path.join(__dirname, "../images"));
 
@@ -33,4 +34,4 @@ const server = new GraphQLServer({
     },
 })
 
-server.start(() => console.log(`Server is running on ${process.env.NENDOGO_API_URL}`));
+server.start(() => console.log(`Server is running on http://localhost:4000`));
