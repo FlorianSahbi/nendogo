@@ -52,8 +52,7 @@ const SigninForm = () => {
         localStorage.setItem("user", JSON.stringify(currentUser));
         localStorage.setItem("isLoggedIn", "true");
         auth.setCurrentUser(currentUser);
-        // window.location.href = "http://localhost:8000/nendoroids";
-        window.location.href = "https://nendogo.com/nendoroids";
+        window.location.href = process.env.NENDOGO_SITE_URL;
       }
     },
     onError: error => {

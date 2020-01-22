@@ -3,7 +3,7 @@ module.exports = {
     title: "Nendoroids",
     titleTemplate: "%s · NendoGO",
     description: "A tools to manage nendoroids collections.",
-    url: "https://www.nendoroids.floriansahbi.com",
+    url: "https://www.nendogo.com",
     image: "/images/mashiro.jpg",
     twitterUsername: "@floriansahbi",
   },
@@ -17,8 +17,7 @@ module.exports = {
       options: {
         typeName: "API",
         fieldName: "api",
-        // url: `http://localhost:4000`,
-        url: `https://nendogo.com/graphql`,
+        url: process.env.NENDOGO_API_URL,
       },
     },
     {

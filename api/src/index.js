@@ -2,14 +2,7 @@ const { GraphQLServer } = require('graphql-yoga');
 const { prisma } = require('./generated/prisma-client');
 const Subscription = require('./resolvers/Subscription');
 const path = require("path");
-
-const AWS = require('aws-sdk')
-const { createWriteStream, existsSync, mkdirSync } = require("fs");
-
-// AWS.config.loadFromPath(`${__dirname}/credentials.json`);
-
-// const s3 = new AWS.S3({ apiVersion: '2006-03-01' });
-
+const { existsSync, mkdirSync } = require("fs");
 const Query = require('./resolvers/Query');
 const Mutation = require('./resolvers/Mutation');
 const User = require('./resolvers/User');
@@ -40,4 +33,4 @@ const server = new GraphQLServer({
     },
 })
 
-server.start(() => console.log(`Server is running on http://localhost:4000`));
+server.start(() => console.log(`Server is running on ${process.env.NENDOGO_API_URL}`));
