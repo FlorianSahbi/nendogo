@@ -4,7 +4,6 @@ module.exports = {
     titleTemplate: "%s · NendoGO",
     description: "A tools to manage nendoroids collections.",
     url: "https://www.nendogo.com",
-    image: "/images/mashiro.jpg",
     twitterUsername: "@floriansahbi",
   },
   plugins: [
@@ -50,24 +49,5 @@ module.exports = {
         trackingId: "UA-116019269-4",
       }
     },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
-      },
-    },
-    {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
-        start_url: `/`,
-        background_color: `#131415`,
-        theme_color: `#131415`,
-        display: `minimal-ui`,
-        icon: `src/images/mashiro.jpg`,
-      },
-    }
   ],
 }

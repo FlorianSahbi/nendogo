@@ -2,12 +2,7 @@ import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
-import { filesQuery } from "../file/index";
-import { useStaticQuery, graphql } from "gatsby";
-
-import Chip from "@material-ui/core/Chip";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
@@ -34,20 +29,6 @@ const uploadFileMutation = gql`
 `;
 
 const Upload = () => {
-  const {
-    prisma: { nendoroids }
-  } = useStaticQuery(graphql`
-    {
-      prisma {
-        nendoroids(orderBy: name_ASC) {
-          id
-          images
-          number
-          formattedName
-        }
-      }
-    }
-  `);
   const [uploadFile] = useMutation(uploadFileMutation);
 
   const onDrop = useCallback(
