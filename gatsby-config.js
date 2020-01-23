@@ -16,7 +16,8 @@ module.exports = {
       options: {
         typeName: "API",
         fieldName: "api",
-        url: "http://localhost:4000",
+        // url: "http://localhost:4000/graphql",
+        url: "https://nendogo.com/graphql",
       },
     },
     {
