@@ -12,7 +12,6 @@ import {
 } from "../../apollo/queries";
 import Auth from "../../globalStates/useAuth";
 
-import Sparkle from 'react-sparkle'
 
 const imgUrl = "https://images2.alphacoders.com/742/thumb-1920-742320.png";
 
@@ -67,17 +66,6 @@ const User = (props) => {
   return (
     <Layout header>
       <div className={classes.container}>
-        <Sparkle
-          color={'#FFC0CB'}
-          count={500}
-          minSize={5}
-          maxSize={8}
-          overflowPx={20}
-          fadeOutSpeed={5}
-          newSparkleOnFadeOut={true}
-          flicker={true}
-          flickerSpeed={'normal'}
-        />
         <div className={classes.wrapper}>
           <div className={classes.imgWrapper}>
             <img src={imgUrl} alt="dunno" />
