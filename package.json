@@ -49,6 +49,7 @@
     "react-icons": "^3.8.0",
     "react-images": "^1.1.0-beta.1",
     "react-photo-gallery": "^8.0.0",
+    "react-sparkle": "^1.0.5",
     "unstated-next": "^1.1.0",
     "yup": "^0.28.0"
   },

@@ -135,10 +135,6 @@ const User = (props) => {
               </div> */}
             </div>
           </div>
-
-          <div className={classes.pictures}>
-            <Carousel images={nendoStories} />
-          </div>
         </div>
       </div>
     </Layout>
