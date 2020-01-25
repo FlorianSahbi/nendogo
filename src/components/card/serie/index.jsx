@@ -14,6 +14,7 @@ const useStyles = makeStyles(theme => ({
     borderRadius: "10px",
     border: `2px solid ${theme.palette.primary.contrastText}`,
     transition: "all 0.5s ease",
+    margin: theme.spacing(1),
     "&:hover": {
       border: `2px solid ${theme.palette.secondary.light}`
     }

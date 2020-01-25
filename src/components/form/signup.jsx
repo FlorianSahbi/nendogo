@@ -7,6 +7,9 @@ import { SIGNUP_MUTATION } from "../../apollo/queries/index";
 import Auth from "../../globalStates/useAuth";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -39,7 +42,9 @@ const SignupForm = () => {
     }
     setOpen2(false);
   };
+
   const auth = Auth.useContainer();
+
   const [signup] = useMutation(SIGNUP_MUTATION, {
     onCompleted: data => {
       const currentUser = {
@@ -60,6 +65,7 @@ const SignupForm = () => {
       handleClick(error.message);
     }
   });
+
   return (
     <>
       <Formik
@@ -87,46 +93,55 @@ const SignupForm = () => {
         }}
       >
         <Form>
-          <h2
-            style={{
-              textAlign: "center",
-              textTransform: "uppercase",
-              fontFamily: "'Cinzel",
-              fontSize: "1.5em"
-            }}
-          >
-            Sign up
-          </h2>
-          <MyTextInput
-            label="Pseudo"
-            name="pseudo"
-            type="text"
-            placeholder="Pseudo"
-          />
-          <MyTextInput
-            label="Email"
-            name="email"
-            type="email"
-            placeholder="Email"
-          />
-          <MyTextInput
-            label="Password"
-            name="password"
-            type="password"
-            placeholder="Password"
-          />
-          <button type="submit">Signup</button>
+          <Grid item>
+            <Typography
+              style={{
+                textAlign: "center",
+                textTransform: "uppercase",
+                fontSize: "1.5em"
+              }}
+            >
+              Sign up
+            </Typography>
+          </Grid>
+          <Grid item>
+            <MyTextInput
+              label="Pseudo"
+              name="pseudo"
+              type="text"
+            />
+          </Grid>
+          <Grid item>
+            <MyTextInput
+              label="Email"
+              name="email"
+              type="email"
+            />
+          </Grid>
+          <Grid item>
+            <MyTextInput
+              label="Password"
+              name="password"
+              type="password"
+            />
+          </Grid>
+          <Grid item>
+            <Button fullWidth type="submit" color="primary">
+              Submit
+            </Button>
+          </Grid>
         </Form>
       </Formik>
+
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} color="error">
-          Cet utilisateur n'existe pas.
+          This user does not exist.
         </Alert>
       </Snackbar>
 
       <Snackbar open={open2} autoHideDuration={6000} onClose={handleClose2}>
         <Alert onClose={handleClose2} color="error">
-          Mauvaise password.
+          Password or email does not exist.
         </Alert>
       </Snackbar>
     </>

@@ -5,16 +5,15 @@ import { GET_MANUFACTURERS } from "../apollo/graphql/queries";
 import { useQuery } from "@apollo/react-hooks";
 import Grid from "@material-ui/core/Grid";
 import { useTheme } from "@material-ui/styles";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from "@material-ui/core/CircularProgress";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 const renderCards = manufacturers =>
-  manufacturers.map(({ id, name }) => {
-    return (
-      <Grid item md={3} sm={6} xs={12} style={{ padding: "1em" }}>
-        <Card key={id} id={id} name={name} />
-      </Grid>
-    );
-  });
+  manufacturers.map(({ id, name }) => (
+    <Grid key={`${id}-gridId`} item xl={3} lg={3} md={3} sm={3} sm={4} xs={4}>
+      <Card key={`${id}-manufacturerId`} id={id} name={name} />
+    </Grid>
+  ));
 
 const ManufacturersPage = () => {
   const theme = useTheme();
@@ -30,8 +29,18 @@ const ManufacturersPage = () => {
 
   return (
     <Layout header>
-      <Grid container style={{ background: theme.palette.primary.main }}>
-        {loading && <CircularProgress />}
+      <CssBaseline />
+      <Grid
+        container
+        style={{
+          background: theme.palette.primary.main,
+          padding: theme.spacing(1),
+          minHeight: "calc(100vh - 60px)"
+        }}
+      >
+        {loading && (
+          <CircularProgress style={{ color: theme.palette.secondary.main }} />
+        )}
         {!loading && manufacturers && renderCards(manufacturers)}
       </Grid>
     </Layout>

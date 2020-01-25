@@ -5,18 +5,15 @@ import { GET_SCULPTORS } from "../apollo/graphql/queries";
 import { useQuery } from "@apollo/react-hooks";
 import Grid from "@material-ui/core/Grid";
 import { useTheme } from "@material-ui/styles";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from "@material-ui/core/CircularProgress";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
-const renderCards = sculptors => {
-  const theme = useTheme();
-  return sculptors.map(({ id, name }) => {
-    return (
-      <Grid item md={3} sm={6} xs={12} style={{ padding: "1em" }}>
-        <Card key={id} id={id} name={name} />
-      </Grid>
-    );
-  });
-};
+const renderCards = sculptors =>
+  sculptors.map(({ id, name }) => (
+    <Grid key={`${id}-gridId`} item xl={3} lg={3} md={3} sm={3} sm={4} xs={4}>
+      <Card key={`${id}-sculptorId`} id={id} name={name} />
+    </Grid>
+  ));
 
 const SculptorsPage = () => {
   const theme = useTheme();
@@ -32,12 +29,16 @@ const SculptorsPage = () => {
 
   return (
     <Layout header>
-      {loading && <CircularProgress />}
+      <CssBaseline />
       <Grid
         container
-        spacing={1}
-        style={{ background: theme.palette.primary.main }}
+        style={{
+          background: theme.palette.primary.main,
+          padding: theme.spacing(1),
+          minHeight: "calc(100vh - 60px)"
+        }}
       >
+        {loading && <CircularProgress />}
         {!loading && sculptors && renderCards(sculptors)}
       </Grid>
     </Layout>

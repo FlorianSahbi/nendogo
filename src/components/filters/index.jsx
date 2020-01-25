@@ -173,7 +173,7 @@ const Filters = () => {
           borderTop: `1px solid ${theme.palette.primary.contrastText}`,
           borderLeft: `0px solid ${theme.palette.primary.contrastText}`,
           borderBottom: `1px solid ${theme.palette.primary.contrastText}`,
-          borderRight: `0px solid ${theme.palette.primary.contrastText}`
+          borderRight: `0px solid ${theme.palette.primary.contrastText}`,
         }}
       >
         <Grid container justify="center" alignItems="center">

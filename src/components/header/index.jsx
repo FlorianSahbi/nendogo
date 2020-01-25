@@ -197,7 +197,7 @@ const Header = () => {
       >
         {sideList("left")}
       </SwipeableDrawer>
-      <AppBar position="sticky" style={{ zIndex: 5 }}>
+      <AppBar position="sticky" style={{ zIndex: 5, height: "60px" }}>
         <Toolbar>
           <Grid container justify="space-between" alignItems="center">
             <Grid container justify="flex-start" alignItems="center" item xs={3}>
@@ -307,7 +307,7 @@ const Header = () => {
                   </Button>
                 </AniLink>
 
-                <AniLink
+                {/* <AniLink
                   cover
                   direction="down"
                   bg={theme.palette.primary.main}
@@ -322,7 +322,7 @@ const Header = () => {
                   >
                     images
                   </Button>
-                </AniLink>
+                </AniLink> */}
               </Grid>
             </Hidden>
             <Grid

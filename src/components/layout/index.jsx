@@ -9,7 +9,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import { CssBaseline } from "@material-ui/styles";
+import { Grid } from "@material-ui/core";
 
 const DialogNendoroids = () => {
   const dial = Dial.useContainer();
@@ -41,11 +41,21 @@ const DialogNendoroids = () => {
 
 export default function Layout({ children, header, footer }) {
   return (
-    <>
-      {header && <Header />}
-      {children}
-      {footer && <Footer />}
+    <Grid container direction="column">
+      {header && (
+        <Grid item>
+          <Header />
+        </Grid>
+      )}
+
+      <Grid item container>{children}</Grid>
+
+      {footer && (
+        <Grid item>
+          <Footer />
+        </Grid>
+      )}
       <DialogNendoroids />
-    </>
+    </Grid>
   );
 }

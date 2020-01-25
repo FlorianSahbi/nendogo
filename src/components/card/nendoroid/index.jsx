@@ -33,33 +33,35 @@ export default function Cards({ images, name, number }) {
   const theme = useTheme();
 
   return (
-    <a href={`../../nendoroid/${name}/`}>
-      <Card
-        style={{
-          background: theme.palette.primary.light,
-          color: theme.palette.primary.contrastText,
-          borderRadius: "0px"
-        }}
-      >
-        <CardActionArea>
-          <CardMedia
-            align-items="center"
-            image={images[0]}
-            src={images[0]}
-            className={classes.cardMedia}
-            title={name}
-          >
-            <CardContent className={classes.cardContent}>
-              <Typography align="center" variant="h6" component="h1">
-                {name}
-              </Typography>
-              <Typography align="center" variant="h6" component="h1">
-                #{number}
-              </Typography>
-            </CardContent>
-          </CardMedia>
-        </CardActionArea>
-      </Card>
-    </a>
+    <Card
+      style={{
+        background: theme.palette.primary.light,
+        color: theme.palette.primary.contrastText,
+        borderRadius: "0px",
+        margin: theme.spacing(1)
+      }}
+    >
+      <CardActionArea>
+        <CardMedia
+          align-items="center"
+          image={images[0]}
+          src={images[0]}
+          className={classes.cardMedia}
+          title={name}
+        >
+          <CardContent className={classes.cardContent}>
+            <Typography align="center" variant="h6" component="h1">
+              {name}
+            </Typography>
+            <Typography align="center" variant="h6" component="h1">
+              #{number}
+            </Typography>
+            <Typography align="center" variant="button" component="h1">
+              <a href={`../../nendoroid/${name}/`}>See more</a>
+            </Typography>
+          </CardContent>
+        </CardMedia>
+      </CardActionArea>
+    </Card>
   );
 }
