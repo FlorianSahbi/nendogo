@@ -5,16 +5,12 @@ import { useQuery } from "@apollo/react-hooks";
 import { GET_USERS } from "../apollo/graphql/queries";
 import { CssBaseline, Grid } from "@material-ui/core";
 import { useTheme } from "@material-ui/styles";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const renderCards = userArray => {
-  return userArray.map(({id, pseudo, avatar}) => (
+  return userArray.map(({ id, pseudo, avatar }) => (
     <Grid key={`${id}-gridId`} item xl={2} lg={2} md={3} sm={3} sm={4} xs={6}>
-      <Cards
-        key={id}
-        id={id}
-        pseudo={pseudo}
-        avatar={[avatar]}
-      />
+      <Cards key={id} id={id} pseudo={pseudo} avatar={[avatar]} />
     </Grid>
   ));
 };
@@ -35,12 +31,21 @@ const UsersPage = () => {
   return (
     <Layout header>
       <CssBaseline />
-      {loading && <div style={{ color: "white" }}>Loading...</div>}
+      {loading && <CircularProgress />}
       <Grid
         container
         spacing={1}
-        style={{ background: theme.palette.primary.main, minHeight: "100vh", padding: theme.spacing(1) }}
+        alignContent="flex-start"
+        style={{
+          background: theme.palette.primary.main,
+          minHeight: "100vh",
+          padding: theme.spacing(1)
+        }}
       >
+        {!loading && users && renderCards(users)}
+        {!loading && users && renderCards(users)}
+        {!loading && users && renderCards(users)}
+        {!loading && users && renderCards(users)}
         {!loading && users && renderCards(users)}
       </Grid>
     </Layout>

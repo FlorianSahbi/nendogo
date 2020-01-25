@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import { useTheme } from "@material-ui/styles";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   cardContent: {
     height: "100%",
     backdropFilter: "0",
@@ -19,8 +19,14 @@ const useStyles = makeStyles({
       backdropFilter: `brightness(70%) blur(5px)`,
       opacity: "1"
     }
+  },
+  cardMedia: {
+    height: "400px",
+    [theme.breakpoints.down("xs")]: {
+      height: "300px"
+    }
   }
-});
+}));
 
 export default function Cards({ images, name, number }) {
   const classes = useStyles();
@@ -40,9 +46,7 @@ export default function Cards({ images, name, number }) {
             align-items="center"
             image={images[0]}
             src={images[0]}
-            style={{
-              height: "400px"
-            }}
+            className={classes.cardMedia}
             title={name}
           >
             <CardContent className={classes.cardContent}>

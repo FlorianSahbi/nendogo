@@ -5,12 +5,13 @@ import { GET_SERIES } from "../apollo/graphql/queries";
 import { useQuery } from "@apollo/react-hooks";
 import Grid from "@material-ui/core/Grid";
 import { useTheme } from "@material-ui/styles";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const renderCards = series =>
   series.map(({ id, name }) => {
     return (
-      <Grid item sm={6} xs={12} style={{ padding: "1em", height: "200px" }}>
-        <Card key={id} id={id} name={name} />)
+      <Grid item md={3} sm={6} xs={12} style={{ padding: "1em" }}>
+        <Card key={id} id={id} name={name} />
       </Grid>
     );
   });
@@ -18,7 +19,7 @@ const renderCards = series =>
 const SeriesPage = () => {
   const theme = useTheme();
   const [series, setSeries] = useState(null);
-  const [name, setName] = useState("Naruto");
+  const [name, setName] = useState("");
   const [orderBy, setOrderBy] = useState("name_ASC");
 
   const { error, loading, data } = useQuery(GET_SERIES, {
@@ -34,7 +35,7 @@ const SeriesPage = () => {
         spacing={1}
         style={{ background: theme.palette.primary.main, minHeight: "100vh" }}
       >
-        {loading && <div style={{ color: "white" }}>Loading...</div>}
+        {loading && <CircularProgress />}
         {!loading && series && renderCards(series)}
       </Grid>
     </Layout>

@@ -40,7 +40,7 @@ const ID = () => {
   let currentUser = Auth.useContainer();
   if (currentUser.isAuth) {
     return (
-      <>
+      <Grid item sm={12} container justify="flex-end">
         <AniLink
           cover
           direction="down"
@@ -73,26 +73,28 @@ const ID = () => {
         >
           Logout
         </Button>
-      </>
+      </Grid>
     );
   } else {
     return (
-      <AniLink
-        cover
-        direction="down"
-        bg={theme.palette.primary.main}
-        to="/signin/"
-      >
-        <Button
-          startIcon={
-            <VpnKeyRoundedIcon
-              style={{ fill: theme.palette.primary.contrastText }}
-            />
-          }
+      <Grid item sm={12}>
+        <AniLink
+          cover
+          direction="down"
+          bg={theme.palette.primary.main}
+          to="/signin/"
         >
-          Login
-        </Button>
-      </AniLink>
+          <Button
+            startIcon={
+              <VpnKeyRoundedIcon
+                style={{ fill: theme.palette.primary.contrastText }}
+              />
+            }
+          >
+            Login
+          </Button>
+        </AniLink>
+      </Grid>
     );
   }
 };
@@ -198,7 +200,7 @@ const Header = () => {
       <AppBar position="sticky" style={{ zIndex: 5 }}>
         <Toolbar>
           <Grid container justify="space-between" alignItems="center">
-            <Grid container justify="flex-start" alignItems="center" xs={3}>
+            <Grid container justify="flex-start" alignItems="center" item xs={3}>
               <Grid item xs={2}>
                 <IconButton
                   edge="start"
@@ -219,7 +221,7 @@ const Header = () => {
               <Grid item xs={8} />
             </Grid>
             <Hidden mdDown>
-              <Grid container justify="space-evenly" alignItems="center" xs={6}>
+              <Grid container justify="space-evenly" alignItems="center" item xs={6}>
                 <AniLink
                   cover
                   direction="down"
@@ -323,7 +325,14 @@ const Header = () => {
                 </AniLink>
               </Grid>
             </Hidden>
-            <Grid container justify="flex-end" alignItems="center" xs={3}>
+            <Grid
+              container
+              justify="flex-end"
+              alignItems="center"
+              direct="row"
+              xs={3}
+              item
+            >
               <ID auth={auth} />
             </Grid>
           </Grid>

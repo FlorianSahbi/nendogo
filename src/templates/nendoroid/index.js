@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
 import { makeStyles } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/styles";
 
 
 const useStyles = makeStyles(theme => ({
@@ -26,7 +27,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   title: {
-    // backgroundImage: "linear-gradient(180deg, rgba(0, 0, 0, 0) 65%, rgba(10, 10, 12, 0.1) 70%, #111415 90%",
+    backgroundImage: "linear-gradient(180deg, rgba(0, 0, 0, 0) 65%, rgba(10, 10, 12, 0.1) 70%, #111415 90%)",
     borderBottom: "3px solid white",
     position: "absolute",
     right: "0",
@@ -35,16 +36,23 @@ const useStyles = makeStyles(theme => ({
     paddingTop: "80%",
     textAlign: "center",
     width: "100%",
+    [theme.breakpoints.down('sm')]: {
+      fontSize: "2em",
+    }
   },
   cardinfo: {
     minHeight: "100vh",
     padding: "5em",
     minHeight: "100vh",
+    [theme.breakpoints.down('sm')]: {
+      padding: "0em",
+    }
   },
   column: {
     /* border-image: linear-gradient(#f0e6d2, #ffd582) 1, */
     /* border-width: 1px,
     border-style: solid, */
+    width: "100%",
   },
   cell: {
     borderImage: "linear-gradient(#f0e6d2, #ffd582) 1",
@@ -64,6 +72,7 @@ const Nendoroid = ({ pageContext: { manufacturer, releaseDate, id, formattedName
     variables: { id }
   });
   const classes = useStyles();
+  const theme = useTheme();
 
   if (error) return <span style={{ color: "white" }}>{error.message}</span>;
 
@@ -80,28 +89,26 @@ const Nendoroid = ({ pageContext: { manufacturer, releaseDate, id, formattedName
         <Grid className={classes.cardinfo} container>
 
           {/* LEFT  COLUMN */}
-
-
           <Grid className={classes.column} item md={2} sm={12}>
             <Grid container direction="row" justify="space-between" alignItems="stretch" style={{ height: "100%", padding: "0.5em" }}>
-              <Grid className={classes.cell} container direction="row" justify="center" alignItems="center">
-                <Typography variant="h6" align="center" >
-                  <a href={`../../serie/${series}`}>
+              <Grid item className={classes.cell} container direction="row" justify="center" alignItems="center">
+                <Typography variant="h6" align="center">
+                  <a href={`../../serie/${series}`} style={{ color: theme.palette.primary.contrastText }}>
                     {series}
                   </a>
                 </Typography>
               </Grid>
-              <Grid className={classes.cell} container direction="row" justify="center" alignItems="center">
+              <Grid item className={classes.cell} container direction="row" justify="center" alignItems="center">
                 <Typography variant="h6" align="center">
                   {moment(releaseDate).format('YYYY/MM')}
                 </Typography>
               </Grid>
-              <Grid className={classes.cell} container direction="row" justify="center" alignItems="center">
+              <Grid item className={classes.cell} container direction="row" justify="center" alignItems="center">
                 <Typography variant="h6" align="center">
                   ¥{price}
                 </Typography>
               </Grid>
-              <Grid className={classes.cell} container direction="row" justify="center" alignItems="center">
+              <Grid item className={classes.cell} container direction="row" justify="center" alignItems="center">
                 <Typography variant="h6" align="center">
                   #{number}
                 </Typography>
@@ -111,7 +118,6 @@ const Nendoroid = ({ pageContext: { manufacturer, releaseDate, id, formattedName
 
           {/* MID  COLUMN */}
           <Grid className={classes.column} item md={8} sm={12}>
-
             <Grid container direction="row" justify="space-between" alignItems="stretch" style={{ height: "100%", padding: "0.5em" }}>
               <Grid className={classes.cell} container direction="column" justify="center" alignItems="stretch" style={{ padding: "5em" }}>
                 <Typography gutterBottom align="center" variant="h2">
@@ -154,15 +160,6 @@ const Nendoroid = ({ pageContext: { manufacturer, releaseDate, id, formattedName
                     <Typography variant="h6" align="left">They like it</Typography>
                   </Grid>
                   <Grid container direction="row" md={12} style={{ padding: "0.5em" }}>
-                    <Avatar src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Anime-wallpaper-1.png" alt="ok" />
-                    <Avatar src="https://i2.wp.com/recommendmeanime.com/wp-content/uploads/2017/04/best-sites-to-find-free-anime-wallpapers.jpg?fit=584%2C329&ssl=1" alt="ok" />
-                    <Avatar src="https://mocah.org/uploads/posts/4500265-anime-anime-girls-spirited-away-studio-ghibli.jpg" alt="ok" />
-                    <Avatar src="https://wallpapersite.com/images/pages/pic_w/19265.jpg" alt="ok" />
-                    <Avatar src="https://mocah.org/uploads/posts/4500265-anime-anime-girls-spirited-away-studio-ghibli.jpg" alt="ok" />
-                    <Avatar src="https://wallpapersite.com/images/pages/pic_w/19265.jpg" alt="ok" />
-                    <Avatar src="https://mocah.org/uploads/posts/4500265-anime-anime-girls-spirited-away-studio-ghibli.jpg" alt="ok" />
-                    <Avatar src="https://wallpapersite.com/images/pages/pic_w/19265.jpg" alt="ok" />
-                    <Avatar src="https://mocah.org/uploads/posts/4500265-anime-anime-girls-spirited-away-studio-ghibli.jpg" alt="ok" />
                     <Avatar src="https://wallpapersite.com/images/pages/pic_w/19265.jpg" alt="ok" />
                   </Grid>
                   <Grid container justify="flex-end" alignItems="flex-end" md={12}>
@@ -176,20 +173,6 @@ const Nendoroid = ({ pageContext: { manufacturer, releaseDate, id, formattedName
                     <Typography variant="h6" align="left">They like it</Typography>
                   </Grid>
                   <Grid container direction="row" md={12} style={{ padding: "0.5em" }}>
-                    <Avatar src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Anime-wallpaper-1.png" alt="ok" />
-                    <Avatar src="https://i2.wp.com/recommendmeanime.com/wp-content/uploads/2017/04/best-sites-to-find-free-anime-wallpapers.jpg?fit=584%2C329&ssl=1" alt="ok" />
-                    <Avatar src="https://mocah.org/uploads/posts/4500265-anime-anime-girls-spirited-away-studio-ghibli.jpg" alt="ok" />
-                    <Avatar src="https://mocah.org/uploads/posts/4500265-anime-anime-girls-spirited-away-studio-ghibli.jpg" alt="ok" />
-                    <Avatar src="https://mocah.org/uploads/posts/4500265-anime-anime-girls-spirited-away-studio-ghibli.jpg" alt="ok" />
-                    <Avatar src="https://mocah.org/uploads/posts/4500265-anime-anime-girls-spirited-away-studio-ghibli.jpg" alt="ok" />
-                    <Avatar src="https://mocah.org/uploads/posts/4500265-anime-anime-girls-spirited-away-studio-ghibli.jpg" alt="ok" />
-                    <Avatar src="https://mocah.org/uploads/posts/4500265-anime-anime-girls-spirited-away-studio-ghibli.jpg" alt="ok" />
-                    <Avatar src="https://mocah.org/uploads/posts/4500265-anime-anime-girls-spirited-away-studio-ghibli.jpg" alt="ok" />
-                    <Avatar src="https://mocah.org/uploads/posts/4500265-anime-anime-girls-spirited-away-studio-ghibli.jpg" alt="ok" />
-                    <Avatar src="https://wallpapersite.com/images/pages/pic_w/19265.jpg" alt="ok" />
-                    <Avatar src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Anime-wallpaper-1.png" alt="ok" />
-                    <Avatar src="https://i2.wp.com/recommendmeanime.com/wp-content/uploads/2017/04/best-sites-to-find-free-anime-wallpapers.jpg?fit=584%2C329&ssl=1" alt="ok" />
-                    <Avatar src="https://mocah.org/uploads/posts/4500265-anime-anime-girls-spirited-away-studio-ghibli.jpg" alt="ok" />
                     <Avatar src="https://wallpapersite.com/images/pages/pic_w/19265.jpg" alt="ok" />
                   </Grid>
                   <Grid container justify="flex-end" alignItems="flex-end" md={12}>
@@ -203,19 +186,6 @@ const Nendoroid = ({ pageContext: { manufacturer, releaseDate, id, formattedName
                     <Typography variant="h6" align="left">They like it</Typography>
                   </Grid>
                   <Grid container direction="row" md={12} style={{ padding: "0.5em" }}>
-                    <Avatar src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Anime-wallpaper-1.png" alt="ok" />
-                    <Avatar src="https://i2.wp.com/recommendmeanime.com/wp-content/uploads/2017/04/best-sites-to-find-free-anime-wallpapers.jpg?fit=584%2C329&ssl=1" alt="ok" />
-                    <Avatar src="https://mocah.org/uploads/posts/4500265-anime-anime-girls-spirited-away-studio-ghibli.jpg" alt="ok" />
-                    <Avatar src="https://wallpapersite.com/images/pages/pic_w/19265.jpg" alt="ok" />
-                    <Avatar src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Anime-wallpaper-1.png" alt="ok" />
-                    <Avatar src="https://i2.wp.com/recommendmeanime.com/wp-content/uploads/2017/04/best-sites-to-find-free-anime-wallpapers.jpg?fit=584%2C329&ssl=1" alt="ok" />
-                    <Avatar src="https://mocah.org/uploads/posts/4500265-anime-anime-girls-spirited-away-studio-ghibli.jpg" alt="ok" />
-                    <Avatar src="https://mocah.org/uploads/posts/4500265-anime-anime-girls-spirited-away-studio-ghibli.jpg" alt="ok" />
-                    <Avatar src="https://mocah.org/uploads/posts/4500265-anime-anime-girls-spirited-away-studio-ghibli.jpg" alt="ok" />
-                    <Avatar src="https://mocah.org/uploads/posts/4500265-anime-anime-girls-spirited-away-studio-ghibli.jpg" alt="ok" />
-                    <Avatar src="https://mocah.org/uploads/posts/4500265-anime-anime-girls-spirited-away-studio-ghibli.jpg" alt="ok" />
-                    <Avatar src="https://mocah.org/uploads/posts/4500265-anime-anime-girls-spirited-away-studio-ghibli.jpg" alt="ok" />
-                    <Avatar src="https://mocah.org/uploads/posts/4500265-anime-anime-girls-spirited-away-studio-ghibli.jpg" alt="ok" />
                     <Avatar src="https://wallpapersite.com/images/pages/pic_w/19265.jpg" alt="ok" />
                   </Grid>
                   <Grid container justify="flex-end" alignItems="flex-end" md={12}>

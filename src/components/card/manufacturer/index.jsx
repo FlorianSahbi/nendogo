@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { TEST_MANU } from "../../../apollo/queries/index";
 import { useQuery } from "@apollo/react-hooks";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles(theme => ({
   containerCardManufacturer: {
@@ -35,7 +36,8 @@ const Card = ({ name }) => {
     variables: { name },
     onCompleted: data => console.log(data)
   });
-  if (loading) return <div>Loading</div>;
+
+  if (loading) return <CircularProgress />;
 
   return (
     <a href={`../manufacturer/${name}`}>

@@ -76,10 +76,7 @@ const SigninPage = () => {
         alignItems="center"
         style={{ height: "calc(100vh - 70px)", overflow: "hidden" }}
       >
-        <Grid item sm={6}>
-          {renderCardsBacbground()}
-        </Grid>
-        <Grid item sm={6}>
+        <Grid item sm={12}>
           <SigninForm />
         </Grid>
       </Grid>

@@ -5,12 +5,13 @@ import { GET_SCULPTORS } from "../apollo/graphql/queries";
 import { useQuery } from "@apollo/react-hooks";
 import Grid from "@material-ui/core/Grid";
 import { useTheme } from "@material-ui/styles";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const renderCards = sculptors => {
   const theme = useTheme();
   return sculptors.map(({ id, name }) => {
     return (
-      <Grid item sm={6} xs={12} style={{ padding: theme.spacing(1) }}>
+      <Grid item md={3} sm={6} xs={12} style={{ padding: "1em" }}>
         <Card key={id} id={id} name={name} />
       </Grid>
     );
@@ -31,7 +32,7 @@ const SculptorsPage = () => {
 
   return (
     <Layout header>
-      {loading && <div style={{ color: "white" }}>Loading...</div>}
+      {loading && <CircularProgress />}
       <Grid
         container
         spacing={1}

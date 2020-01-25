@@ -15,6 +15,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { useTheme } from "@material-ui/styles";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const nendos = [
   {
@@ -110,12 +111,12 @@ const ImagesPage = () => {
   });
 
   if (error) return <div>{error.message}</div>;
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <CircularProgress />;
 
   return (
     <Layout header>
       <Grid container style={{ padding: theme.spacing(1), background: theme.palette.primary.main }} spacing={1}>
-        {loading && <div>Loading...</div>}
+        {loading && <CircularProgress />}
         {!loading && images && renderCards(images)}
       </Grid>
     </Layout>

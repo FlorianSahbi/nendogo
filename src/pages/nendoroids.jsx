@@ -73,7 +73,7 @@ const renderCards = (nendoroids, currentUser) => {
           md={3}
           sm={3}
           sm={4}
-          xs={6}
+          xs={4}
         >
           <Cards
             key={`${id}-nendoId`}

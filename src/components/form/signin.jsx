@@ -39,6 +39,7 @@ const SigninForm = () => {
     }
     setOpen2(false);
   };
+  
   const auth = Auth.useContainer();
   const [signin] = useMutation(SIGNIN_MUTATION, {
     onCompleted: data => {
@@ -52,8 +53,8 @@ const SigninForm = () => {
         localStorage.setItem("user", JSON.stringify(currentUser));
         localStorage.setItem("isLoggedIn", "true");
         auth.setCurrentUser(currentUser);
-        // window.location.href = "http://localhost:8000";
-        window.location.href = "https://nendogo.com/nendoroids";
+        window.location.href = "http://localhost:8000";
+        // window.location.href = "https://nendogo.com/nendoroids";
       }
     },
     onError: error => {

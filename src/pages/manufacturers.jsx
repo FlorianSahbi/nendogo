@@ -5,11 +5,12 @@ import { GET_MANUFACTURERS } from "../apollo/graphql/queries";
 import { useQuery } from "@apollo/react-hooks";
 import Grid from "@material-ui/core/Grid";
 import { useTheme } from "@material-ui/styles";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const renderCards = manufacturers =>
   manufacturers.map(({ id, name }) => {
     return (
-      <Grid item sm={6} xs={12} style={{ padding: "1em" }}>
+      <Grid item md={3} sm={6} xs={12} style={{ padding: "1em" }}>
         <Card key={id} id={id} name={name} />
       </Grid>
     );
@@ -30,7 +31,7 @@ const ManufacturersPage = () => {
   return (
     <Layout header>
       <Grid container style={{ background: theme.palette.primary.main }}>
-        {loading && <div style={{ color: "white" }}>Loading...</div>}
+        {loading && <CircularProgress />}
         {!loading && manufacturers && renderCards(manufacturers)}
       </Grid>
     </Layout>

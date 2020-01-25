@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SigninForm from "../components/form/signin";
+import SignupForm from "../components/form/signup";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import Layout from "../components/layout";
@@ -76,11 +76,8 @@ const SignupPage = () => {
         alignItems="center"
         style={{ height: "calc(100vh - 70px)", overflow: "hidden" }}
       >
-        <Grid item sm={6}>
-          {renderCardsBacbground()}
-        </Grid>
-        <Grid item sm={6}>
-          <SigninForm />
+        <Grid item sm={12}>
+          <SignupForm />
         </Grid>
       </Grid>
     </Layout>
