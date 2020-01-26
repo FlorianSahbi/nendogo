@@ -24,9 +24,6 @@ const UploadPage = () => {
   const [filename, setFilename] = useState("Rikka wants to play some N64");
   const [file, setFile] = useState(null);
 
-  console.log(filename)
-
-  console.log(file)
   // Hooks graphql
   const [createImage] = useMutation(AFTER_UPLOAD, {
     onCompleted: data => console.log(data),
@@ -92,15 +89,12 @@ const UploadPage = () => {
   };
 
   const submit = async () => {
-    console.log(file.name);
     const response = await signS3({
       variables: {
         filename: formatFilename(file.name),
         filetype: file.type
       }
     });
-
-    console.log(response);
 
     const { signedRequest, url } = response.data.signS3;
     await uploadToS3(file, signedRequest);
@@ -113,8 +107,6 @@ const UploadPage = () => {
         url: url,
       }
     });
-
-    console.log(`done`);
   };
 
   useEffect(

@@ -8,7 +8,6 @@ import AppBar from "@material-ui/core/AppBar";
 import { FiltersNendoroids } from "../../globalStates/useFilters";
 import { useTheme } from "@material-ui/styles";
 import Popper from "@material-ui/core/Popper";
-import Slide from "@material-ui/core/Slide";
 
 const Filters = () => {
   // HOOKS
@@ -170,34 +169,68 @@ const Filters = () => {
         position="static"
         style={{
           background: theme.palette.primary.main,
-          borderTop: `1px solid ${theme.palette.primary.contrastText}`,
-          borderLeft: `0px solid ${theme.palette.primary.contrastText}`,
-          borderBottom: `1px solid ${theme.palette.primary.contrastText}`,
-          borderRight: `0px solid ${theme.palette.primary.contrastText}`,
+          borderTop: `3px solid ${theme.palette.primary.contrastText}`,
+          borderLeft: `none`,
+          borderBottom: `3px solid ${theme.palette.primary.contrastText}`,
+          borderRight: `none`,
         }}
       >
-        <Grid container justify="center" alignItems="center">
-          <Grid item xs={4}>
-            {/* <NameFilter /> */}
+        <Grid
+          container
+          direction="row"
+          justify="flex-start"
+          alignItems="flex-end"
+        >
+          <Grid
+            item
+            style={{
+              // border: "5px solid yellow"
+              height: "100%"
+            }}
+          >
+            <Typography
+              variant="h6"
+              style={{
+                color: theme.palette.primary.contrastText,
+                border: "2px solid green"
+              }}
+            >
+              Filters
+            </Typography>
           </Grid>
-          <Grid item xs={4}>
-            <Button onClick={handleClick1} aria-describedby={id1}>
-              <Typography
-                variant="h6"
-                style={{ color: theme.palette.primary.contrastText }}
-              >
-                Range : {min}-{max}
-              </Typography>
+          <Grid
+            item
+            style={{
+              borderRight: `1px solid ${theme.palette.primary.contrastText}`,
+              height: "100%"
+            }}
+            onClick={handleClick1}
+            aria-describedby={id1}
+          >
+            <Button
+              style={{
+                border: "3px solid blue",
+                height: "100%"
+              }}
+            >
+              Range : {min}-{max}
             </Button>
           </Grid>
-          <Grid item xs={4}>
-            <Button onClick={handleClick2} aria-describedby={id2}>
-              <Typography
-                variant="h6"
-                style={{ color: theme.palette.primary.contrastText }}
-              >
-                Order By : {orderBy}
-              </Typography>
+          <Grid
+            item
+            style={{
+              borderRight: `1px solid ${theme.palette.primary.contrastText}`
+            }}
+            onClick={handleClick2}
+            aria-describedby={id2}
+          >
+            <Button
+              style={{
+                border: "3px solid blue",
+                height: "100%"
+              }}
+            >
+              Order By : {orderBy}
             </Button>
           </Grid>
         </Grid>

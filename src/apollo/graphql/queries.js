@@ -15,8 +15,8 @@ export const GET_NENDOROIDS = gql`
 `;
 
 export const GET_USERS = gql`
-  query GetUsers($pseudo: String, $orderBy: UserOrderByInput) {
-    getUsers(pseudo: $pseudo, orderBy: $orderBy) {
+  query GetUsers($pseudo: String, $orderBy: UserOrderByInput, $skip: Int, $first: Int) {
+    getUsers(pseudo: $pseudo, orderBy: $orderBy, skip: $skip, first: $first) {
       count
       users {
         id

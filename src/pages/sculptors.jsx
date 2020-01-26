@@ -8,6 +8,9 @@ import { useTheme } from "@material-ui/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
+import { FiltersSculptors } from "../globalStates/useFilters";
+import Filters from "../components/filters/index";
+
 const renderCards = sculptors =>
   sculptors.map(({ id, name }) => (
     <Grid key={`${id}-gridId`} item xl={3} lg={3} md={3} sm={3} sm={4} xs={4}>
@@ -17,9 +20,11 @@ const renderCards = sculptors =>
 
 const SculptorsPage = () => {
   const theme = useTheme();
+  const {
+    orderBy,
+    name
+  } = FiltersSculptors.useContainer();
   const [sculptors, setSculptors] = useState(null);
-  const [name, setName] = useState("");
-  const [orderBy, setOrderBy] = useState("name_ASC");
 
   const { error, loading, data } = useQuery(GET_SCULPTORS, {
     variables: { name, orderBy },
@@ -38,6 +43,7 @@ const SculptorsPage = () => {
           minHeight: "calc(100vh - 60px)"
         }}
       >
+        <Filters />
         {loading && <CircularProgress />}
         {!loading && sculptors && renderCards(sculptors)}
       </Grid>

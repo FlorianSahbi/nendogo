@@ -104,7 +104,6 @@ async function createImage(parent, { id, title, filename, url }, context, info) 
 }
 
 async function signS3(parent, args, context, info) {
-  console.log(args)
   const s3 = new aws.S3({
     signatureVersion: "v4",
     region: "eu-west-3",

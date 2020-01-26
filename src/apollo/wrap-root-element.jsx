@@ -5,14 +5,17 @@ import { client } from "./client";
 import Auth from "../globalStates/useAuth";
 import Dial from "../globalStates/useDialog";
 import {
+  FiltersUsers,
   FiltersNendoroids,
-  FiltersManufacturers
+  FiltersSeries,
+  FiltersManufacturers,
+  FiltersSculptors
 } from "../globalStates/useFilters";
 
 export const darkTheme = createMuiTheme({
   overrides: {
     a: {
-      textDecoration: "unset",
+      textDecoration: "unset"
     },
     MuiAvatar: {
       root: {
@@ -79,11 +82,17 @@ export const wrapRootElement = ({ element }) => {
     <MuiThemeProvider theme={darkTheme}>
       <Auth.Provider>
         <Dial.Provider>
-          <FiltersNendoroids.Provider>
-            <FiltersManufacturers.Provider>
-              <ApolloProvider client={client}>{element}</ApolloProvider>
-            </FiltersManufacturers.Provider>
-          </FiltersNendoroids.Provider>
+          <FiltersUsers.Provider>
+            <FiltersNendoroids.Provider>
+              <FiltersSeries.Provider>
+                <FiltersManufacturers.Provider>
+                  <FiltersSculptors.Provider>
+                    <ApolloProvider client={client}>{element}</ApolloProvider>
+                  </FiltersSculptors.Provider>
+                </FiltersManufacturers.Provider>
+              </FiltersSeries.Provider>
+            </FiltersNendoroids.Provider>
+          </FiltersUsers.Provider>
         </Dial.Provider>
       </Auth.Provider>
     </MuiThemeProvider>

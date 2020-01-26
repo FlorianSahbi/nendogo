@@ -10,14 +10,18 @@ async function getNendoroids(parent, { formattedName, orderBy }, context) {
   return { nendoroids, count }
 }
 
-async function getUsers(parent, { pseudo, orderBy }, context) {
+async function getUsers(parent, { pseudo, orderBy, skip, first }, context) {
   const users = await context.prisma.users({
     where: { pseudo_contains: pseudo },
-    orderBy
+    orderBy,
+    skip,
+    first,
   })
   const count = await context.prisma.usersConnection({
     where: { pseudo_contains: pseudo },
-    orderBy
+    orderBy,
+    skip,
+    first,
   }).aggregate().count()
   return { users, count }
 }

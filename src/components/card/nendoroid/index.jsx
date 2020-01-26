@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   cardMedia: {
     height: "400px",
     [theme.breakpoints.down("xs")]: {
-      height: "300px"
+      height: "200px"
     }
   }
 }));

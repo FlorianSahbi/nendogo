@@ -2,10 +2,23 @@ scalar Date
 scalar Upload
 
 type Query {
-  getNendoroids(formattedName: String orderBy: NendoroidOrderByInput): Nendoroids!
-  getUsers(pseudo: String, orderBy: UserOrderByInput): Users!
+  getNendoroids(
+    formattedName: String
+    orderBy: NendoroidOrderByInput
+  ): Nendoroids!
+
+  getUsers(
+    pseudo: String
+    orderBy: UserOrderByInput
+    skip: Int
+    first: Int
+  ): Users!
+  
   getSeries(name: String, orderBy: SerieOrderByInput): Series!
-  getManufacturers(name: String, orderBy: ManufacturerOrderByInput): Manufacturers!
+  getManufacturers(
+    name: String
+    orderBy: ManufacturerOrderByInput
+  ): Manufacturers!
   getSculptors(name: String, orderBy: SculptorOrderByInput): Sculptors!
 
   getImages(

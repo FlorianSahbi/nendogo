@@ -103,8 +103,7 @@ const renderCards = cards => {
 const ImagesPage = () => {
   const theme = useTheme();
   const [images, setimages] = useState(null);
-
-  console.log(images);
+  
   const { error, loading, data } = useQuery(GET_IMAGES, {
     onCompleted: data => setimages(data.getImages.images),
     onError: error => console.log(error)
