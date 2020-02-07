@@ -5,8 +5,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-/api/node_modules
-/api/images
+/backend/node_modules
+/backend/images
 
 # Runtime data
 pids

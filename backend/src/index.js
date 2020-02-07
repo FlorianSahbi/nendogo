@@ -1,12 +1,13 @@
 const { GraphQLServer } = require('graphql-yoga');
-const { prisma } = require('./generated/prisma-client');
-const Subscription = require('./resolvers/Subscription');
-const Query = require('./resolvers/Query');
-const Mutation = require('./resolvers/Mutation');
-const User = require('./resolvers/User');
-const Image = require('./resolvers/Image');
-const Nendoroid = require('./resolvers/Nendoroid');
-const Interaction = require('./resolvers/Interaction');
+const { prisma } = require('../prisma/client');
+
+const Subscription = require('./graphql/resolvers/Subscription');
+const Query = require('./graphql/resolvers/Query');
+const Mutation = require('./graphql/resolvers/Mutation');
+const User = require('./graphql/resolvers/User');
+const Image = require('./graphql/resolvers/Image');
+const Nendoroid = require('./graphql/resolvers/Nendoroid');
+const Interaction = require('./graphql/resolvers/Interaction');
 
 const resolvers = {
   Query,
@@ -19,7 +20,7 @@ const resolvers = {
 }
 
 const server = new GraphQLServer({
-  typeDefs: './schema.graphql',
+  typeDefs: './graphql/schema.graphql',
   resolvers,
   context: request => {
     return {
@@ -30,7 +31,7 @@ const server = new GraphQLServer({
 })
 
 const options = {
-  port: 4000,
+  port: 5100,
   endpoint: '/graphql',
   subscriptions: '/subscriptions',
   playground: '/playground',
