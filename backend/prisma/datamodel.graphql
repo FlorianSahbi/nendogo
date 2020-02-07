@@ -1,0 +1,87 @@
+type Nendoroid {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  name: String
+  number: Int
+  formattedName: String!
+  title: String
+  description: [String!]! @scalarList(strategy: EMBEDDED)
+  images: [String!]! @scalarList(strategy: EMBEDDED)
+  series: String
+  manufacturer: String
+  category: String
+  price: Int
+  releaseDate: DateTime
+  specifications: String
+  sculptor: String
+  cooperation: String
+  planningProduction: String
+  releasedBy: String
+  distributedBy: String
+  srcUrl: String
+  range: String
+  interactions: [Interaction!]!
+}
+
+type User {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  firstName: String
+  lastName: String
+  pseudo: String @unique
+  email: String! @unique
+  avatar: String
+  password: String!
+}
+
+type Interaction {
+  id: ID! @id
+  nendoroid: Nendoroid! @relation(link: INLINE)
+  user: User! @relation(link: INLINE)
+  type: InteractionType!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Serie {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  name: String!
+}
+
+type Manufacturer {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  name: String!
+}
+
+type Sculptor {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  name: String!
+}
+
+type Image {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  likes: Int!
+  views: Int!
+  user: User! @relation(link: INLINE)
+  title: String!
+  filename: String!
+  mimetype: String!
+  encoding: String!
+  url: String!
+}
+
+enum InteractionType {
+  LIKE
+  WISH
+  OWN
+}
