@@ -47,7 +47,7 @@ export default function Cards({ avatar, pseudo }) {
           image={avatar}
           src={avatar}
           className={classes.cardMedia}
-          title={name}
+          title={pseudo}
         >
           <CardContent className={classes.cardContent}>
             <Typography align="center" variant="h6" component="h1">

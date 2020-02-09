@@ -1,111 +1,54 @@
 const path = require('path');
 
-exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions;
+// exports.createPages = async ({ graphql, actions }) => {
+//   const { createPage } = actions;
 
-  const templateNendo = path.resolve("./src/templates/nendoroid/index.js");
-  const templateUser = path.resolve('./src/templates/user/index.js');
-  const templateSerie = path.resolve('./src/templates/serie/index.js');
-  const templateSculptor = path.resolve('./src/templates/sculptor/index.js');
-  const templateManufacturer = path.resolve('./src/templates/manufacturer/index.js');
+//   const templateNendo = path.resolve("./src/templates/nendoroid/index.js");
+//   const templateUser = path.resolve('./src/templates/user/index.js');
+//   const templateSerie = path.resolve('./src/templates/serie/index.js');
+//   const templateSculptor = path.resolve('./src/templates/sculptor/index.js');
+//   const templateManufacturer = path.resolve('./src/templates/manufacturer/index.js');
 
-  const PAGES = await graphql(`
-{
-  prisma {
-    manufacturers {
-      id
-      name
-    }
-    sculptors {
-      id
-      name
-    }
-    series {
-      name
-      id
-    }
-    users {
-      avatar
-      pseudo
-      id
-    }
-    nendoroids {
-      title
-      srcUrl
-      specifications
-      series
-      sculptor
-      releasedBy
-      releaseDate
-      range
-      price
-      planningProduction
-      number
-      name
-      images
-      formattedName
-      id
-      distributedBy
-      description
-      cooperation
-      category
-      manufacturer
-      interactions {
-        id
-        type
-        user {
-          avatar
-          pseudo
-          id
-        }
-      }
-    }
-  }
-}
-`);
+//   nendoroids.forEach((nendoroid) => {
+//     createPage({
+//       path: `nendoroid/${nendoroid.formattedName}`,
+//       component: templateNendo,
+//       context: nendoroid,
+//     })
+//   });
 
-  const { data: { prisma: { nendoroids, users, series, sculptors, manufacturers } } } = await PAGES;
+//   users.forEach((user) => {
+//     createPage({
+//       path: `user/${user.pseudo}`,
+//       component: templateUser,
+//       context: user,
+//     })
+//   });
 
-  nendoroids.forEach((nendoroid) => {
-    createPage({
-      path: `nendoroid/${nendoroid.formattedName}`,
-      component: templateNendo,
-      context: nendoroid,
-    })
-  });
+//   series.forEach((serie) => {
+//     createPage({
+//       path: `serie/${serie.name}`,
+//       component: templateSerie,
+//       context: serie,
+//     })
+//   });
 
-  users.forEach((user) => {
-    createPage({
-      path: `user/${user.pseudo}`,
-      component: templateUser,
-      context: user,
-    })
-  });
+//   sculptors.forEach((sculptor) => {
+//     createPage({
+//       path: `sculptor/${sculptor.name}`,
+//       component: templateSculptor,
+//       context: sculptor,
+//     })
+//   });
 
-  series.forEach((serie) => {
-    createPage({
-      path: `serie/${serie.name}`,
-      component: templateSerie,
-      context: serie,
-    })
-  });
-
-  sculptors.forEach((sculptor) => {
-    createPage({
-      path: `sculptor/${sculptor.name}`,
-      component: templateSculptor,
-      context: sculptor,
-    })
-  });
-
-  manufacturers.forEach((manufacturer) => {
-    createPage({
-      path: `manufacturer/${manufacturer.name}`,
-      component: templateManufacturer,
-      context: manufacturer,
-    })
-  });
-};
+//   manufacturers.forEach((manufacturer) => {
+//     createPage({
+//       path: `manufacturer/${manufacturer.name}`,
+//       component: templateManufacturer,
+//       context: manufacturer,
+//     })
+//   });
+// };
 
 // exports.onCreatePage = async ({ page, actions }) => {
 //   const { createPage } = actions;

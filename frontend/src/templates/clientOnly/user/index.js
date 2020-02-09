@@ -35,7 +35,7 @@ const User = (props) => {
       onCompleted: data => {
         setUser(data.getUserByPseudo)
       },onError: err => {
-        location.href = "/nendoroids";
+
       }
 
     }
