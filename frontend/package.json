@@ -18,7 +18,7 @@
     "apollo-link-http": "^1.5.16",
     "apollo-upload-client": "^12.1.0",
     "aws-sdk": "^2.597.0",
-    "axios": "^0.19.1",
+    "axios": "^0.30.2",
     "formik": "^2.1.1",
     "gatsby": "^2.18.11",
     "gatsby-cli": "^2.8.27",
